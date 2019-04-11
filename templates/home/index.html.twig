@@ -1,7 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ someVariable }}{% endblock %}
+{% block title %} Workchase {% endblock %}
 
-{% block body %}
-    <div class="nfq-academy">{{ someVariable }}</div>
+{% block ads %}
+    <section class="Ad u-color-yellow">
+        <header class="Ad-header">
+            <div class="Ad-date">2019-01-10</div>
+            <div class="Ad-bids">34</div>
+            <h3 class="Header">Tvoros dažymas</h3>
+        </header>
+        <div class="Ad-body">
+            <div>
+                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
+                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
+                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
+            </div>
+
+            <button class="Button">Plačiau</button>
+        </div>
+        <footer class="Ad-footer">
+            <img class="Ad-icon" src="" alt="">
+        </footer>
+    </section>
+{% endblock %}
+
+{% block filter %}
+    <section class="Filter">
+        <div class="Filter-item u-color-purple">
+            <span class="Filter-title">Remontas</span>
+            <span class="Filter-icon is-active">X</span>
+        </div>
+        <div class="Filter-item u-color-yellow">
+            <span class="Filter-title">Apdailos darbai</span>
+            <span class="Filter-icon is-active">X</span>
+        </div>
+        <div class="Filter-item u-color-blue">
+            <span class="Filter-title">Baldai</span>
+            <span class="Filter-icon is-active">X</span>
+        </div>
+    </section>
 {% endblock %}

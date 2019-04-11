@@ -1,0 +1,12 @@
+.Filter {
+  &-item {
+    display: inline-block;
+    color: var(--colorWhite);
+    border-radius: var(--radiusMedium);
+    padding: var(--spaceTopBotTextSmall) var(--spaceLeftRightTextSmall);
+  }
+  &-icon:after{
+    //content: url("/assets/img/close.png");
+    width: 20px;
+  }
+}
