@@ -1,0 +1,14 @@
+.Ads{
+  padding-top: var(--spaceLarge);
+  display: grid;
+  grid-gap: var(--spaceMedium);
+  grid-template-columns: repeat(2, 1fr);
+  align-items: flex-start;
+}
+
+.Ad {
+
+  &-Header {
+
+  }
+}

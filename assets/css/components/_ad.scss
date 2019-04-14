@@ -1,7 +1,27 @@
-.Ad {
+.Ads{
+  padding-top: var(--spaceLarge);
+  display: block;
+}
+
+
+.Ad{
+  width: 100%;
+  @include box-shadow();
   display: inline-block;
   padding: var(--spaceMedium);
-  &-Header {
+  background-color: var(--colorWhite);
+  border-radius: var(--radiusSmall);
+  margin: var(--spaceSmall);
 
+  &-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    padding: 0;
   }
 }

@@ -3,40 +3,58 @@
 {% block title %} Workchase {% endblock %}
 
 {% block ads %}
-    <section class="Ad u-color-yellow">
-        <header class="Ad-header">
-            <div class="Ad-date">2019-01-10</div>
-            <div class="Ad-bids">34</div>
-            <h3 class="Header">Tvoros dažymas</h3>
-        </header>
-        <div class="Ad-body">
-            <div>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-            </div>
+    <section class="Ads">
 
-            <button class="Button">Plačiau</button>
-        </div>
-        <footer class="Ad-footer">
-            <img class="Ad-icon" src="" alt="">
-        </footer>
+        <section class="Ad">
+            <header class="Ad-header">
+                <div class="Date">2019-01-10</div>
+                <div class="Bid">
+                    <span class="Bid-header">Aplikavo</span>
+                    <span class="Bid-count">34</span>
+                </div>
+            </header>
+            <h3 class="Header">Tvoros dažymas dažss dažymas dažymas dažymas dažymas dažymas</h3>
+            <div class="Ad-body">
+                <div>
+                    <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
+                    <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
+                    <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
+                </div>
+                <button class="Button">Plačiau</button>
+            </div>
+            <footer class="Ad-footer">
+               <ul class="Ad-categories">
+                   <li class="Category Category--red">Statybos</li>
+                   <li class="Category Category--purple">Lauko statybos</li>
+                   <li class="Category Category--green">Remontas</li>
+                   <li class="Category Category--yellow">Elektra</li>
+               </ul>
+            </footer>
+        </section>
     </section>
 {% endblock %}
 
 {% block filter %}
-    <section class="Filter">
-        <div class="Filter-item u-color-purple">
-            <span class="Filter-title">Remontas</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-        <div class="Filter-item u-color-yellow">
-            <span class="Filter-title">Apdailos darbai</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-        <div class="Filter-item u-color-blue">
-            <span class="Filter-title">Baldai</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
+    <section>
+        <ul class="FilterBar">
+            <li>
+                <a class="Category Category--filter Category--lightGreen">
+                    <span class="Filter-title">Remontas</span>
+                    <span class="Filter-icon is-active">X</span>
+                </a>
+            </li>
+            <li>
+                <a class="Category Category--filter Category--purple">
+                    <span class="Filter-title">Apdailos darbai</span>
+                    <span class="Filter-icon is-active">X</span>
+                </a>
+            </li>
+            <li>
+                <a class="Category Category--filter Category--blue">
+                    <span class="Filter-title">Baldai</span>
+                    <span class="Filter-icon is-active">X</span>
+                </a>
+            </li>
+        </ul>
     </section>
 {% endblock %}
