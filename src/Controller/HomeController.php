@@ -60,7 +60,7 @@ class HomeController extends AbstractController
             $categories[$availableCategory->getSlug()] = trim($categories[$availableCategory->getSlug()], ',');
             $categories[$availableCategory->getSlug()] = strtr(
                 $categories[$availableCategory->getSlug()],
-                [',,' => '']
+                [',,' => ',']
             );
         }
 
