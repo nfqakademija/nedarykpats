@@ -4,15 +4,23 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Ubuntu:400,700&amp;subset=latin-ext" rel="stylesheet">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
-
-        {% block filter %}{% endblock %}
-        {% block ads %}{% endblock %}
+        <div class="Content">
+            <div class="Content-Block">
+                {% block filter %}{% endblock %}
+            </div>
+        </div>
+        <div class="Content Content--GreyBg">
+            <div class="Content-Block">
+                {% block ads %}{% endblock %}
+            </div>
+        </div>
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

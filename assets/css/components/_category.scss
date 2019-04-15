@@ -1,0 +1,40 @@
+ .Category {
+    background-color: var(--colorBlack);
+    display: inline-block;
+    color: var(--colorWhite);
+    border-radius: var(--radiusMedium);
+    padding: var(--spaceTopBotTextSmall) var(--spaceLeftRightTexMedium);
+    text-transform: uppercase;
+    font-size: var(--fontSizeMedium);
+    letter-spacing: 0.3px;
+    margin-top: var(--spaceSmall);
+    margin-right: var(--spaceSmall);
+
+    &--filter{
+      font-size: var(--fontSize);
+    }
+
+    &--red{
+      background-color: var(--colorRed);
+    }
+
+    &--green{
+      background-color: var(--colorGreen);
+    }
+
+    &--lightGreen{
+      background-color: var(--colorLightGreen);
+    }
+
+    &--yellow{
+      background-color: var(--colorYellow);
+    }
+
+    &--purple{
+      background-color: var(--colorPurple);
+    }
+
+    &--blue{
+      background-color: var(--colorBlue);
+    }
+  }

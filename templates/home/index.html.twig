@@ -3,47 +3,65 @@
 {% block title %} Workchase {% endblock %}
 
 {% block ads %}
-    {% for advert in filteredAdverts %}
-        <section class="Ad u-color-yellow">
+    <section class="Ads">
+        {% for advert in filteredAdverts %}
+        <section class="Ad">
             <header class="Ad-header">
-                <div class="Ad-date">2019-01-10</div>
-                <div class="Ad-bids">34</div>
-                <h3 class="Header">{{ advert.title }}</h3>
+                <div class="Date">2019-01-10</div>
+                <div class="Bid">
+                    <span class="Bid-header">Aplikavo</span>
+                    <span class="Bid-count">34</span>
+                </div>
             </header>
+            <h3 class="Header">{{ advert.title }}</h3>
             <div class="Ad-body">
                 <div>
-                    {{ advert.text }}
+                    <p>{{ advert.text }}</p>
                 </div>
-
                 <button class="Button">Plačiau</button>
             </div>
             <footer class="Ad-footer">
-                <img class="Ad-icon" src="" alt="">
+               <ul class="Ad-categories">
+                   <li class="Category Category--red">Statybos</li>
+                   <li class="Category Category--purple">Lauko statybos</li>
+                   <li class="Category Category--green">Remontas</li>
+                   <li class="Category Category--yellow">Elektra</li>
+               </ul>
             </footer>
         </section>
-    {% endfor %}
+        {% endfor %}
+    </section>
 {% endblock %}
 
 {% block filter %}
-    <section class="Filter">
-        <div class="Filter-item u-color-purple">
-            <span class="Filter-title">Santechnika</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-        <div class="Filter-item u-color-yellow">
-            <span class="Filter-title">Apdailos darbai</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-        <div class="Filter-item u-color-blue">
-            <span class="Filter-title">Baldai</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-
-    {% for category in selectedCategories %}
-        <div class="Filter-item u-color-purple">
-            <span class="Filter-title">Pasirinkta {{ category }} </span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-    {% endfor %}
+    <section>
+        <ul class="FilterBar">
+            <li>
+                <a class="Category Category--filter Category--lightGreen">
+                    <span class="Filter-title">Remontas</span>
+                    <span class="Filter-icon is-active">X</span>
+                </a>
+            </li>
+            <li>
+                <a class="Category Category--filter Category--purple">
+                    <span class="Filter-title">Apdailos darbai</span>
+                    <span class="Filter-icon is-active">X</span>
+                </a>
+            </li>
+            <li>
+                <a class="Category Category--filter Category--blue">
+                    <span class="Filter-title">Baldai</span>
+                    <span class="Filter-icon is-active">X</span>
+                </a>
+            </li>
+            {% for category in selectedCategories %}
+                <li>
+                    <a class="Category Category--filter Category--blue">
+                        <span class="Filter-title">Pasirinkta {{ category }}</span>
+                        <span class="Filter-icon is-active">X</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
     </section>
 {% endblock %}
