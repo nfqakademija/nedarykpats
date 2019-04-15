@@ -28,6 +28,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'someVariable' => 'NFQ Akademija',
             'selectedCategories' => $selectedCategories,
+            'availableCategories' => [],
             'filteredAdverts' => $filteredAdverts
         ]);
     }

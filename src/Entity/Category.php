@@ -26,6 +26,11 @@ class Category
      */
     private $title;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $class;
+
     private $advert;
 
     public function getId(): ?int
@@ -75,4 +80,24 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function getClass(): string
+    {
+        return $this->class;
+    }
+
+    /**
+     * @param self $class
+     * @return Category
+     */
+    public function setClass($class): self
+    {
+        $this->class = $class;
+        return $this;
+    }
+
+
 }
