@@ -30,9 +30,10 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'someVariable' => 'NFQ Akademija',
-            'selectedCategories' => $selectedCategories,
+            'selectedCategorySlugs' => $selectedCategories,
             'availableCategories' => $availableCategories,
-            'filteredAdverts' => $filteredAdverts
+            'filteredAdverts' => $filteredAdverts,
+            'toggleQueryStrings' => []
         ]);
     }
 }
