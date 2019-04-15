@@ -26,9 +26,30 @@ class Category
      */
     private $title;
 
+    private $advert;
+
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Advert
+     */
+    public function getAdvert()
+    {
+        return $this->advert;
+    }
+
+    /**
+     * @param Advert $advert
+     * @return self
+     */
+    public function setAdvert($advert): self
+    {
+        $this->advert = $advert;
+
+        return $this;
     }
 
     public function getSlug(): ?string

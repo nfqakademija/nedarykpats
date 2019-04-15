@@ -3,31 +3,31 @@
 {% block title %} Workchase {% endblock %}
 
 {% block ads %}
-    <section class="Ad u-color-yellow">
-        <header class="Ad-header">
-            <div class="Ad-date">2019-01-10</div>
-            <div class="Ad-bids">34</div>
-            <h3 class="Header">Tvoros dažymas</h3>
-        </header>
-        <div class="Ad-body">
-            <div>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-            </div>
+    {% for advert in filteredAdverts %}
+        <section class="Ad u-color-yellow">
+            <header class="Ad-header">
+                <div class="Ad-date">2019-01-10</div>
+                <div class="Ad-bids">34</div>
+                <h3 class="Header">{{ advert.title }}</h3>
+            </header>
+            <div class="Ad-body">
+                <div>
+                    {{ advert.text }}
+                </div>
 
-            <button class="Button">Plačiau</button>
-        </div>
-        <footer class="Ad-footer">
-            <img class="Ad-icon" src="" alt="">
-        </footer>
-    </section>
+                <button class="Button">Plačiau</button>
+            </div>
+            <footer class="Ad-footer">
+                <img class="Ad-icon" src="" alt="">
+            </footer>
+        </section>
+    {% endfor %}
 {% endblock %}
 
 {% block filter %}
     <section class="Filter">
         <div class="Filter-item u-color-purple">
-            <span class="Filter-title">Remontas</span>
+            <span class="Filter-title">Santechnika</span>
             <span class="Filter-icon is-active">X</span>
         </div>
         <div class="Filter-item u-color-yellow">
@@ -38,5 +38,12 @@
             <span class="Filter-title">Baldai</span>
             <span class="Filter-icon is-active">X</span>
         </div>
+
+    {% for category in selectedCategories %}
+        <div class="Filter-item u-color-purple">
+            <span class="Filter-title">Pasirinkta {{ category }} </span>
+            <span class="Filter-icon is-active">X</span>
+        </div>
+    {% endfor %}
     </section>
 {% endblock %}

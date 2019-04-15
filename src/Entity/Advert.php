@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdvertRepository")
@@ -27,10 +30,18 @@ class Advert
     private $text;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Category")
-     * @ORM\JoinColumn(nullable=false)
+     * @ManyToMany(targetEntity="Category")
+     * @JoinTable(name="category_advert",
+     *      joinColumns={@JoinColumn(name="advert_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id")}
+     *      )
      */
     private $categories;
+
+    public function __construct()
+    {
+        $this->categories = array();
+    }
 
     public function getId(): ?int
     {
@@ -61,14 +72,14 @@ class Advert
         return $this;
     }
 
-    public function getCategories(): ?Category
+    public function getCategories(): array
     {
         return $this->categories;
     }
 
     public function setCategories(?Category $categories): self
     {
-        $this->categories = $categories;
+        array_push($this->categories, $categories);
 
         return $this;
     }
