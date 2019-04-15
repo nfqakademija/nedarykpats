@@ -29,11 +29,41 @@ class HomeController extends AbstractController
         $availableCategories = $categoryRepository->findAll();
 
         return $this->render('home/index.html.twig', [
-            'someVariable' => 'NFQ Akademija',
             'selectedCategorySlugs' => $selectedCategories,
             'availableCategories' => $availableCategories,
             'filteredAdverts' => $filteredAdverts,
-            'toggleQueryStrings' => []
+            'toggleQueryStrings' => $this->buildToggleQueryStrings($availableCategories, $selectedCategories)
         ]);
+    }
+
+    /**
+     * @param array|Category[] $availableCategories
+     * @param array|string[] $selectedCategorySlugs
+     * @return array
+     */
+    private function buildToggleQueryStrings(array $availableCategories, array $selectedCategorySlugs) : array
+    {
+        $categories = [];
+        foreach ($availableCategories as $availableCategory)
+        {
+            if(in_array($availableCategory->getSlug(), $selectedCategorySlugs)) {
+                $categories[$availableCategory->getSlug()] =
+                    strtr(
+                    implode(',', $selectedCategorySlugs),
+                    [$availableCategory->getSlug() => '']
+                    );
+            }
+            else {
+                $categories[$availableCategory->getSlug()] = implode(',', $selectedCategorySlugs) . ',' . $availableCategory->getSlug();
+            }
+
+            $categories[$availableCategory->getSlug()] = trim($categories[$availableCategory->getSlug()], ',');
+            $categories[$availableCategory->getSlug()] = strtr(
+                $categories[$availableCategory->getSlug()],
+                [',,' => '']
+            );
+        }
+
+        return $categories;
     }
 }

@@ -39,18 +39,10 @@
             {% for category in availableCategories %}
             <li>
                 <a class="Category Category--filter Category--lightGreen">
-                    <span class="Filter-title">{{ category.title }}</span>
-                    <span class="Filter-icon is-active">X</span>
+                    <span class="Filter-title"><a href="?filter={{ toggleQueryStrings[category.slug] }}" >{{ category.title }}</a></span>
+                    <span class="Filter-icon is-active"></span>
                 </a>
             </li>
-            {% endfor %}
-            {% for category in selectedCategories %}
-                <li>
-                    <a class="Category Category--filter Category--blue">
-                        <span class="Filter-title">Pasirinkta {{ category }}</span>
-                        <span class="Filter-icon is-active">X</span>
-                    </a>
-                </li>
             {% endfor %}
         </ul>
     </section>
