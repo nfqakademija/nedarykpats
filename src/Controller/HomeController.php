@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
 use App\Repository\AdvertRepository;
+use App\Repository\CategoryRepository;
 use App\SearchObjects\Filters;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,7 +15,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request, AdvertRepository $advertRepository)
+    public function index(Request $request, AdvertRepository $advertRepository, CategoryRepository $categoryRepository)
     {
         $filters = new Filters();
         $selectedCategories = [];
@@ -22,13 +24,14 @@ class HomeController extends AbstractController
             $selectedCategories = explode(',',$request->query->get('filter'));
 
         $filters->setKeywords($selectedCategories);
-
         $filteredAdverts = $advertRepository->findByCategories($filters);
+
+        $availableCategories = $categoryRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'someVariable' => 'NFQ Akademija',
             'selectedCategories' => $selectedCategories,
-            'availableCategories' => [],
+            'availableCategories' => $availableCategories,
             'filteredAdverts' => $filteredAdverts
         ]);
     }

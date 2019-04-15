@@ -29,7 +29,7 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $class;
+    private $cssClass;
 
     private $advert;
 
@@ -84,7 +84,7 @@ class Category
     /**
      * @return string
      */
-    public function getClass(): string
+    public function getCSSClass(): string
     {
         return $this->class;
     }
@@ -93,9 +93,9 @@ class Category
      * @param self $class
      * @return Category
      */
-    public function setClass($class): self
+    public function setCSSClass($cssClass): self
     {
-        $this->class = $class;
+        $this->cssClass = $cssClass;
         return $this;
     }
 

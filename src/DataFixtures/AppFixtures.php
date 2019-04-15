@@ -15,18 +15,21 @@ class AppFixtures extends Fixture
         $category1 = new Category();
         $category1->setSlug('baldai');
         $category1->setTitle('Baldai');
+        $category1->setCSSClass('blue');
         $manager->persist($category1);
         $manager->flush();
 
         $category2 = new Category();
         $category2->setSlug('santechnika');
         $category2->setTitle('Santechnika');
+        $category2->setCSSClass('red');
         $manager->persist($category2);
         $manager->flush();
 
         $category3 = new Category();
         $category3->setSlug('vidaus-apdaila');
         $category3->setTitle('Vidaus apdaia');
+        $category3->setCSSClass('green');
         $manager->persist($category3);
         $manager->flush();
 

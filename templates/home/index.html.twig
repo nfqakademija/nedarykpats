@@ -36,24 +36,14 @@
 {% block filter %}
     <section>
         <ul class="FilterBar">
+            {% for category in availableCategories %}
             <li>
                 <a class="Category Category--filter Category--lightGreen">
-                    <span class="Filter-title">Remontas</span>
+                    <span class="Filter-title">{{ category.title }}</span>
                     <span class="Filter-icon is-active">X</span>
                 </a>
             </li>
-            <li>
-                <a class="Category Category--filter Category--purple">
-                    <span class="Filter-title">Apdailos darbai</span>
-                    <span class="Filter-icon is-active">X</span>
-                </a>
-            </li>
-            <li>
-                <a class="Category Category--filter Category--blue">
-                    <span class="Filter-title">Baldai</span>
-                    <span class="Filter-icon is-active">X</span>
-                </a>
-            </li>
+            {% endfor %}
             {% for category in selectedCategories %}
                 <li>
                     <a class="Category Category--filter Category--blue">
