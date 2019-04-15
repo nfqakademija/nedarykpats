@@ -38,9 +38,16 @@
         <ul class="FilterBar">
             {% for category in availableCategories %}
             <li>
-                <a class="Category Category--filter Category--lightGreen">
-                    <span class="Filter-title"><a href="?filter={{ toggleQueryStrings[category.slug] }}" >{{ category.title }}</a></span>
-                    <span class="Filter-icon is-active"></span>
+                <a class="Category Category--filter Category--lightGreen {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
+                   href="?filter={{ toggleQueryStrings[category.slug] }}">
+                    <span class="Filter-title">{{ category.title }}</span>
+                    <span class="Filter-icon">
+                        {% if category.slug not in selectedCategorySlugs %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                    </span>
                 </a>
             </li>
             {% endfor %}
