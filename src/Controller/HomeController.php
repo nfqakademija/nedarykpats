@@ -43,27 +43,27 @@ class HomeController extends AbstractController
      */
     private function buildToggleQueryStrings(array $availableCategories, array $selectedCategorySlugs) : array
     {
-        $categories = [];
+        $toggleQueryStrings = [];
         foreach ($availableCategories as $availableCategory)
         {
             if(in_array($availableCategory->getSlug(), $selectedCategorySlugs)) {
-                $categories[$availableCategory->getSlug()] =
+                $toggleQueryStrings[$availableCategory->getSlug()] =
                     strtr(
                     implode(',', $selectedCategorySlugs),
                     [$availableCategory->getSlug() => '']
                     );
             }
             else {
-                $categories[$availableCategory->getSlug()] = implode(',', $selectedCategorySlugs) . ',' . $availableCategory->getSlug();
+                $toggleQueryStrings[$availableCategory->getSlug()] = implode(',', $selectedCategorySlugs) . ',' . $availableCategory->getSlug();
             }
 
-            $categories[$availableCategory->getSlug()] = trim($categories[$availableCategory->getSlug()], ',');
-            $categories[$availableCategory->getSlug()] = strtr(
-                $categories[$availableCategory->getSlug()],
+            $toggleQueryStrings[$availableCategory->getSlug()] = trim($toggleQueryStrings[$availableCategory->getSlug()], ',');
+            $toggleQueryStrings[$availableCategory->getSlug()] = strtr(
+                $toggleQueryStrings[$availableCategory->getSlug()],
                 [',,' => ',']
             );
         }
 
-        return $categories;
+        return $toggleQueryStrings;
     }
 }

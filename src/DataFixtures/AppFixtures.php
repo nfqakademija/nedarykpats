@@ -85,6 +85,20 @@ class AppFixtures extends Fixture
             if($i % 3 == 0) {
                 $product->setCategories($category3);
             }
+            if($i % 4 == 0) {
+                $product->setCategories($category4);
+            }
+            if($i % 5 == 0) {
+                $product->setCategories($category5);
+                $product->setCategories($category6);
+            }
+            if ($i % 6 == 0) {
+                $product->setCategories($category7);
+            }
+            if($i % 7 == 0) {
+                $product->setCategories($category8);
+                $product->setCategories($category9);
+            }
 
             $manager->persist($product);
         }

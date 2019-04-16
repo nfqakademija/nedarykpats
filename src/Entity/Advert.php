@@ -5,7 +5,7 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\JoinTable;
-use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AdvertRepository")
@@ -30,54 +30,97 @@ class Advert
     private $text;
 
     /**
-     * @ManyToMany(targetEntity="Category")
-     * @JoinTable(name="category_advert",
-     *      joinColumns={@JoinColumn(name="advert_id", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="category_id", referencedColumnName="id")}
-     *      )
+     * @ORM\Column(type="datetime", nullable=FALSE)
+     */
+    private $createdAt;
+
+    /**
+     * @ManyToMany(targetEntity="Category", inversedBy="adverts")
+     * @JoinTable(name="adverts_categories")
      */
     private $categories;
 
     public function __construct()
     {
         $this->categories = array();
+        $this->createdAt = new \DateTime("now");
     }
 
-    public function getId(): ?int
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getTitle(): ?string
+    /**
+     * @return string
+     */
+    public function getTitle(): string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return Advert
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
         return $this;
     }
 
-    public function getText(): ?string
+    /**
+     * @return string
+     */
+    public function getText(): string
     {
         return $this->text;
     }
 
+    /**
+     * @param string $text
+     * @return Advert
+     */
     public function setText(string $text): self
     {
         $this->text = $text;
-
         return $this;
     }
 
-    public function getCategories(): array
+    /**
+     * @return \DateTime
+     */
+    public function getCreatedAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     * @return Advert
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
     {
         return $this->categories;
     }
 
-    public function setCategories(?Category $categories): self
+    /**
+     * @param Category $categories
+     * @return Advert
+     */
+    public function setCategories(Category $categories): self
     {
         array_push($this->categories, $categories);
 

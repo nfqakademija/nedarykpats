@@ -7,7 +7,7 @@
         {% for advert in filteredAdverts %}
         <section class="Ad">
             <header class="Ad-header">
-                <div class="Date">2019-01-10</div>
+                <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
                 <div class="Bid">
                     <span class="Bid-header">Aplikavo</span>
                     <span class="Bid-count">34</span>
@@ -22,10 +22,9 @@
             </div>
             <footer class="Ad-footer">
                <ul class="Ad-categories">
-                   <li class="Category Category--red">Statybos</li>
-                   <li class="Category Category--purple">Lauko statybos</li>
-                   <li class="Category Category--green">Remontas</li>
-                   <li class="Category Category--yellow">Elektra</li>
+                   {% for advertCategory in advert.categories  %}
+                       <li class="Category {{ advertCategory.cssClass }}">{{ advertCategory.title }}</li>
+                   {% endfor %}
                </ul>
             </footer>
         </section>
@@ -38,7 +37,7 @@
         <ul class="FilterBar">
             {% for category in availableCategories %}
             <li>
-                <a class="Category Category--filter Category--lightGreen {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
+                <a class="Category Category--filter {{ category.cssClass }} {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
                    href="?filter={{ toggleQueryStrings[category.slug] }}">
                     <span class="Filter-title">{{ category.title }}</span>
                     <span class="Filter-icon">

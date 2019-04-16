@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
@@ -29,75 +32,99 @@ class Category
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $cssClass;
+    private $cssStyle;
 
-    private $advert;
+    /**
+     * @ManyToMany(targetEntity="Advert", mappedBy="categories")
+     */
+    private $adverts;
 
-    public function getId(): ?int
+    /**
+     * Category constructor.
+     */
+    public function __construct()
+    {
+        $this->adverts = array();
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return Advert
+     * @return string
      */
-    public function getAdvert()
-    {
-        return $this->advert;
-    }
-
-    /**
-     * @param Advert $advert
-     * @return self
-     */
-    public function setAdvert($advert): self
-    {
-        $this->advert = $advert;
-
-        return $this;
-    }
-
-    public function getSlug(): ?string
+    public function getSlug(): string
     {
         return $this->slug;
     }
 
+    /**
+     * @param string $slug
+     * @return Category
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
-
-        return $this;
-    }
-
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    public function setTitle(string $title): self
-    {
-        $this->title = $title;
-
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getCSSClass(): string
+    public function getTitle(): string
     {
-        return $this->class;
+        return $this->title;
     }
 
     /**
-     * @param self $class
+     * @param string $title
      * @return Category
      */
-    public function setCSSClass($cssClass): self
+    public function setTitle(string $title): self
     {
-        $this->cssClass = $cssClass;
+        $this->title = $title;
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getCssStyle(): string
+    {
+        return $this->cssStyle;
+    }
+
+    /**
+     * @param string $cssStyle
+     * @return Category
+     */
+    public function setCssStyle(string $cssStyle)
+    {
+        $this->cssStyle = $cssStyle;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Advert[]
+     */
+    public function getAdverts(): Collection
+    {
+        return $this->adverts;
+    }
+
+    /**
+     * @param array|Advert[] $adverts
+     * @return Category
+     */
+    public function setAdverts(array $adverts): self
+    {
+        $this->adverts = $adverts;
+        return $this;
+    }
 
 }
