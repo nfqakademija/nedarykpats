@@ -146,35 +146,5 @@ class AppFixtures extends Fixture
         $product->setCategories($category6);
         $manager->persist($product);
         $manager->flush();
-
-
-//        // Bam!
-//        for ($i = 0; $i < 20; $i++) {
-//
-//            $product = new Advert();
-//            $product->setTitle('product '.$i);
-//            $product->setText(mt_rand(10, 100));
-//            $product->setCategories($i % 2 == 0 ? $category1 : $category2);
-//            if($i % 3 == 0) {
-//                $product->setCategories($category3);
-//            }
-//            if($i % 4 == 0) {
-//                $product->setCategories($category4);
-//            }
-//            if($i % 5 == 0) {
-//                $product->setCategories($category5);
-//                $product->setCategories($category6);
-//            }
-//            if ($i % 6 == 0) {
-//                $product->setCategories($category7);
-//            }
-//            if($i % 7 == 0) {
-//                $product->setCategories($category8);
-//                $product->setCategories($category9);
-//            }
-//
-//            $manager->persist($product);
-//        }
-//        $manager->flush();
     }
 }
