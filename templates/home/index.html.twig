@@ -5,7 +5,7 @@
 {% block ads %}
     <section class="Ads">
         {% for advert in filteredAdverts %}
-        <section class="Ad">
+        <section class="Ad u-visibility-parent">
             <header class="Ad-header">
                 <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
                 <div class="Bid">
@@ -18,7 +18,9 @@
                 <div>
                     <p>{{ advert.text }}</p>
                 </div>
-                <a class="Button" href="/advert/{{ advert.id }}">Plačiau</a>
+                <div class="u-align-center u-visibility-flex-child">
+                    <a class="Button u-margin-top-bottom" href="/advert/{{ advert.id }}">Plačiau</a>
+                </div>
             </div>
             <footer class="Ad-footer">
                <ul class="Ad-categories">

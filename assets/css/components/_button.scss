@@ -1,0 +1,19 @@
+.Button {
+  width: 80%;
+  border-radius: var(--radiusMedium);
+  padding-top: var(--spaceTopBotTextMedium);
+  padding-bottom: var(--spaceTopBotTextMedium);
+  text-transform: uppercase;
+  font-size: var(--fontSizeMedium);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--colorBlack);
+  border: 2px solid var(--colorGrey);
+  
+  &:hover {
+    color: var(--colorWhite);
+    background-color: var(--colorGrey);
+  }
+}

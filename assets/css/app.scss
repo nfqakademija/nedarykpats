@@ -4,8 +4,8 @@
 
 @import "helpers/reset";
 @import "helpers/variables";
-@import "helpers/utilities";
 @import "helpers/mixins";
+@import "helpers/utilities";
 
 @import "base/base";
 
@@ -16,6 +16,7 @@
 @import "components/date";
 @import "components/bid";
 @import "components/category";
+@import "components/button";
 
 @media (min-width: 600px) {
   @import "layout/content_medium";

@@ -4,6 +4,10 @@ body {
   color: var(--colorBlack);
 }
 
+p {
+  line-height: var(--lineHeight);
+}
+
 h3 {
   font-size: var(--fontSizeHeader3);
   padding-top: var(--spaceMedium);
