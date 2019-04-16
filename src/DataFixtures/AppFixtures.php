@@ -75,33 +75,106 @@ class AppFixtures extends Fixture
         $manager->persist($category9);
         $manager->flush();
 
-        // Bam!
-        for ($i = 0; $i < 20; $i++) {
 
-            $product = new Advert();
-            $product->setTitle('product '.$i);
-            $product->setText(mt_rand(10, 100));
-            $product->setCategories($i % 2 == 0 ? $category1 : $category2);
-            if($i % 3 == 0) {
-                $product->setCategories($category3);
-            }
-            if($i % 4 == 0) {
-                $product->setCategories($category4);
-            }
-            if($i % 5 == 0) {
-                $product->setCategories($category5);
-                $product->setCategories($category6);
-            }
-            if ($i % 6 == 0) {
-                $product->setCategories($category7);
-            }
-            if($i % 7 == 0) {
-                $product->setCategories($category8);
-                $product->setCategories($category9);
-            }
-
-            $manager->persist($product);
-        }
+        $product = new Advert();
+        $product->setTitle('Laiptinės dažymas ');
+        $product->setText('Reikalingi profesionalūs dažytojai, mokantys ir galintys perdažyti mūsų namų laiptinę. Namas - 5 aukštų.');
+        $product->setCategories($category3);
+        $product->setCategories($category2);
+        $manager->persist($product);
         $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Reikalingas elektrikas');
+        $product->setText('Reikalingas elektrikas 700m2 namo elektros instaliacijai įrengti. Objektas Trakų/Elektrėnų rajone.');
+        $product->setCategories($category6);
+        $manager->persist($product);
+        $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Vonios plytelių klijavimas');
+        $product->setText('Norime atnaujinti vonią, ieškome plytelių klojėjo. Butas Vilniaus rajone, susiekimas automobiliu.');
+        $product->setCategories($category3);
+        $product->setCategories($category2);
+        $manager->persist($product);
+        $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Reikalingas Sodininkas');
+        $product->setText('Reikalingas sodininkas privačiam namui Vilniuje (Antakalnis). Darbų apimtis: teritorijos tvarkymas, augalų sodinimas, ravėjimas, augalų ir medžių genėjimas ir t.t. Darbas pilna diena, 3-4 kartus per savaitę.');
+        $product->setCategories($category4);
+        $manager->persist($product);
+        $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Ieškome santechniko');
+        $product->setText('Reikalingas santechnikas visai buto santechnikai atnaujinti.');
+        $product->setCategories($category5);
+        $manager->persist($product);
+        $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Ieškome silpnų srovių montotuojo');
+        $product->setText('Ieškome silpnų srovių montotuojo. darbo pobūdis - kabelių ir įrangos montavimas. Silpnų srovių komutavimo ir sistemų paleidimų gebėjimas - privalumas.');
+        $product->setCategories($category6);
+        $manager->persist($product);
+        $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Reikalingas darbų vadovas');
+        $product->setText('Iešome darbų vadovo buto renovacijai. Butas - 60m2, mansarda, senamiestis.');
+        $product->setCategories($category2);
+        $product->setCategories($category3);
+        $product->setCategories($category5);
+        $product->setCategories($category6);
+        $manager->persist($product);
+        $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Buitinės technikos pajungimas');
+        $product->setText('Reikia pajungti visą buitinę techniką (indaplovę, kaitlentę, skalbimo mašiną, šaldytuvą, gartraukį) naujoje virtuvėje. Vilnius (Pašilaičiai).');
+        $product->setCategories($category7);
+        $manager->persist($product);
+        $manager->flush();
+
+        $product = new Advert();
+        $product->setTitle('Baldų išrinkimas/surinkimas');
+        $product->setText('Kraustomės, reikia išrinkti visus baldus, o naujame bute surinkti. Vėliau būtų daugiau baldų, kuriuos reiktų surinkti');
+        $product->setCategories($category2);
+        $product->setCategories($category3);
+        $product->setCategories($category5);
+        $product->setCategories($category6);
+        $manager->persist($product);
+        $manager->flush();
+
+
+//        // Bam!
+//        for ($i = 0; $i < 20; $i++) {
+//
+//            $product = new Advert();
+//            $product->setTitle('product '.$i);
+//            $product->setText(mt_rand(10, 100));
+//            $product->setCategories($i % 2 == 0 ? $category1 : $category2);
+//            if($i % 3 == 0) {
+//                $product->setCategories($category3);
+//            }
+//            if($i % 4 == 0) {
+//                $product->setCategories($category4);
+//            }
+//            if($i % 5 == 0) {
+//                $product->setCategories($category5);
+//                $product->setCategories($category6);
+//            }
+//            if ($i % 6 == 0) {
+//                $product->setCategories($category7);
+//            }
+//            if($i % 7 == 0) {
+//                $product->setCategories($category8);
+//                $product->setCategories($category9);
+//            }
+//
+//            $manager->persist($product);
+//        }
+//        $manager->flush();
     }
 }
