@@ -16,30 +16,39 @@ class Advert
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=1000)
+     * @var string
      */
     private $text;
 
     /**
      * @ORM\Column(type="datetime", nullable=FALSE)
+     * @var \DateTime
      */
     private $createdAt;
 
     /**
      * @ManyToMany(targetEntity="Category", inversedBy="adverts")
      * @JoinTable(name="adverts_categories")
+     * @var array|Category
      */
     private $categories;
 
+    /**
+     * Advert constructor.
+     * @throws \Exception
+     */
     public function __construct()
     {
         $this->categories = array();

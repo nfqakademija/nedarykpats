@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Workchase {% endblock %}
+
+{% block ads %}
+    <section class="Ads">
+            <section class="Ad">
+                <header class="Ad-header">
+                    <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
+                    <div class="Bid">
+                        <span class="Bid-header">Aplikavo</span>
+                        <span class="Bid-count">34</span>
+                    </div>
+                </header>
+                <h3 class="Header">{{ advert.title }}</h3>
+                <div class="Ad-body">
+                    <div>
+                        <p>{{ advert.text }}</p>
+                    </div>
+                    <button class="Button">Plačiau</button>
+                </div>
+                <footer class="Ad-footer">
+                    <ul class="Ad-categories">
+                        {% for advertCategory in advert.categories  %}
+                            <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </footer>
+            </section>
+    </section>
+{% endblock %}

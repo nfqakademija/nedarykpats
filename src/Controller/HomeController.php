@@ -14,6 +14,10 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
+     * @param Request $request
+     * @param AdvertRepository $advertRepository
+     * @param CategoryRepository $categoryRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request, AdvertRepository $advertRepository, CategoryRepository $categoryRepository)
     {
@@ -33,6 +37,19 @@ class HomeController extends AbstractController
             'availableCategories' => $availableCategories,
             'filteredAdverts' => $filteredAdverts,
             'toggleQueryStrings' => $this->buildToggleQueryStrings($availableCategories, $selectedCategories)
+        ]);
+    }
+
+    /**
+     * @Route("/advert/{id}", name="advert", requirements={"id"="\d+"})
+     * @param int $id
+     * @param AdvertRepository $advertRepository
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function advert(int $id, AdvertRepository $advertRepository){
+        $advert = $advertRepository->find($id);
+        return $this->render('home/advert.html.twig', [
+            'advert' => $advert
         ]);
     }
 

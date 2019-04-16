@@ -18,12 +18,12 @@
                 <div>
                     <p>{{ advert.text }}</p>
                 </div>
-                <button class="Button">Plačiau</button>
+                <a class="Button" href="/advert/{{ advert.id }}">Plačiau</a>
             </div>
             <footer class="Ad-footer">
                <ul class="Ad-categories">
                    {% for advertCategory in advert.categories  %}
-                       <li class="Category {{ advertCategory.cssClass }}">{{ advertCategory.title }}</li>
+                       <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
                    {% endfor %}
                </ul>
             </footer>
@@ -37,7 +37,7 @@
         <ul class="FilterBar">
             {% for category in availableCategories %}
             <li>
-                <a class="Category Category--filter {{ category.cssClass }} {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
+                <a class="Category Category--filter {{ category.cssStyle }} {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
                    href="?filter={{ toggleQueryStrings[category.slug] }}">
                     <span class="Filter-title">{{ category.title }}</span>
                     <span class="Filter-icon">

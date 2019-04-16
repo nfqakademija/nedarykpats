@@ -16,26 +16,31 @@ class Category
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $slug;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $title;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @var string
      */
     private $cssStyle;
 
     /**
      * @ManyToMany(targetEntity="Advert", mappedBy="categories")
+     * @var array|Advert
      */
     private $adverts;
 
