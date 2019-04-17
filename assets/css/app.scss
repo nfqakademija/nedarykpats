@@ -17,10 +17,12 @@
 @import "components/bid";
 @import "components/category";
 @import "components/button";
+@import "components/pagination";
 
 @media (min-width: 600px) {
   @import "layout/content_medium";
   @import "components/ad_medium";
+  @import "components/pagination-medium";
 }
 
 @media (min-width: 1200px) {

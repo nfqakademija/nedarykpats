@@ -1,16 +1,17 @@
 .Button {
+  @include transitionAll;
   width: 80%;
   border-radius: var(--radiusMedium);
   padding-top: var(--spaceTopBotTextMedium);
   padding-bottom: var(--spaceTopBotTextMedium);
   text-transform: uppercase;
   font-size: var(--fontSizeMedium);
-  font-weight: 600;
+  font-weight: var(--bold);
   letter-spacing: 0.3px;
   text-align: center;
   text-decoration: none;
   color: var(--colorBlack);
-  border: 2px solid var(--colorGrey);
+  border: var(--borderSmall) solid var(--colorGrey);
   
   &:hover {
     color: var(--colorWhite);

@@ -1,0 +1,21 @@
+.Pagination {
+  &.u-align-center {
+    display: flex;
+  }
+  
+  li {
+    display: inline;
+  }
+  
+  &-item {
+    @include borderRadiusFull;
+    width: var(--radiusMediumLarge);
+  }
+  
+  &-item:not(&-prev):not(&-next) {
+    display: inline-block;
+  }
+  
+}
+
+

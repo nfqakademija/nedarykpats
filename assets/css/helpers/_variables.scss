@@ -41,6 +41,13 @@
 }
 
 /**
+ * Fonts weight
+ */
+:root {
+  --bold: 600;
+}
+
+/**
  * Spacing
  */
 :root {
@@ -66,6 +73,7 @@
 :root {
   --radiusSmall: 20px;
   --radiusMedium: 30px;
+  --radiusMediumLarge: 40px;
   --radiusLarge: 50px;
 }
 
@@ -73,7 +81,7 @@
  * Border width
  */
 :root {
-  --widthSmall: 2px;
-  --widthMedium: 4px;
-  --widthLarge: 50px;
+  --borderSmall: 2px;
+  --borderMedium: 4px;
+  --borderLarge: 50px;
 }

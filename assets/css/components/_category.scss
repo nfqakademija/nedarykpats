@@ -12,7 +12,7 @@
   
   &--filter {
 	font-size: var(--fontSize);
-	border-width: 2px;
+	border-width: var(--borderSmall);
 	border-style: solid;
   }
   

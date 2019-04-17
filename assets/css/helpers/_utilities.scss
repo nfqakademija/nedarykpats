@@ -9,20 +9,18 @@
 }
 
 .u-margin-top-bottom {
-  margin-bottom: var(--spaceLarge);
+  margin-bottom: var(--spaceMedium);
   margin-top: var(--spaceMedium);
 }
 
 .u-visibility-parent {
   
   .u-visibility-flex-child {
-    //@include transitionAll;
-    visibility: hidden;
-    height: 0;
+    @include transitionAll;
+    opacity: 0;
   }
   
   &:hover .u-visibility-flex-child {
-    visibility: visible;
-    height: auto;
+    opacity: 1;
   }
 }
