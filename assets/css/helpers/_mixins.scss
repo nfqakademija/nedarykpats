@@ -24,3 +24,12 @@
   -webkit-border-radius: 100%;
   border-radius: 100%;
 }
+
+@mixin shadowBlockForm() {
+  @include box-shadow();
+  display: inline-block;
+  padding: var(--spaceMedium);
+  background-color: var(--colorWhite);
+  border-radius: var(--radiusSmall);
+  margin: var(--spaceSmall);
+}

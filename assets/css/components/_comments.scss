@@ -1,0 +1,38 @@
+.Comments {
+  @include shadowBlockForm();
+  
+  &-block{
+    display: flex;
+    justify-content: flex-start;
+  }
+  
+  &-image {
+    border-radius: var(--radiusLarge);
+    margin-right: var(--spaceMedium);
+    margin-top: var(--spaceSmall);
+    img {
+      max-width: var(--imgSmall);
+      height: var(--imgSmall);
+      overflow: hidden;
+      border-radius: var(--radiusLarge);
+      border-width: var(--borderSmall);
+      border-color: var(--colorLightGray);
+      border-style: solid;
+    }
+  }
+  &-content{
+
+  }
+  
+  &-header {
+    font-weight: var(--bold);
+    color: var(--colorGrey);
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  &-text{
+    padding-top: var(--spaceTopBotTextMedium);
+    padding-bottom: var(--spaceTopBotTextMedium);
+  }
+}

@@ -11,6 +11,7 @@
 
 @import "layout/content";
 @import "components/filterBar";
+@import "components/ads";
 @import "components/ad";
 @import "components/header";
 @import "components/date";
@@ -18,14 +19,24 @@
 @import "components/category";
 @import "components/button";
 @import "components/pagination";
+@import "components/comments";
+@import "components/selectedAd";
+@import "components/statusBlock";
 
 @media (min-width: 600px) {
   @import "layout/content_medium";
-  @import "components/ad_medium";
+  @import "components/ads_medium";
   @import "components/pagination-medium";
+  @import "components/comments-medium";
+  @import "components/selectedAd_medium";
+  @import "components/statusBlock-medium";
 }
 
 @media (min-width: 1200px) {
   @import "layout/content_large";
-  @import "components/ad_large";
+  @import "components/ads_large";
+  @import "components/pagination-large";
+  @import "components/comments-large";
+  @import "components/selectedAd_large";
+  @import "components/statusBlock-large";
 }

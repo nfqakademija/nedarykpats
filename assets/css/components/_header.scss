@@ -1,3 +1,10 @@
 .Header {
-  
+	padding-top: var(--spaceMedium);
+	padding-bottom: var(--spaceSmall);
+	border-bottom: 1px solid var(--colorLightGray);
+	margin-bottom: var(--spaceSmall);
+}
+
+.Header--single {
+  border-bottom: none;
 }

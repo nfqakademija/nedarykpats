@@ -1,16 +1,12 @@
-.Ads {
-  padding-top: var(--spaceLarge);
-  display: block;
-}
-
 .Ad {
   width: 100%;
-  @include box-shadow();
-  display: inline-block;
-  padding: var(--spaceMedium);
-  background-color: var(--colorWhite);
-  border-radius: var(--radiusSmall);
-  margin: var(--spaceSmall);
+  @include shadowBlockForm();
+  //@include box-shadow();
+  //display: inline-block;
+  //padding: var(--spaceMedium);
+  //background-color: var(--colorWhite);
+  //border-radius: var(--radiusSmall);
+  //margin: var(--spaceSmall);
   
   &-header {
 	display: flex;
@@ -22,5 +18,9 @@
 	flex-wrap: wrap;
 	justify-content: flex-end;
 	padding: 0;
+  }
+  
+  &--single {
+	width: auto;
   }
 }

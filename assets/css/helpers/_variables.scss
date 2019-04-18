@@ -10,6 +10,7 @@
  * Colors
  */
 :root {
+  --colorMain: #3f4af5;
   --colorOrange: #fcba02;
   --colorRed: #ec5b56;
   --colorGreen: #398175;
@@ -84,4 +85,12 @@
   --borderSmall: 2px;
   --borderMedium: 4px;
   --borderLarge: 50px;
+}
+
+/**
+ * Img size
+ */
+:root {
+  --imgSmall: 50px;
+  --imgMedium: 100px;
 }

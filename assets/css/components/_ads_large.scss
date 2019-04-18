@@ -1,12 +1,8 @@
 .Ads {
   grid-template-columns: repeat(3, 1fr);
   
-}
-
-
-.Ad {
-  
-  &-Header {
-	
+  &--single {
+    grid-template-columns: none;
   }
 }
+

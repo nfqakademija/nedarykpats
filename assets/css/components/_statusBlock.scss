@@ -1,0 +1,31 @@
+.StatusBlock {
+  @include shadowBlockForm;
+  color: var(--colorWhite);
+  text-transform: uppercase;
+  font-weight: var(--bold);
+  text-align: center;
+  display: block;
+  
+  &-icon {
+	display: none;
+  }
+  &-title {
+	width: var(--imgMedium);
+  }
+  
+  &--pending {
+	
+  }
+  
+  &--aproved {
+	background-color: var(--colorGrey);
+  }
+  
+  &--hired {
+	background-color: var(--colorMain);
+  }
+  
+  &--canceled{
+	
+  }
+}
