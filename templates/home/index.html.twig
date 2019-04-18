@@ -6,15 +6,15 @@
     <section class="Ads">
         {% for advert in filteredAdverts %}
         <section class="Ad u-visibility-parent">
-            <header >
+            <header class="Ad-header">
                 <div > {{ advert.createdAt|date("Y-m-d") }}</div>
                 <div class="Bid">
                     <span class="Bid-header">Aplikavo</span>
                     <span class="Bid-count">34</span>
                 </div>
             </header>
-            <h3 >{{ advert.title }}</h3>
-            <div>
+            <h3 class="Header">{{ advert.title }}</h3>
+            <div class="Ad-body">
                 <div>
                     <p>{{ advert.text }}</p>
                 </div>
@@ -22,8 +22,8 @@
                     <a class="Button u-margin-top-bottom" href="/advert/{{ advert.id }}">Plačiau</a>
                 </div>
             </div>
-            <footer >
-               <ul >
+            <footer class="Ad-footer">
+               <ul class="Ad-categories">
                    {% for advertCategory in advert.categories  %}
                        <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
                    {% endfor %}
