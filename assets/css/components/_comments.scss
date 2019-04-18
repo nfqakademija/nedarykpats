@@ -35,4 +35,8 @@
     padding-top: var(--spaceTopBotTextMedium);
     padding-bottom: var(--spaceTopBotTextMedium);
   }
+  
+  &-replayBlock {
+    @include shadowBlockForm();
+  }
 }

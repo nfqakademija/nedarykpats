@@ -1,9 +1,7 @@
 .Button {
   @include transitionAll;
-  width: 80%;
   border-radius: var(--radiusMedium);
-  padding-top: var(--spaceTopBotTextMedium);
-  padding-bottom: var(--spaceTopBotTextMedium);
+  padding: var(--spaceTopBotTextMedium) var(--spaceLeftRightTexBig);;
   text-transform: uppercase;
   font-size: var(--fontSizeMedium);
   font-weight: var(--bold);
@@ -12,6 +10,7 @@
   text-decoration: none;
   color: var(--colorBlack);
   border: var(--borderSmall) solid var(--colorGrey);
+  //display: block;
   
   &:hover {
     color: var(--colorWhite);
@@ -19,6 +18,14 @@
   }
   
   &--blue {
-    //background-color: #0000F0;
+    background-color: var(--colorMain);
+    border: none;
+    color: var(--colorWhite);
   }
+  
+  &--short {
+    width: 80%;
+  }
+  
 }
+

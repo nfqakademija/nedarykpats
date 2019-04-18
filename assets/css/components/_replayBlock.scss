@@ -1,0 +1,12 @@
+.ReplayBlock {
+  @include shadowBlockForm;
+  display: block;
+  text-align: center;
+  
+  &-content {
+    display: block;
+    width: 100%;
+    border: none;
+  }
+
+}
