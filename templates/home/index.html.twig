@@ -6,15 +6,15 @@
     <section class="Ads">
         {% for advert in filteredAdverts %}
         <section class="Ad u-visibility-parent">
-            <header class="Ad-header">
-                <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
+            <header >
+                <div > {{ advert.createdAt|date("Y-m-d") }}</div>
                 <div class="Bid">
                     <span class="Bid-header">Aplikavo</span>
                     <span class="Bid-count">34</span>
                 </div>
             </header>
-            <h3 class="Header">{{ advert.title }}</h3>
-            <div class="Ad-body">
+            <h3 >{{ advert.title }}</h3>
+            <div>
                 <div>
                     <p>{{ advert.text }}</p>
                 </div>
@@ -22,8 +22,8 @@
                     <a class="Button u-margin-top-bottom" href="/advert/{{ advert.id }}">Plačiau</a>
                 </div>
             </div>
-            <footer class="Ad-footer">
-               <ul class="Ad-categories">
+            <footer >
+               <ul >
                    {% for advertCategory in advert.categories  %}
                        <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
                    {% endfor %}
@@ -33,23 +33,22 @@
         {% endfor %}
     </section>
 
+
+    {% if paginationPages > 1 %}
     <section>
         <ul class="Pagination u-align-center">
-            <li><a href="#" class="Pagination-item Pagination-prev">&laquo</a></li>
-            <li><a href="#" class="Pagination-item is-active">1</a></li>
-            <li><a href="#" class="Pagination-item">2</a></li>
-            <li><a href="#" class="Pagination-item">3</a></li>
-            <li><a href="#" class="Pagination-item">4</a></li>
-            <li><a href="#" class="Pagination-item">5</a></li>
-            <li><a href="#" class="Pagination-item">6</a></li>
-            <li><a href="#" class="Pagination-item">7</a></li>
-            <li><a href="#" class="Pagination-item">8</a></li>
-            <li><a href="#" class="Pagination-item">9</a></li>
-            <li><a href="#" class="Pagination-item Pagination-next">&raquo;</a></li>
+            {% if page > 1 %}
+            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ page - 1 }}" class="Pagination-item Pagination-prev">&laquo</a></li>
+            {% endif %}
+
+            {% for i in 1..paginationPages %}
+            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ i }}" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}  </a></li>
+            {% endfor %}
+            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ page + 1 }}" class="Pagination-item Pagination-next">&raquo;</a></li>
         </ul><br>
     </section>
-
-{% endblock %}
+    {% endif %}
+    {% endblock %}
 
 {% block filter %}
     <section>
