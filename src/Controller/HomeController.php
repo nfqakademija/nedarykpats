@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Offer;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\OfferRepository;
 use App\SearchObjects\Filters;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -57,10 +59,14 @@ class HomeController extends AbstractController
      * @param AdvertRepository $advertRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function advert(int $id, AdvertRepository $advertRepository){
+    public function advert(int $id, AdvertRepository $advertRepository, OfferRepository $offerRepository){
         $advert = $advertRepository->find($id);
+
+        $offers = $offerRepository->findby(['advert' => $advert]);
+
         return $this->render('home/advert.html.twig', [
-            'advert' => $advert
+            'advert' => $advert,
+            'offers' => $offers
         ]);
     }
 

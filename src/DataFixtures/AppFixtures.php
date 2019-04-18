@@ -150,7 +150,6 @@ class AppFixtures extends Fixture
 
         $offer = new Offer($product);
         $offer
-            ->setAdvert($product)
             ->setText('Sveiki, galiu jums padėti šiuo klausimu. Vieno valandos kaina 12 Eur be PVM. Jeigu naudojamas mūsų transportas 14 Eur be PVM (esant didesniam atstumui nei 50 km, vieno kilometro kaina 0,5 Eur be PVM )')
             ->setEmail('paslaugos@krautykis-lengvai.lt');
         $manager->persist($offer);

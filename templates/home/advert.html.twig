@@ -34,43 +34,22 @@
     </section>
 
     <section class="Comments">
+        {% for offer in offers %}
         <section class="Comments-block">
             <div class="Comments-image">
                 <img src="/img/user1.png" alt="user">
             </div>
             <div class="Comments-content">
                 <div class="Comments-header">
-                    <span class="Comments-author">Jonas Jonatis</span>
+                    <span class="Comments-author">{{ offer.email }}</span>
                     <span class="Comments-date">2019-04-16</span>
                 </div>
                 <div class="Comments-text">
-                    <p>Siūlau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur
-                        lau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur.
-                        Siūlau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur.
-                        iūlau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur.</p>
-                    <p>Siūlau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur.</p>
-                    <p>Siūlau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur.</p>
+                    <p>{{ offer.text }}</p>
                 </div>
             </div>
         </section>
-    </section>
-
-    <section class="Comments">
-        <section class="Comments-block">
-            <div class="Comments-image">
-                <img src="/img/user1.png" alt="user">
-            </div>
-            <div class="Comments-content">
-                <div class="Comments-header">
-                    <span class="Comments-author">Jonas Jonatis</span>
-                    <span class="Comments-date">2019-04-16</span>
-                </div>
-                <div class="Comments-text">
-                    <p>Siūlau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur
-                        Siūlau da m2 kaina - 30eur.Siūlau dažymo paslaugas,1 m2 kaina - 30eur.</p>
-                </div>
-            </div>
-        </section>
+        {% endfor %}
     </section>
 
     <form class="ReplayBlock">
