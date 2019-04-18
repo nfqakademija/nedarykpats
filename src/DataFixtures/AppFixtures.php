@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Advert;
 use App\Entity\Category;
+use App\Entity\Offer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 
@@ -146,5 +147,14 @@ class AppFixtures extends Fixture
         $product->setCategories($category6);
         $manager->persist($product);
         $manager->flush();
+
+        $offer = new Offer();
+        $offer
+            ->setAdvert($product)
+            ->setText('Sveiki, galiu jums padėti šiuo klausimu. Vieno valandos kaina 12 Eur be PVM. Jeigu naudojamas mūsų transportas 14 Eur be PVM (esant didesniam atstumui nei 50 km, vieno kilometro kaina 0,5 Eur be PVM )')
+            ->setEmail('paslaugos@krautykis-lengvai.lt');
+        $manager->persist($offer);
+        $manager->flush();
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\JoinTable;
@@ -46,6 +47,11 @@ class Advert
     private $categories;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="advert")
+     */
+    private $offers;
+
+    /**
      * Advert constructor.
      * @throws \Exception
      */
@@ -53,6 +59,7 @@ class Advert
     {
         $this->categories = array();
         $this->createdAt = new \DateTime("now");
+        $this->offers = new ArrayCollection();
     }
 
     /**
@@ -132,6 +139,45 @@ class Advert
     public function setCategories(Category $categories): self
     {
         array_push($this->categories, $categories);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    /**
+     * @param Offer $offer
+     * @return Advert
+     */
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setAdvert($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Offer $offer
+     * @return Advert
+     */
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getAdvert() === $this) {
+                $offer->setAdvert(null);
+            }
+        }
 
         return $this;
     }
