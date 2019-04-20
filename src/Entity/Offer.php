@@ -31,7 +31,7 @@ class Offer
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=500)
+     * @ORM\Column(type="string", length=5000)
      * @var string
      */
     private $text;
