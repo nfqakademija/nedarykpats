@@ -1,12 +1,21 @@
 .ReplayBlock {
   @include shadowBlockForm;
   display: block;
-  text-align: center;
+  margin-left: 0;
+  margin-right: 0;
   
   &-content {
     display: block;
     width: 100%;
     border: none;
+  }
+  
+  &-mail {
+    text-align: left;
+    border: none;
+    border-bottom: var(--borderxSmall) solid var(--colorGrey);
+    padding: var(--spaceTopBotTextSmall);
+    padding-left: 0;
   }
 
 }

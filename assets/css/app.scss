@@ -23,6 +23,8 @@
 @import "components/selectedAd";
 @import "components/statusBlock";
 @import "components/replayBlock";
+@import "components/pageHeader";
+@import "components/sectionBlock";
 
 
 @media (min-width: 600px) {
@@ -32,6 +34,8 @@
   @import "components/comments-medium";
   @import "components/selectedAd_medium";
   @import "components/statusBlock-medium";
+  @import "components/pageHeader-medium";
+  @import "components/sectionBlock-medium";
 }
 
 @media (min-width: 1200px) {
@@ -41,4 +45,6 @@
   @import "components/comments-large";
   @import "components/selectedAd_large";
   @import "components/statusBlock-large";
+  @import "components/pageHeader-large";
+  @import "components/sectionBlock-large";
 }

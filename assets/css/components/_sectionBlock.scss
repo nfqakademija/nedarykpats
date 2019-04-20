@@ -1,0 +1,19 @@
+.SectionBlock{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--spaceLarge);
+  margin-bottom: var(--spaceLarge);
+  
+  &-text {
+	order: 2;
+	width: 50%;
+  }
+  &-img {
+	text-align: center;
+	img {
+	  order: 1;
+	  width: 70%;
+	}
+  }
+}

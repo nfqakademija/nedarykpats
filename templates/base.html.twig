@@ -14,6 +14,16 @@
     <body>
         <div class="Content">
             <div class="Content-Block">
+                {% block header %}{% endblock %}
+            </div>
+        </div>
+        <div class="Content u-height-full">
+            <div class="Content-Block">
+                {% block intro %}{% endblock %}
+            </div>
+        </div>
+        <div class="Content">
+            <div class="Content-Block">
                 {% block filter %}{% endblock %}
             </div>
         </div>

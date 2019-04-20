@@ -1,5 +1,6 @@
 body,
-textarea{
+textarea,
+input{
   font-family:  var(--fontFamily);
   font-size: var(--fontSize);
   color: var(--colorBlack);
@@ -9,6 +10,9 @@ p {
   line-height: var(--lineHeight);
 }
 
+h1 {
+  font-size: 40px;
+}
 h3 {
   font-size: var(--fontSizeHeader3);
 }

@@ -1,5 +1,7 @@
 .Comments {
   @include shadowBlockForm();
+  display: block;
+  margin: 0;
   
   &-block{
     display: flex;
@@ -21,7 +23,7 @@
     }
   }
   &-content{
-
+	width: 100%;
   }
   
   &-header {

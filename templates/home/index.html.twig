@@ -2,8 +2,35 @@
 
 {% block title %} Workchase {% endblock %}
 
+{% block header %}
+    <div class="PageHeader">
+        <div class="PageHeader-logo">
+            <a href="/"><img src="img/logo.png" alt="worchase"></a>
+        </div>
+        <nav class="PageHeader-nav">
+            <span class="PageHeader-item"><a href="">Visi skelbimai</a></span>
+            <span class="PageHeader-item"><a href="">Mano pasiūlymai</a></span>
+            <span class="PageHeader-item"><a href="">Profilis</a></span>
+        </nav>
+    </div>
+{% endblock %}
+
+{% block intro %}
+<section class="SectionBlock">
+    <div class="SectionBlock-text">
+        <h1>Ieškok, kas tau padarytų darbą!</h1>
+        <div class="u-display-flex">
+            <a class="Button Button--blue u-margin-top-bottom" href="#FilterBar">Plačiau</a>
+        </div>
+    </div>
+    <div class="SectionBlock-img">
+        <img src="img/intro.png"/>
+    </div>
+</section>
+{% endblock %}
+
 {% block ads %}
-    <section class="Ads">
+    <section id="Ads" class="Ads">
         {% for advert in filteredAdverts %}
         <section class="Ad u-visibility-parent">
             <header class="Ad-header">
@@ -51,7 +78,7 @@
     {% endblock %}
 
 {% block filter %}
-    <section>
+    <section id="FilterBar">
         <ul class="FilterBar">
             {% for category in availableCategories %}
             <li>

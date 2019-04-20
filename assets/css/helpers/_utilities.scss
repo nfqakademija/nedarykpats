@@ -8,16 +8,33 @@
   justify-content: center;
 }
 
+.u-display-flex {
+  display: flex;
+}
+
+.u-display-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.u-height-full {
+  //min-height: 70%;
+}
+
 .u-margin-top-bottom {
   margin-bottom: var(--spaceMedium);
   margin-top: var(--spaceMedium);
+}
+
+.u-margin-bottom{
+  margin-bottom: var(--spaceMedium);
 }
 
 .u-visibility-parent {
   
   .u-visibility-flex-child {
     @include transitionAll;
-    opacity: 0;
+    opacity: .4;
   }
   
   &:hover .u-visibility-flex-child {

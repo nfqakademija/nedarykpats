@@ -1,0 +1,12 @@
+.PageHeader {
+  
+  &-item {
+    visibility: visible;
+    text-transform: uppercase;
+    padding-left: var(--spaceLarge);
+    letter-spacing: 0.3px;
+    a {
+      text-decoration: none;
+    }
+  }
+}
