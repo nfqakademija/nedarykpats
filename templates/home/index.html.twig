@@ -66,14 +66,15 @@
     {% if paginationPages > 1 %}
     <section>
         <ul class="Pagination u-align-center">
-            {% if page > 1 %}
-            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ page - 1 }}" class="Pagination-item Pagination-prev">&laquo</a></li>
-            {% endif %}
+
+            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ page - 1 }}" class="Pagination-item Pagination-prev{{ (page == 1) ? ' unavailable' : '' }}">&laquo</a></li>
+
 
             {% for i in 1..paginationPages %}
             <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ i }}" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}  </a></li>
             {% endfor %}
-            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ page + 1 }}" class="Pagination-item Pagination-next">&raquo;</a></li>
+            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page= {{ page + 1 }}" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' unavailable' : '' }}">&raquo;</a></li>
+
         </ul><br>
     </section>
     {% endif %}
