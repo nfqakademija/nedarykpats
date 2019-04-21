@@ -1,7 +1,7 @@
 .Comments {
   @include shadowBlockForm();
   display: block;
-  margin: 0;
+  margin: var(--spaceSmall) 0;
   
   &-block{
     display: flex;

@@ -20,6 +20,18 @@
         <a class="Button" href="/">Atgal</a>
     </div>
 
+    {#TODO: neskeminga zinute#}
+    {% if app.session.flashBag.has('success') %}
+        <div class="Alert Alert-success">
+            <span class="Alert-icon">
+                <img src="/img/success.svg" alt="success">
+                   {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }}
+                   {% endfor %}
+            </span>
+        </div>
+    {% endif %}
+
     <section class="SelectedAd">
         <section class="SelectedAd-content">
             <header class="Ad-header">
@@ -30,7 +42,6 @@
                         <span class="Bid-count">{{ advert.countOffers() }}</span>
                     </div>
                 {% endif %}
-            </header>
             </header>
             <h3 class="Header Header--single">{{ advert.title }}</h3>
             <div class="Ad-body">
@@ -75,20 +86,13 @@
         {% endfor %}
     {% endif %}
 
-    {% if app.session.flashBag.has('success') %}
-        <div class="alert alert-success">
-            {% for msg in app.session.flashBag.get('success') %}
-                {{ msg }}
-            {% endfor %}
-        </div>
-    {% endif %}
+    {#TODO: reiktų išvalyti fomą po submito#}
+    {{ form_start(offerForm, {'attr': {'class' : 'ReplayBlock'}}) }}
 
-        {{ form_start(offerForm, {'attr': {'class' : 'ReplayBlock'}}) }}
+        {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
+        {{ form_row(offerForm.text, {'label': 'Skelbimo tekstas', 'attr' : { 'class' : 'ReplayBlock-content', 'placeholder' : "Parašyk žinutę su trumpa informacija apie save.", 'rows': "8" }}) }}
+        {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
 
-            {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
-            {{ form_row(offerForm.text, {'label': 'Skelbimo tekstas', 'attr' : { 'class' : 'ReplayBlock-content', 'placeholder' : "Parašyk žinutę su trumpa informacija apie save." }}) }}
-            {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
-
-        {{ form_end(offerForm) }}
+    {{ form_end(offerForm) }}
 
 {% endblock %}

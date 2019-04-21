@@ -17,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-    const ITEMS_PER_PAGE = 4;
+    const ITEMS_PER_PAGE = 6;
 
     /**
      *  @Route("/", name="home")

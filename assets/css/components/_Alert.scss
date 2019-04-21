@@ -1,0 +1,24 @@
+.Alert {
+  @include shadowBlockForm();
+  width: 100%;
+  margin: var(--spaceSmall) 0;
+  background-color: var(--colorWhite);
+  box-shadow: none;
+  border: var(--borderSmall) solid var(--colorBlack);
+  
+  &-succsess{
+  
+  }
+  
+  &-icon {
+    display: flex;
+    align-items: center;
+    
+    img {
+      height: 30px;
+      padding-right: var(--spaceSmall);
+    }
+  }
+}
+
+

@@ -10,6 +10,8 @@
   }
 
   &-item {
+    @include box-sizing-content-box();
+    display: block;
     float: left;
     color: var(--colorGrey);
     border: var(--borderSmall) solid var(--colorGrey);
@@ -34,11 +36,14 @@
     display: none;
   }
 
-
   &-prev,
   &-next {
     color: var(--colorWhite);
     background-color: var(--colorGrey);
+  }
+  
+  & .is-unavailable {
+    display: none;
   }
 }
 
