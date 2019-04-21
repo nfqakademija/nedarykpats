@@ -18,6 +18,7 @@ class HomeController extends AbstractController
     const ITEMS_PER_PAGE = 6;
 
     /**
+     *  @Route("/", name="home")
      * @param Request $request
      * @param AdvertRepository $advertRepository
      * @param CategoryRepository $categoryRepository
