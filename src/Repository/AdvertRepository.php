@@ -21,35 +21,25 @@ class AdvertRepository extends ServiceEntityRepository
         parent::__construct($registry, Advert::class);
     }
 
-    public function findByCategories(Filters $filters,int $page, int $itemsPerPage) {
-         $query = $this->createQueryBuilder('a')
-             ->addSelect('a');
-            // ->addSelect('COUNT(o.id) as offersCount')
-            // ->leftJoin('a.offers','o');
-         if($filters->getKeywords()) {
-             $query
-                 ->innerJoin('a.categories', 'c')
-                 ->where($query->expr()->in('c.slug', $filters->getKeywords()));
-         }
+    public function findByCategories(Filters $filters, int $page, int $itemsPerPage)
+    {
+        $query = $this->createQueryBuilder('a')
+            ->addSelect('a');
+        // ->addSelect('COUNT(o.id) as offersCount')
+        // ->leftJoin('a.offers','o');
+        if ($filters->getKeywords()) {
+            $query
+                ->innerJoin('a.categories', 'c')
+                ->where($query->expr()->in('c.slug', $filters->getKeywords()));
+        }
 
-        $paginator = $this->paginate($query->getQuery(), $page ,$itemsPerPage);
+        $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
 
         return $paginator;
     }
 
 
-
     /**
-     * Paginator Helper
-     *
-     * Pass through a query object, current page & limit
-     * the offset is calculated from the page and limit
-     * returns an `Paginator` instance, which you can call the following on:
-     *
-     *     $paginator->getIterator()->count() # Total fetched (ie: `5` posts)
-     *     $paginator->count() # Count of ALL posts (ie: `20` posts)
-     *     $paginator->getIterator() # ArrayIterator
-     *
      * @param \Doctrine\ORM\Query $dql DQL Query Object
      * @param integer $page Current page (defaults to 1)
      * @param integer $limit The total number per page (defaults to 5)
