@@ -21,8 +21,10 @@ class AppFixtures extends Fixture
         }
 
         $adverts = [];
+        $date = new \DateTime(date('Y-m-d'));
         foreach ($this->getAdvertsData() as $singleAdvert) {
-            $advert = $this->getAdvert($singleAdvert, $categories);
+            $date->modify('-1 day');
+            $advert = $this->getAdvert($singleAdvert, $categories, $date->format('Y-m-d H:i:s'));
             $this->addReference($singleAdvert['reference'], $advert);
             $manager->persist($advert);
             $adverts[$singleAdvert['reference']] = $advert;
@@ -45,12 +47,13 @@ class AppFixtures extends Fixture
             ->setCssStyle($category['cssStyle']);
     }
 
-    private function getAdvert(array $advert, array $categories)
+    private function getAdvert(array $advert, array $categories, string $date)
     {
         $singleAdvert = new Advert();
         $singleAdvert
             ->setTitle($advert['title'])
-            ->setText($advert['text']);
+            ->setText($advert['text'])
+            ->setCreatedAt(new \DateTime($date));
         foreach ( $advert['categories'] as $category){
             $singleAdvert->setCategories($categories[$category]);
         }
