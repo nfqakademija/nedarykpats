@@ -34,8 +34,8 @@ class HomeController extends AbstractController
         $filters = new Filters();
         $selectedCategories = [];
 
-        if ($request->query->get('filter') !== null) {
-            $selectedCategories = explode(',', $request->query->get('filter'));
+        if ($request->query->get('filter') != null) {
+            $selectedCategories = explode(',',$request->query->get('filter'));
         }
 
         $filters->setKeywords($selectedCategories);
