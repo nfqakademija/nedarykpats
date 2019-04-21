@@ -113,6 +113,11 @@ class AppFixtures extends Fixture
                     'slug' => 'kita',
                     'cssStyle' => 'Category--brown',
                 ],
+                [
+                    'name' => 'Interjero dizainas',
+                    'slug' => 'interjero-dizainas',
+                    'cssStyle' => 'Category--red',
+                ],
             ];
     }
 

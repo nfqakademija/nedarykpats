@@ -48,18 +48,28 @@ class Advert
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="advert")
+     * @var ArrayCollection|Offer
      */
     private $offers;
 
     /**
      * Advert constructor.
+     * @param \DateTime|null $createdAt
      * @throws \Exception
      */
-    public function __construct()
+    public function __construct(\DateTime $createdAt = null)
     {
         $this->categories = array();
-        $this->createdAt = new \DateTime("now");
         $this->offers = new ArrayCollection();
+
+        if(isset($createdAt))
+        {
+            $this->createdAt = $createdAt;
+        }
+        else
+        {
+            $this->createdAt = new \DateTime('now');
+        }
     }
 
     /**
@@ -180,5 +190,12 @@ class Advert
         }
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function countOffers() {
+        return count($this->offers);
     }
 }

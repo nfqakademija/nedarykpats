@@ -20,22 +20,21 @@ class AdvertRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Advert::class);
     }
+
     public function findByCategories(Filters $filters,int $page, int $itemsPerPage) {
          $query = $this->createQueryBuilder('a')
-            ->select('a');
+             ->addSelect('a');
+            // ->addSelect('COUNT(o.id) as offersCount')
+            // ->leftJoin('a.offers','o');
          if($filters->getKeywords()) {
              $query
                  ->innerJoin('a.categories', 'c')
                  ->where($query->expr()->in('c.slug', $filters->getKeywords()));
          }
 
-
         $paginator = $this->paginate($query->getQuery(), $page ,$itemsPerPage);
 
         return $paginator;
-//         return $query
-//             ->getQuery()
-//             ->getResult();
     }
 
 

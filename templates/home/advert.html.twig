@@ -24,10 +24,13 @@
         <section class="SelectedAd-content">
             <header class="Ad-header">
                 <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
-                <div class="Bid">
-                    <span class="Bid-header">Aplikavo</span>
-                    <span class="Bid-count">34</span>
-                </div>
+                {% if advert.countOffers()  > 0 %}
+                    <div class="Bid">
+                        <span class="Bid-header">Aplikavo</span>
+                        <span class="Bid-count">{{ advert.countOffers() }}</span>
+                    </div>
+                {% endif %}
+            </header>
             </header>
             <h3 class="Header Header--single">{{ advert.title }}</h3>
             <div class="Ad-body">
@@ -51,8 +54,8 @@
         {#</section>#}
     </section>
 
-    {% if(offers is not empty) %}
-        {% for offer in offers %}
+    {% if(advert.offers is not empty) %}
+        {% for offer in advert.offers %}
             <section class="Comments">
                 <section class="Comments-block">
                     <div class="Comments-image">
@@ -61,7 +64,7 @@
                     <div class="Comments-content">
                         <div class="Comments-header">
                             <span class="Comments-author">{{ offer.email }}</span>
-                            <span class="Comments-date">2019-04-16</span>
+                            <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
                         </div>
                         <div class="Comments-text">
                             <p>{{ offer.text }}</p>

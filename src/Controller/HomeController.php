@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-    const ITEMS_PER_PAGE = 4;
+    const ITEMS_PER_PAGE = 6;
 
     /**
      * @Route("/", name="home")
@@ -39,9 +39,10 @@ class HomeController extends AbstractController
 
         $filteredAdverts = $advertRepository->findByCategories($filters,$page,self::ITEMS_PER_PAGE );
 
-        $availableCategories = $categoryRepository->findAll();
+        $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
 
         $paginationPages = ceil($filteredAdverts->count() / self::ITEMS_PER_PAGE);
+
 
         return $this->render('home/index.html.twig', [
             'selectedCategorySlugs' => $selectedCategories,
@@ -62,11 +63,8 @@ class HomeController extends AbstractController
     public function advert(int $id, AdvertRepository $advertRepository, OfferRepository $offerRepository){
         $advert = $advertRepository->find($id);
 
-        $offers = $offerRepository->findby(['advert' => $advert]);
-
         return $this->render('home/advert.html.twig', [
-            'advert' => $advert,
-            'offers' => $offers
+            'advert' => $advert
         ]);
     }
 

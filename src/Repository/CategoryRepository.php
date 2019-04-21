@@ -19,4 +19,12 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function findAvailableCategoriesForFilter()
+    {
+        return $this->createQueryBuilder('category')
+            ->select('category')
+            ->innerJoin('category.adverts', 'adverts')
+            ->getQuery()
+            ->getResult();
+    }
 }
