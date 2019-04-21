@@ -34,12 +34,13 @@ class HomeController extends AbstractController
         $filters = new Filters();
         $selectedCategories = [];
 
-        if($request->query->get('filter') != null)
-            $selectedCategories = explode(',',$request->query->get('filter'));
+        if ($request->query->get('filter') !== null) {
+            $selectedCategories = explode(',', $request->query->get('filter'));
+        }
 
         $filters->setKeywords($selectedCategories);
 
-        $filteredAdverts = $advertRepository->findByCategories($filters,$page,self::ITEMS_PER_PAGE );
+        $filteredAdverts = $advertRepository->findByCategories($filters, $page, self::ITEMS_PER_PAGE);
 
         $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
 
@@ -66,8 +67,12 @@ class HomeController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function advert(int $id, AdvertRepository $advertRepository, OfferRepository $offerRepository, Request $request)
-    {
+    public function advert(
+        int $id,
+        AdvertRepository $advertRepository,
+        OfferRepository $offerRepository,
+        Request $request
+    ) {
         $advert = $advertRepository->find($id);
 
         $offer = new Offer($advert);
@@ -81,7 +86,6 @@ class HomeController extends AbstractController
         $offerForm->handleRequest($request);
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
-
             $offer = $offerForm->getData();
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -105,24 +109,17 @@ class HomeController extends AbstractController
     private function buildToggleQueryStrings(array $availableCategories, array $selectedCategorySlugs) : array
     {
         $toggleQueryStrings = [];
-        foreach ($availableCategories as $availableCategory)
-        {
-            if(in_array($availableCategory->getSlug(), $selectedCategorySlugs)) {
-                $toggleQueryStrings[$availableCategory->getSlug()] =
-                    strtr(
-                    implode(',', $selectedCategorySlugs),
-                    [$availableCategory->getSlug() => '']
-                    );
-            }
-            else {
-                $toggleQueryStrings[$availableCategory->getSlug()] = implode(',', $selectedCategorySlugs) . ',' . $availableCategory->getSlug();
+        foreach ($availableCategories as $availableCategory) {
+            $slug = $availableCategory->getSlug();
+
+            if (in_array($slug, $selectedCategorySlugs)) {
+                $toggleQueryStrings[$slug] = strtr(implode(',', $selectedCategorySlugs), [$slug => '']);
+            } else {
+                $toggleQueryStrings[$slug] = implode(',', $selectedCategorySlugs) . ',' . $slug;
             }
 
-            $toggleQueryStrings[$availableCategory->getSlug()] = trim($toggleQueryStrings[$availableCategory->getSlug()], ',');
-            $toggleQueryStrings[$availableCategory->getSlug()] = strtr(
-                $toggleQueryStrings[$availableCategory->getSlug()],
-                [',,' => ',']
-            );
+            $toggleQueryStrings[$slug] = trim($toggleQueryStrings[$slug], ',');
+            $toggleQueryStrings[$slug] = strtr($toggleQueryStrings[$slug], [',,' => ',']);
         }
 
         return $toggleQueryStrings;

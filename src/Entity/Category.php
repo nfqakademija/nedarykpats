@@ -131,5 +131,4 @@ class Category
         $this->adverts = $adverts;
         return $this;
     }
-
 }

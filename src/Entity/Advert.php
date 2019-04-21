@@ -62,12 +62,9 @@ class Advert
         $this->categories = array();
         $this->offers = new ArrayCollection();
 
-        if(isset($createdAt))
-        {
+        if (isset($createdAt)) {
             $this->createdAt = $createdAt;
-        }
-        else
-        {
+        } else {
             $this->createdAt = new \DateTime('now');
         }
     }
@@ -195,7 +192,8 @@ class Advert
     /**
      * @return int
      */
-    public function countOffers() {
+    public function countOffers()
+    {
         return count($this->offers);
     }
 }

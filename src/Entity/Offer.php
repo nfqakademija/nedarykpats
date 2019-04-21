@@ -56,12 +56,9 @@ class Offer
     public function __construct(Advert $advert, \DateTime $createdAt = null)
     {
         $this->advert = $advert;
-        if(isset($createdAt))
-        {
+        if (isset($createdAt)) {
             $this->createdAt = $createdAt;
-        }
-        else
-        {
+        } else {
             $this->createdAt = new \DateTime('now');
         }
     }

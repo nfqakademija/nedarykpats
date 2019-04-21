@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\SearchObjects;
-
 
 class Filters
 {
@@ -25,7 +23,4 @@ class Filters
         $this->keywords = $keywords;
         return $this;
     }
-
-
-
 }

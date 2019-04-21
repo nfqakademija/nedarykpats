@@ -56,6 +56,4 @@ class AdvertRepository extends ServiceEntityRepository
 
         return $paginator;
     }
-
-
 }
