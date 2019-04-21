@@ -10,6 +10,10 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 class AppFixtures extends Fixture
 {
+    /**
+     * @param ObjectManager $manager
+     * @throws \Exception
+     */
     public function load(ObjectManager $manager)
     {
         $categories = [];
@@ -39,6 +43,10 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
+    /**
+     * @param array $category
+     * @return Category
+     */
     private function getCategory(array $category)
     {
         return (new Category())
@@ -47,6 +55,13 @@ class AppFixtures extends Fixture
             ->setCssStyle($category['cssStyle']);
     }
 
+    /**
+     * @param array $advert
+     * @param array $categories
+     * @param string $date
+     * @return Advert
+     * @throws \Exception
+     */
     private function getAdvert(array $advert, array $categories, string $date)
     {
         $singleAdvert = new Advert();
@@ -54,7 +69,7 @@ class AppFixtures extends Fixture
             ->setTitle($advert['title'])
             ->setText($advert['text'])
             ->setCreatedAt(new \DateTime($date));
-        foreach ( $advert['categories'] as $category){
+        foreach ($advert['categories'] as $category) {
             $singleAdvert->setCategories($categories[$category]);
         }
         return $singleAdvert;
@@ -67,6 +82,9 @@ class AppFixtures extends Fixture
             ->setText($offer['text']);
     }
 
+    /**
+     * @return array
+     */
     private function getCategoryData()
     {
         return
@@ -124,6 +142,9 @@ class AppFixtures extends Fixture
             ];
     }
 
+    /**
+     * @return array
+     */
     private function getAdvertsData()
     {
         return
@@ -143,7 +164,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'vonios-plyteliu',
                     'title' => 'Vonios plytelių klijavimas',
-                    'categories' => ['apdailos-darbai','remontas'],
+                    'categories' => ['apdailos-darbai', 'remontas'],
                     'text' => 'Norime atnaujinti vonią, ieškome plytelių klojėjo. Butas Vilniaus rajone, susiekimas automobiliu.',
                 ],
                 [
@@ -155,7 +176,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'ieskome-santechniko',
                     'title' => 'Ieškome santechniko',
-                    'categories' => ['remontas','santechnika'],
+                    'categories' => ['remontas', 'santechnika'],
                     'text' => 'Reikalingas santechnikas visai buto santechnikai atnaujinti.',
                 ],
                 [
@@ -167,13 +188,13 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'darbų-vadovas',
                     'title' => 'Reikalingas darbų vadovas',
-                    'categories' => ['remontas','apdailos-darbai', 'elektra', 'santechnika'],
+                    'categories' => ['remontas', 'apdailos-darbai', 'elektra', 'santechnika'],
                     'text' => 'Iešome darbų vadovo buto renovacijai. Butas - 60m2, mansarda, senamiestis.',
                 ],
                 [
                     'reference' => 'darbų-vadovas-2',
                     'title' => 'Statybos vadovas Utenoje',
-                    'categories' => ['remontas','apdailos-darbai', 'statybos'],
+                    'categories' => ['remontas', 'apdailos-darbai', 'statybos'],
                     'text' => 'Ieškome atestuoto statybos darbų vadovo nedidelių objektų statybos darbams, t.p.griovimo darbams. Reikalavimai: vairuotojo pažymėjimas, dokumentų pildymas, darbas su klientais, jų paieška. Galime suteikti gyvenamąjį plotą darbo dienomis.',
                 ],
                 [
@@ -185,12 +206,15 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'baldu-isrinkimas',
                     'title' => 'Baldų išrinkimas/surinkimas',
-                    'categories' => ['remontas','baldai', 'kita'],
+                    'categories' => ['remontas', 'baldai', 'kita'],
                     'text' => 'Kraustomės, reikia išrinkti visus baldus, o naujame bute surinkti. Vėliau būtų daugiau baldų, kuriuos reiktų surinkti',
                 ],
             ];
     }
 
+    /**
+     * @return array
+     */
     private function getOfferData()
     {
         return
@@ -200,7 +224,7 @@ class AppFixtures extends Fixture
                     'advert' => 'baldu-isrinkimas',
                     'email' => 'paslaugos@krautykis-lengvai.lt',
                     'text' => 'Sveiki, galiu jums padėti šiuo klausimu. Vieno valandos kaina 12 Eur be PVM. Jeigu naudojamas mūsų transportas 14 Eur be PVM (esant didesniam atstumui nei 50 km, vieno kilometro kaina 0,5 Eur be PVM',
-                    ],
+                ],
                 [
                     'reference' => 'technikos-pajungimas-atsakymas',
                     'advert' => 'technikos-pajungimas',
