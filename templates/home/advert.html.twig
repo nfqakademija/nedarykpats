@@ -75,10 +75,20 @@
         {% endfor %}
     {% endif %}
 
-    <form class="ReplayBlock">
-        <input class="ReplayBlock-mail u-margin-bottom" type="email" name="email" placeholder="Tavo el. paštas" required>
-        <textarea class="ReplayBlock-content" name="replay" rows="4" placeholder="Parašyk žinutę su trumpa informacija apie save." required></textarea>
-        <button class="Button Button--blue">Siųsti</button>
-    </form>
+    {% if app.session.flashBag.has('success') %}
+        <div class="alert alert-success">
+            {% for msg in app.session.flashBag.get('success') %}
+                {{ msg }}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+        {{ form_start(offerForm, {'attr': {'class' : 'ReplayBlock'}}) }}
+
+            {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
+            {{ form_row(offerForm.text, {'label': 'Skelbimo tekstas', 'attr' : { 'class' : 'ReplayBlock-content', 'placeholder' : "Parašyk žinutę su trumpa informacija apie save." }}) }}
+            {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+
+        {{ form_end(offerForm) }}
 
 {% endblock %}

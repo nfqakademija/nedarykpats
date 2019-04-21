@@ -4,10 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Offer;
+use App\Form\OfferType;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\OfferRepository;
 use App\SearchObjects\Filters;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,7 +17,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-    const ITEMS_PER_PAGE = 6;
+    const ITEMS_PER_PAGE = 4;
 
     /**
      *  @Route("/", name="home")
@@ -54,17 +56,44 @@ class HomeController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/advert/{id}", name="advert", requirements={"id"="\d+"})
      * @param int $id
      * @param AdvertRepository $advertRepository
+     * @param OfferRepository $offerRepository
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function advert(int $id, AdvertRepository $advertRepository, OfferRepository $offerRepository){
+    public function advert(int $id, AdvertRepository $advertRepository, OfferRepository $offerRepository, Request $request)
+    {
         $advert = $advertRepository->find($id);
 
+        $offer = new Offer($advert);
+
+        $offerForm = $this->createFormBuilder($offer)
+            ->add('email')
+            ->add('text')
+            ->add('save', SubmitType::class, ['label' => 'Siųsti'])
+            ->getForm();
+
+        $offerForm->handleRequest($request);
+
+        if ($offerForm->isSubmitted() && $offerForm->isValid()) {
+
+            $offer = $offerForm->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($offer);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Siūlymas išsaugotas');
+        }
+
         return $this->render('home/advert.html.twig', [
-            'advert' => $advert
+            'advert' => $advert,
+            'offerForm' => $offerForm->createView(),
         ]);
     }
 
