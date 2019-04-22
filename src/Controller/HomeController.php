@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Advert;
 use App\Entity\Category;
 use App\Entity\Offer;
-use App\Form\OfferType;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\OfferRepository;
 use App\SearchObjects\Filters;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class HomeController extends AbstractController
 {
@@ -60,20 +60,16 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/advert/{id}", name="advert", requirements={"id"="\d+"})
-     * @param int $id
-     * @param AdvertRepository $advertRepository
-     * @param OfferRepository $offerRepository
+     * @ParamConverter("advert", class="App:Advert")
+     * @param Advert $advert
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
     public function advert(
-        int $id,
-        AdvertRepository $advertRepository,
-        OfferRepository $offerRepository,
+        Advert $advert,
         Request $request
     ) {
-        $advert = $advertRepository->find($id);
 
         $offer = new Offer($advert);
 
@@ -93,6 +89,8 @@ class HomeController extends AbstractController
             $entityManager->flush();
 
             $this->addFlash('success', 'Siūlymas išsaugotas');
+
+            return $this->redirect($request->getUri());
         }
 
         return $this->render('home/advert.html.twig', [
