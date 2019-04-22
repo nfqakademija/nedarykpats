@@ -25,8 +25,6 @@ class AdvertRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('a')
             ->addSelect('a');
-        // ->addSelect('COUNT(o.id) as offersCount')
-        // ->leftJoin('a.offers','o');
         if ($filters->getKeywords()) {
             $query
                 ->innerJoin('a.categories', 'c')
