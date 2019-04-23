@@ -37,7 +37,12 @@ class Offer
      * @ORM\Column(type="text")
      * @var string
      * @Assert\NotBlank
-     * @Assert\Length(max="2000", min="30" ,maxMessage="Viršytas maksimalus kiekis", minMessage="Žinutėje per mažai simbolių")
+     * @Assert\Length(
+     *     max="2000",
+     *     min="30",
+     *     maxMessage="Viršytas maksimalus kiekis",
+     *     minMessage="Žinutėje per mažai simbolių"
+     * )
      */
     private $text;
 
