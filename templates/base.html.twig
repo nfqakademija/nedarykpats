@@ -12,26 +12,14 @@
         {% endblock %}
     </head>
     <body>
-        <div class="Content">
-            <div class="Content-Block">
-                {% block header %}{% endblock %}
-            </div>
-        </div>
-        <div class="Content u-height-full">
-            <div class="Content-Block">
-                {% block intro %}{% endblock %}
-            </div>
-        </div>
-        <div class="Content">
-            <div class="Content-Block">
-                {% block filter %}{% endblock %}
-            </div>
-        </div>
-        <div class="Content Content--GreyBg">
-            <div class="Content-Block">
-                {% block ads %}{% endblock %}
-            </div>
-        </div>
+
+        {% block header %}{% endblock %}
+
+        {% block intro %}{% endblock %}
+
+        {% block filter %}{% endblock %}
+
+        {% block ads %}{% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

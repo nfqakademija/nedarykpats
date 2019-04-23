@@ -11,8 +11,16 @@ p {
 }
 
 h1 {
-  font-size: 40px;
+  font-size: var(--fontSizeLarge);
 }
+
+h2 {
+  font-size: var(--fontSizeLarge);
+  text-align: center;
+  padding-top: var(--spaceLarge);
+  padding-bottom: var(--spaceMedium);
+}
+
 h3 {
   font-size: var(--fontSizeHeader3);
 }
