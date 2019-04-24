@@ -41,11 +41,11 @@ button {
 }
 
 textarea:hover,
-input:hover,
+input:not([type='checkbox']):hover,
 textarea:active,
-input:active,
+input:not([type='checkbox']):active,
 textarea:focus,
-input:focus,
+input:not([type='checkbox']):focus,
 button:focus,
 button:active,
 button:hover,

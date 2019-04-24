@@ -19,7 +19,7 @@
     <div class="Content Content--GreyBg">
         <div class="Content-Block">
             <div class="u-display-right">
-                <a class="Button" href="/">Atgal</a>
+                <a class="Button" href="/#FilterBar">Atgal</a>
             </div>
 
             {#TODO: neskeminga zinute#}
@@ -88,14 +88,15 @@
                 {% endfor %}
             {% endif %}
 
-            {#TODO: reiktų išvalyti fomą po submito#}
             {{ form_start(offerForm, {'attr': {'class' : 'ReplayBlock'}}) }}
 
                 {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
                 {{ form_row(offerForm.text, {'label': 'Skelbimo tekstas', 'attr' : { 'class' : 'ReplayBlock-content', 'placeholder' : "Parašyk žinutę su trumpa informacija apie save.", 'rows': "8" }}) }}
+                 <div><input class="ReplayBlock-checkbox" type="checkbox" name="vehicle1" value="Bike" required> Sutinku, kad mano el. paštas būtų paviešintas.</div>
                 {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
 
             {{ form_end(offerForm) }}
+
         </div>
     </div>
 {% endblock %}

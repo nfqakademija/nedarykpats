@@ -23,7 +23,7 @@
 
 .u-margin-top-bottom {
   margin-bottom: var(--spaceMedium);
-  margin-top: var(--spaceMedium);
+  margin-top: var(--spaceLarge);
 }
 
 .u-margin-bottom{
@@ -34,7 +34,7 @@
   
   .u-visibility-flex-child {
     @include transitionAll;
-    opacity: .4;
+    opacity: 0.2;
   }
   
   &:hover .u-visibility-flex-child {
