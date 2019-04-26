@@ -1,24 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %} Workchase {% endblock %}
-
-{% block header %}
-    <div class="Content">
-        <div class="Content-Block">
-            <div class="PageHeader">
-                <div class="PageHeader-logo">
-                    <a href="/"><img src="img/logo.png" alt="worchase"></a>
-                </div>
-                {#TODO:Bus naudojama antrame sprinte, netrinti#}
-                {#<nav class="PageHeader-nav">#}
-                    {#<span class="PageHeader-item"><a href="">Visi skelbimai</a></span>#}
-                    {#<span class="PageHeader-item"><a href="">Mano pasiūlymai</a></span>#}
-                    {#<span class="PageHeader-item"><a href="">Profilis</a></span>#}
-                {#</nav>#}
-            </div>
-        </div>
-    </div>
-{% endblock %}
+{% extends 'home/body.html.twig' %}
 
 {% block intro %}
 <div class="Content u-height-full u-align-center">
@@ -60,7 +40,7 @@
                                 <p>{{ advert.text }}</p>
                             </div>
                             <div class="u-align-center u-visibility-flex-child">
-                                <a class="Button Button--short u-margin-top-bottom" href="/advert/{{ advert.id }}">Plačiau</a>
+                                <a class="Button Button--short u-margin-top-bottom" href={{ path('advert', {'id': advert.id }) }}>Plačiau</a>
                             </div>
                             <footer class="Ad-footer Ad-footer--bottom">
                                 <ul class="Ad-categories">
@@ -75,19 +55,18 @@
             </section>
 
             {% if paginationPages > 1 %}
-            <section>
-                <ul class="Pagination u-align-center">
+                <section>
+                    <ul class="Pagination u-align-center">
 
-                    <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page - 1 }}#FilterBar" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
+                        <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page - 1 }}#FilterBar" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
 
+                        {% for i in 1..paginationPages %}
+                            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ i }}#FilterBar" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
+                        {% endfor %}
 
-                    {% for i in 1..paginationPages %}
-                    <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ i }}#FilterBar" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
-                    {% endfor %}
-                    <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page + 1 }}#FilterBar" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>
-
-                </ul><br>
-            </section>
+                        <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page + 1 }}#FilterBar" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>
+                    </ul>
+                </section>
             {% endif %}
         </div>
     </div>

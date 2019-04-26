@@ -6,20 +6,28 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('img/logo_icon.png') }}">
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700|Ubuntu:400,700&amp;subset=latin-ext" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Workchase{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body>
+        <div class="Content">
+            <div class="Content-Block">
+                <div class="PageHeader">
+                    <div class="PageHeader-logo">
+                        <a href="/"><img src="/img/logo.png" alt="worchase"></a>
+                    </div>
+                    <nav class="PageHeader-nav">
+                        <span class="PageHeader-item"><a href="#">Mano pasiūlymai</a></span>
+                        <span class="PageHeader-item"><a href="{{ path('new_advert') }}">Įkelti naują</a></span>
+                        <span class="PageHeader-item"><a href="#">Prisijungti</a></span>
+                    </nav>
+                </div>
+            </div>
+        </div>
 
-        {% block header %}{% endblock %}
-
-        {% block intro %}{% endblock %}
-
-        {% block filter %}{% endblock %}
-
-        {% block ads %}{% endblock %}
+        {% block body %}{% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}

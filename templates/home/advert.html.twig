@@ -1,19 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block title %} Workchase {% endblock %}
-
-{% block header %}
-    <div class="Content">
-        <div class="Content-Block">
-            <div class="PageHeader">
-                <div class="PageHeader-logo">
-                    <a href="/"><img src="../img/logo.png" alt="worchase"></a>
-                </div>
-                <nav class="PageHeader-nav"></nav>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+{% extends 'home/body.html.twig' %}
 
 {% block ads %}
     <div class="Content Content--GreyBg">
@@ -60,11 +45,10 @@
                     </footer>
                 </section>
 
-                {#TODO:Bus naudojama antrame sprinte, netrinti#}
-                {#<section class="StatusBlock StatusBlock--hired">#}
-                    {#<img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">#}
-                    {#<p class="StatusBlock-title">Pasamdytas!</p>#}
-                {#</section>#}
+                <section class="StatusBlock StatusBlock--hired">
+                    <img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">
+                    <p class="StatusBlock-title">Pasamdytas!</p>
+                </section>
             </section>
 
             {% if(advert.offers is not empty) %}
@@ -92,7 +76,6 @@
 
                 {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
                 {{ form_row(offerForm.text, {'label': 'Skelbimo tekstas', 'attr' : { 'class' : 'ReplayBlock-content', 'placeholder' : "Parašyk žinutę su trumpa informacija apie save.", 'rows': "8" }}) }}
-                 <div><input class="ReplayBlock-checkbox" type="checkbox" name="vehicle1" value="Bike" required> Sutinku, kad mano el. paštas būtų paviešintas.</div>
                 {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
 
             {{ form_end(offerForm) }}
