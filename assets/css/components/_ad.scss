@@ -2,7 +2,7 @@
   width: 100%;
   @include shadowBlockForm();
   height: 500px;
-  display:flex;
+  display: flex;
   flex-direction: column;
   
   &-header {

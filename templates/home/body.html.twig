@@ -2,10 +2,17 @@
 
 {% block body %}
 
-    {% block intro %}{% endblock %}
+    <div class="Content">
+        <div class="Content-Block">
+            {% block intro %}{% endblock %}
+        </div>
+    </div>
+    <div class="Content Content--GreyBg">
+        <div class="Content-Block">
+            {% block filter %}{% endblock %}
 
-    {% block filter %}{% endblock %}
-
-    {% block ads %}{% endblock %}
+            {% block ads %}{% endblock %}
+        </div>
+    </div>
 
 {% endblock %}

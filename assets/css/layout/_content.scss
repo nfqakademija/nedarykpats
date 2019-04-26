@@ -1,10 +1,10 @@
 .Content {
   padding: var(--spaceMedium);
-
 }
 
 .Content--GreyBg {
-  background-color: var(--colorGray);
+  background:  var(--colorGray);
+  background: linear-gradient(0deg,  var(--colorGray) 73%,  var(--colorWhite) 73%);
 }
 
 .Content-Block {

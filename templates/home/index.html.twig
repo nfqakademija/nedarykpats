@@ -1,8 +1,8 @@
 {% extends 'home/body.html.twig' %}
 
 {% block intro %}
-<div class="Content u-height-full u-align-center">
-    <div class="Content-Block">
+{#<div class="Content u-height-full u-align-center">#}
+    {#<div class="Content-Block">#}
         <section class="SectionBlock">
             <div class="SectionBlock-text">
                 <h1>Ieškok, kas tau padarytų darbą!</h1>
@@ -14,13 +14,10 @@
                 <img src="img/intro.png"/>
             </div>
         </section>
-    </div>
-</div>
+
 {% endblock %}
 
 {% block ads %}
-    <div class="Content Content--GreyBg">
-        <div class="Content-Block">
             <section id="Ads" class="Ads">
                 {% for advert in filteredAdverts %}
 
@@ -68,13 +65,10 @@
                     </ul>
                 </section>
             {% endif %}
-        </div>
-    </div>
+
     {% endblock %}
 
 {% block filter %}
-    <div class="Content">
-        <div class="Content-Block">
             <section id="FilterBar">
                 <h2>Visi skelbimai</h2>
                 <ul class="FilterBar">
@@ -95,6 +89,4 @@
                     {% endfor %}
                 </ul>
             </section>
-        </div>
-    </div>
 {% endblock %}

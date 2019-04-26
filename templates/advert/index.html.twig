@@ -4,10 +4,47 @@
 
 {% block body %}
 
+
+
     <div class="Content Content--GreyBg">
         <div class="Content-Block">
-            <div>įkelti naują skelbimą</div>
+
+            <div class="Form">
+                <div class="Form-item">
+                    <label class="" for="floatField">El. paštas</label>
+                    <input class="" type="email" />
+                </div>
+
+                <div class="Form-item">
+                    <label class="" for="floatField">Pavadinimas</label>
+                    <input class="" type="text" />
+                </div>
+
+                <div class="Form-item">
+                    <label class="" for="floatField">Skelbimo tekstas</label>
+                    <textarea class="" rows="10"></textarea>
+                </div>
+
+                <div class="Form-item">
+                    <select class="" name="cars">
+                        <option disabled selected value>Kategorijos</option>
+                        <option value="volvo">Lauko darbai</option>
+                        <option value="saab">Vidaus darbai</option>
+                        <option value="fiat">Remontas</option>
+                        <option value="audi">Baldai</option>
+                    </select>
+                </div>
+
+                <input class="Button Button--blue" type="submit" value="Įkelti" />
+            </div>
+
         </div>
     </div>
+
+    <script>
+        var usingVersionedFileJs = true;
+        var usingReactApp = true;
+    </script>
+    {{ parent() }}
 
 {% endblock %}
