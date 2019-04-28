@@ -23,7 +23,11 @@
 
                     <section class="Ad u-visibility-parent">
                         <header class="Ad-header">
-                            <div > {{ advert.createdAt|date("Y-m-d") }}</div>
+                            <div > {{ advert.createdAt|date("Y-m-d") }}
+                                {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
+                                    Šis skelbimas tavo!
+                                {% endif %}
+                            </div>
                             {% if advert.countOffers()  > 0 %}
                             <div class="Bid">
                                 <span class="Bid-header">Aplikavo</span>

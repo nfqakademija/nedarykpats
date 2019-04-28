@@ -53,6 +53,12 @@ class Advert
     private $offers;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="adverts")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
+    /**
      * Advert constructor.
      * @param \DateTime|null $createdAt
      * @throws \Exception
@@ -195,5 +201,17 @@ class Advert
     public function countOffers()
     {
         return count($this->offers);
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }
