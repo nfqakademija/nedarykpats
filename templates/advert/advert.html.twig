@@ -50,7 +50,7 @@
                 </section>
             </section>
 
-            {% if(advert.offers is not empty) %}
+            {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
                 {% for offer in advert.offers %}
                     <section class="Comments">
                         <section class="Comments-block">
