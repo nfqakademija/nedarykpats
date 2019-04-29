@@ -19,6 +19,15 @@
 	justify-content: center;
   }
   
+  &-text {
+	p {
+	  overflow: hidden;
+	  display: -webkit-box;
+	  -webkit-line-clamp: 4;
+	  -webkit-box-orient: vertical;
+	}
+  }
+  
   &-text--top {
 	align-self: flex-start;
 	flex-grow: 1;

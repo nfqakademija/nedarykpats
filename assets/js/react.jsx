@@ -11,9 +11,10 @@ if (typeof usingReactApp !== "undefined") {
 
         const handleBlur = (e) => {
             const target = e.target;
-            if(!target.value) {
+            if (!target.value) {
                 target.parentNode.classList.remove('active');
             }
+
         };
 
         const bindEvents = (element) => {
@@ -22,12 +23,21 @@ if (typeof usingReactApp !== "undefined") {
             floatField.addEventListener('blur', handleBlur);
         };
 
+        const callEvents = (element) => {
+            const floatField = element.querySelector('input, textarea, select');
+            floatField.parentNode.classList.add("active")
+        };
+
         const init = () => {
             const floatContainers = document.querySelectorAll('.Form-item');
 
             floatContainers.forEach((element) => {
                 const value = element.querySelector('input, textarea, select').value;
                 bindEvents(element);
+
+                if (value) {
+                    callEvents(element);
+                }
             });
         };
 
