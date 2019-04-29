@@ -23,8 +23,24 @@
     color: var(--colorWhite);
   }
   
+  &--fb {
+    background-color: var(--colorLightBlue);
+    border: none;
+    color: var(--colorWhite);
+  }
+  
+  &--fb {
+    background-color: var(--colorRed);
+    border: none;
+    color: var(--colorWhite);
+  }
+  
   &--short {
     width: 80%;
+  }
+  
+  &--long {
+    width: 100%;
   }
   
 }

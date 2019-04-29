@@ -2,6 +2,18 @@
   @include shadowBlockForm();
   width: 100%;
   
+  &-avatar {
+	
+	img {
+	  height: 150px;
+	  overflow: hidden;
+	  border-width: var(--borderMedium);
+	  border-style: solid;
+	  border-color: var(--colorBlack);
+	  border-radius: var(--radiusFull);
+	}
+  }
+  
   &-item {
 	
 	input,
