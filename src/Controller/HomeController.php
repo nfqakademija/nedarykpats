@@ -24,7 +24,7 @@ class HomeController extends AbstractController
      */
     public function index(Request $request, AdvertRepository $advertRepository, CategoryRepository $categoryRepository)
     {
-        $page = $request->query->get('page') ? $request->query->get('page') : 1;
+        $page = $this->getPageInput($request);
 
         $filters = new Filters();
         $selectedCategories = [];
@@ -37,10 +37,14 @@ class HomeController extends AbstractController
 
         $filteredAdverts = $advertRepository->findByCategories($filters, $page, self::ITEMS_PER_PAGE);
 
-        $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
-
         $paginationPages = ceil($filteredAdverts->count() / self::ITEMS_PER_PAGE);
 
+        if ($page > $paginationPages) {
+            $page = $paginationPages;
+            $filteredAdverts = $advertRepository->findByCategories($filters, $page, self::ITEMS_PER_PAGE);
+        }
+
+        $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
 
         return $this->render('home/index.html.twig', [
             'selectedCategorySlugs' => $selectedCategories,
@@ -75,4 +79,21 @@ class HomeController extends AbstractController
 
         return $toggleQueryStrings;
     }
+
+
+    /**
+     * @param Request $request
+     * @return int
+     */
+    private function getPageInput(Request $request)
+    {
+        $pageInput = $request->query->get('page') ? $request->query->get('page') : 1;
+        $pageCastToInt =  ctype_digit($pageInput)  ? $pageInput : 1;
+        $page = $pageCastToInt > 0 ? $pageCastToInt : 1;
+
+        return $page;
+    }
 }
+
+
+
