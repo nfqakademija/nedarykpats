@@ -7,34 +7,46 @@
     <div class="Content Content--GreyBg">
         <div class="Content-Block">
 
-            <div class="Form">
-                <div class="Form-item">
-                    <label class="" for="floatField">El. paštas</label>
-                    <input class="" type="email" />
-                </div>
+            {#            <div class="Form">#}
+            {#                <div class="Form-item">#}
+            {#                    <label class="" for="floatField">El. paštas</label>#}
+            {#                    <input class="" type="email" />#}
+            {#                </div>#}
 
-                <div class="Form-item">
-                    <label class="" for="floatField">Pavadinimas</label>
-                    <input class="" type="text" />
-                </div>
+            {#                <div class="Form-item">#}
+            {#                    <label class="" for="floatField">Pavadinimas</label>#}
+            {#                    <input class="" type="text" />#}
+            {#                </div>#}
 
-                <div class="Form-item">
-                    <label class="" for="floatField">Skelbimo tekstas</label>
-                    <textarea class="" rows="10"></textarea>
-                </div>
+            {#                <div class="Form-item">#}
+            {#                    <label class="" for="floatField">Skelbimo tekstas</label>#}
+            {#                    <textarea class="" rows="10"></textarea>#}
+            {#                </div>#}
 
-                <div class="Form-item">
-                    <select class="" name="cars">
-                        <option disabled selected value>Kategorijos</option>
-                        <option value="volvo">Lauko darbai</option>
-                        <option value="saab">Vidaus darbai</option>
-                        <option value="fiat">Remontas</option>
-                        <option value="audi">Baldai</option>
-                    </select>
-                </div>
+            {#                <div class="Form-item">#}
+            {#                    <select class="" name="cars">#}
+            {#                        <option disabled selected value>Kategorijos</option>#}
+            {#                        <option value="volvo">Lauko darbai</option>#}
+            {#                        <option value="saab">Vidaus darbai</option>#}
+            {#                        <option value="fiat">Remontas</option>#}
+            {#                        <option value="audi">Baldai</option>#}
+            {#                    </select>#}
+            {#                </div>#}
 
-                <input class="Button Button--blue" type="submit" value="Įkelti" />
-            </div>
+            {#                <input class="Button Button--blue" type="submit" value="Įkelti" />#}
+            {#            </div>#}
+
+
+
+            {{ form_start(advertForm, {'attr': {'class' : 'ReplayBlock'}}) }}
+
+                {{ form_row(advertForm.title, { 'label': 'Pavadinimas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo Skelbimo pavadinimas"  }  }) }}
+                {{ form_row(advertForm.text, { 'label': 'Tekstas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo Skelbimo tekstas"  }  }) }}
+                {{ form_row(advertForm.categories, {'label': 'Kategorijos'  }) }}
+                {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+
+            {{ form_end(advertForm) }}
+
 
         </div>
     </div>

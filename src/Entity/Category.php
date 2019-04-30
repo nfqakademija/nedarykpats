@@ -131,4 +131,11 @@ class Category
         $this->adverts = $adverts;
         return $this;
     }
+
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
 }
