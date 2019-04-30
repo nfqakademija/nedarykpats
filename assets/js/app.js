@@ -12,3 +12,24 @@ require('../css/app.scss');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
+
+
+//------------------------
+//-- Mobile navigation ---
+//------------------------
+const nav = document.querySelector('#nav');
+const menu = document.querySelector('#menu');
+const menuToggle = document.querySelector('.Nav-toggle');
+let isMenuOpen = false;
+
+menuToggle.addEventListener('click', e => {
+    e.preventDefault();
+    isMenuOpen = !isMenuOpen;
+
+    menuToggle.setAttribute('aria-expanded', String(isMenuOpen));
+    menu.hidden = !isMenuOpen;
+    nav.classList.toggle('Nav--open');
+});
+
+

@@ -1,5 +1,13 @@
 .PageHeader {
   
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  &-logo {
+    position: relative;
+  }
+  
   &-item {
     visibility: visible;
     text-transform: uppercase;
