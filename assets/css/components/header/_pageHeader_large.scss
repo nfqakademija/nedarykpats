@@ -3,9 +3,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 40px;
   
   &-logo {
     position: relative;
+    height: 60px;
+    margin: 0;
   }
   
   &-item {

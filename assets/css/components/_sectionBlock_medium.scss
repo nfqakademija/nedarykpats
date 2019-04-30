@@ -1,15 +1,18 @@
 .SectionBlock{
-  flex-direction: row;
+  align-items: center;
   
-  &-text {
+  &-content {
 	width: auto;
-	order: 1;
+	order: 2;
   }
   &-img {
-	order: 2;
+	display: block;
+	order: 1;
+	width: 100%;
+	text-align: center;
+ 
 	img {
-	  float: right;
-	  width: 90%;
+	  width: 80%;
 	}
   }
 }
