@@ -6,9 +6,6 @@
     <div class="Content Content--top Content--GreyBg ">
         <div class="Content-Block u-align-center">
         <form method="post" class="Form Form--short">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
 
             <div class="Form-avatar u-align-center u-margin-top-bottom">
                 <img src="/img/avatar.png" alt="avatar" />
@@ -16,9 +13,15 @@
 
             <h3 class="u-text-center u-margin-bottom">Prisijungti</h3>
 
+            {#TODO: sutvarkyti errorus, atskirti, kuriam inputui kas priklauso#}
             <div class="Form-item">
                 <label for="floatField">El. paštas</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required />
+                <span class="Form-errors">
+                     {% if error %}
+                         <span class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                     {% endif %}
+                </span>
             </div>
             <div class="Form-item">
                 <label for="floatField">Slaptažodis</label>
