@@ -137,5 +137,4 @@ class Category
     {
         return $this->getTitle();
     }
-
 }
