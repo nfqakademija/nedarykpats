@@ -65,13 +65,13 @@ class Advert
      */
     public function __construct(\DateTime $createdAt = null)
     {
-        $this->categories = array();
+        $this->categories = new ArrayCollection();
         $this->offers = new ArrayCollection();
 
         if (isset($createdAt)) {
             $this->createdAt = $createdAt;
         } else {
-            $this->createdAt = new \DateTime('now');
+            $this->createdAt = new \DateTime('now');new ArrayCollection();
         }
     }
 
@@ -86,7 +86,7 @@ class Advert
     /**
      * @return string
      */
-    public function getTitle(): string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
@@ -95,7 +95,7 @@ class Advert
      * @param string $title
      * @return Advert
      */
-    public function setTitle(string $title): self
+    public function setTitle(string $title): ?self
     {
         $this->title = $title;
         return $this;
@@ -104,7 +104,7 @@ class Advert
     /**
      * @return string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -113,7 +113,7 @@ class Advert
      * @param string $text
      * @return Advert
      */
-    public function setText(string $text): self
+    public function setText(string $text): ?self
     {
         $this->text = $text;
         return $this;
@@ -146,12 +146,12 @@ class Advert
     }
 
     /**
-     * @param Category $categories
+     * @param Category[] $categories
      * @return Advert
      */
-    public function setCategories(Category $categories): self
+    public function setCategories(ArrayCollection $categories): ?self
     {
-        array_push($this->categories, $categories);
+        $this->categories = $categories;
 
         return $this;
     }
