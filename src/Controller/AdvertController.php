@@ -14,7 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class AdvertController extends AbstractController
 {
 
-
     /**
      * @Route ("/advert" , name="new_advert")
      * @param Request $request
@@ -43,7 +42,7 @@ class AdvertController extends AbstractController
             return $this->redirect('/advert/'. $advert->getid());
         }
 
-        return $this->render('advert/index.html.twig', [
+        return $this->render('advert/insert_advert.html.twig', [
             'advertForm' => $advertForm->createView(),
         ]);
     }
@@ -83,7 +82,7 @@ class AdvertController extends AbstractController
             return $this->redirect($request->getUri());
         }
 
-        return $this->render('advert/advert.html.twig', [
+        return $this->render('advert/single_advert.html.twig', [
             'advert' => $advert,
             'offerForm' => $offerForm->createView(),
         ]);

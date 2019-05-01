@@ -8,6 +8,7 @@ use App\Repository\CategoryRepository;
 use App\SearchObjects\Filters;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
@@ -16,7 +17,7 @@ class HomeController extends AbstractController
     const ITEMS_PER_PAGE = 6;
 
     /**
-     *  @Route("/", name="home")
+     * @Route("/", name="home")
      * @param Request $request
      * @param AdvertRepository $advertRepository
      * @param CategoryRepository $categoryRepository
@@ -47,6 +48,51 @@ class HomeController extends AbstractController
         $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
 
         return $this->render('home/index.html.twig', [
+            'selectedCategorySlugs' => $selectedCategories,
+            'availableCategories' => $availableCategories,
+            'paginationPages' => $paginationPages,
+            'filteredAdverts' => $filteredAdverts->getIterator(),
+            'page' => $page,
+            'toggleQueryStrings' => $this->buildToggleQueryStrings($availableCategories, $selectedCategories)
+        ]);
+    }
+
+    //TODO: iskelti į AdvertController
+    /**
+     * @Route("/my-adverts", name="my_adverts")
+     * @param Request $request
+     * @param AdvertRepository $advertRepository
+     * @param CategoryRepository $categoryRepository
+     * @return Response
+     */
+    public function myAdvert(
+        Request $request,
+        AdvertRepository $advertRepository,
+        CategoryRepository $categoryRepository
+    ): Response {
+        $page = $this->getPageInput($request);
+        $user = $this->getUser();
+
+        $filters = new Filters();
+        $selectedCategories = [];
+
+        if ($request->query->get('filter') != null) {
+            $selectedCategories = explode(',', $request->query->get('filter'));
+        }
+
+        $filters->setKeywords($selectedCategories);
+        $filteredAdverts = $advertRepository->findMyAdvertsByCategories($user, $filters, $page, self::ITEMS_PER_PAGE);
+        $paginationPages = ceil($filteredAdverts->count() / self::ITEMS_PER_PAGE);
+
+        if ($paginationPages > 0 && $page > $paginationPages) {
+            $page = $paginationPages;
+            $filteredAdverts = $advertRepository
+                ->findMyAdvertsByCategories($user, $filters, $page, self::ITEMS_PER_PAGE);
+        }
+
+        $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
+
+        return $this->render('advert/my_adverts.html.twig', [
             'selectedCategorySlugs' => $selectedCategories,
             'availableCategories' => $availableCategories,
             'paginationPages' => $paginationPages,
