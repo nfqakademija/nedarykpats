@@ -20,10 +20,11 @@ security:
             guard:
                 authenticators:
                     - App\Security\LoginAuthenticator
+                    - App\Security\GoogleAuthenticator
+                entry_point: App\Security\LoginAuthenticator
             logout:
                 path:   /logout
                 target: /
-
             # activate different ways to authenticate
 
             # http_basic: true

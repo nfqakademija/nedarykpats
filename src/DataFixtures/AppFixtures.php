@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Offer;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -99,15 +100,18 @@ class AppFixtures extends Fixture
      */
     private function getAdvert(array $advert, array $categories, string $date, array $users)
     {
+        $advertCategories = new ArrayCollection();
+        foreach ($advert['categories'] as $category)
+        {
+            $advertCategories->add($categories[$category]);
+        }
         $singleAdvert = new Advert();
         $singleAdvert
             ->setTitle($advert['title'])
             ->setText($advert['text'])
             ->setCreatedAt(new \DateTime($date))
-            ->setUser($users[$advert['email']]);
-        foreach ($advert['categories'] as $category) {
-            $singleAdvert->setCategories($categories[$category]);
-        }
+            ->setUser($users[$advert['email']])
+            ->setCategories($advertCategories);
         return $singleAdvert;
     }
 

@@ -42,21 +42,39 @@ class User implements UserInterface
      */
     private $adverts;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $googleID;
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return User
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -86,6 +104,10 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return User
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -101,6 +123,10 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return User
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -133,6 +159,10 @@ class User implements UserInterface
         return $this->adverts;
     }
 
+    /**
+     * @param Advert $advert
+     * @return User
+     */
     public function addAdvert(Advert $advert): self
     {
         if (!$this->adverts->contains($advert)) {
@@ -143,6 +173,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Advert $advert
+     * @return User
+     */
     public function removeAdvert(Advert $advert): self
     {
         if ($this->adverts->contains($advert)) {
@@ -152,6 +186,25 @@ class User implements UserInterface
                 $advert->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGoogleID(): ?string
+    {
+        return $this->googleID;
+    }
+
+    /**
+     * @param string|null $googleID
+     * @return User
+     */
+    public function setGoogleID(?string $googleID): self
+    {
+        $this->googleID = $googleID;
 
         return $this;
     }

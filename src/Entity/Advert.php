@@ -72,7 +72,6 @@ class Advert
             $this->createdAt = $createdAt;
         } else {
             $this->createdAt = new \DateTime('now');
-            new ArrayCollection();
         }
     }
 
