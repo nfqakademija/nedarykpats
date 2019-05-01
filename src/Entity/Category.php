@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\ORM\Mapping\JoinTable;
@@ -39,10 +40,10 @@ class Category
     private $cssStyle;
 
     /**
-     * @ManyToMany(targetEntity="Advert", mappedBy="categories")
-     * @var array|Advert
+     * @ORM\ManyToMany(targetEntity="App\Entity\Advert", mappedBy="categories")
      */
     private $adverts;
+
 
     /**
      * Category constructor.
@@ -123,16 +124,36 @@ class Category
     }
 
     /**
-     * @param array|Advert[] $adverts
+     * @param Advert $advert
      * @return Category
      */
-    public function setAdverts(array $adverts): self
+    public function addAdvert(Advert $advert): self
     {
-        $this->adverts = $adverts;
+        if (!$this->adverts->contains($advert)) {
+            $this->adverts[] = $advert;
+            $advert->addCategory($this);
+        }
+
         return $this;
     }
 
+    /**
+     * @param Advert $advert
+     * @return Category
+     */
+    public function removeAdvert(Advert $advert): self
+    {
+        if ($this->adverts->contains($advert)) {
+            $this->adverts->removeElement($advert);
+            $advert->removeCategory($this);
+        }
 
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getTitle();

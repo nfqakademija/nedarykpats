@@ -101,6 +101,7 @@ class AppFixtures extends Fixture
      */
     private function getAdvert(array $advert, array $categories, string $date, array $users)
     {
+
         $singleAdvert = new Advert();
         $singleAdvert
             ->setTitle($advert['title'])
@@ -115,7 +116,8 @@ class AppFixtures extends Fixture
 
             $collection->add($categories[$category]);
 
-            $singleAdvert->setCategories($collection);
+            $singleAdvert->addCategory($categories[$category]);
+
         }
         return $singleAdvert;
     }
