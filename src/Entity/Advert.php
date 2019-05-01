@@ -66,6 +66,11 @@ class Advert
      */
     private $isConfirmed;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="advert", cascade={"persist", "remove"})
+     */
+    private $token;
+
 
     /**
      * Advert constructor.
@@ -81,7 +86,6 @@ class Advert
             $this->createdAt = $createdAt;
         } else {
             $this->createdAt = new \DateTime('now');
-            new ArrayCollection();
         }
     }
 
@@ -240,6 +244,24 @@ class Advert
     public function setIsConfirmed(bool $isConfirmed): self
     {
         $this->isConfirmed = $isConfirmed;
+
+        return $this;
+    }
+
+    public function getToken(): ?Token
+    {
+        return $this->token;
+    }
+
+    public function setToken(?Token $token): self
+    {
+        $this->token = $token;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newAdvert = $token === null ? null : $this;
+        if ($newAdvert !== $token->getAdvert()) {
+            $token->setAdvert($newAdvert);
+        }
 
         return $this;
     }

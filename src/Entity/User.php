@@ -48,6 +48,11 @@ class User implements UserInterface
      */
     private $isConfirmed;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $token;
+
 
     /**
      * User constructor.
@@ -192,6 +197,23 @@ class User implements UserInterface
     public function setIsConfirmed(bool $isConfirmed): self
     {
         $this->isConfirmed = $isConfirmed;
+
+        return $this;
+    }
+
+    public function getToken(): ?Token
+    {
+        return $this->token;
+    }
+
+    public function setToken(Token $token): self
+    {
+        $this->token = $token;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $token->getUser()) {
+            $token->setUser($this);
+        }
 
         return $this;
     }
