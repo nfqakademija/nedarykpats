@@ -42,21 +42,41 @@ class User implements UserInterface
      */
     private $adverts;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $isConfirmed;
+
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return User
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -152,6 +172,26 @@ class User implements UserInterface
                 $advert->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed(): bool
+    {
+        return $this->isConfirmed;
+    }
+
+
+    /**
+     * @param bool $isConfirmed
+     * @return User
+     */
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
 
         return $this;
     }

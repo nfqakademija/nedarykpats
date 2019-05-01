@@ -52,6 +52,18 @@ class Offer
      */
     private $createdAt;
 
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $isConfirmed;
+
+    /**
+     * @return bool
+     */
+
+
     /**
      * Offer constructor.
      * @param Advert $advert
@@ -148,6 +160,23 @@ class Offer
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->isConfirmed;
+    }
+
+
+    /**
+     * @param bool $isConfirmed
+     * @return Offer
+     */
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
 
         return $this;
     }

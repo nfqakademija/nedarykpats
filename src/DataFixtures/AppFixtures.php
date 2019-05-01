@@ -7,6 +7,7 @@ use App\Entity\Category;
 use App\Entity\Offer;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -85,7 +86,8 @@ class AppFixtures extends Fixture
         $user = new User();
         $user->setEmail($userData['email'])
             ->setRoles($userData['roles'])
-            ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']));
+            ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
+            ->setIsConfirmed($userData['is_confirmed']);
         return $user;
     }
 
@@ -104,9 +106,16 @@ class AppFixtures extends Fixture
             ->setTitle($advert['title'])
             ->setText($advert['text'])
             ->setCreatedAt(new \DateTime($date))
-            ->setUser($users[$advert['email']]);
+            ->setUser($users[$advert['email']])
+            ->setIsConfirmed($advert['is_confirmed']);
+
+        $collection = new ArrayCollection();
+
         foreach ($advert['categories'] as $category) {
-            $singleAdvert->setCategories($categories[$category]);
+
+            $collection->add($categories[$category]);
+
+            $singleAdvert->setCategories($collection);
         }
         return $singleAdvert;
     }
@@ -121,7 +130,8 @@ class AppFixtures extends Fixture
     {
         return (new Offer($adverts[$offer['advert']]))
             ->setEmail($offer['email'])
-            ->setText($offer['text']);
+            ->setText($offer['text'])
+            ->setIsConfirmed($offer['is_confirmed']);
     }
 
     /**
@@ -197,6 +207,7 @@ class AppFixtures extends Fixture
                     'title' => 'Laiptinės dažymas',
                     'categories' => ['statybos', 'remontas'],
                     'text' => 'Reikalingi profesionalūs dažytojai, mokantys ir galintys perdažyti mūsų namų laiptinę. Namas - 5 aukštų.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'reikalingas-elektrikas',
@@ -204,6 +215,7 @@ class AppFixtures extends Fixture
                     'title' => 'Reikalingas elektrikas',
                     'categories' => ['elektra'],
                     'text' => 'Reikalingas elektrikas 700m2 namo elektros instaliacijai įrengti. Objektas Trakų/Elektrėnų rajone.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'vonios-plyteliu',
@@ -211,6 +223,7 @@ class AppFixtures extends Fixture
                     'title' => 'Vonios plytelių klijavimas',
                     'categories' => ['apdailos-darbai', 'remontas'],
                     'text' => 'Norime atnaujinti vonią, ieškome plytelių klojėjo. Butas Vilniaus rajone, susiekimas automobiliu.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'reikalingas-sodininkas',
@@ -218,6 +231,7 @@ class AppFixtures extends Fixture
                     'title' => 'Reikalingas Sodininkas',
                     'categories' => ['lauko-darbai'],
                     'text' => 'Reikalingas sodininkas privačiam namui Vilniuje (Antakalnis). Darbų apimtis: teritorijos tvarkymas, augalų sodinimas, ravėjimas, augalų ir medžių genėjimas ir t.t. Darbas pilna diena, 3-4 kartus per savaitę.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'ieskome-santechniko',
@@ -225,6 +239,7 @@ class AppFixtures extends Fixture
                     'title' => 'Ieškome santechniko',
                     'categories' => ['remontas', 'santechnika'],
                     'text' => 'Reikalingas santechnikas visai buto santechnikai atnaujinti.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'silpnu-sroviu-montotuojas',
@@ -232,6 +247,7 @@ class AppFixtures extends Fixture
                     'title' => 'Ieškome silpnų srovių montotuojo',
                     'categories' => ['elektra'],
                     'text' => 'Ieškome silpnų srovių montotuojo. darbo pobūdis - kabelių ir įrangos montavimas. Silpnų srovių komutavimo ir sistemų paleidimų gebėjimas - privalumas.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'darbų-vadovas',
@@ -239,6 +255,7 @@ class AppFixtures extends Fixture
                     'title' => 'Reikalingas darbų vadovas',
                     'categories' => ['remontas', 'apdailos-darbai', 'elektra', 'santechnika'],
                     'text' => 'Iešome darbų vadovo buto renovacijai. Butas - 60m2, mansarda, senamiestis.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'darbų-vadovas-2',
@@ -246,6 +263,7 @@ class AppFixtures extends Fixture
                     'title' => 'Statybos vadovas Utenoje',
                     'categories' => ['remontas', 'apdailos-darbai', 'statybos'],
                     'text' => 'Ieškome atestuoto statybos darbų vadovo nedidelių objektų statybos darbams, t.p.griovimo darbams. Reikalavimai: vairuotojo pažymėjimas, dokumentų pildymas, darbas su klientais, jų paieška. Galime suteikti gyvenamąjį plotą darbo dienomis.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'technikos-pajungimas',
@@ -253,6 +271,7 @@ class AppFixtures extends Fixture
                     'title' => 'Buitinės technikos pajungimas',
                     'categories' => ['buitines-technikos-pajungimas'],
                     'text' => 'Reikia pajungti visą buitinę techniką (indaplovę, kaitlentę, skalbimo mašiną, šaldytuvą, gartraukį) naujoje virtuvėje. Vilnius (Pašilaičiai).',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'baldu-isrinkimas',
@@ -260,6 +279,7 @@ class AppFixtures extends Fixture
                     'title' => 'Baldų išrinkimas/surinkimas',
                     'categories' => ['remontas', 'baldai', 'kita'],
                     'text' => 'Kraustomės, reikia išrinkti visus baldus, o naujame bute surinkti. Vėliau būtų daugiau baldų, kuriuos reiktų surinkti',
+                    'is_confirmed' => true,
                 ],
             ];
     }
@@ -276,72 +296,84 @@ class AppFixtures extends Fixture
                     'advert' => 'baldu-isrinkimas',
                     'email' => 'vilius@rangovas.lt',
                     'text' => 'Sveiki, galiu jums padėti šiuo klausimu. Vieno valandos kaina 12 Eur be PVM. Jeigu naudojamas mūsų transportas 14 Eur be PVM (esant didesniam atstumui nei 50 km, vieno kilometro kaina 0,5 Eur be PVM',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'technikos-pajungimas-atsakymas',
                     'advert' => 'technikos-pajungimas',
                     'email' => 'laurynas@rangovas.lt',
                     'text' => 'Individualiai taisau visus buitinius (ir ne tik) elektros prietaisus, atlieku visus elektros instaliacijos darbus, montuoju ir pajungiu.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'technikos-pajungimas-atsakymas-2',
                     'advert' => 'technikos-pajungimas',
                     'email' => 'aurimas@rangovas.lt',
                     'text' => 'Skalbimo mašinų, indaplovių, gartraukių, viryklių ir kitos technikos pajungimas. Visos kainos yra sutartinės.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'darbų-vadovas-atsakymas',
                     'advert' => 'darbų-vadovas',
                     'email' => 'martyna@rangove.lt',
                     'text' => 'Atestuotas techninis prižiūrėtojas, statybų vadovas, turintis ilgametę (15 metų) patirtį statinio statybų (darbų) vadovo pareigose, atlieka statinių statybų techninę priežiūrą (gyvenamieji ir negyvenamieji pastatai). Galiu vykdyti priežiūrą kas stato ūkio būdu ir konsultuoti su statyba susijusiais įvairiais klausimais. Turiu patirties su karkasinių namų statyba. Tikrinu pastatus ar pastatyti pagal projektą, statybos taisykles, statybos techninius reglamentus (STR) ar atitinka visus keliamus reikalavimus.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'darbų-vadovas-atsakymas-2',
                     'advert' => 'darbų-vadovas',
                     'email' => 'vilius@rangovas.lt',
                     'text' => 'Atestuotas techninės priežiūros vadovas, statybos vadovas papildomai atlieka techninę priežiūrą individualiems ir kt. statiniams.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'darbų-vadovas-atsakymas-3',
                     'advert' => 'darbų-vadovas',
                     'email' => 'laurynas@rangovas.lt',
                     'text' => 'Statybų vadovo paslaugos statantiems ūkio būdu, konsultacijos. Ypatingi (neypatingi) gyvenamieji ir negyvenamieji pastatai, kultūros paveldo objektai. Dirbame visoje Lietuvoje.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'montotuojas-atsakymas',
                     'advert' => 'silpnu-sroviu-montotuojas',
                     'email' => 'aurimas@rangovas.lt',
                     'text' => 'Specialistai, turintys ilgametę patirtį elektros instaliacijos srityje, atlieka lauko ir vidaus elektros instaliaciją, konsultuoja, pataria, padeda išsirinkti optimalų sprendimą, paruošia dokumentus ESO.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'ieskome-santechniko-atsakymas',
                     'advert' => 'ieskome-santechniko',
                     'email' => 'martyna@rangove.lt',
                     'text' => 'KODĖL VERTA SKAMBINTI BŪTENT MAN? OPERATYVUMAS: Priklausomai nuo darbų apimties ir pobūdžio dirbu vienas, o reikalui esant – kooperuojuosi. Jūsų patogumui – paslaugas teikiu ir savaitgaliais. PARTNERIAI: Bendradarbiauju su ilgamečiais, geriausią kokybės ir kainos santykį siūlančiais medžiagų tiekėjais. Dėka gero apyvartumo, sugebu suderėti aukštas nuolaidas. Dirbu ir su šeimininko medžiagomis. KONKURENCINGUMAS: Man nereikia išlaikyti vadybininkų, buhalterių ir direktorių "ant savo sprando", todėl galiu pasiūlyti konkurencingas paslaugų kainas bei suteikti NUOLAIDAS didesnės apimties montavimo darbams. MANDAGUMAS: Bendrauju maloniai ir korektiškai. Suteikiu visapusišką informaciją, dažniausiai galite rinktis iš kelių įmanomų variantų.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'ieskome-santechniko-atsakymas-2',
                     'advert' => 'ieskome-santechniko',
                     'email' => 'vilius@rangovas.lt',
                     'text' => 'Santechnikas Vilniuje operatyviai ir profesionaliai atlieka visus santechnikos montavimo ir remonto darbus.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'reikalingas-sodininkas-atsakymas',
                     'advert' => 'reikalingas-sodininkas',
                     'email' => 'laurynas@rangovas.lt',
                     'text' => 'Turiu darbo patirties šiose pareigose. Taip pat atlieku smulkius santechnikos,remonto ir kitus darbus.',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'vonios-plyteliu-atsakymas',
                     'advert' => 'vonios-plyteliu',
                     'email' => 'aurimas@rangovas.lt',
                     'text' => 'Kokybiškai klijuoju visu rūšių plyteles,plytelių supjovimas 45 laipsnių kampu,nuolydžių formavimas,hidroizoliacijos įrengimas ,sienų bei grindų lyginimas ir kiti papildomi darbai. Konsultuoju.Galiu išrašyti saskaitą-fakturą. Patirtis virš 20 metu. ',
+                    'is_confirmed' => true,
                 ],
                 [
                     'reference' => 'laiptines-dazymas-atsakymas',
                     'advert' => 'laiptines-dazymas',
                     'email' => 'martyna@rangove.lt',
                     'text' => 'Glaistymo, dažymo darbai,tapetavimas ir kiti apdailos darbai, 12m patirtis',
+                    'is_confirmed' => true,
                 ],
             ];
     }
@@ -357,41 +389,49 @@ class AppFixtures extends Fixture
                     'email' => 'aurimas@uzsakovas.lt',
                     'password' => 'aurimas1',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
                 [
                     'email' => 'martyna@uzsakove.lt',
                     'password' => 'martyna',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
                 [
                     'email' => 'vilius@uzsakovas.lt',
                     'password' => 'vilius',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
                 [
                     'email' => 'laurynas@uzsakovas.lt',
                     'password' => 'laurynas',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
                 [
                     'email' => 'aurimas@rangovas.lt',
                     'password' => 'aurimas',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
                 [
                     'email' => 'martyna@rangove.lt',
                     'password' => 'martyna',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
                 [
                     'email' => 'vilius@rangovas.lt',
                     'password' => 'vilius',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
                 [
                     'email' => 'laurynas@rangovas.lt',
                     'password' => 'laurynas',
                     'roles' => ['ROLE_USER'],
+                    'is_confirmed' => true,
                 ],
             ];
     }
