@@ -87,6 +87,7 @@ class AppFixtures extends Fixture
         $user->setEmail($userData['email'])
             ->setRoles($userData['roles'])
             ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
+            ->setCreatedAt(new \DateTime('now'))
             ->setIsConfirmed($userData['is_confirmed']);
         return $user;
     }
@@ -389,9 +390,9 @@ class AppFixtures extends Fixture
             [
                 [
                     'email' => 'aurimas@uzsakovas.lt',
-                    'password' => 'aurimas1',
+                    'password' => 'aurimas',
                     'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
+                    'is_confirmed' => false,
                 ],
                 [
                     'email' => 'martyna@uzsakove.lt',
