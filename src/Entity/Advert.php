@@ -40,9 +40,9 @@ class Advert
     private $createdAt;
 
     /**
-     * @ManyToMany(targetEntity="Category", inversedBy="adverts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="adverts")
      * @JoinTable(name="adverts_categories")
-     * @var array|Category
+     * @var ArrayCollection|Category
      */
     private $categories;
 
@@ -55,6 +55,7 @@ class Advert
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="adverts")
      * @ORM\JoinColumn(nullable=false)
+     * @var User
      */
     private $user;
 
@@ -146,12 +147,27 @@ class Advert
     }
 
     /**
-     * @param Category[] $categories
+     * @param Category $category
      * @return Advert
      */
-    public function setCategories(ArrayCollection $categories): ?self
+    public function addCategory(Category $category): self
     {
-        $this->categories = $categories;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Category $category
+     * @return Advert
+     */
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
 
         return $this;
     }
@@ -203,11 +219,18 @@ class Advert
         return count($this->offers);
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return Advert
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
