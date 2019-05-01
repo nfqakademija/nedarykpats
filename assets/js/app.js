@@ -12,3 +12,43 @@ require('../css/app.scss');
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
 });
+
+
+
+//------------------------
+//-- Mobile navigation ---
+//------------------------
+const nav = document.querySelector('#nav');
+const menu = document.querySelector('#menu');
+const menuToggle = document.querySelector('.Nav-toggle');
+let isMenuOpen = false;
+
+menuToggle.addEventListener('click', e => {
+    e.preventDefault();
+    isMenuOpen = !isMenuOpen;
+
+    menuToggle.setAttribute('aria-expanded', String(isMenuOpen));
+    menu.hidden = !isMenuOpen;
+    nav.classList.toggle('Nav--open');
+});
+
+const item = document.querySelector('.Nav-link');
+item.onclick = function(){
+    nav.classList.remove("Nav--open");
+};
+
+
+
+//----------------------------------------
+//-- Registration ir Login form errors ---
+//----------------------------------------
+const formError = document.querySelectorAll('.Form-item');
+
+formError.forEach((element) => {
+
+    const value = element.querySelector('.Form-errors');
+
+    if ((value) && (value.childNodes.length > 1)) {
+        element.classList.add("is-error");
+    }
+});

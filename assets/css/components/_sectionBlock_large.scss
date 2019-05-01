@@ -1,12 +1,14 @@
 .SectionBlock{
+  height: var(--screen-height);
   flex-direction: row;
   
-  &-text {
-	width: auto;
-	order: 1;
+  &-content {
+	width: 50%;
   }
+  
   &-img {
 	order: 2;
+	
 	img {
 	  float: right;
 	  width: 90%;

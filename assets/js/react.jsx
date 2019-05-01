@@ -14,7 +14,6 @@ if (typeof usingReactApp !== "undefined") {
             if (!target.value) {
                 target.parentNode.classList.remove('active');
             }
-
         };
 
         const bindEvents = (element) => {

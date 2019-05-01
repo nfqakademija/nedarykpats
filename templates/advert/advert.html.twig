@@ -1,6 +1,8 @@
-{% extends 'home/body.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block ads %}
+{% block body %}
+    <div class="Content Content--top Content--GreyBg ">
+        <div class="Content-Block">
 
             <div class="u-display-right">
                 <a class="Button" href="/#FilterBar">Atgal</a>
@@ -79,4 +81,6 @@
 
             {{ form_end(offerForm) }}
 
+        </div>
+    </div>
 {% endblock %}

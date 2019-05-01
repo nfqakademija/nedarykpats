@@ -11,24 +11,44 @@
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
+
     <body>
-        <div class="Content">
+        <div class="Content Content-Fixed">
             <div class="Content-Block">
-                <div class="PageHeader">
+                <header class="PageHeader" role="banner">
                     <div class="PageHeader-logo">
                         <a href="/"><img src="/img/logo.png" alt="worchase"></a>
                     </div>
-                    <nav class="PageHeader-nav">
-                        <span class="PageHeader-item"><a href="#">Mano pasiūlymai</a></span>
-                        <span class="PageHeader-item"><a href="{{ path('new_advert') }}">Įkelti naują</a></span>
-                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                            <span class="PageHeader-item">{{ app.user.username }}</span>
-                            <span class="PageHeader-item"><a href="{{ path('logout') }}">Atsijungti</a></span>
-                        {% else %}
-                            <span class="PageHeader-item"><a href="{{ path('login') }}">Prisijungti</a></span>
-                        {% endif %}
+
+                    <nav id="nav" class="Nav" role="navigation">
+
+                        <ul class="Nav-menu" id="menu" tabindex="-1" aria-label="main navigation">
+                                <li class="Nav-item"><a class="Nav-link" href="/#FilterBar">Visi skelbimai</a></li>
+                                <li class="Nav-item"><a class="Nav-link" href="{{ path('new_advert') }}">Įkelti naują</a></li>
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                {#<li class="Nav-item">{{ app.user.username }}</li>#}
+                                <li class="Nav-item"><a class="Nav-link" href="#">Mano pasiūlymai</a></li>
+                                <li class="Nav-item"><a class="Nav-link" href="{{ path('logout') }}">Atsijungti</a></li>
+                            {% else %}
+                                <li class="Nav-item"><a class="Nav-link Nav-link--login" href="{{ path('login') }}">Prisijungti</a></li>
+                            {% endif %}
+                        </ul>
+
+                        <a href="#nav" class="Nav-toggle" role="button" aria-expanded="false" aria-controls="menu">
+                            <svg class="menuicon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
+                                <g>
+                                    <line class="menuicon__bar" x1="13" y1="16.5" x2="37" y2="16.5"/>
+                                    <line class="menuicon__bar" x1="13" y1="24.5" x2="37" y2="24.5"/>
+                                    <line class="menuicon__bar" x1="13" y1="24.5" x2="37" y2="24.5"/>
+                                    <line class="menuicon__bar" x1="13" y1="32.5" x2="37" y2="32.5"/>
+                                </g>
+                            </svg>
+                        </a>
+
+                        <div class="Splash"></div>
+
                     </nav>
-                </div>
+                </header>
             </div>
         </div>
 

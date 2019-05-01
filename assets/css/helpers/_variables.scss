@@ -40,6 +40,7 @@
   --fontSizeLargeMinus: -25px;
   --fontSizeHeader3: 24px;
   --lineHeight: 22px;
+  --lineHeightMedium: 26px;
   --fontFamily: 'Ubuntu', sans-serif;
 }
 
@@ -97,4 +98,12 @@
 :root {
   --imgSmall: 50px;
   --imgMedium: 100px;
+}
+
+/**
+ * Img size
+ */
+:root {
+  --screen-height: 100vh;
+  --screen-width: 100vw;
 }

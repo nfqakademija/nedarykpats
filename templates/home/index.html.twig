@@ -1,93 +1,96 @@
-{% extends 'home/body.html.twig' %}
+{% extends 'body.html.twig' %}
 
 {% block intro %}
-        <section class="SectionBlock">
-            <div class="SectionBlock-text">
-                <h1>Ieškok, kas tau padarytų darbą!</h1>
-                <div class="u-display-flex">
-                    <a class="Button Button--blue u-margin-top-bottom" href="#FilterBar">Plačiau</a>
-                </div>
+    <section class="SectionBlock">
+        <div class="SectionBlock-content">
+            <h1>Ieškok, kas tau padarytų darbą!</h1>
+            <p class="SectionBlock-text">
+                Ieškai, kas galėtų atlikti darbą, bet nežinai kur kreiptis? Nežinai, kuris kandidatas geriausias? Užsuk ir įkelk savo skelbimą, darbas bus atliktas!
+            </p>
+            <div class="u-display-flex">
+                <a class="Button Button--blue u-margin-top-bottom" href="#FilterBar">Plačiau</a>
             </div>
-            <div class="SectionBlock-img">
-                <img src="img/intro.png"/>
-            </div>
-        </section>
+        </div>
+        <div class="SectionBlock-img">
+            <img src="img/intro.png"/>
+        </div>
+    </section>
 {% endblock %}
 
 {% block ads %}
-            <section id="Ads" class="Ads">
-                {% for advert in filteredAdverts %}
+    <section id="Ads" class="Ads">
+        {% for advert in filteredAdverts %}
 
-                    <section class="Ad u-visibility-parent">
-                        <header class="Ad-header">
-                            <div > {{ advert.createdAt|date("Y-m-d") }}
-                                {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
-                                    Šis skelbimas tavo!
-                                {% endif %}
-                            </div>
-                            {% if advert.countOffers()  > 0 %}
-                            <div class="Bid">
-                                <span class="Bid-header">Aplikavo</span>
-                                <span class="Bid-count">{{ advert.countOffers() }}</span>
-                            </div>
-                            {% endif %}
-                        </header>
-                        <h3 class="Header">{{ advert.title }}</h3>
-                        <div class="Ad-body">
-                            <div class="Ad-text Ad-text--top">
-                                <p>{{ advert.text }}</p>
-                            </div>
-                            <div class="u-align-center u-visibility-flex-child">
-                                <a class="Button Button--short u-margin-top-bottom" href={{ path('advert', {'id': advert.id }) }}>Plačiau</a>
-                            </div>
-                            <footer class="Ad-footer Ad-footer--bottom">
-                                <ul class="Ad-categories">
-                                    {% for advertCategory in advert.categories  %}
-                                        <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </footer>
-                        </div>
-                    </section>
-                {% endfor %}
+            <section class="Ad u-visibility-parent">
+                <header class="Ad-header">
+                    <div > {{ advert.createdAt|date("Y-m-d") }}
+                        {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
+                            Šis skelbimas tavo!
+                        {% endif %}
+                    </div>
+                    {% if advert.countOffers()  > 0 %}
+                    <div class="Bid">
+                        <span class="Bid-header">Aplikavo</span>
+                        <span class="Bid-count">{{ advert.countOffers() }}</span>
+                    </div>
+                    {% endif %}
+                </header>
+                <h3 class="Header">{{ advert.title }}</h3>
+                <div class="Ad-body">
+                    <div class="Ad-text Ad-text--top">
+                        <p>{{ advert.text }}</p>
+                    </div>
+                    <div class="u-align-center u-visibility-flex-child">
+                        <a class="Button Button--short u-margin-top-bottom" href={{ path('advert', {'id': advert.id }) }}>Plačiau</a>
+                    </div>
+                    <footer class="Ad-footer Ad-footer--bottom">
+                        <ul class="Ad-categories">
+                            {% for advertCategory in advert.categories  %}
+                                <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
+                            {% endfor %}
+                        </ul>
+                    </footer>
+                </div>
             </section>
+        {% endfor %}
+    </section>
 
-            {% if paginationPages > 1 %}
-                <section>
-                    <ul class="Pagination u-align-center">
+    {% if paginationPages > 1 %}
+        <section>
+            <ul class="Pagination u-align-center">
 
-                        <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page - 1 }}#FilterBar" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
+                <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page - 1 }}#FilterBar" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
 
-                        {% for i in 1..paginationPages %}
-                            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ i }}#FilterBar" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
-                        {% endfor %}
+                {% for i in 1..paginationPages %}
+                    <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ i }}#FilterBar" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
+                {% endfor %}
 
-                        <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page + 1 }}#FilterBar" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>
-                    </ul>
-                </section>
-            {% endif %}
+                <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page + 1 }}#FilterBar" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>
+            </ul>
+        </section>
+    {% endif %}
 
-    {% endblock %}
+{% endblock %}
 
 {% block filter %}
-            <section id="FilterBar">
-                <h2>Visi skelbimai</h2>
-                <ul class="FilterBar">
-                    {% for category in availableCategories %}
-                    <li>
-                        <a class="Category Category--filter {{ category.cssStyle }} {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
-                           href="?filter={{ toggleQueryStrings[category.slug] }}#FilterBar">
-                            <span class="Filter-title">{{ category.title }}</span>
-                            <span class="Filter-icon">
-                                {% if category.slug not in selectedCategorySlugs %}
-                                    <i class="fas fa-check"></i>
-                                {% else %}
-                                    <i class="fas fa-times"></i>
-                                {% endif %}
-                            </span>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </section>
+    <section id="FilterBar">
+        <h2>Visi skelbimai</h2>
+        <ul class="FilterBar">
+            {% for category in availableCategories %}
+            <li>
+                <a class="Category Category--filter {{ category.cssStyle }} {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
+                   href="?filter={{ toggleQueryStrings[category.slug] }}#FilterBar">
+                    <span class="Filter-title">{{ category.title }}</span>
+                    <span class="Filter-icon">
+                        {% if category.slug not in selectedCategorySlugs %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                    </span>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
 {% endblock %}

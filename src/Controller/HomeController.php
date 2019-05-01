@@ -94,6 +94,3 @@ class HomeController extends AbstractController
         return $page;
     }
 }
-
-
-

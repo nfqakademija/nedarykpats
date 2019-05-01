@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Advert;
 use App\Entity\Offer;
+use App\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,13 +13,38 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class AdvertController extends AbstractController
 {
+
+
     /**
-     * @Route("/advert", name="new_advert")
+     * @Route ("/advert" , name="new_advert")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
-    public function index()
+    public function addNewAdvert(Request $request)
     {
+        $advertForm = $this->createForm(AdvertType::class);
+
+        $user =  $this->getUser();
+
+        $advertForm->handleRequest($request);
+
+        if ($advertForm->isSubmitted() && $advertForm->isValid()) {
+            $advert = $advertForm->getData();
+
+            $advert->setUser($user);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($advert);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Uzklausa išsaugota');
+
+            return $this->redirect('/advert/'. $advert->getid());
+        }
+
         return $this->render('advert/index.html.twig', [
-            'controller_name' => 'AdvertController',
+            'advertForm' => $advertForm->createView(),
         ]);
     }
 

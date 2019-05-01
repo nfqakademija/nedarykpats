@@ -14,7 +14,28 @@
 	}
   }
   
+  &-errors {
+	ul {
+	  padding: 0;
+	  margin: 0;
+	}
+	
+	li,
+	span {
+	  padding-left: var(--spaceSmall);
+	  list-style: none;
+	  font-size: var(--fontSizeMedium);
+	  color: var(--colorRed);
+	}
+  }
+  
   &-item {
+  
+	&.is-error {
+	  input {
+		border-color: var(--colorRed) !important;
+	  }
+	}
 	
 	input,
 	label,
@@ -24,10 +45,10 @@
 	  margin-bottom: var(--spaceSmall);
 	  padding-left: var(--spaceSmall);
 	}
- 
+	
 	input,
 	label,
-	select{
+	select {
 	  padding: var(--spaceTopBotTextMedium) var(--spaceTopBotTextMedium);
 	}
 	
@@ -58,7 +79,7 @@
 	  border-style: solid;
 	  border-color: var(--colorBlack);
 	}
- 
+	
 	label {
 	  position: absolute;
 	  transform-origin: top left;
@@ -71,6 +92,5 @@
 	  text-transform: uppercase;
 	  font-weight: var(--bold);
 	}
-	
   }
 }

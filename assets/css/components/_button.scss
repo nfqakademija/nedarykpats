@@ -1,21 +1,6 @@
 .Button {
   @include transitionAll;
-  border-radius: var(--radiusMedium);
-  padding: var(--spaceTopBotTextMedium) var(--spaceLeftRightTexBig);;
-  text-transform: uppercase;
-  font-size: var(--fontSizeMedium);
-  font-weight: var(--bold);
-  letter-spacing: 0.3px;
-  text-align: center;
-  text-decoration: none;
-  color: var(--colorBlack);
-  border: var(--borderSmall) solid var(--colorGrey);
-  background-color: var(--colorWhite);
-  
-  &:hover {
-    color: var(--colorWhite);
-    background-color: var(--colorGrey);
-  }
+  @include button();
   
   &--blue {
     background-color: var(--colorMain);
