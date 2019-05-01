@@ -35,7 +35,7 @@ class User implements UserInterface
     private $roles = [];
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @var string
      */
     private $password;
@@ -62,6 +62,12 @@ class User implements UserInterface
      * @var string
      */
     private $googleID;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $createdAt;
 
     /**
      * User constructor.
@@ -226,11 +232,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Token|null
+     */
     public function getToken(): ?Token
     {
         return $this->token;
     }
 
+    /**
+     * @param Token $token
+     * @return User
+     */
     public function setToken(Token $token): self
     {
         $this->token = $token;
@@ -258,6 +271,25 @@ class User implements UserInterface
     public function setGoogleID(?string $googleID): self
     {
         $this->googleID = $googleID;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt(\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }
