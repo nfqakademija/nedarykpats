@@ -60,3 +60,12 @@
 .not-active {
   background-color: transparent;
 }
+
+
+.is-newCategory {
+  @include transitionAll();
+  opacity: 1;
+  -webkit-transition: opacity 1000ms linear;
+  transition: opacity 1000ms linear;
+  cursor: pointer;
+}

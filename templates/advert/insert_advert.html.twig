@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Naujas skelbimas{% endblock %}
+
+{% block body %}
+
+    <div class="Content Content--top Content--GreyBg ">
+        <div class="Content-Block">
+
+                            {{ form_start(advertForm, {'attr': {'class' : 'Form'}}) }}
+                            <div class="Form-item">
+                                <label class="" for="floatField">El. paštas</label>
+                                <input class="" type="email" />
+                            </div>
+
+                            <div class="Form-item">
+                                {{ form_label(advertForm.title) }}
+                                {{ form_widget(advertForm.title) }}
+                                <span class="Form-errors">
+                                     {{ form_errors(advertForm.title) }}
+                                </span>
+
+                            </div>
+
+                            <div class="Form-item">
+                                <label class="" for="floatField">Skelbimo tekstas</label>
+                                <textarea class="" rows="10"></textarea>
+                            </div>
+
+                            <div id="AdvertCategories"></div>
+
+                            <div id="CategoriesList" hidden></div>
+
+                            <div class="Form-item">
+                                <select id="AdvertList" name="categories">
+                                    <option disabled selected value>Kategorijos</option>
+                                    <option value="1">Lauko darbai</option>
+                                    <option value="2">Vidaus darbai</option>
+                                    <option value="3">Remontas</option>
+                                    <option value="4">Baldai</option>
+                                </select>
+                            </div>
+
+                            {{ form_row(advertForm.text, { 'label': 'Tekstas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo Skelbimo tekstas"  }  }) }}
+                            {{ form_row(advertForm.categories, {'label': 'Kategorijos'  }) }}
+                            {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+
+                            {{ form_end(advertForm) }}
+            
+        </div>
+    </div>
+
+    <script>
+        var usingVersionedFileJs = true;
+        var usingReactApp = true;
+    </script>
+    {{ parent() }}
+
+{% endblock %}
