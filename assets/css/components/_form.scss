@@ -86,11 +86,18 @@
 	  transition: all .1s ease-in-out;
 	  pointer-events: none;
 	}
-	
-	&.active label {
-	  transform: translate(0px, var(--fontSizeLargeMinus)) scale(.75);
-	  text-transform: uppercase;
-	  font-weight: var(--bold);
-	}
+  }
+  &-item.active label {
+	transform: translate(0px, var(--fontSizeLargeMinus)) scale(.75);
+  }
+  
+  &-item.active label,
+  &-label {
+	text-transform: uppercase;
+	font-weight: var(--bold);
+  }
+  &-label {
+	font-size: var(--fontSizeMedium);
+	padding-left: var(--spaceSmall);
   }
 }

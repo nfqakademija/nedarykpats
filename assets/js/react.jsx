@@ -57,21 +57,29 @@ if (typeof usingReactApp !== "undefined") {
         const updateList = () => {
             const categoriesList = document.getElementById('CategoriesList');
             categoriesList.innerHTML = categories;
+            changeCategoriesTitle();
         };
 
-        const addCategory = (element) => {
+        const addCategory = (element, value, list) => {
             const advertCategories = document.getElementById('AdvertCategories');
 
             advertCategories.innerHTML +=
                 '<span class="Category Category--filter is-newCategory">' +
-                '<span class="Filter-title">' +
+                '<li class="Filter-title"' +
+                'value="' + value + '">' +
                 element +
-                '</span>' +
+                '</li>' +
                 '<span class="Filter-icon">' +
                 '<i class="fas fa-times"></i>' +
                 '</span>' +
                 '</span>';
             categories.push(element);
+
+            for (var i = 0; i < list.length; i++){
+                if (list.options[i].value === value )
+                    list.remove(i);
+            }
+
             updateList();
         };
 
@@ -80,30 +88,67 @@ if (typeof usingReactApp !== "undefined") {
             updateList();
         };
 
+        const changeCategoriesTitle = () => {
+            const categoriesTitle = document.getElementById('CategoriesTitle');
+            const isSelectedCategories = categories.length > 0;
+            let title = "Pasirinkite kategorijas";
+
+            (isSelectedCategories) ? title = "Pasirinktos kategorijos:" : title = "Pasirinkite kategorijas";
+            categoriesTitle.innerText = title;
+        };
+
         const selectCategories = (element) => {
             element.addEventListener("change", function() {
-                const advertValue = element.options[element.selectedIndex].text;
-                const isInArray = categories.includes(advertValue);
+                const advertText = element.options[element.selectedIndex].text;
+                const advertValue = element.options[element.selectedIndex].value;
+                const isInArray = categories.includes(advertText);
 
-                (isInArray) ? removeCategory(advertValue) : addCategory(advertValue);
+                (isInArray) ? removeCategory(advertText) : addCategory(advertText, advertValue, element);
             });
         };
 
-        const removeTags = (element) => {
-            const tag = element.childNodes[0];
-            const isClass = tag.classList.contains('Filter-title');
+        const removeTags = (element, list) => {
 
-            if (isClass) {
-                removeCategory(tag.textContent);
-                element.style.opacity = '0';
+            const isClassTitle = element.classList.contains('Filter-title');
+            const isClassCategory = element.classList.contains('Category');
+            const isClassIcon = element.parentNode.classList.contains('Filter-icon');
+
+            const remove = (tag, tagText, tagValue) => {
+                removeCategory(tagText);
+                tag.style.opacity = '0';
                 setTimeout(function(){
-                    element.parentNode.removeChild(element);
-                    }, 500);
+                    tag.parentNode.removeChild(tag);
+                }, 500);
+                list.innerHTML += '<option value="'+tagValue+'">'+tagText+'</option>';
+            };
+
+            if (isClassTitle) {
+                const tag = element.parentNode;
+                const tagText = element.textContent;
+                const tagValue = element.value;
+                remove(tag, tagText, tagValue);
             }
+
+            if (isClassCategory) {
+                const tag = element;
+                const tagText = element.textContent;
+                const tagValue = element.childNodes[0].value;
+                remove(tag, tagText, tagValue);
+            }
+
+            if (isClassIcon) {
+                const tag = element.parentNode.parentNode;
+                const tagText = tag.textContent;
+                const tagValue = tag.childNodes[0].value
+                remove(tag, tagText, tagValue);
+            }
+
         };
 
+
+
         const init = () => {
-            const advertList = document.getElementById('AdvertList');
+            const advertList = document.getElementById('advert_categories');
             const tagParent = document.getElementById('AdvertCategories');
 
             if (advertList) {
@@ -112,8 +157,8 @@ if (typeof usingReactApp !== "undefined") {
 
             if (tagParent) {
                 tagParent.addEventListener("click",function(e) {
-                    const tag = e.path[1];
-                    removeTags(tag);
+                    const tag = e.srcElement;
+                    removeTags(tag, advertList);
                 });
             }
         };

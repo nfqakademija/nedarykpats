@@ -23,21 +23,31 @@ const menu = document.querySelector('#menu');
 const menuToggle = document.querySelector('.Nav-toggle');
 let isMenuOpen = false;
 
-menuToggle.addEventListener('click', e => {
-    e.preventDefault();
+const animateSplash = () => {
     isMenuOpen = !isMenuOpen;
 
     menuToggle.setAttribute('aria-expanded', String(isMenuOpen));
     menu.hidden = !isMenuOpen;
     nav.classList.toggle('Nav--open');
+};
+
+menuToggle.addEventListener('click', e => {
+    e.preventDefault();
+    animateSplash();
 });
 
 const item = document.querySelector('.Nav-link');
-item.onclick = function(){
-    nav.classList.remove("Nav--open");
-};
+item.addEventListener('click', e => {
+    e.preventDefault();
 
+    const goTo = item.getAttribute('href');
+    animateSplash();
 
+    setTimeout(function() {
+        window.location = goTo;
+    }, 700);
+
+});
 
 //----------------------------------------
 //-- Registration ir Login form errors ---

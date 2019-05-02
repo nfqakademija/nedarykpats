@@ -14,6 +14,10 @@
 	font-size: var(--fontSize);
 	border-width: var(--borderSmall);
 	border-style: solid;
+	li {
+	  display: inline-block;
+	  list-style: none;
+	}
   }
   
   &--brown {
