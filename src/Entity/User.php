@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use PHP_CodeSniffer\Reports\Json;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -23,17 +24,19 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @var string
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @var array
      */
     private $roles = [];
 
     /**
-     * @var string The hashed password
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
      */
     private $password;
 
@@ -42,21 +45,58 @@ class User implements UserInterface
      */
     private $adverts;
 
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $isConfirmed;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $token;
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    private $googleID;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return User
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -86,6 +126,10 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return User
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -101,6 +145,10 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return User
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -133,6 +181,10 @@ class User implements UserInterface
         return $this->adverts;
     }
 
+    /**
+     * @param Advert $advert
+     * @return User
+     */
     public function addAdvert(Advert $advert): self
     {
         if (!$this->adverts->contains($advert)) {
@@ -143,6 +195,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Advert $advert
+     * @return User
+     */
     public function removeAdvert(Advert $advert): self
     {
         if ($this->adverts->contains($advert)) {
@@ -152,6 +208,88 @@ class User implements UserInterface
                 $advert->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed(): bool
+    {
+        return $this->isConfirmed;
+    }
+
+
+    /**
+     * @param bool $isConfirmed
+     * @return User
+     */
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
+
+        return $this;
+    }
+
+    /**
+     * @return Token|null
+     */
+    public function getToken(): ?Token
+    {
+        return $this->token;
+    }
+
+    /**
+     * @param Token $token
+     * @return User
+     */
+    public function setToken(Token $token): self
+    {
+        $this->token = $token;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $token->getUser()) {
+            $token->setUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getGoogleID(): ?string
+    {
+        return $this->googleID;
+    }
+
+    /**
+     * @param string|null $googleID
+     * @return User
+     */
+    public function setGoogleID(?string $googleID): self
+    {
+        $this->googleID = $googleID;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime|null
+     */
+    public function getCreatedAt(): ?\DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt(\DateTime $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

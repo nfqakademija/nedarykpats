@@ -32,6 +32,7 @@ class AdvertController extends AbstractController
             $advert = $advertForm->getData();
 
             $advert->setUser($user);
+            $advert->setIsConfirmed(true);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($advert);
@@ -72,6 +73,7 @@ class AdvertController extends AbstractController
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offer = $offerForm->getData();
+            $offer->setIsConfirmed(true);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offer);

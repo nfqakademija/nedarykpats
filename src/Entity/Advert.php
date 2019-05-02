@@ -40,9 +40,9 @@ class Advert
     private $createdAt;
 
     /**
-     * @ManyToMany(targetEntity="Category", inversedBy="adverts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="adverts")
      * @JoinTable(name="adverts_categories")
-     * @var array|Category
+     * @var ArrayCollection|Category
      */
     private $categories;
 
@@ -55,8 +55,23 @@ class Advert
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="adverts")
      * @ORM\JoinColumn(nullable=false)
+     * @var User
      */
     private $user;
+
+
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $isConfirmed;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="advert", cascade={"persist", "remove"})
+     */
+    private $token;
+
 
     /**
      * Advert constructor.
@@ -72,7 +87,6 @@ class Advert
             $this->createdAt = $createdAt;
         } else {
             $this->createdAt = new \DateTime('now');
-            new ArrayCollection();
         }
     }
 
@@ -147,12 +161,27 @@ class Advert
     }
 
     /**
-     * @param Category[] $categories
+     * @param Category $category
      * @return Advert
      */
-    public function setCategories(ArrayCollection $categories): ?self
+    public function addCategory(Category $category): self
     {
-        $this->categories = $categories;
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Category $category
+     * @return Advert
+     */
+    public function removeCategory(Category $category): self
+    {
+        if ($this->categories->contains($category)) {
+            $this->categories->removeElement($category);
+        }
 
         return $this;
     }
@@ -204,14 +233,58 @@ class Advert
         return count($this->offers);
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return Advert
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isConfirmed(): bool
+    {
+        return $this->isConfirmed;
+    }
+
+    /**
+     * @param bool $isConfirmed
+     * @return Advert
+     */
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
+
+        return $this;
+    }
+
+    public function getToken(): ?Token
+    {
+        return $this->token;
+    }
+
+    public function setToken(?Token $token): self
+    {
+        $this->token = $token;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newAdvert = $token === null ? null : $this;
+        if ($newAdvert !== $token->getAdvert()) {
+            $token->setAdvert($newAdvert);
+        }
 
         return $this;
     }

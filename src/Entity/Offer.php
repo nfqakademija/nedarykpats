@@ -52,6 +52,23 @@ class Offer
      */
     private $createdAt;
 
+
+    /**
+     * @var bool
+     * @ORM\Column(type="boolean")
+     */
+    private $isConfirmed;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="offer", cascade={"persist", "remove"})
+     */
+    private $token;
+
+    /**
+     * @return bool
+     */
+
+
     /**
      * Offer constructor.
      * @param Advert $advert
@@ -148,6 +165,41 @@ class Offer
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isConfirmed(): bool
+    {
+        return $this->isConfirmed;
+    }
+
+
+    /**
+     * @param bool $isConfirmed
+     * @return Offer
+     */
+    public function setIsConfirmed(bool $isConfirmed): self
+    {
+        $this->isConfirmed = $isConfirmed;
+
+        return $this;
+    }
+
+    public function getToken(): ?Token
+    {
+        return $this->token;
+    }
+
+    public function setToken(?Token $token): self
+    {
+        $this->token = $token;
+
+        // set (or unset) the owning side of the relation if necessary
+        $newOffer = $token === null ? null : $this;
+        if ($newOffer !== $token->getOffer()) {
+            $token->setOffer($newOffer);
+        }
 
         return $this;
     }
