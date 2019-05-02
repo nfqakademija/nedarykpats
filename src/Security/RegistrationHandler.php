@@ -64,7 +64,6 @@ class RegistrationHandler extends AbstractController
         $user = $userRepository->findOneBy(['token' => $token]);
 
         if (!$user) {
-
             $user->setIsConfirmed(true);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
