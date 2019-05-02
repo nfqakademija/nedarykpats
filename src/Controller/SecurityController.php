@@ -34,7 +34,6 @@ class SecurityController extends AbstractController
     public function loginExternal(Request $request, RegistrationHandler $registrationHandler)
     {
         $recipient = $request->request->get('email');
-        var_dump($recipient);
         $registrationHandler->sendExternalLoginEmail($recipient);
         return $this->redirectToRoute('home');
     }
