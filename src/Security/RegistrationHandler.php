@@ -44,7 +44,7 @@ class RegistrationHandler extends AbstractController
                     'emails/externalLogin.html.twig',
                     [
                         'email' => $recipient,
-                        'loginUrl' => 'http://127.0.0.1:8000/'.$this->createLoginHash($recipient)
+                        'loginUrl' => 'http://127.0.0.1:8000/auth/'.$this->createLoginHash($recipient)
                     ]
                 ),
                 'text/html'
@@ -53,12 +53,34 @@ class RegistrationHandler extends AbstractController
         $this->switfMailer->send($message);
     }
 
+
+    /**
+     * @param $token
+     * @return bool
+     */
+    public function validateToken($token)
+    {
+        $userRepository = $this->entityManager->getRepository(User::class);
+        $user = $userRepository->findOneBy(['token' => $token]);
+
+        if (!$user) {
+
+            $user->setIsConfirmed(true);
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
+
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      * @param string $email
      * @throws \Exception
      * @return string
      */
-    public function createLoginHash(string $email): string
+    private function createLoginHash(string $email): string
     {
 
         $random_prefix = rand();
