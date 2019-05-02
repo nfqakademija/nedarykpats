@@ -10,6 +10,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Token;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SecurityController extends AbstractController
 {
@@ -36,6 +38,31 @@ class SecurityController extends AbstractController
         $registrationHandler->sendExternalLoginEmail($recipient);
         return $this->redirectToRoute('home');
     }
+
+//    /**
+//     * @Route("/auth/{hash}", name="token")
+//     * @ParamConverter("token", class="App:Token")
+//     * @param Token $token
+//     * @param RegistrationHandler $registrationHandler
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     */
+//    public function validateFromEmail(Token $token, RegistrationHandler $registrationHandler)
+//    {
+//       $hash = $token->getHash();
+//
+//       if ($hash  && $token->getExpired() === false) {
+//
+//            $validation = $registrationHandler->validateToken($hash) ;
+//
+//            if ($validation) {
+//
+//
+//
+//                return $this->redirectToRoute('home');
+//            }
+//       }
+//        return $this->redirectToRoute('home'); ///TODO: bad token url
+//    }
 
     /**
      *
