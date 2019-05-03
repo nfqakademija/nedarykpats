@@ -2,6 +2,9 @@
   &-toggle {
 	display: none;
   }
+  *:focus {
+	outline:none;
+  }
   
   &-menu {
 	display: inline-flex;

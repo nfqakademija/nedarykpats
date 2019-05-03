@@ -36,18 +36,29 @@ menuToggle.addEventListener('click', e => {
     animateSplash();
 });
 
+
+//----------------------------------------
+//-- Mobile form splash screen dalay -----
+//----------------------------------------
 const item = document.querySelector('.Nav-link');
-item.addEventListener('click', e => {
-    e.preventDefault();
+    item.addEventListener('click', e => {
+        const width = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
 
-    const goTo = item.getAttribute('href');
-    animateSplash();
+        if (width < 1200) {
+            e.preventDefault();
 
-    setTimeout(function() {
-        window.location = goTo;
-    }, 700);
+            const goTo = item.getAttribute('href');
+            animateSplash();
 
-});
+            setTimeout(function () {
+                window.location = goTo;
+            }, 700);
+        }
+    });
+
+
 
 //----------------------------------------
 //-- Registration ir Login form errors ---
@@ -62,3 +73,21 @@ formError.forEach((element) => {
         element.classList.add("is-error");
     }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

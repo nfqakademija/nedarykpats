@@ -8,6 +8,7 @@
         <div class="Content-Block">
 
             {{ form_start(advertForm, {'attr': {'class' : 'Form'}}) }}
+            {#TODO: nereikia emailo, jei prisijunges#}
             <div class="Form-item">
                 <label class="" for="floatField">El. paštas</label>
                 <input class="" type="email" />
@@ -35,10 +36,9 @@
                 {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top'}}) }}
             </div>
 
+            {#TODO: ar galima pakeisti į textarea?#}
             {{ form_row(advertForm.text, { 'label': 'Tekstas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo Skelbimo tekstas"  }  }) }}
-            {#{{ form_row(advertForm.categories, {'label': 'Kategorijos'  }) }}#}
             {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
-
             {{ form_end(advertForm) }}
 
         </div>

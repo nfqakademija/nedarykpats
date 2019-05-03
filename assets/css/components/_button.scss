@@ -1,6 +1,7 @@
 .Button {
   @include transitionAll;
   @include button();
+  box-sizing: padding-box;
   
   &--blue {
     background-color: var(--colorMain);
@@ -8,13 +9,15 @@
     color: var(--colorWhite);
   }
   
-  &--fb {
-    background-color: var(--colorLightBlue);
-    border: none;
-    color: var(--colorWhite);
+  &--google {
+    display: inline-block;
+    //background-color: var(--colorLightBlue);
+    //border: none;
+    //color: var(--colorWhite);
   }
   
   &--fb {
+    display: inline-block;
     background-color: var(--colorRed);
     border: none;
     color: var(--colorWhite);

@@ -19,11 +19,16 @@
   }
   
   &-text {
+	
 	p {
 	  overflow: hidden;
+	  text-overflow: ellipsis;
 	  display: -webkit-box;
+	  line-height: var(--lineHeight);
+	  max-height: var(--lineHeightForLines);
 	  -webkit-line-clamp: 4;
 	  -webkit-box-orient: vertical;
+	  
 	}
   }
   
