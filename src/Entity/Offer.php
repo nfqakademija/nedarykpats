@@ -47,8 +47,8 @@ class Offer
     private $text;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @var \DateTime
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @var \DateTimeInterface
      */
     private $createdAt;
 
@@ -71,18 +71,9 @@ class Offer
 
     /**
      * Offer constructor.
-     * @param Advert $advert
-     * @param \DateTime|null $createdAt
-     * @throws \Exception
      */
-    public function __construct(Advert $advert, \DateTime $createdAt = null)
+    public function __construct()
     {
-        $this->advert = $advert;
-        if (isset($createdAt)) {
-            $this->createdAt = $createdAt;
-        } else {
-            $this->createdAt = new \DateTime('now');
-        }
     }
 
     /**
@@ -151,18 +142,18 @@ class Offer
     }
 
     /**
-     * @return \DateTime|null
+     * @return \DateTimeInterface|null
      */
-    public function getCreatedAt(): ?\DateTime
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param \DateTimeInterface $createdAt
      * @return Offer
      */
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -203,4 +194,5 @@ class Offer
 
         return $this;
     }
+
 }

@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Security\RegistrationHandler;
+use App\Service\RegistrationHandler;
+use App\Service\EmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,8 +11,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use App\Entity\Token;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class SecurityController extends AbstractController
 {
@@ -31,11 +30,15 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login-external", name="login_external")
      */
-    public function loginExternal(Request $request, RegistrationHandler $registrationHandler)
-    {
+    public function loginExternal(
+        Request $request,
+        RegistrationHandler $registrationHandler,
+        EmailService $emailService
+    ) {
         $recipient = $request->request->get('email');
-        var_dump($recipient);
-        $registrationHandler->sendExternalLoginEmail($recipient);
+        $hash = $registrationHandler->createLoginHash($recipient);
+        $emailService->sendSingleLoginEmail($recipient, $hash);
+
         return $this->redirectToRoute('home');
     }
 

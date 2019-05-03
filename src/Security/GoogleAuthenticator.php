@@ -80,7 +80,8 @@ class GoogleAuthenticator extends SocialAuthenticator
             $user->setEmail($googleUser->getEmail())
                 ->setGoogleID(intval($googleUser->getId()))
                 ->setRoles(['ROLE_USER'])
-                ->setIsConfirmed(true);
+                ->setIsConfirmed(true)
+                ->setCreatedAt(new \DateTime('now'));
             $this->em->persist($user);
             $this->em->flush();
         }

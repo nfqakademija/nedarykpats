@@ -21,10 +21,10 @@
                                         Šis skelbimas tavo!
                                     {% endif %}
                                 </div>
-                                {% if advert.countOffers()  > 0 %}
+                                {% if advert.getOffersCount()  > 0 %}
                                 <div class="Bid">
                                     <span class="Bid-header">Aplikavo</span>
-                                    <span class="Bid-count">{{ advert.countOffers() }}</span>
+                                    <span class="Bid-count">{{ advert.getOffersCount() }}</span>
                                 </div>
                                 {% endif %}
                             </header>

@@ -1,19 +1,15 @@
 <?php
 
 
-namespace App\Security;
+namespace App\Service;
 
 use App\Entity\Token;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class RegistrationHandler extends AbstractController
+class RegistrationHandler
 {
-    /**
-     * @var \Swift_Mailer
-     */
-    private $switfMailer;
+
     /**
      * @var EntityManagerInterface
      */
@@ -21,38 +17,12 @@ class RegistrationHandler extends AbstractController
 
     /**
      * RegistrationHandler constructor.
-     * @param \Swift_Mailer $swiftMailer
      * @param EntityManagerInterface $entityManager
      */
-    public function __construct(\Swift_Mailer $swiftMailer, EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
-        $this->switfMailer = $swiftMailer;
         $this->entityManager = $entityManager;
     }
-
-    /**
-     * @param string $recipient
-     * @throws \Exception
-     */
-    public function sendExternalLoginEmail(string $recipient)
-    {
-        $message = (new \Swift_Message('Prisijungimo nuoroda'))
-            ->setFrom('workchase.nfq@gmail.com')
-            ->setTo($recipient)
-            ->setBody(
-                $this->renderView(
-                    'emails/externalLogin.html.twig',
-                    [
-                        'email' => $recipient,
-                        'loginUrl' => 'http://127.0.0.1:8000/auth/'.$this->createLoginHash($recipient)
-                    ]
-                ),
-                'text/html'
-            );
-
-        $this->switfMailer->send($message);
-    }
-
 
     /**
      * @param $token
@@ -79,7 +49,7 @@ class RegistrationHandler extends AbstractController
      * @throws \Exception
      * @return string
      */
-    private function createLoginHash(string $email): string
+    public function createLoginHash(string $email): string
     {
 
         $random_prefix = rand();

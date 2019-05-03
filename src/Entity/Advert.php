@@ -34,8 +34,8 @@ class Advert
     private $text;
 
     /**
-     * @ORM\Column(type="datetime", nullable=FALSE)
-     * @var \DateTime
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @var \DateTimeInterface
      */
     private $createdAt;
 
@@ -59,35 +59,26 @@ class Advert
      */
     private $user;
 
-
-
     /**
-     * @var bool
      * @ORM\Column(type="boolean")
+     * @var bool
      */
     private $isConfirmed;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="advert", cascade={"persist", "remove"})
+     * @var Token
      */
     private $token;
 
 
     /**
      * Advert constructor.
-     * @param \DateTime|null $createdAt
-     * @throws \Exception
      */
-    public function __construct(\DateTime $createdAt = null)
+    public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->offers = new ArrayCollection();
-
-        if (isset($createdAt)) {
-            $this->createdAt = $createdAt;
-        } else {
-            $this->createdAt = new \DateTime('now');
-        }
     }
 
     /**
@@ -135,18 +126,18 @@ class Advert
     }
 
     /**
-     * @return \DateTime
+     * @return \DateTimeInterface
      */
-    public function getCreatedAt(): \DateTime
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
     /**
-     * @param \DateTime $createdAt
+     * @param \DateTimeInterface $createdAt
      * @return Advert
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -228,7 +219,7 @@ class Advert
     /**
      * @return int
      */
-    public function countOffers()
+    public function getOffersCount(): int
     {
         return count($this->offers);
     }
@@ -255,7 +246,7 @@ class Advert
     /**
      * @return bool
      */
-    public function isConfirmed(): bool
+    public function isConfirmed(): ?bool
     {
         return $this->isConfirmed;
     }
@@ -271,11 +262,18 @@ class Advert
         return $this;
     }
 
+    /**
+     * @return Token|null
+     */
     public function getToken(): ?Token
     {
         return $this->token;
     }
 
+    /**
+     * @param Token|null $token
+     * @return Advert
+     */
     public function setToken(?Token $token): self
     {
         $this->token = $token;
