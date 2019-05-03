@@ -50,7 +50,7 @@ class Category
      */
     public function __construct()
     {
-        $this->adverts = array();
+        $this->adverts = new ArrayCollection();
     }
 
     /**

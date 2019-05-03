@@ -13,42 +13,50 @@ class Token
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @var int
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=32)
+     * @var string
      */
     private $hash;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="token", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
+     * @var User
      */
     private $user;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Advert", inversedBy="token", cascade={"persist", "remove"})
+     * @var Advert
      */
     private $advert;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Offer", inversedBy="token", cascade={"persist", "remove"})
+     * @var Offer
      */
     private $offer;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
+     * @var \DateTimeInterface
      */
     private $createdAt;
 
     /**
      * @ORM\Column(type="datetime")
+     * @var \DateTimeInterface
      */
     private $expiresAt;
 
     /**
      * @ORM\Column(type="boolean")
+     * @var bool
      */
     private $expired;
 

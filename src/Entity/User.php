@@ -64,7 +64,7 @@ class User implements UserInterface
     private $googleID;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", options={"default": "CURRENT_TIMESTAMP"})
      * @var \DateTime
      */
     private $createdAt;

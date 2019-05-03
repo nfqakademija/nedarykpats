@@ -131,9 +131,11 @@ class AppFixtures extends Fixture
      */
     private function getOffer(array $offer, array $adverts)
     {
-        return (new Offer($adverts[$offer['advert']]))
+        return (new Offer())
             ->setEmail($offer['email'])
             ->setText($offer['text'])
+            ->setAdvert($adverts[$offer['advert']])
+            ->setCreatedAt(new \DateTime('now'))
             ->setIsConfirmed($offer['is_confirmed']);
     }
 
