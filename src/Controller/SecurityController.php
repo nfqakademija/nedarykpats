@@ -6,6 +6,7 @@ use App\Service\RegistrationHandler;
 use App\Service\EmailService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -88,10 +89,13 @@ class SecurityController extends AbstractController
     public function connectCheckAction()
     {
         if (!$this->getUser()) {
-            //TODO: Reikėtų pranešti apie nepavykusį prisijungimą
-            return $this->redirectToRoute('home');
+            $this->addFlash('fail', 'Sorry, login failed');
+            return $this->redirectToRoute('register');
         } else {
-            //TODO: Reikėtų pranešti apie pavykusį prisijungimą
+            $userEmail = $this->getUser()->getEmail();
+            $user = substr($userEmail, 0, strpos($userEmail, "@"));
+
+            $this->addFlash('success', 'Welcome '. $user);
             return $this->redirectToRoute('home');
         }
     }

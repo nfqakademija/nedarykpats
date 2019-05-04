@@ -2,13 +2,14 @@
 
 {% block body %}
 
+    {% include 'components/login_flash_bag.html.twig' %}
+
     {% include 'components/intro.html.twig' %}
 
     <div class="Content Content--GreyBg">
         <div class="Content-Block">
 
             {% include 'components/filterBar.html.twig' with {'header': 'Visi skelbimai'} %}
-
 
             {% block ads %}
                 <section id="Ads" class="Ads">
