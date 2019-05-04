@@ -6,6 +6,7 @@ namespace App\Service;
 use App\Entity\Token;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\TokenGeneratorService;
 
 class RegistrationHandler
 {
@@ -16,72 +17,64 @@ class RegistrationHandler
     private $entityManager;
 
     /**
-     * RegistrationHandler constructor.
-     * @param EntityManagerInterface $entityManager
+     * @var TokenGeneratorService
      */
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    private $tokenGeneratorService;
 
     /**
-     * @param $token
-     * @return bool
+     * RegistrationHandler constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param TokenGeneratorService $tokenGeneratorService
      */
-    public function validateToken($token)
+    public function __construct(EntityManagerInterface $entityManager , TokenGeneratorService $tokenGeneratorService)
     {
-        $userRepository = $this->entityManager->getRepository(User::class);
-        $user = $userRepository->findOneBy(['token' => $token]);
-
-        if (!$user) {
-            $user->setIsConfirmed(true);
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-
-            return true;
-        }
-        return false;
+        $this->entityManager = $entityManager;
+        $this->tokenGeneratorService = $tokenGeneratorService;
     }
+
 
 
     /**
      * @param string $email
-     * @throws \Exception
      * @return string
+     * @throws \Exception
      */
     public function createLoginHash(string $email): string
     {
-
-        $random_prefix = rand();
-        $random_suffix = rand();
-        $hash = md5($random_prefix.$email.$random_suffix);
-        $createDate = new \DateTime('now');
-
         $userRepository = $this->entityManager->getRepository(User::class);
         $user = $userRepository->findOneBy(['email' => $email]);
 
-        if (!$user) {
-            $user = new User();
-            $user->setEmail($email)
-                ->setRoles(['ROLE_USER'])
-                ->setIsConfirmed(false)
-                ->setCreatedAt($createDate);
+        $createDate =  new \DateTime('now');
 
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
+        if (!$user) {
+            $user = $this->createUser($createDate, $email);
         }
 
-        $token = new Token();
-        $token
-            ->setHash($hash)
-            ->setCreatedAt(new \DateTime('now'))
-            ->setExpiresAt($createDate->modify('+ 2 hours'))
-            ->setExpired(false)
-            ->setUser($user);
+        $token =  $this->tokenGeneratorService->generate($email, $createDate, $user, null, null);
 
-        $this->entityManager->persist($token);
+        return $token->getHash();
+    }
+
+
+    /**
+     * @param \DateTime $createDate
+     * @param string $email
+     * @return User
+     */
+    private function createUser(\DateTime $createDate, string $email)
+    {
+        $user = new User();
+        $user->setEmail($email)
+            ->setRoles(['ROLE_USER'])
+            ->setIsConfirmed(false)
+            ->setCreatedAt($createDate);
+
+        $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        return $hash;
+        return $user;
     }
+
+
+
 }
