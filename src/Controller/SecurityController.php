@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Service\RegistrationHandler;
 use App\Service\EmailService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
@@ -12,6 +13,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use App\Entity\Token;
+use App\Service\TokenConsumerService;
+
 
 class SecurityController extends AbstractController
 {
@@ -43,30 +48,41 @@ class SecurityController extends AbstractController
         return $this->redirectToRoute('home');
     }
 
-//    /**
-//     * @Route("/auth/{hash}", name="token")
-//     * @ParamConverter("token", class="App:Token")
-//     * @param Token $token
-//     * @param RegistrationHandler $registrationHandler
-//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-//     */
-//    public function validateFromEmail(Token $token, RegistrationHandler $registrationHandler)
-//    {
-//       $hash = $token->getHash();
-//
-//       if ($hash  && $token->getExpired() === false) {
-//
-//            $validation = $registrationHandler->validateToken($hash) ;
-//
-//            if ($validation) {
-//
-//
-//
-//                return $this->redirectToRoute('home');
-//            }
-//       }
-//        return $this->redirectToRoute('home'); ///TODO: bad token url
-//    }
+
+    /**
+     * @Route("/auth/{hash}", name="token")
+     * @ParamConverter("token", class="App:Token")
+     * @param Token $token
+     * @param TokenConsumerService $tokenConsumerService
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function validateFromEmail(Token $token, TokenConsumerService $tokenConsumerService)
+    {
+        if ($tokenConsumerService->checkIfExpired($token)) {
+            $this->addFlash('fail', 'Deja nuoroda nebegalioja');
+            return $this->redirectToRoute('home');
+        }
+
+       $result =  $tokenConsumerService->consume($token);
+
+       switch ($result['EntityConfirmed']){
+           case 'User':
+               $this->addFlash('success', 'Registraticija sekminga');
+               return $this->redirectToRoute('home');
+
+           case 'Advert':
+               $this->addFlash('success', 'Skelbimas sekmingas');
+               return $this->redirectToRoute('/advert/'. $result['id']);
+
+           case 'Offer':
+               $this->addFlash('success', 'Siulymas sekmingas');
+               return $this->redirectToRoute('/advert/'. $result['advertId']);
+
+           default:
+               $this->addFlash('fail', 'Neteisinga nuoroda');
+               return $this->redirectToRoute('home');
+       }
+    }
 
     /**
      *
@@ -90,12 +106,12 @@ class SecurityController extends AbstractController
     {
         if (!$this->getUser()) {
             $this->addFlash('fail', 'Sorry, login failed');
-            return $this->redirectToRoute('register');
+            return $this->redirectToRoute('home');
         } else {
             $userEmail = $this->getUser()->getEmail();
             $user = substr($userEmail, 0, strpos($userEmail, "@"));
 
-            $this->addFlash('success', 'Welcome '. $user);
+            $this->addFlash('success', 'Sveiki '. $user);
             return $this->redirectToRoute('home');
         }
     }

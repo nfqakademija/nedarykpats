@@ -42,5 +42,6 @@ class EmailService
             );
 
         $this->switfMailer->send($message);
+
     }
 }
