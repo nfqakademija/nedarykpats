@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Service\RegistrationHandler;
-use App\Service\EmailService;
+use App\Service\EmailHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use App\Entity\Token;
 use App\Service\TokenConsumerService;
-
 
 class SecurityController extends AbstractController
 {
@@ -39,7 +38,7 @@ class SecurityController extends AbstractController
     public function loginExternal(
         Request $request,
         RegistrationHandler $registrationHandler,
-        EmailService $emailService
+        EmailHandler $emailService
     ) {
         $recipient = $request->request->get('email');
         $hash = $registrationHandler->createLoginHash($recipient);
@@ -59,29 +58,29 @@ class SecurityController extends AbstractController
     public function validateFromEmail(Token $token, TokenConsumerService $tokenConsumerService)
     {
         if ($tokenConsumerService->checkIfExpired($token)) {
-            $this->addFlash('fail', 'Deja nuoroda nebegalioja');
+            $this->addFlash('fail', 'Nuoroda nebegalioja.');
             return $this->redirectToRoute('home');
         }
 
-       $result =  $tokenConsumerService->consume($token);
+        $result = $tokenConsumerService->consume($token);
 
-       switch ($result['EntityConfirmed']){
-           case 'User':
-               $this->addFlash('success', 'Registraticija sekminga');
-               return $this->redirectToRoute('home');
+        switch ($result['EntityConfirmed']) {
+            case 'User':
+                $this->addFlash('success', 'Registracija sėkminga!');
+                return $this->redirectToRoute('home');
 
-           case 'Advert':
-               $this->addFlash('success', 'Skelbimas sekmingas');
-               return $this->redirectToRoute('/advert/'. $result['id']);
+            case 'Advert':
+                $this->addFlash('success', 'Skelbimas patalpintas sėkmingai');
+                return $this->redirectToRoute('/advert/'. $result['id']);
 
-           case 'Offer':
-               $this->addFlash('success', 'Siulymas sekmingas');
-               return $this->redirectToRoute('/advert/'. $result['advertId']);
+            case 'Offer':
+                $this->addFlash('success', 'Siūlymas patalpintas sėkmingai');
+                return $this->redirectToRoute('/advert/'. $result['advertId']);
 
-           default:
-               $this->addFlash('fail', 'Neteisinga nuoroda');
-               return $this->redirectToRoute('home');
-       }
+            default:
+                $this->addFlash('fail', 'Atsiprašome, neteisinga nuoroda');
+                return $this->redirectToRoute('home');
+        }
     }
 
     /**
@@ -105,13 +104,13 @@ class SecurityController extends AbstractController
     public function connectCheckAction()
     {
         if (!$this->getUser()) {
-            $this->addFlash('fail', 'Sorry, login failed');
+            $this->addFlash('fail', 'Atsiprašome, neteisingas prisijungimas');
             return $this->redirectToRoute('home');
         } else {
             $userEmail = $this->getUser()->getEmail();
             $user = substr($userEmail, 0, strpos($userEmail, "@"));
 
-            $this->addFlash('success', 'Sveiki '. $user);
+            $this->addFlash('success', 'Sveiki, '. $user);
             return $this->redirectToRoute('home');
         }
     }

@@ -32,7 +32,7 @@ class TokenGeneratorService
      * @param Offer|null $offer
      * @return Token
      */
-    public function generate(string $email, \DateTime $createDate, User $user, ?Advert $advert, ?Offer $offer ) : Token
+    public function generate(string $email, \DateTime $createDate, User $user, ?Advert $advert, ?Offer $offer) : Token
     {
         $token = new Token();
         $token

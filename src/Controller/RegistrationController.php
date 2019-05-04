@@ -5,9 +5,10 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginAuthenticator;
-use App\Service\EmailService;
+use App\Service\EmailHandler;
 use App\Service\RegistrationHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,12 +19,13 @@ class RegistrationController extends AbstractController
 {
     /**
      * @Route("/register", name="app_register")
-     * @param Request $request
+     * @param Request                      $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param GuardAuthenticatorHandler $guardHandler
-     * @param LoginAuthenticator $authenticator
-     * @param RegistrationHandler $registrationHandler
-     * @param EmailService $emailService
+     * @param GuardAuthenticatorHandler    $guardHandler
+     * @param LoginAuthenticator           $authenticator
+     * @param RegistrationHandler          $registrationHandler
+     * @param EmailHandler                 $emailService
+     *
      * @return Response
      * @throws \Exception
      */
@@ -33,26 +35,24 @@ class RegistrationController extends AbstractController
         GuardAuthenticatorHandler $guardHandler,
         LoginAuthenticator $authenticator,
         RegistrationHandler $registrationHandler,
-        EmailService $emailService
+        EmailHandler $emailService
     ): Response {
+
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $this->setUserProperties($user,  $passwordEncoder, $form);
+            $this->setUserProperties($user, $passwordEncoder, $form);
 
             $this->sendRegistrationEmail($registrationHandler, $emailService, $request);
 
-            $this->addFlash('success', 'Norit uzbaigti registracija patikrinkite emaila');
-
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
+            $this->addFlash(
+                'success',
+                'Norėdami baigti registraciją, paspauskite ant nuorodos, išsiųstos pateiktu el. paštu'
             );
+
+            return new RedirectResponse($this->generateUrl('home'));
         }
 
         return $this->render('registration/register.html.twig', [
@@ -68,7 +68,7 @@ class RegistrationController extends AbstractController
      * @throws \Exception
      */
     private function setUserProperties(User $user, UserPasswordEncoderInterface $passwordEncoder, $form)
-     {
+    {
          $user->setPassword(
              $passwordEncoder->encodePassword(
                  $user,
@@ -81,17 +81,18 @@ class RegistrationController extends AbstractController
          $entityManager = $this->getDoctrine()->getManager();
          $entityManager->persist($user);
          $entityManager->flush();
-     }
+    }
 
     /**
      * @param RegistrationHandler $registrationHandler
-     * @param EmailService $emailService
-     * @param Request $request
+     * @param EmailHandler        $emailService
+     * @param Request             $request
+     *
      * @throws \Exception
      */
     private function sendRegistrationEmail(
         RegistrationHandler $registrationHandler,
-        EmailService $emailService,
+        EmailHandler $emailService,
         Request $request
     ) {
         $form = $request->request->all();
@@ -99,5 +100,4 @@ class RegistrationController extends AbstractController
         $hash = $registrationHandler->createLoginHash($email);
         $emailService->sendSingleLoginEmail($email, $hash);
     }
-
 }

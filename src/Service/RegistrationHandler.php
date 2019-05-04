@@ -26,7 +26,7 @@ class RegistrationHandler
      * @param EntityManagerInterface $entityManager
      * @param TokenGeneratorService $tokenGeneratorService
      */
-    public function __construct(EntityManagerInterface $entityManager , TokenGeneratorService $tokenGeneratorService)
+    public function __construct(EntityManagerInterface $entityManager, TokenGeneratorService $tokenGeneratorService)
     {
         $this->entityManager = $entityManager;
         $this->tokenGeneratorService = $tokenGeneratorService;
@@ -74,7 +74,4 @@ class RegistrationHandler
 
         return $user;
     }
-
-
-
 }

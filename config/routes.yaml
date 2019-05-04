@@ -1,2 +1,5 @@
 logout:
   path: /logout
+
+login_with_hash:
+  path: /auth/{hash}

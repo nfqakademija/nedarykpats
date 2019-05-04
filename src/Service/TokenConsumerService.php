@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Service;
-
 
 use App\Entity\Advert;
 use App\Entity\Offer;
@@ -47,14 +44,11 @@ class TokenConsumerService
             $this->confirmUser($entity);
             $this->expireToken($token);
             return ['EntityConfirmed' => 'User'];
-
         } elseif ($entity->getAdvert()) {
             $this->confirmAdvert($entity);
             $this->expireToken($token);
             return ['EntityConfirmed' => 'Advert', 'id' => $entity->getAdvert()->getId()];
-
         } elseif ($entity->getOffer()) {
-
             $this->confirmOffer($entity);
             $this->expireToken($token);
             $advertId = $entity->getOffer()->getAdvert()->getId();
