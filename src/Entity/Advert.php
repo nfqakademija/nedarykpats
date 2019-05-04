@@ -79,6 +79,7 @@ class Advert
     {
         $this->categories = new ArrayCollection();
         $this->offers = new ArrayCollection();
+        $this->createdAt = new \DateTime();
     }
 
     /**

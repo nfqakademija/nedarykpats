@@ -8,14 +8,19 @@
         <div class="Content-Block">
 
             {{ form_start(advertForm, {'attr': {'class' : 'Form'}}) }}
-            {#TODO: nereikia emailo, jei prisijunges#}
-            <div class="Form-item">
-                <label class="" for="floatField">El. paštas</label>
-                <input class="" type="email" />
-            </div>
+
+            {#TODO: sutvarkyti, jeigu user neegzistuoja#}
+            {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
+                <div class="Form-item">
+                    <label class="" for="floatField">El. paštas</label>
+                    <input class="" type="email" />
+                </div>
+            {% endif %}
+
+
 
             <div class="Form-item">
-                {{ form_label(advertForm.title) }}
+                {{ form_label(advertForm.title,'Antraštė') }}
                 {{ form_widget(advertForm.title) }}
                 <span class="Form-errors">
                      {{ form_errors(advertForm.title) }}
@@ -24,9 +29,14 @@
             </div>
 
             <div class="Form-item">
-                <label class="" for="floatField">Skelbimo tekstas</label>
-                <textarea class="" rows="10"></textarea>
+                {{ form_label(advertForm.text, 'Skelbimo tekstas') }}
+                {{ form_widget(advertForm.text, {'attr': {'rows': '10'} }) }}
+                <span class="Form-errors">
+                     {{ form_errors(advertForm.text) }}
+                </span>
             </div>
+
+            {{ form_widget(advertForm.text, {'attr': {'class': 'u-no-margin-top'}}) }}
 
             <span id="CategoriesTitle" class="Form-label">Pasirinkite kategorijas</span>
             <div id="AdvertCategories"></div>
@@ -36,9 +46,8 @@
                 {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top'}}) }}
             </div>
 
-            {#TODO: ar galima pakeisti į textarea?#}
-            {{ form_row(advertForm.text, { 'label': 'Tekstas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo Skelbimo tekstas"  }  }) }}
             {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+
             {{ form_end(advertForm) }}
 
         </div>
