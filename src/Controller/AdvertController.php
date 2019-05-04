@@ -61,7 +61,7 @@ class AdvertController extends AbstractController
         Request $request
     ) {
 
-        $offer = new Offer($advert);
+        $offer = new Offer();
 
         $offerForm = $this->createFormBuilder($offer)
             ->add('email')
@@ -74,6 +74,8 @@ class AdvertController extends AbstractController
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offer = $offerForm->getData();
             $offer->setIsConfirmed(true);
+            $offer->setCreatedAt(new \DateTime('now'));
+            $offer->setAdvert($advert);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($offer);
