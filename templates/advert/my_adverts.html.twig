@@ -10,20 +10,23 @@
             {% include 'components/filterBar.html.twig' with {'header' : ''} %}
 
             {% block ads %}
-                <section id="Ads" class="Ads">
+                {% if filteredAdverts|length < 1 %}
+                    <div class="Message Message--empty">
+                        <img class="Message-img" src="/img/worker-empty.png" alt="" />
+                        <p class="Message-text">Jūs skelbimų neturite!</p>
+                    </div>
+                {% endif %}
 
-                    {% if filteredAdverts|length < 1 %}
-                        <p>Jūs skelbimų neturite! Įkelkite čia.</p>
-                    {% endif %}
+                <section id="Ads" class="Ads">
 
                     {% for advert in filteredAdverts %}
                         <section class="Ad u-visibility-parent">
                             <header class="Ad-header">
                                 <div > {{ advert.createdAt|date("Y-m-d") }} </div>
-                                {% if advert.countOffers()  > 0 %}
+                                {% if advert.getOffersCount()  > 0 %}
                                     <div class="Bid">
                                         <span class="Bid-header">Aplikavo</span>
-                                        <span class="Bid-count">{{ advert.countOffers() }}</span>
+                                        <span class="Bid-count">{{ advert.getOffersCount() }}</span>
                                     </div>
                                 {% endif %}
                             </header>

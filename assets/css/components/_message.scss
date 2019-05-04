@@ -1,0 +1,17 @@
+.Message {
+  
+  &--empty {
+    padding-top: var(--spaceLarge);
+	text-align: center;
+  }
+  
+  &-text {
+	color: var(--colorLightGray);
+  }
+  
+  &-img {
+    max-width: 300px;
+    opacity: 0.5;
+  }
+  
+}
