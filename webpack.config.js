@@ -19,7 +19,9 @@ Encore
      */
     .addEntry('app', [
         './assets/js/app.js',
+        './assets/js/avatar.js',
         './assets/js/react.jsx',
+        './assets/js/form.jsx',
     ])
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
@@ -55,7 +57,7 @@ Encore
     .enableReactPreset()
 
     // uncomment if you use TypeScript
-    //.enableTypeScriptLoader()
+    // .enableTypeScriptLoader()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher

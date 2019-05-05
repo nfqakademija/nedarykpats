@@ -1,0 +1,19 @@
+.avatarContainer {
+  
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: var(--radiusFull);
+  border: solid var(--borderMedium) var(--colorGrey);
+  overflow: hidden;
+  pointer-events: none;
+  
+  .avatarContainer-svg {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: var(--full-size);
+	height: var(--full-size);
+	pointer-events: none;
+  }
+}
