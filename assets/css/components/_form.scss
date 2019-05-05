@@ -100,4 +100,13 @@
 	font-size: var(--fontSizeMedium);
 	padding-left: var(--spaceSmall);
   }
+  
+  &-select > div {
+	padding: var(--spaceTiny) var(--spaceTopBotTextSmall);
+	margin-bottom: var(--spaceMedium);
+	border-radius: var(--radiusSmall);
+	border-width: var(--borderSmall);
+	border-style: solid;
+	border-color: var(--colorBlack);
+  }
 }

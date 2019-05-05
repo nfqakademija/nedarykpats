@@ -19,9 +19,9 @@ Encore
      */
     .addEntry('app', [
         './assets/js/app.js',
-        './assets/js/avatar.js',
         './assets/js/react.jsx',
-        './assets/js/form.jsx',
+        './assets/js/components/animations/avatar.js',
+        './assets/js/components/animations/menu.js',
     ])
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')

@@ -1,0 +1,40 @@
+//-------------------------------
+//--react categories input style
+//-------------------------------
+.css-bg1rzq-control,
+.css-1szy77t-control {
+  
+  &:hover {
+    border-color: var(--colorBlack) !important;
+  }
+  
+  &:focus {
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+    box-shadow: none !important;
+    border-color: var(--colorBlack) !important;
+  }
+}
+
+.css-es53b3-multiValue {
+  background-color: var(--colorGrey) !important;
+  border-radius: var(--radiusMedium) !important;
+  padding: var(--spaceTiny) var(--spaceTopBotTextSmall);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-top: var(--spaceSmall);
+  margin-right: var(--spaceSmall);
+  font-size: var(--fontSize);
+ 
+  .css-12jo7m5,
+  .css-1alnv5e {
+    color: var(--colorWhite);
+  }
+  
+  .css-1alnv5e {
+    &:hover {
+      background-color: transparent;
+      color: var(--colorWhite);
+    }
+  }
+}

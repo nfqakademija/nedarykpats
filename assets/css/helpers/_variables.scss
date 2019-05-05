@@ -56,6 +56,7 @@
  * Spacing
  */
 :root {
+  --spaceTiny: 5px;
   --spaceSmall: 10px;
   --spaceMedium: 25px;
   --spaceLarge: 50px;
@@ -102,9 +103,10 @@
 }
 
 /**
- * Img size
+ * size
  */
 :root {
   --screen-height: 100vh;
   --screen-width: 100vw;
+  --full-size: 100%;
 }

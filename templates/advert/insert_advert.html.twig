@@ -39,10 +39,13 @@
             {{ form_widget(advertForm.text, {'attr': {'class': 'u-no-margin-top'}}) }}
 
             <span id="CategoriesTitle" class="Form-label">Pasirinkite kategorijas</span>
-            <div id="AdvertCategories"></div>
-            <div id="CategoriesList" hidden></div>
 
-            <div class="Form-item">
+            <div id="AdvertCategories"
+                 data-category-options="test"
+            ></div>
+
+
+            <div class="Form-item" hidden>
                 {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top'}}) }}
             </div>
 
