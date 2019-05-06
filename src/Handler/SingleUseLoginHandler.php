@@ -58,7 +58,7 @@ class SingleUseLoginHandler
     {
         $user = $this->userCreationHandler->getUser($email);
         if (!$user) {
-            $this->userCreationHandler->createUser($email);
+            $user = $this->userCreationHandler->createUser($email);
         }
         $hash = $this->tokenGeneratorService->generate($email, new \DateTime('now'), $user, null, null);
         $this->emailHandler->sendSingleLoginEmail($email, $hash->getHash());
