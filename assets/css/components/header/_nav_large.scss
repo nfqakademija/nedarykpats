@@ -35,7 +35,8 @@
 	text-transform: none;
 	transition: text-shadow .3s;
  
-	&:hover {
+	&:hover,
+	&:focus{
 	  background-color: transparent;
 	  text-shadow: 0 0 .25px var(--colorMain), 0 0 .25px var(--colorMain);
 	  color: var(--colorMain);

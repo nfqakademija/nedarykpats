@@ -10,7 +10,8 @@ const categories = document.getElementById('AdvertCategories');
 if (categories) {
     try {
         ReactDOM.render(
-        <AddCategories {...(categories.dataset)}/>,
+        <AddCategories
+        {...(categories.dataset)}/>,
         categories
     );
     } catch (error) {

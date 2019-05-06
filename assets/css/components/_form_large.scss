@@ -1,3 +1,26 @@
-.Form--short {
-  width: 400px;
+.Form {
+  
+  &-image {
+    display: block;
+    float: left;
+    width: 40%;
+    text-align: center;
+    img {
+      width: 60%;
+    }
+  }
+  
+  &-content {
+    float: right;
+    width: 60%;
+  }
+  
+  &--short {
+    width: 400px;
+  }
+  
+  &--column {
+    display: flex;
+    align-items: center;
+  }
 }

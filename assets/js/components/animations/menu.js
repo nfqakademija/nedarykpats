@@ -43,28 +43,6 @@ item.addEventListener('click', e => {
 
 
 
-//----------------------------------------
-//-- Registration ir Login form errors ---
-//----------------------------------------
-const formError = document.querySelectorAll('.Form-item');
-
-formError.forEach((element) => {
-
-    const value = element.querySelector('.Form-errors');
-
-    if ((value) && (value.childNodes.length > 1)) {
-        element.classList.add("is-error");
-    }
-});
-
-
-
-
-
-
-
-
-
 
 
 
