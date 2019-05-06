@@ -44,4 +44,15 @@ class UserCreationHandler
 
         return $user;
     }
+
+    /**
+     * @param string $email
+     * @return User
+     */
+    public function getUser(string $email) : User
+    {
+        $userRepository = $this->entityManager->getRepository(User::class);
+        $user = $userRepository->findOneBy(['email' => $email]);
+        return $user;
+    }
 }

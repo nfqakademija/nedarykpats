@@ -18,6 +18,7 @@ class AdvertController extends AbstractController
     /**
      * @Route ("/advert" , name="new_advert")
      * @param Request $request
+     * @param AdvertCreationHandler $advertCreationHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
@@ -28,10 +29,8 @@ class AdvertController extends AbstractController
         $advertForm->handleRequest($request);
 
         if ($advertForm->isSubmitted() && $advertForm->isValid()) {
-            $advert = $advertForm->getData();
-
-            $advertCreationHandler->handle($advert);
-
+            $advertFormDTO = $advertForm->getData();
+            $advert = $advertCreationHandler->handle($advertFormDTO);
             $this->addFlash('success', 'Uzklausa išsaugota');
 
             return $this->redirect('/advert/'. $advert->getid());

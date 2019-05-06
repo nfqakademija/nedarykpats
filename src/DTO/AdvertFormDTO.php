@@ -31,28 +31,26 @@ class AdvertFormDTO
     private $categories;
 
     /**
-     * Advert constructor.
-     * @param EntityManagerInterface $entityManager
+     * @return string
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function getTitle(): ?string
     {
-        //TODO:
-        $this->categories = $entityManager->getRepository(Category::class)->findAll();
+        return $this->title;
     }
 
     /**
-     * @return string
+     * AdvertFormDTO constructor.
      */
-    public function getTitle(): string
+    public function __construct()
     {
-        return $this->title;
+        $this->categories = new ArrayCollection();
     }
 
     /**
      * @param string $title
      * @return AdvertFormDTO
      */
-    public function setTitle(string $title): AdvertFormDTO
+    public function setTitle(?string $title): AdvertFormDTO
     {
         $this->title = $title;
         return $this;
@@ -61,7 +59,7 @@ class AdvertFormDTO
     /**
      * @return string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -70,16 +68,16 @@ class AdvertFormDTO
      * @param string $text
      * @return AdvertFormDTO
      */
-    public function setText(string $text): AdvertFormDTO
+    public function setText(?string $text): AdvertFormDTO
     {
         $this->text = $text;
         return $this;
     }
 
     /**
-     * @return Collection|Category[]
+     * @return ArrayCollection|Category[]
      */
-    public function getCategories(): Collection
+    public function getCategories(): ?ArrayCollection
     {
         return $this->categories;
     }
@@ -88,7 +86,7 @@ class AdvertFormDTO
      * @param Category $category
      * @return AdvertFormDTO
      */
-    public function addCategory(Category $category): AdvertFormDTO
+    public function addCategory(?Category $category): AdvertFormDTO
     {
         if (!$this->categories->contains($category)) {
             $this->categories[] = $category;
@@ -101,7 +99,7 @@ class AdvertFormDTO
      * @param Category $category
      * @return AdvertFormDTO
      */
-    public function removeCategory(Category $category): AdvertFormDTO
+    public function removeCategory(?Category $category): AdvertFormDTO
     {
         if ($this->categories->contains($category)) {
             $this->categories->removeElement($category);
@@ -113,7 +111,7 @@ class AdvertFormDTO
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -122,7 +120,7 @@ class AdvertFormDTO
      * @param string $email
      * @return AdvertFormDTO
      */
-    public function setEmail(string $email): AdvertFormDTO
+    public function setEmail(?string $email): AdvertFormDTO
     {
         $this->email = $email;
         return $this;

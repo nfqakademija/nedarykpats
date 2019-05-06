@@ -71,11 +71,6 @@ class Advert
      */
     private $token;
 
-    /**
-     * @var string
-     */
-    private $email;
-
 
     /**
      * Advert constructor.
@@ -123,26 +118,6 @@ class Advert
     }
 
     /**
-     * @return string
-     */
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     * @return Advert
-     */
-    public function setEmail(string $email): ?self
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-
-
-    /**
      * @param string $text
      * @return Advert
      */
@@ -188,6 +163,16 @@ class Advert
             $this->categories[] = $category;
         }
 
+        return $this;
+    }
+
+    /**
+     * @param ArrayCollection $categories
+     * @return Advert
+     */
+    public function setCategories(ArrayCollection $categories): self
+    {
+        $this->categories = $categories;
         return $this;
     }
 
