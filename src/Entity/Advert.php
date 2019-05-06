@@ -79,12 +79,13 @@ class Advert
 
     /**
      * Advert constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->offers = new ArrayCollection();
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTime('now');
     }
 
     /**

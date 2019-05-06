@@ -64,16 +64,14 @@ class Offer
      */
     private $token;
 
-    /**
-     * @return bool
-     */
-
 
     /**
      * Offer constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
+        $this->createdAt = new \DateTime('now');
     }
 
     /**

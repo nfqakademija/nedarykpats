@@ -60,6 +60,14 @@ class Token
      */
     private $expired;
 
+    /**
+     * Token constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime('now');
+    }
 
     /**
      * @return int|null
