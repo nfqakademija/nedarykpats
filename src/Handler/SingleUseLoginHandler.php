@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Handler;
-
 
 use App\Entity\User;
 use App\Service\EmailHandler;
@@ -58,24 +55,24 @@ class SingleUseLoginHandler
      * @param string $email
      * @throws \Exception
      */
-    public function handle(string $email) {
+    public function handle(string $email)
+    {
         $user = $this->getUser($email);
-        if(!$user) {
+        if (!$user) {
             $this->userCreationHandler->createUser($email);
         }
         $hash = $this->tokenGeneratorService->generate($email, new \DateTime('now'), $user, null, null);
         $this->emailHandler->sendSingleLoginEmail($email, $hash->getHash());
-
     }
 
     /**
      * @param string $email
      * @return User
      */
-    private function getUser(string $email) : User {
+    private function getUser(string $email) : User
+    {
         $userRepository = $this->entityManager->getRepository(User::class);
         $user = $userRepository->findOneBy(['email' => $email]);
         return $user;
     }
-
 }

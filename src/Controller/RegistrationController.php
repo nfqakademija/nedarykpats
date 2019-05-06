@@ -37,7 +37,6 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $this->setUserProperties($user, $passwordEncoder, $form);
 
             $registrationHandler->handle($user);

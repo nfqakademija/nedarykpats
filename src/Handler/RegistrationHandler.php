@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Handler;
 
 use App\Entity\User;
@@ -39,8 +37,8 @@ class RegistrationHandler
     public function __construct(
         EntityManagerInterface $entityManager,
         TokenGeneratorService $tokenGeneratorService,
-        EmailHandler $emailHandler)
-    {
+        EmailHandler $emailHandler
+    ) {
         $this->entityManager = $entityManager;
         $this->tokenGeneratorService = $tokenGeneratorService;
         $this->emailHandler = $emailHandler;
@@ -50,7 +48,8 @@ class RegistrationHandler
      * @param User $user
      * @throws \Exception
      */
-    public function handle(User $user) {
+    public function handle(User $user)
+    {
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 

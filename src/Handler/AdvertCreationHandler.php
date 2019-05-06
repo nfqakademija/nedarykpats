@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Handler;
-
 
 use App\Entity\Advert;
 use App\Service\EmailHandler;
@@ -59,11 +56,9 @@ class AdvertCreationHandler
         $this->entityManager->persist($advert);
         $this->entityManager->flush();
 
-        if(!$advertConfirmed) {
+        if (!$advertConfirmed) {
             $hash = $this->tokenGeneratorService->generate('email', new \DateTime('now'), $user, $advert, null);
             $this->emailHandler->sendAdvertConfirmationWithSingleLoginUrl('email', $hash->getHash());
         }
-
     }
-
 }

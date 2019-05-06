@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\Service;
-
 
 use App\Entity\User;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
@@ -25,5 +22,4 @@ class UserChecker implements UserCheckerInterface
     public function checkPostAuth(UserInterface $user)
     {
     }
-
 }

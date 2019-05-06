@@ -1,8 +1,5 @@
 <?php
-
-
 namespace App\DTO;
-
 
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
@@ -130,5 +127,4 @@ class AdvertFormDTO
         $this->email = $email;
         return $this;
     }
-
 }
