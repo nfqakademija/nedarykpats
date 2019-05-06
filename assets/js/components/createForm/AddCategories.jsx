@@ -11,7 +11,7 @@ const options = [
     { value: '7', label: 'Vidaus darbai' }
 ];
 
-class Categories extends React.Component {
+class AddCategories extends React.Component {
     constructor(props) {
         super(props);
 
@@ -26,7 +26,6 @@ class Categories extends React.Component {
 
     render() {
         const { selectedOption } = this.state;
-        console.log(this.props.categoryOptions);
 
         return (
             <Select
@@ -40,4 +39,4 @@ class Categories extends React.Component {
     }
 }
 
-export default Categories;
+export default AddCategories;

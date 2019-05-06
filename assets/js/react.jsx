@@ -33,7 +33,6 @@ if (typeof usingReactApp !== "undefined") {
             floatContainers.forEach((element) => {
                 const value = element.querySelector('input, textarea, select').value;
                 bindEvents(element);
-
                 if (value) {
                     callEvents(element);
                 }
