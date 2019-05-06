@@ -14,6 +14,7 @@ class AdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('email')
             ->add('title')
             ->add('text', TextareaType::class)
             ->add('categories', null, ['multiple' => true])

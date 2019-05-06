@@ -71,6 +71,11 @@ class Advert
      */
     private $token;
 
+    /**
+     * @var string
+     */
+    private $email;
+
 
     /**
      * Advert constructor.
@@ -115,6 +120,26 @@ class Advert
     {
         return $this->text;
     }
+
+    /**
+     * @return string
+     */
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    /**
+     * @param string $email
+     * @return Advert
+     */
+    public function setEmail(string $email): ?self
+    {
+        $this->email = $email;
+        return $this;
+    }
+
+
 
     /**
      * @param string $text

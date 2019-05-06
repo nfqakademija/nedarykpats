@@ -1,8 +1,9 @@
 .Header {
-	padding-top: var(--spaceMedium);
-	padding-bottom: var(--spaceSmall);
-	border-bottom: 1px solid var(--colorLightGray);
-	margin-bottom: var(--spaceSmall);
+  padding-top: var(--spaceMedium);
+  padding-bottom: var(--spaceSmall);
+  border-bottom: 1px solid var(--colorLightGray);
+  margin-bottom: var(--spaceSmall);
+  word-break: break-all;
 }
 
 .Header--single {

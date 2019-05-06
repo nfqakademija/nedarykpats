@@ -8,16 +8,20 @@
         <div class="Content-Block">
 
             {{ form_start(advertForm, {'attr': {'class' : 'Form'}}) }}
-
-            {#TODO: sutvarkyti, jeigu user neegzistuoja#}
+            {#TODO: kai userio nera, erroras#}
             {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
                 <div class="Form-item">
-                    <label class="" for="floatField">El. paštas</label>
-                    <input class="" type="email" />
+                    {{ form_label(advertForm.email,'El. paštas') }}
+                    {{ form_widget(advertForm.email) }}
+                    <span class="Form-errors">
+                     {{ form_errors(advertForm.email) }}
+                    </span>
                 </div>
+             {% else %}
+                 <div class="Form-item" hidden>
+                     {{ form_widget(advertForm.email, {'value' : app.user.email}) }}
+                 </div>
             {% endif %}
-
-
 
             <div class="Form-item">
                 {{ form_label(advertForm.title,'Antraštė') }}
@@ -25,7 +29,6 @@
                 <span class="Form-errors">
                      {{ form_errors(advertForm.title) }}
                 </span>
-
             </div>
 
             <div class="Form-item">

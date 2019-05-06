@@ -6,6 +6,11 @@
 
     {% include 'components/intro.html.twig' %}
 
+    {#<div id="Alert"#}
+         {#data-alert-show=false#}
+         {#data-alert-title="Dar vienas žingsnis..."#}
+         {#data-alert-message="test">#}
+
     <div class="Content Content--GreyBg">
         <div class="Content-Block">
 
@@ -18,9 +23,6 @@
                         <section class="Ad u-visibility-parent">
                             <header class="Ad-header">
                                 <div > {{ advert.createdAt|date("Y-m-d") }}
-                                    {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
-                                        Šis skelbimas tavo!
-                                    {% endif %}
                                 </div>
                                 {% if advert.getOffersCount()  > 0 %}
                                 <div class="Bid">
@@ -45,6 +47,11 @@
                                     </ul>
                                 </footer>
                             </div>
+                            {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
+                                <div class="StatusBar">
+                                    Šis skelbimas tavo!
+                                </div>
+                            {% endif %}
                         </section>
                     {% endfor %}
                 </section>
