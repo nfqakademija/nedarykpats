@@ -64,6 +64,7 @@ class GoogleAuthenticator extends SocialAuthenticator
      * @param mixed $credentials
      * @param UserProviderInterface $userProvider
      * @return User|object|\Symfony\Component\Security\Core\User\UserInterface|null
+     * @throws \Exception
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
@@ -73,8 +74,9 @@ class GoogleAuthenticator extends SocialAuthenticator
 
         $email = $googleUser->getEmail();
 
-        $user = $this->em->getRepository('App:User')
+        $user = $this->em->getRepository(User::class)
             ->findOneBy(['email' => $email]);
+
         if (!$user) {
             $user = new User();
             $user->setEmail($googleUser->getEmail())
