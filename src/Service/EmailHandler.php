@@ -28,7 +28,6 @@ class EmailHandler
     public function sendSingleLoginEmail(string $recipient, string $hash)
     {
         $message = (new \Swift_Message('Prisijungimo nuoroda'))
-            ->setFrom('workchase.nfq@gmail.com')
             ->setTo($recipient)
             ->setBody(
                 $this->twigTemplating->render(
@@ -51,7 +50,6 @@ class EmailHandler
     public function sendRegistrationConfirmation(string $recipient, string $hash)
     {
         $message = (new \Swift_Message('Registracija sėkminga!'))
-            ->setFrom('workchase.nfq@gmail.com')
             ->setTo($recipient)
             ->setBody(
                 $this->twigTemplating->render(
@@ -74,7 +72,6 @@ class EmailHandler
     public function sendAdvertConfirmationWithSingleLoginUrl(string $recipient, string $hash)
     {
         $message = (new \Swift_Message('Patvirtinkite skelbimo patalpinimą'))
-            ->setFrom('workchase.nfq@gmail.com')
             ->setTo($recipient)
             ->setBody(
                 $this->twigTemplating->render(
@@ -97,7 +94,6 @@ class EmailHandler
     public function sendOfferConfirmationWithSingleLoginUrl(string $recipient, string $hash)
     {
         $message = (new \Swift_Message('Patvirtinkite pasiūlymo patalpinimą'))
-            ->setFrom('workchase.nfq@gmail.com')
             ->setTo($recipient)
             ->setBody(
                 $this->twigTemplating->render(
