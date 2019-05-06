@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Handler\SingleUseLoginHandler;
 use App\Service\RegistrationHandler;
 use App\Service\EmailHandler;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,13 +38,10 @@ class SecurityController extends AbstractController
      */
     public function loginExternal(
         Request $request,
-        RegistrationHandler $registrationHandler,
-        EmailHandler $emailService
+        SingleUseLoginHandler $singleUseLoginHandler
     ) {
         $recipient = $request->request->get('email');
-        $hash = $registrationHandler->createLoginHash($recipient);
-        $emailService->sendSingleLoginEmail($recipient, $hash);
-
+        $singleUseLoginHandler->handle($recipient);
         return $this->redirectToRoute('home');
     }
 
@@ -54,6 +52,7 @@ class SecurityController extends AbstractController
      * @param Token $token
      * @param TokenConsumerService $tokenConsumerService
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @throws \Exception
      */
     public function validateFromEmail(Token $token, TokenConsumerService $tokenConsumerService)
     {

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Handler\AdvertCreationHandler;
 use App\Entity\Advert;
 use App\Entity\Offer;
 use App\Form\AdvertType;
@@ -20,23 +21,16 @@ class AdvertController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function addNewAdvert(Request $request)
+    public function addNewAdvert(Request $request, AdvertCreationHandler $advertCreationHandler)
     {
         $advertForm = $this->createForm(AdvertType::class);
-
-        $user =  $this->getUser();
 
         $advertForm->handleRequest($request);
 
         if ($advertForm->isSubmitted() && $advertForm->isValid()) {
             $advert = $advertForm->getData();
 
-            $advert->setUser($user);
-            $advert->setIsConfirmed(true);
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($advert);
-            $entityManager->flush();
+            $advertCreationHandler->handle($advert);
 
             $this->addFlash('success', 'Uzklausa išsaugota');
 

@@ -6,7 +6,7 @@ use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Security\LoginAuthenticator;
 use App\Service\EmailHandler;
-use App\Service\RegistrationHandler;
+use App\Handler\RegistrationHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,10 +21,7 @@ class RegistrationController extends AbstractController
      * @Route("/register", name="app_register")
      * @param Request                      $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param GuardAuthenticatorHandler    $guardHandler
-     * @param LoginAuthenticator           $authenticator
      * @param RegistrationHandler          $registrationHandler
-     * @param EmailHandler                 $emailService
      *
      * @return Response
      * @throws \Exception
@@ -32,10 +29,7 @@ class RegistrationController extends AbstractController
     public function register(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        GuardAuthenticatorHandler $guardHandler,
-        LoginAuthenticator $authenticator,
-        RegistrationHandler $registrationHandler,
-        EmailHandler $emailService
+        RegistrationHandler $registrationHandler
     ): Response {
 
         $user = new User();
@@ -43,9 +37,10 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $this->setUserProperties($user, $passwordEncoder, $form);
 
-            $this->sendRegistrationEmail($registrationHandler, $emailService, $request);
+            $registrationHandler->handle($user);
 
             $this->addFlash(
                 'success',
@@ -59,7 +54,6 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form->createView(),
         ]);
     }
-
 
     /**
      * @param User $user
@@ -75,29 +69,8 @@ class RegistrationController extends AbstractController
                  $form->get('plainPassword')->getData()
              )
          );
-
+         $user->setRoles(['ROLE_USER']);
          $user->setIsConfirmed(false);
          $user->setCreatedAt(new \DateTime('now'));
-         $entityManager = $this->getDoctrine()->getManager();
-         $entityManager->persist($user);
-         $entityManager->flush();
-    }
-
-    /**
-     * @param RegistrationHandler $registrationHandler
-     * @param EmailHandler        $emailService
-     * @param Request             $request
-     *
-     * @throws \Exception
-     */
-    private function sendRegistrationEmail(
-        RegistrationHandler $registrationHandler,
-        EmailHandler $emailService,
-        Request $request
-    ) {
-        $form = $request->request->all();
-        $email = $form['registration_form']['email'];
-        $hash = $registrationHandler->createLoginHash($email);
-        $emailService->sendSingleLoginEmail($email, $hash);
     }
 }
