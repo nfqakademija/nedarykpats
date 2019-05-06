@@ -2,7 +2,6 @@
 namespace App\Handler;
 
 use App\Entity\Advert;
-use App\Service\EmailHandler;
 use App\Service\TokenGeneratorService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;

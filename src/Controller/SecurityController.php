@@ -3,8 +3,6 @@
 namespace App\Controller;
 
 use App\Handler\SingleUseLoginHandler;
-use App\Service\RegistrationHandler;
-use App\Service\EmailHandler;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

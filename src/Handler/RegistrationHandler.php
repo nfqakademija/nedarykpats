@@ -2,7 +2,6 @@
 namespace App\Handler;
 
 use App\Entity\User;
-use App\Service\EmailHandler;
 use App\Service\TokenGeneratorService;
 use Doctrine\ORM\EntityManagerInterface;
 
