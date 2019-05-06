@@ -34,7 +34,7 @@ class EmailHandler
                     'email_templates/confirmation_single_login.html.twig',
                     [
                         'email' => $recipient,
-                        'loginUrl' => 'http://127.0.0.1:8000/auth/'.$hash
+                        'loginUrl' => $hash
                     ]
                 ),
                 'text/html'
@@ -56,7 +56,7 @@ class EmailHandler
                     'email_templates/confirmation.html.twig',
                     [
                         'email' => $recipient,
-                        'loginUrl' => 'http://127.0.0.1:8000/auth/'.$hash
+                        'loginUrl' => $hash
                     ]
                 ),
                 'text/html'
@@ -78,7 +78,7 @@ class EmailHandler
                     'email_templates/confirmation_advert.html.twig',
                     [
                         'email' => $recipient,
-                        'loginUrl' => 'http://127.0.0.1:8000/auth/'.$hash
+                        'loginUrl' => $hash
                     ]
                 ),
                 'text/html'
@@ -100,7 +100,7 @@ class EmailHandler
                     'email_templates/confirmation_offer.html.twig',
                     [
                         'email' => $recipient,
-                        'loginUrl' => 'http://127.0.0.1:8000/auth/'.$hash
+                        'loginUrl' => $hash
                     ]
                 ),
                 'text/html'

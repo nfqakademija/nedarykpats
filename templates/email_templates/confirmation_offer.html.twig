@@ -6,7 +6,7 @@
 <body>
 
     <p>Sveiki, jūsų el.paštu {{ email }} buvo pateiktas siūlymas.</p>
-    <p>Patvirtinkite paspaudami šią nuorodą, kad norite jį paviešinti:  <a href="{{ loginUrl }}">Nuoroda</a></p>
+    <p>Patvirtinkite paspaudami šią nuorodą, kad norite jį paviešinti:  <a href="{{ absolute_url(path('login_with_hash', {'hash': loginUrl}))}}">Nuoroda</a></p>
 
 </body>
 </html>
