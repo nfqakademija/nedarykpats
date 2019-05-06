@@ -2,7 +2,6 @@
 namespace App\Handler;
 
 use App\Entity\User;
-use App\Service\EmailHandler;
 use App\Service\TokenGeneratorService;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -57,22 +56,11 @@ class SingleUseLoginHandler
      */
     public function handle(string $email)
     {
-        $user = $this->getUser($email);
+        $user = $this->userCreationHandler->getUser($email);
         if (!$user) {
-            $this->userCreationHandler->createUser($email);
+            $user = $this->userCreationHandler->createUser($email);
         }
         $hash = $this->tokenGeneratorService->generate($email, new \DateTime('now'), $user, null, null);
         $this->emailHandler->sendSingleLoginEmail($email, $hash->getHash());
-    }
-
-    /**
-     * @param string $email
-     * @return User
-     */
-    private function getUser(string $email) : User
-    {
-        $userRepository = $this->entityManager->getRepository(User::class);
-        $user = $userRepository->findOneBy(['email' => $email]);
-        return $user;
     }
 }

@@ -73,10 +73,12 @@ class User implements UserInterface
 
     /**
      * User constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
         $this->adverts = new ArrayCollection();
+        $this->createdAt = new \DateTime('now');
     }
 
     /**

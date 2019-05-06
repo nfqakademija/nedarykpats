@@ -71,20 +71,16 @@ class Advert
      */
     private $token;
 
-    /**
-     * @var string
-     */
-    private $email;
-
 
     /**
      * Advert constructor.
+     * @throws \Exception
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
         $this->offers = new ArrayCollection();
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new \DateTime('now');
     }
 
     /**
@@ -120,26 +116,6 @@ class Advert
     {
         return $this->text;
     }
-
-    /**
-     * @return string
-     */
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     * @return Advert
-     */
-    public function setEmail(string $email): ?self
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-
 
     /**
      * @param string $text
@@ -187,6 +163,16 @@ class Advert
             $this->categories[] = $category;
         }
 
+        return $this;
+    }
+
+    /**
+     * @param ArrayCollection $categories
+     * @return Advert
+     */
+    public function setCategories(ArrayCollection $categories): self
+    {
+        $this->categories = $categories;
         return $this;
     }
 

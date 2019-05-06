@@ -1,8 +1,9 @@
 <?php
 namespace App\Handler;
 
+use App\DTO\AdvertFormDTO;
 use App\Entity\Advert;
-use App\Service\EmailHandler;
+use App\Entity\User;
 use App\Service\TokenGeneratorService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -35,30 +36,45 @@ class AdvertCreationHandler
     }
 
     /**
-     * TODO: AdvertFormDTO (first form must be checked)
-     * @param Advert $advert
+     * @param AdvertFormDTO $advertFormDTO
+     * @return Advert
      * @throws \Exception
      */
-    public function handle(Advert $advert)
+    public function handle(AdvertFormDTO $advertFormDTO)
     {
         $user = $this->tokenStorage->getToken()->getUser();
         $advertConfirmed = true;
 
-        if (!$user) {
-            $user = $this->userCreationHandler->createUser('test@test.lt');
+
+        if (!$user instanceof User) {
+            $user = $this->userCreationHandler->getUser($advertFormDTO->getEmail());
             $advertConfirmed = false;
         }
+        if (!$user instanceof User) {
+            $user = $this->userCreationHandler->createUser($advertFormDTO->getEmail());
+        }
 
-        //TODO: When AdvertFormDTO used advert must be created here. Now email is only set here.
-        $advert->setUser($user);
-        $advert->setIsConfirmed($advertConfirmed);
+        $advert = new Advert();
+        $advert->setTitle($advertFormDTO->getTitle())
+            ->setText($advertFormDTO->getText())
+            ->setCategories($advertFormDTO->getCategories())
+            ->setUser($user)
+            ->setIsConfirmed($advertConfirmed);
 
         $this->entityManager->persist($advert);
         $this->entityManager->flush();
 
         if (!$advertConfirmed) {
-            $hash = $this->tokenGeneratorService->generate('email', new \DateTime('now'), $user, $advert, null);
-            $this->emailHandler->sendAdvertConfirmationWithSingleLoginUrl('email', $hash->getHash());
+            $hash = $this->tokenGeneratorService->generate(
+                $advertFormDTO->getEmail(),
+                new \DateTime('now'),
+                $user,
+                $advert,
+                null
+            );
+            $this->emailHandler->sendAdvertConfirmationWithSingleLoginUrl($advertFormDTO->getEmail(), $hash->getHash());
         }
+
+        return $advert;
     }
 }
