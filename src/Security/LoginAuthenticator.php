@@ -101,7 +101,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         $user = $this->entityManager->getRepository(User::class)
-            ->findOneBy(['email' => $credentials['email'], 'isConfirmed' => true]);
+            ->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
             // fail authentication with a custom error
