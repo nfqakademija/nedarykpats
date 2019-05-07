@@ -11,16 +11,39 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class AdvertCreationHandler
 {
 
+    /**
+     * @var TokenStorageInterface
+     */
     private $tokenStorage;
 
+    /**
+     * @var UserCreationHandler
+     */
     private $userCreationHandler;
 
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * @var EmailHandler
+     */
     private $emailHandler;
 
+    /**
+     * @var TokenGeneratorService
+     */
     private $tokenGeneratorService;
 
+    /**
+     * AdvertCreationHandler constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param TokenStorageInterface $tokenStorage
+     * @param UserCreationHandler $userCreationHandler
+     * @param EmailHandler $emailHandler
+     * @param TokenGeneratorService $tokenGeneratorService
+     */
     public function __construct(
         EntityManagerInterface $entityManager,
         TokenStorageInterface $tokenStorage,
