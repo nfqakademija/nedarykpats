@@ -6,7 +6,10 @@ use App\Entity\Offer;
 use App\Entity\Token;
 use App\Entity\User;
 use App\Repository\TokenRepository;
+use App\Security\LoginAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 
 class TokenConsumerService
 {
@@ -20,31 +23,51 @@ class TokenConsumerService
      */
     private $tokenRepository;
 
+    private $authenticator;
+
+    private $guardHandler;
+
+    private $request;
 
     /**
      * TokenConsumerService constructor.
      * @param EntityManagerInterface $entityManager
      * @param TokenRepository $tokenRepository
+     * @param LoginAuthenticator $authenticator
+     * @param GuardAuthenticatorHandler $guardHandler
      */
-    public function __construct(EntityManagerInterface $entityManager, TokenRepository $tokenRepository)
-    {
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        TokenRepository $tokenRepository,
+        LoginAuthenticator $authenticator,
+        GuardAuthenticatorHandler $guardHandler
+    ) {
         $this->entityManager = $entityManager;
         $this->tokenRepository = $tokenRepository;
+        $this->guardHandler = $guardHandler;
+        $this->authenticator = $authenticator;
     }
 
     /**
      * @param Token $token
+     * @param Request $request
      * @return array
      */
-    public function consume(Token $token): array
+    public function consume(Token $token, Request $request): array
     {
         $entity = $this->tokenRepository->findOneBy(['hash' => $token->getHash()]);
 
-        if ($entity->getUser()) {
-            $this->confirmUser($entity);
-            $this->expireToken($token);
-            return ['EntityConfirmed' => 'User'];
-        } elseif ($entity->getAdvert()) {
+        $this->confirmUser($entity);
+        $this->expireToken($token);
+
+         $this->guardHandler->authenticateUserAndHandleSuccess(
+             $token->getUser(),
+             $request,
+             $this->authenticator,
+             'main'
+         );
+
+        if ($entity->getAdvert()) {
             $this->confirmAdvert($entity);
             $this->expireToken($token);
             return ['EntityConfirmed' => 'Advert', 'id' => $entity->getAdvert()->getId()];
@@ -54,6 +77,7 @@ class TokenConsumerService
             $advertId = $entity->getOffer()->getAdvert()->getId();
             return ['EntityConfirmed' => 'Offer', 'advertId' => $advertId];
         }
+        return ['EntityConfirmed' => 'User'];
     }
 
 

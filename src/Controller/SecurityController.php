@@ -56,17 +56,18 @@ class SecurityController extends AbstractController
      * @ParamConverter("token", class="App:Token")
      * @param Token $token
      * @param TokenConsumerService $tokenConsumerService
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
      */
-    public function validateFromEmail(Token $token, TokenConsumerService $tokenConsumerService)
+    public function validateFromEmail(Token $token, TokenConsumerService $tokenConsumerService, Request $request)
     {
         if ($tokenConsumerService->checkIfExpired($token)) {
             $this->addFlash('fail', 'Nuoroda nebegalioja.');
             return $this->redirectToRoute('home');
         }
 
-        $result = $tokenConsumerService->consume($token);
+        $result = $tokenConsumerService->consume($token, $request);
 
         switch ($result['EntityConfirmed']) {
             case 'User':
