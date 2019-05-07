@@ -4,10 +4,8 @@ namespace App\Controller;
 
 use App\Form\RegistrationFormType;
 use App\Handler\SingleUseLoginHandler;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -21,6 +19,8 @@ class SecurityController extends AbstractController
 {
     /**
      * @Route("/login", name="login")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
