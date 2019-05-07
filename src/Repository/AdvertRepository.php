@@ -22,7 +22,12 @@ class AdvertRepository extends ServiceEntityRepository
         parent::__construct($registry, Advert::class);
     }
 
-    // TODO: add annotations!!!
+    /**
+     * @param Filters $filters
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return Paginator
+     */
     public function findByCategories(Filters $filters, int $page, int $itemsPerPage)
     {
         $query = $this->createQueryBuilder('a')
@@ -31,14 +36,23 @@ class AdvertRepository extends ServiceEntityRepository
             $query
                 ->innerJoin('a.categories', 'c')
                 ->where($query->expr()->in('c.slug', $filters->getKeywords()));
+            ;
         }
+
+        $query->orderBy('a.createdAt', 'DESC');
 
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
 
         return $paginator;
     }
 
-    // TODO: add annotations!!!
+    /**
+     * @param User $user
+     * @param Filters $filters
+     * @param int $page
+     * @param int $itemsPerPage
+     * @return Paginator
+     */
     public function findMyAdvertsByCategories(User $user, Filters $filters, int $page, int $itemsPerPage)
     {
         $query = $this->createQueryBuilder('a')
@@ -51,6 +65,8 @@ class AdvertRepository extends ServiceEntityRepository
                 ->innerJoin('a.categories', 'c')
                 ->andWhere($query->expr()->in('c.slug', $filters->getKeywords()));
         }
+
+        $query->orderBy('a.createdAt', 'DESC');
 
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
 
