@@ -31,7 +31,12 @@ class AdvertController extends AbstractController
         if ($advertForm->isSubmitted() && $advertForm->isValid()) {
             $advertFormDTO = $advertForm->getData();
             $advert = $advertCreationHandler->handle($advertFormDTO);
-            $this->addFlash('success', 'Uzklausa išsaugota');
+
+            if ($advert->isConfirmed()) {
+                $this->addFlash('success', 'Uzklausa išsaugota');
+            } else {
+                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas');
+            }
 
             return $this->redirect('/advert/'. $advert->getid());
         }

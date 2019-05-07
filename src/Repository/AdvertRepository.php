@@ -31,11 +31,12 @@ class AdvertRepository extends ServiceEntityRepository
     public function findByCategories(Filters $filters, int $page, int $itemsPerPage)
     {
         $query = $this->createQueryBuilder('a')
-            ->addSelect('a');
+            ->addSelect('a')
+            ->where('a.isConfirmed = 1');
         if ($filters->getKeywords()) {
             $query
                 ->innerJoin('a.categories', 'c')
-                ->where($query->expr()->in('c.slug', $filters->getKeywords()));
+                ->andWhere($query->expr()->in('c.slug', $filters->getKeywords()));
             ;
         }
 
@@ -58,6 +59,7 @@ class AdvertRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('a')
             ->innerJoin('a.user', 'u')
             ->where('u.id = :userId')
+            ->andWhere('a.isConfirmed = 1')
             ->setParameter(':userId', $user->getId());
 
         if ($filters->getKeywords()) {

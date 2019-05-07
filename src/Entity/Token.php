@@ -24,7 +24,7 @@ class Token
     private $hash;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", inversedBy="token", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="token", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @var User
      */

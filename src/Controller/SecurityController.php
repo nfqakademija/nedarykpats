@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Form\RegistrationFormType;
 use App\Handler\SingleUseLoginHandler;
+use App\Security\LoginAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -47,6 +49,7 @@ class SecurityController extends AbstractController
     ) {
         $recipient = $request->request->get('email');
         $singleUseLoginHandler->handle($recipient);
+        $this->addFlash('success', 'Išsiųsta el.paštu nuoroda');
         return $this->redirectToRoute('home');
     }
 
@@ -57,35 +60,43 @@ class SecurityController extends AbstractController
      * @param Token $token
      * @param TokenConsumerService $tokenConsumerService
      * @param Request $request
+     * @param LoginAuthenticator $loginAuthenticator
+     * @param GuardAuthenticatorHandler $guardHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      * @throws \Exception
      */
-    public function validateFromEmail(Token $token, TokenConsumerService $tokenConsumerService, Request $request)
-    {
+    public function validateFromEmail(
+        Token $token,
+        TokenConsumerService $tokenConsumerService,
+        Request $request,
+        LoginAuthenticator $loginAuthenticator,
+        GuardAuthenticatorHandler $guardHandler
+    ) {
         if ($tokenConsumerService->checkIfExpired($token)) {
             $this->addFlash('fail', 'Nuoroda nebegalioja.');
             return $this->redirectToRoute('home');
         }
 
-        $result = $tokenConsumerService->consume($token, $request);
+        $result = $tokenConsumerService->consume($token);
 
-        switch ($result['EntityConfirmed']) {
-            case 'User':
-                $this->addFlash('success', 'Registracija sėkminga!');
-                return $this->redirectToRoute('home');
+        $guardHandler->authenticateUserAndHandleSuccess(
+            $token->getUser(),
+            $request,
+            $loginAuthenticator,
+            'main'
+        );
 
-            case 'Advert':
-                $this->addFlash('success', 'Skelbimas patalpintas sėkmingai');
-                return $this->redirectToRoute('/advert/'. $result['id']);
-
-            case 'Offer':
-                $this->addFlash('success', 'Siūlymas patalpintas sėkmingai');
-                return $this->redirectToRoute('/advert/'. $result['advertId']);
-
-            default:
-                $this->addFlash('fail', 'Atsiprašome, neteisinga nuoroda');
-                return $this->redirectToRoute('home');
+        if ($token->getAdvert()) {
+            $this->addFlash('success', 'Skelbimas patalpintas sėkmingai');
+            return $this->redirectToRoute('advert', ['id' => $token->getAdvert()->getId()]);
         }
+        if ($token->getOffer()) {
+            $this->addFlash('success', 'Siūlymas patalpintas sėkmingai');
+            return $this->redirectToRoute('/advert/'. $result['advertId']);
+        }
+
+        $this->addFlash('success', 'Prisijungimas sėkmingas!');
+        return $this->redirectToRoute('home');
     }
 
     /**
