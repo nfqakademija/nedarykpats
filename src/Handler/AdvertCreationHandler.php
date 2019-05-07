@@ -66,8 +66,6 @@ class AdvertCreationHandler
 
         if (!$advertConfirmed) {
             $hash = $this->tokenGeneratorService->generate(
-                $advertFormDTO->getEmail(),
-                new \DateTime('now'),
                 $user,
                 $advert,
                 null

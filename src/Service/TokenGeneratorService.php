@@ -24,26 +24,32 @@ class TokenGeneratorService
         $this->entityManager = $entityManager;
     }
 
+
     /**
-     * @param string $email
-     * @param \DateTime $createDate
      * @param User $user
      * @param Advert|null $advert
      * @param Offer|null $offer
      * @return Token
+     * @throws \Exception
      */
-    public function generate(string $email, \DateTime $createDate, User $user, ?Advert $advert, ?Offer $offer) : Token
+    public function generate( User $user, ?Advert $advert, ?Offer $offer): Token
     {
         $token = new Token();
+        $createDate = new \DateTime('now');
         $token
-            ->setHash($this->generateHash($email))
+            ->setHash(md5(microtime()))
             ->setCreatedAt($createDate)
             ->setExpiresAt($createDate->modify('+ 2 hours'))
             ->setExpired(false)
             ->setUser($user);
 
-        $advert ? $token->setAdvert($advert) : null;
-        $offer ? $token->setOffer($offer) : null;
+        if ($advert) {
+            $token->setAdvert($advert);
+        }
+
+        if ($offer) {
+            $token->setOffer($offer);
+        }
 
         $this->entityManager->persist($token);
         $this->entityManager->flush();
@@ -51,16 +57,4 @@ class TokenGeneratorService
         return $token;
     }
 
-    /**
-     * @param string $email
-     * @return string
-     */
-    private function generateHash(string $email) :string
-    {
-        $random_prefix = rand();
-        $random_suffix = rand();
-        $hash = md5($random_prefix.$email.$random_suffix);
-
-        return $hash;
-    }
 }
