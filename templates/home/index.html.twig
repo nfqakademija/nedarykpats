@@ -22,15 +22,27 @@
 
                         <section class="Ad u-visibility-parent">
                             <header class="Ad-header">
-                                <div > {{ advert.createdAt|date("Y-m-d") }}
-                                </div>
-                                {% if advert.getOffersCount()  > 0 %}
+                                <div> {{ advert.createdAt|date("Y-m-d") }} </div>
+
                                 <div class="Bid">
+                                {% if advert.getOffersCount()  > 0 %}
                                     <span class="Bid-header">Aplikavo</span>
                                     <span class="Bid-count">{{ advert.getOffersCount() }}</span>
-                                </div>
+                                 {% else %}
+                                     <span class="Bid-header">&#8203;</span>
+                                     <span class="Bid-count">&#8203;</span>
                                 {% endif %}
+                                </div>
                             </header>
+
+                            <div class="Bid-header u-margin-top">
+                                {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
+                                    Šis skelbimas tavo!
+                                {% else %}
+                                    &#8203;
+                                {% endif %}
+                            </div>
+
                             <h3 class="Header">{{ advert.title }}</h3>
                             <div class="Ad-body">
                                 <div class="Ad-text Ad-text--top">
@@ -47,11 +59,6 @@
                                     </ul>
                                 </footer>
                             </div>
-                            {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
-                                <div class="StatusBar">
-                                    Šis skelbimas tavo!
-                                </div>
-                            {% endif %}
                         </section>
                     {% endfor %}
                 </section>
