@@ -1,8 +1,24 @@
 const email = document.querySelector('#registration_form_email');
+const emailLogin = document.querySelector('#inputEmail');
+
+const password = document.querySelector('#registration_form_plainPassword');
+const passwordLogin = document.querySelector('#inputPassword');
 
 if (email) {
-    let password = document.querySelector('#registration_form_plainPassword'),
-        mySVG = document.querySelector('.avatarContainer'),
+    animateAvatar(email, password);
+}
+
+if (emailLogin) {
+    animateAvatar(emailLogin, passwordLogin);
+}
+
+//------------------------------
+//-----Avatar animation---------
+//------------------------------
+
+function animateAvatar(email, password) {
+
+    let mySVG = document.querySelector('.avatarContainer'),
         armL = document.querySelector('.armL'),
         armR = document.querySelector('.armR'),
         eyeL = document.querySelector('.eyeL'),
@@ -130,9 +146,6 @@ if (email) {
     const coverEyes = () => {
         TweenMax.to(armL, .45, {x: 0, y: 2, rotation: 0});
         TweenMax.to(armR, .45, {x: 0, y: 2, rotation: 0, ease: Quad.easeOut});
-        // TweenMax.to(armL, .45, {x: 0, y: 2, rotation: 0, ease: Quad.easeOut});
-        // TweenMax.to(armR, .45, {x: 0, y: 2, rotation: 0, ease: Quad.easeOut});
-        // TweenMax.to(armR, .45, {x: 0, y: 2, rotation: 0, ease: Quad.easeOut, delay: .1});
     };
 
     const uncoverEyes = () => {
@@ -160,7 +173,6 @@ if (email) {
 
         while (el) {
             if (el.tagName == "BODY") {
-                // deal with browser quirks with body/window/document and page scroll
                 var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
                 var yScroll = el.scrollTop || document.documentElement.scrollTop;
 
