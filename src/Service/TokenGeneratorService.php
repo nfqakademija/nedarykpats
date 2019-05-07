@@ -32,7 +32,7 @@ class TokenGeneratorService
      * @return Token
      * @throws \Exception
      */
-    public function generate( User $user, ?Advert $advert, ?Offer $offer): Token
+    public function generate(User $user, ?Advert $advert, ?Offer $offer): Token
     {
         $token = new Token();
         $createDate = new \DateTime('now');
@@ -56,5 +56,4 @@ class TokenGeneratorService
 
         return $token;
     }
-
 }
