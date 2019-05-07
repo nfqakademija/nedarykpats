@@ -1,37 +1,71 @@
 import React from 'react';
 import Select from 'react-select';
 
-const options = [
-    { value: '1', label: 'Statybos' },
-    { value: '2', label: 'Remontas' },
-    { value: '3', label: 'Lauko darbai' },
-    { value: '4', label: 'Vidaus darbai' },
-    { value: '5', label: 'Kiti darbai' },
-    { value: '6', label: 'Santechnika' },
-    { value: '7', label: 'Vidaus darbai' }
-];
-
 class AddCategories extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             selectedOption: null,
+            categories: [],
+            dom: document.getElementById(this.props.originalInputId),
         };
+
+        this.getValuesFromFile();
     }
 
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
     };
 
+    getValuesFromFile = () => {
+        const dom = this.state.dom;
+
+        for (let i = 0; i < dom.length; i++) {
+            this.state.categories.push(
+                {
+                    value: dom[i].value,
+                    label: dom[i].text
+                }
+            );
+        }
+        return this.state.categories;
+    };
+
+    removeSelectedValues = (array) => {
+        return array.forEach(function (label, index) {
+            array[index].removeAttribute('selected');
+        });
+    };
+
+    addSelectedValues = (array, selected) => {
+        return array.forEach(function (label, index) {
+            if (array[index].text === selected) {
+                array[index].setAttribute('selected', true);
+            }
+        });
+    };
+
+    updateSelectedValues = () => {
+        const selected = this.state.selectedOption || 0;
+        const domOptions = this.state.dom.querySelectorAll('option');
+
+        this.removeSelectedValues(domOptions);
+
+        for (let i = 0; i < selected.length; i++) {
+            this.addSelectedValues(domOptions, selected[i].label);
+        }
+    };
+
     render() {
         const { selectedOption } = this.state;
+        this.updateSelectedValues();
 
         return (
             <Select
                 value={selectedOption}
                 onChange={this.handleChange}
-                options={options}
+                options={this.state.categories}
                 isMulti
                 isSearchable
             />

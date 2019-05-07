@@ -5,55 +5,62 @@
 {% block body %}
 
     <div class="Content Content--top Content--GreyBg ">
+
         <div class="Content-Block">
 
-            {{ form_start(advertForm, {'attr': {'class' : 'Form'}}) }}
-            {#TODO: kai userio nera, erroras#}
-            {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
+            {{ form_start(advertForm, {'attr': {'class' : 'Form Form--column'}}) }}
+
+            <div class="Form-image">
+                <img alt="create_form" src="/img/image_form.png" />
+            </div>
+
+            <div class="Form-content">
+                {#TODO: kai userio nera, erroras#}
+                {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
+                    <div class="Form-item">
+                        {{ form_label(advertForm.email,'El. paštas') }}
+                        {{ form_widget(advertForm.email) }}
+                        <span class="Form-errors">
+                         {{ form_errors(advertForm.email) }}
+                        </span>
+                    </div>
+                 {% else %}
+                     <div class="Form-item" hidden>
+                         {{ form_widget(advertForm.email, {'value' : app.user.email}) }}
+                     </div>
+                {% endif %}
+
                 <div class="Form-item">
-                    {{ form_label(advertForm.email,'El. paštas') }}
-                    {{ form_widget(advertForm.email) }}
+                    {{ form_label(advertForm.title,'Antraštė') }}
+                    {{ form_widget(advertForm.title) }}
                     <span class="Form-errors">
-                     {{ form_errors(advertForm.email) }}
+                         {{ form_errors(advertForm.title) }}
                     </span>
                 </div>
-             {% else %}
-                 <div class="Form-item" hidden>
-                     {{ form_widget(advertForm.email, {'value' : app.user.email}) }}
-                 </div>
-            {% endif %}
 
-            <div class="Form-item">
-                {{ form_label(advertForm.title,'Antraštė') }}
-                {{ form_widget(advertForm.title) }}
-                <span class="Form-errors">
-                     {{ form_errors(advertForm.title) }}
-                </span>
+                <div class="Form-item">
+                    {{ form_label(advertForm.text, 'Skelbimo tekstas') }}
+                    {{ form_widget(advertForm.text, {'attr': {'rows': '10'} }) }}
+                    <span class="Form-errors">
+                         {{ form_errors(advertForm.text) }}
+                    </span>
+                </div>
+
+                {{ form_widget(advertForm.text, {'attr': {'class': 'u-no-margin-top'}}) }}
+
+                <span id="CategoriesTitle" class="Form-label">Pasirinkite kategorijas</span>
+
+                <div id="AdvertCategories"
+                     data-original-input-id="advert_categories"
+                ></div>
+
+
+                <div class="Form-item" hidden>
+                    {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top', 'id': 'advert_categories'}}) }}
+                </div>
+
+                {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
             </div>
-
-            <div class="Form-item">
-                {{ form_label(advertForm.text, 'Skelbimo tekstas') }}
-                {{ form_widget(advertForm.text, {'attr': {'rows': '10'} }) }}
-                <span class="Form-errors">
-                     {{ form_errors(advertForm.text) }}
-                </span>
-            </div>
-
-            {{ form_widget(advertForm.text, {'attr': {'class': 'u-no-margin-top'}}) }}
-
-            <span id="CategoriesTitle" class="Form-label">Pasirinkite kategorijas</span>
-
-            <div id="AdvertCategories"
-                 data-category-options="test"
-            ></div>
-
-
-            <div class="Form-item">
-                {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top'}}) }}
-            </div>
-
-            {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
-
             {{ form_end(advertForm) }}
 
         </div>
