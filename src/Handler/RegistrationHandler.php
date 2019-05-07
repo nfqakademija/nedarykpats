@@ -52,7 +52,7 @@ class RegistrationHandler
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-        $hash = $this->tokenGeneratorService->generate($user->getEmail(), new \DateTime('now'), $user, null, null);
+        $hash = $this->tokenGeneratorService->generate($user, null, null);
         $this->emailHandler->sendRegistrationConfirmation($user->getEmail(), $hash->getHash());
     }
 }

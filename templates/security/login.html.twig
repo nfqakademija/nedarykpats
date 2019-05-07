@@ -48,11 +48,11 @@
                     <div class="Form-item">
                         <label for="floatField">El. paštas</label>
                         <input type="email" value="" name="email" id="inputEmail2" required />
-                        <span class="Form-errors">
-                         {% if error %}
-                             <span class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-                         {% endif %}
-                            </span>
+{#                        <span class="Form-errors">#}
+{#                         {% if error %}#}
+{#                             <span class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>#}
+{#                         {% endif %}#}
+{#                            </span>#}
                     </div>
                     <button class="Button Button--blue Button--long" type="submit">
                         Prisijungti
