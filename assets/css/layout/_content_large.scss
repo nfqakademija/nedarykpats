@@ -1,0 +1,15 @@
+.Content {
+  
+  &-Fixed {
+    position: absolute;
+    width: 100%;
+  }
+  
+  &--top {
+    padding-top: 160px;
+  }
+}
+
+.Content-Block {
+  width: 1100px;
+}

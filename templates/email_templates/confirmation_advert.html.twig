@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+    <p>Sveiki, jūsų el.paštu {{ email }} buvo pateiktas skelbimas.</p>
+    <p>Patvirtinkite paspaudami šią nuorodą, kad norite jį paviešinti:  <a href="{{ absolute_url(path('login_with_hash', {'hash': loginUrl}))}}">Nuoroda</a></p>
+
+</body>
+</html>

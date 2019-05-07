@@ -1,12 +1,55 @@
-
-// the ~ allows you to reference things in node_modules
-//@import "~bootstrap/scss/bootstrap";
-
 @import "helpers/reset";
 @import "helpers/variables";
+@import "helpers/mixins";
 @import "helpers/utilities";
-
 @import "base/base";
 
-@import "components/filter";
+@import "layout/content";
+@import "components/filterBar";
+@import "components/ads";
 @import "components/ad";
+@import "components/header";
+@import "components/date";
+@import "components/bid";
+@import "components/category";
+@import "components/button";
+@import "components/pagination";
+@import "components/comments";
+@import "components/selectedAd";
+@import "components/statusBlock";
+@import "components/replayBlock";
+@import "components/sectionBlock";
+@import "components/alert";
+@import "components/form";
+@import "layout/header";
+@import "components/message";
+@import "components/avatarContainer";
+@import "layout/components";
+@import "components/statusBar";
+@import "components/switch";
+
+
+@media (min-width: 600px) {
+  @import "layout/content_medium";
+  @import "components/ads_medium";
+  @import "components/ad_medium";
+  @import "components/pagination_medium";
+  @import "components/comments_medium";
+  @import "components/selectedAd_medium";
+  @import "components/statusBlock_medium";
+  @import "components/sectionBlock_medium";
+  @import "components/form_medium";
+  @import "layout/header_medium";
+}
+
+@media (min-width: 1200px) {
+  @import "layout/content_large";
+  @import "components/ads_large";
+  @import "components/pagination_large";
+  @import "components/comments_large";
+  @import "components/selectedAd_large";
+  @import "components/statusBlock_large";
+  @import "components/sectionBlock_large";
+  @import "components/form_large";
+  @import "layout/header_large";
+}

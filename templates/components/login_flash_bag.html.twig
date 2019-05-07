@@ -1,0 +1,20 @@
+
+{% if app.session.flashBag.has('success') %}
+<div class=" " >
+        <span class="Alert-icon">
+            <img src="/img/success.svg" alt="success">
+               {% for msg in app.session.flashBag.get('success') %}
+                   {{ msg }}
+               {% endfor %}
+        </span>
+</div>
+{% elseif app.session.flashBag.has('fail') %}
+<div class=" ">
+        <span class="Alert-icon">
+            <img src="/img/fail.svg" alt="fail">
+               {% for msg in app.session.flashBag.get('fail') %}
+                   {{ msg }}
+               {% endfor %}
+        </span>
+</div>
+{% endif %}

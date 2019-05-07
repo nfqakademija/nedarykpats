@@ -1,0 +1,18 @@
+.SectionBlock{
+  align-items: center;
+  
+  &-content {
+	width: auto;
+	order: 2;
+  }
+  &-img {
+	display: block;
+	order: 1;
+	width: 100%;
+	text-align: center;
+ 
+	img {
+	  width: 80%;
+	}
+  }
+}

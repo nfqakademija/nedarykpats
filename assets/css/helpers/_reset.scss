@@ -39,3 +39,23 @@ button {
   border: 0;
   padding: 0;
 }
+
+textarea:hover,
+input:not([type='checkbox']):hover,
+textarea:active,
+input:not([type='checkbox']):active,
+textarea:focus,
+input:not([type='checkbox']):focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active {
+  outline: 0px !important;
+  -webkit-appearance:none;
+}
+
+textarea {
+  resize: none;
+}

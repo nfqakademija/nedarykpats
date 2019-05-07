@@ -1,35 +1,57 @@
+.u-display-none {
+  display: none;
+}
 .u-color-orange {
   background-color: var(--colorOrange);
 }
 
-.u-color-red {
-  background-color: var(--colorRed);
+.u-align-center {
+  display: flex;
+  justify-content: center;
 }
 
-.u-color-green {
-  background-color: var(--colorGreen);
+.u-text-center {
+  text-align: center;
 }
 
-.u-color-light-green {
-  background-color: var(--colorLightGreen);
+.u-display-flex {
+  display: flex;
 }
 
-.u-color-light-blue {
-  background-color: var(--colorLightBlue);
+.u-display-right {
+  display: flex;
+  justify-content: flex-end;
 }
 
-.u-color-dark-blue {
-  background-color: var(--colorDarkBlue);
+.u-height-full {
+  min-height: 80%;
 }
 
-.u-color-blue {
-  background-color: var(--colorBlue);
+.u-margin-top-bottom {
+  margin-bottom: var(--spaceMedium);
+  margin-top: var(--spaceLarge);
 }
 
-.u-color-purple {
-  background-color: var(--colorPurple);
+.u-margin-bottom{
+  margin-bottom: var(--spaceMedium);
 }
 
-.u-color-yellow {
-  background-color: var(--colorYellow);
+.u-margin-top {
+  margin-top: var(--spaceMedium);
+}
+
+.u-no-margin-top {
+  margin-top: 0 !important;
+}
+
+.u-visibility-parent {
+  
+  .u-visibility-flex-child {
+    @include transitionAll;
+    opacity: 0.2;
+  }
+  
+  &:hover .u-visibility-flex-child {
+    opacity: 1;
+  }
 }

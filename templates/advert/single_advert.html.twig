@@ -1,0 +1,110 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="Content Content--top Content--GreyBg ">
+        <div class="Content-Block">
+
+            <div class="u-display-right">
+                <a class="Button" href="/#FilterBar">Atgal</a>
+            </div>
+
+            {#TODO: neskeminga zinute#}
+            {% if app.session.flashBag.has('success') %}
+                <div class="Alert Alert-success">
+                    <span class="Alert-icon">
+                        <img src="/img/success.svg" alt="success">
+                           {% for msg in app.session.flashBag.get('success') %}
+                            {{ msg }}
+                           {% endfor %}
+                    </span>
+                </div>
+            {% endif %}
+
+            <section class="SelectedAd">
+                <section class="SelectedAd-content">
+                    <header class="Ad-header">
+                        <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
+                        {% if advert.getOffersCount()  > 0 %}
+                            <div class="Bid">
+                                <span class="Bid-header">Aplikavo</span>
+                                <span class="Bid-count">{{ advert.getOffersCount() }}</span>
+                            </div>
+                        {% endif %}
+                    </header>
+                    <h3 class="Header Header--single">{{ advert.title }}</h3>
+                    <div class="Ad-body">
+                        <div>
+                            <p>{{ advert.text }}</p>
+                        </div>
+                    </div>
+                    <footer class="Ad-footer">
+                        <ul class="Ad-categories">
+                            {% for advertCategory in advert.categories  %}
+                                <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
+                            {% endfor %}
+                        </ul>
+                    </footer>
+                </section>
+
+                {#<section class="StatusBlock StatusBlock--hired">#}
+                    {#<img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">#}
+                    {#<p class="StatusBlock-title">Pasamdytas!</p>#}
+                {#</section>#}
+            </section>
+
+
+            {% if app.user != advert.user %}
+            {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
+                {% for offer in advert.offers %}
+                    {% if app.user.email == offer.email %}
+                    <section class="Comments">
+                        <section class="Comments-block">
+                            <div class="Comments-image">
+                                <img src="/img/user1.png" alt="user">
+                            </div>
+                            <div class="Comments-content">
+                                <div class="Comments-header">
+                                    <span class="Comments-author">{{ offer.email }}</span>
+                                    <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+                                </div>
+                                <div class="Comments-text">
+                                    <p>{{ offer.text }}</p>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% elseif(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
+                {% for offer in advert.offers %}
+                    <section class="Comments">
+                        <section class="Comments-block">
+                            <div class="Comments-image">
+                                <img src="/img/user1.png" alt="user">
+                            </div>
+                            <div class="Comments-content">
+                                <div class="Comments-header">
+                                    <span class="Comments-author">{{ offer.email }}</span>
+                                    <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+                                </div>
+                                <div class="Comments-text">
+                                    <p>{{ offer.text }}</p>
+                                </div>
+                            </div>
+                        </section>
+                    </section>
+                {% endfor %}
+            {% endif %}
+
+            {{ form_start(offerForm, {'attr': {'class' : 'ReplayBlock'}}) }}
+
+                {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
+                {{ form_row(offerForm.text, {'label': 'Skelbimo tekstas', 'attr' : { 'class' : 'ReplayBlock-content', 'placeholder' : "Parašyk žinutę su trumpa informacija apie save.", 'rows': "8" }}) }}
+                {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+
+            {{ form_end(offerForm) }}
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+.Content {
+  padding: var(--spaceMedium);
+  padding-top: 0;
+  
+  &--top {
+    min-height: var(--screen-height);
+  }
+  
+  &--GreyBg {
+    background:  var(--colorGray);
+    background: linear-gradient(0deg,  var(--colorGray) 73%,  var(--colorWhite) 73%);
+  }
+  
+  &-Block {
+    width: 100%;
+    margin: auto;
+  }
+}
+
+

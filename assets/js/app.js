@@ -1,14 +1,39 @@
-const $ = require('jquery');
-// this "modifies" the jquery module: adding behavior to it
-// the bootstrap module doesn't export/return anything
-require('bootstrap');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import AddCategories from './components/createForm/AddCategories.jsx';
+import AlertDialog from './components/dialogs/AlertDialog';
 
+require('bootstrap');
 require('../css/app.scss');
 
-// or you can include specific pieces
-// require('bootstrap/js/dist/tooltip');
-// require('bootstrap/js/dist/popover');
+const categories = document.getElementById('AdvertCategories');
+if (categories) {
+    try {
+        ReactDOM.render(
+        <AddCategories
+        {...(categories.dataset)}/>,
+        categories
+    );
+    } catch (error) {
+        console.error(error);
+    }
+}
 
-$(document).ready(function() {
-    $('[data-toggle="popover"]').popover();
-});
+//--Add style to component
+let categoryContainer = document.getElementsByClassName("css-1pcexqc-container");
+for(let i = 0; i < categoryContainer.length; i++) {
+    categoryContainer[i].className += " Form-select";
+};
+
+const alertDialog = document.getElementById("Alert");
+
+if (alertDialog) {
+    try {
+        ReactDOM.render(
+        <AlertDialog {...(alertDialog.dataset)}/>,
+        alertDialog
+    );
+    } catch (error) {
+        console.error(error);
+    }
+}

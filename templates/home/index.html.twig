@@ -1,42 +1,85 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Workchase {% endblock %}
+{% block body %}
 
-{% block ads %}
-    <section class="Ad u-color-yellow">
-        <header class="Ad-header">
-            <div class="Ad-date">2019-01-10</div>
-            <div class="Ad-bids">34</div>
-            <h3 class="Header">Tvoros dažymas</h3>
-        </header>
-        <div class="Ad-body">
-            <div>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-                <p>Reikalingas tvoros dažymas Vilniuje. Tvoramedinė.</p>
-            </div>
+    {% include 'components/login_flash_bag.html.twig' %}
 
-            <button class="Button">Plačiau</button>
-        </div>
-        <footer class="Ad-footer">
-            <img class="Ad-icon" src="" alt="">
-        </footer>
-    </section>
-{% endblock %}
+    {% include 'components/intro.html.twig' %}
 
-{% block filter %}
-    <section class="Filter">
-        <div class="Filter-item u-color-purple">
-            <span class="Filter-title">Remontas</span>
-            <span class="Filter-icon is-active">X</span>
+    {#<div id="Alert"#}
+         {#data-alert-show=false#}
+         {#data-alert-title="Dar vienas žingsnis..."#}
+         {#data-alert-message="test">#}
+
+    <div class="Content Content--GreyBg">
+        <div class="Content-Block">
+
+            {% include 'components/filter_bar.html.twig' with {'header': 'Visi skelbimai'} %}
+
+            {% block ads %}
+                <section id="Ads" class="Ads">
+                    {% for advert in filteredAdverts %}
+
+                        <section class="Ad u-visibility-parent">
+                            <header class="Ad-header">
+                                <div> {{ advert.createdAt|date("Y-m-d") }} </div>
+
+                                <div class="Bid">
+                                {% if advert.getOffersCount()  > 0 %}
+                                    <span class="Bid-header">Aplikavo</span>
+                                    <span class="Bid-count">{{ advert.getOffersCount() }}</span>
+                                 {% else %}
+                                     <span class="Bid-header">&#8203;</span>
+                                     <span class="Bid-count">&#8203;</span>
+                                {% endif %}
+                                </div>
+                            </header>
+
+                            <div class="Bid-header u-margin-top">
+                                {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
+                                    Šis skelbimas tavo!
+                                {% else %}
+                                    &#8203;
+                                {% endif %}
+                            </div>
+
+                            <h3 class="Header">{{ advert.title }}</h3>
+                            <div class="Ad-body">
+                                <div class="Ad-text Ad-text--top">
+                                    <p>{{ advert.text }}</p>
+                                </div>
+                                <div class="u-align-center u-visibility-flex-child">
+                                    <a class="Button Button--short u-margin-top-bottom" href={{ path('advert', {'id': advert.id }) }}>Plačiau</a>
+                                </div>
+                                <footer class="Ad-footer Ad-footer--bottom">
+                                    <ul class="Ad-categories">
+                                        {% for advertCategory in advert.categories  %}
+                                            <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </footer>
+                            </div>
+                        </section>
+                    {% endfor %}
+                </section>
+
+                {% if paginationPages > 1 %}
+                    <section>
+                        <ul class="Pagination u-align-center">
+
+                            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page - 1 }}#FilterBar" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
+
+                            {% for i in 1..paginationPages %}
+                                <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ i }}#FilterBar" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
+                            {% endfor %}
+
+                            <li><a href="?filter={{ selectedCategorySlugs|join(',') }}&page={{ page + 1 }}#FilterBar" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>
+                        </ul>
+                    </section>
+                {% endif %}
+
+            {% endblock %}
+
         </div>
-        <div class="Filter-item u-color-yellow">
-            <span class="Filter-title">Apdailos darbai</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-        <div class="Filter-item u-color-blue">
-            <span class="Filter-title">Baldai</span>
-            <span class="Filter-icon is-active">X</span>
-        </div>
-    </section>
+    </div>
 {% endblock %}

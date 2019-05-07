@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prisijungimas{% endblock %}
+
+{% block body %}
+<div class="Content Content--top Content--GreyBg ">
+    <div class="Content-Block u-align-center">
+
+        <form method="post" class="Form Form--short">
+
+            {{ form_start(registrationForm) }}
+
+            <div class="Form-avatar u-align-center u-margin-top-bottom">
+                {% include 'components/avatar.html.twig' %}
+            </div>
+
+            <h3 class="u-text-center u-margin-bottom">Registruotis</h3>
+
+            <div class="Form-item">
+                {{ form_label(registrationForm.email) }}
+                {{ form_widget(registrationForm.email, {'attr': {'type': 'text', 'pattern': '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'}}) }}
+                <span class="indicator"></span>
+                <span class="Form-errors">
+                     {{ form_errors(registrationForm.email) }}
+                </span>
+            </div>
+
+            <div class="Form-item">
+                {{ form_label(registrationForm.plainPassword) }}
+                {{ form_widget(registrationForm.plainPassword) }}
+                <span class="Form-errors">
+                     {{ form_errors(registrationForm.plainPassword) }}
+                </span>
+            </div>
+
+            <button class="Button Button--blue Button--long u-margin-top" type="submit">
+                Registruotis
+            </button>
+
+            <p class="Header4">Jau turi paskyrą? <a id="loginLink" href="{{ path('login') }}">Prisijunk!</a></p>
+
+            {{ form_end(registrationForm) }}
+        </form>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+    </div>
+</div>
+
+    <script>
+        var usingVersionedFileJs = true;
+        var usingReactApp = true;
+    </script>
+    {{ parent() }}
+
+{% endblock %}

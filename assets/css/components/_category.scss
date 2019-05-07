@@ -1,0 +1,75 @@
+.Category {
+  background-color: var(--colorBlack);
+  display: inline-block;
+  color: var(--colorWhite);
+  border-radius: var(--radiusMedium);
+  padding: var(--spaceTopBotTextSmall) var(--spaceLeftRightTexMedium);
+  text-transform: uppercase;
+  font-size: var(--fontSizeMedium);
+  letter-spacing: 0.3px;
+  margin-top: var(--spaceSmall);
+  margin-right: var(--spaceSmall);
+  
+  &--filter {
+	font-size: var(--fontSize);
+	border-width: var(--borderSmall);
+	border-style: solid;
+	li {
+	  display: inline-block;
+	  list-style: none;
+	}
+  }
+  
+  &--brown {
+	@include categoryColor(var(--colorBrown));
+  }
+  
+  &--lightBlue {
+	@include categoryColor(var(--colorLightBlue));
+  }
+  
+  &--red {
+	@include categoryColor(var(--colorRed));
+  }
+  
+  &--orange {
+	@include categoryColor(var(--colorOrange));
+  }
+  
+  &--red {
+	@include categoryColor(var(--colorRed));
+  }
+  
+  &--green {
+	@include categoryColor(var(--colorGreen));
+  }
+  
+  &--lightGreen {
+	@include categoryColor(var(--colorLightGreen));
+  }
+  
+  &--yellow {
+	@include categoryColor(var(--colorYellow));
+  }
+  
+  &--purple {
+	@include categoryColor(var(--colorPurple));
+  }
+  
+  &--blue {
+	@include categoryColor(var(--colorBlue));
+  }
+}
+
+.not-active {
+  background-color: var(--colorWhite);
+}
+
+
+.is-newCategory {
+  @include transitionAll();
+  opacity: 1;
+  -webkit-transition: opacity 1000ms linear;
+  transition: opacity 1000ms linear;
+  cursor: pointer;
+}

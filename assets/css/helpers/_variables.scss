@@ -1,7 +1,6 @@
 /**
  * Breakpoints
  */
-
 :root {
   --md-viewport: 640px;
   --lg-viewport: 960px;
@@ -11,32 +10,53 @@
  * Colors
  */
 :root {
+  --colorMain: #3f4af5;
   --colorOrange: #fcba02;
   --colorRed: #ec5b56;
   --colorGreen: #398175;
   --colorLightGreen: #4ac5b6;
-  --colorLightBlue: #a9d0d5;
+  --colorLightBlue: #9dd7e5;
   --colorDarkBlue: #475de4;
   --colorBlue: #3a83dc;
   --colorPurple: #7955e8;
-  --colorYellow: #f8dd6b;
+  --colorYellow: #f5cc22;
   --colorWhite: #ffffff;
   --colorBlack: #333333;
-
+  --colorBrown: #6b5869;
+  --colorGray: #f8f8ff;
+  --colorGrey: #4d4d4d;
+  --colorLightGray: #cccccc;
 }
 
 /**
  * Fonts
  */
 :root {
+  --fontSizeSmall: 10px;
+  --fontSizeMedium: 12px;
   --fontSize: 16px;
-  --fontFamily: sans-serif;
+  --fontSizeBig: 24px;
+  --fontSizeLarge: 40px;
+  --fontSizeLargeMinus: -25px;
+  --fontSizeHeader3: 24px;
+  --lineHeight: 22px;
+  --lineHeightForLines: 88px;
+  --lineHeightMedium: 26px;
+  --fontFamily: 'Ubuntu', sans-serif;
+}
+
+/**
+ * Fonts weight
+ */
+:root {
+  --bold: 600;
 }
 
 /**
  * Spacing
  */
 :root {
+  --spaceTiny: 5px;
   --spaceSmall: 10px;
   --spaceMedium: 25px;
   --spaceLarge: 50px;
@@ -46,24 +66,47 @@
  * Spacing around
  */
 :root {
-  --spaceTopBotTextSmall: 5px;
-  --spaceLeftRightTextSmall: 10px;
+  --spaceTopBotTextSmall: 7px;
+  --spaceLeftRightTextSmall: 14px;
+  --spaceTopBotTextMedium: 14px;
+  --spaceLeftRightTexMedium: 28px;
+  --spaceLeftRightTexBig: 52px;
 }
 
 /**
  * Border radius
  */
 :root {
-  --radiusSmall: 10px;
+  --radiusSmall: 20px;
   --radiusMedium: 30px;
+  --radiusMediumLarge: 40px;
   --radiusLarge: 50px;
+  --radiusFull: 100%;
 }
 
 /**
  * Border width
  */
 :root {
-  --widthSmall: 2px;
-  --widthMedium: 4px;
-  --widthLarge: 50px;
+  --borderxSmall: 1px;
+  --borderSmall: 2px;
+  --borderMedium: 4px;
+  --borderLarge: 50px;
+}
+
+/**
+ * Img size
+ */
+:root {
+  --imgSmall: 50px;
+  --imgMedium: 100px;
+}
+
+/**
+ * size
+ */
+:root {
+  --screen-height: 100vh;
+  --screen-width: 100vw;
+  --full-size: 100%;
 }

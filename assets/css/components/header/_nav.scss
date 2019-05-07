@@ -1,0 +1,128 @@
+.Nav {
+  
+  &-toggle {
+	display: inline-block;
+	position: absolute;
+	z-index: 10;
+	right: 15px;
+	top: 15px;
+	cursor: pointer;
+	border-radius: var(--radiusFull);
+	transition: background-color .15s linear;
+	
+	&:hover,
+	&:focus {
+	  background-color:rgba(0,0,0,.2);
+	}
+  }
+  
+  &-menu {
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: var(--screen-height);
+	position: relative;
+	z-index: 5;
+	visibility: hidden;
+  }
+  
+  &-item {
+	list-style-type: none;
+	opacity:0;
+	transition: all .3s cubic-bezier(0.000, 0.995, 0.990, 1.000) .3s;
+  }
+  @for $i from 1 through 5 {
+	&-item:nth-child(#{$i}){
+	  transform:translateY(-40px * $i);
+	}
+  }
+  
+  &-link {
+	color: var(--colorWhite);
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 3px;
+	font-size: 1.25rem;
+	text-decoration: none;
+	padding: var(--spaceTopBotTextMedium);
+	
+	&:hover,
+	&:focus {
+	  outline:0;
+	  background-color:rgba(0,0,0,0.2);
+	}
+  }
+}
+
+// ---------------------------
+// SVG Menu Icon
+// ---------------------------
+
+.menuicon {
+  display: block;
+  cursor: pointer;
+  color: var(--colorMain);
+  
+  transform:rotate(0deg);
+  transition: .3s cubic-bezier(0.165, 0.840, 0.440, 1.000);
+  
+  &__bar {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 3;
+	stroke-linecap: round;
+  }
+  &__bar {
+	transform: rotate(0deg);
+	transform-origin:50% 50%;
+	transition: transform .25s ease-in-out;
+  }
+}
+
+// ---------------------------
+// Active State
+// ---------------------------
+
+.Nav:target,
+.Nav--open {
+  
+  //scale the background circle to full size
+  > .Splash::after {
+	transform:scale(1);
+  }
+  
+  //animate the menu icon
+  .menuicon {
+	color: var(--colorWhite);
+	transform:rotate(180deg);
+	
+	&__circle {
+	  stroke-dashoffset:0;
+	}
+	&__bar:nth-child(1),
+	&__bar:nth-child(4) {
+	  opacity:0;
+	}
+	&__bar:nth-child(2) {
+	  transform: rotate(45deg);
+	}
+	&__bar:nth-child(3) {
+	  transform: rotate(-45deg);
+	}
+  }
+  
+  //show the nav items
+  .Nav {
+	&-menu {
+	  visibility:visible;
+	}
+	
+	&-item {
+	  opacity:1;
+	  transform:translateY(0);
+	}
+  }
+}
+

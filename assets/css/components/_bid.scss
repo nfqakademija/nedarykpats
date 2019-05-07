@@ -1,0 +1,15 @@
+.Bid {
+  display: flex;
+  flex-direction: column;
+  
+  &-header {
+	font-size: var(--fontSizeSmall);
+	text-transform: uppercase;
+  }
+  
+  &-count {
+	font-size: var(--fontSizeBig);
+	font-weight: 800;
+	text-align: center;
+  }
+}

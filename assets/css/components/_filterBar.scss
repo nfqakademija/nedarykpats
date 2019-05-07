@@ -1,0 +1,10 @@
+.FilterBar {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style-type: none;
+  
+  a {
+	text-decoration: none;
+  }
+}

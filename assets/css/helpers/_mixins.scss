@@ -1,0 +1,60 @@
+@mixin box-shadow() {
+  -webkit-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.36);
+  -moz-box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.36);
+  box-shadow: 0px 0px 19px -2px rgba(0,0,0,0.36);
+}
+
+@mixin categoryColor($color) {
+  border-color: $color;
+  background-color: $color;
+  &.not-active{
+    color: $color;
+  }
+}
+
+@mixin transitionAll(){
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+@mixin borderRadiusFull() {
+  -moz-border-radius: 100%;
+  -webkit-border-radius: 100%;
+  border-radius: 100%;
+}
+
+@mixin shadowBlockForm() {
+  @include box-shadow();
+  display: inline-block;
+  padding: var(--spaceMedium);
+  background-color: var(--colorWhite);
+  border-radius: var(--radiusSmall);
+  margin: var(--spaceSmall);
+}
+
+@mixin box-sizing-content-box() {
+  box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+
+@mixin button() {
+  border-radius: var(--radiusMedium);
+  padding: var(--spaceTopBotTextMedium) var(--spaceLeftRightTexBig);;
+  text-transform: uppercase;
+  font-size: var(--fontSizeMedium);
+  font-weight: var(--bold);
+  letter-spacing: 0.3px;
+  text-align: center;
+  text-decoration: none;
+  color: var(--colorBlack);
+  border: var(--borderSmall) solid var(--colorGrey);
+  background-color: var(--colorWhite);
+  
+  &:hover {
+    color: var(--colorWhite);
+    background-color: var(--colorGrey);
+  }
+}

@@ -1,0 +1,24 @@
+<section id="FilterBar">
+
+    {% if (header != '') %}
+        <h2>{{ header }}</h2>
+    {% endif %}
+
+    <ul class="FilterBar">
+        {% for category in availableCategories %}
+            <li>
+                <a class="Category Category--filter {{ category.cssStyle }} {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
+                   href="?filter={{ toggleQueryStrings[category.slug] }}#FilterBar">
+                    <span class="Filter-title">{{ category.title }}</span>
+                    <span class="Filter-icon">
+                    {% if category.slug not in selectedCategorySlugs %}
+                        <i class="fas fa-check"></i>
+                    {% else %}
+                        <i class="fas fa-times"></i>
+                    {% endif %}
+                </span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</section>

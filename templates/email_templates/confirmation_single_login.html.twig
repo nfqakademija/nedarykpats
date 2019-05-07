@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<p>Sveiki, jūsų el.paštu {{ email }} buvo pateikta prisijungimo užklausa</p>
+<p>Paspauskite šią nuorodą ir jūs būsite prijungti prie sistemos: <a href="{{ absolute_url(path('login_with_hash', {'hash': loginUrl}))}}">Nuoroda</a></p>
+
+</body>
+</html>

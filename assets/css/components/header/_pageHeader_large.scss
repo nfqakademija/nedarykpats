@@ -1,0 +1,23 @@
+.PageHeader {
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  
+  &-logo {
+    position: relative;
+    height: 60px;
+    margin: 0;
+  }
+  
+  &-item {
+    visibility: visible;
+    text-transform: uppercase;
+    padding-left: var(--spaceLarge);
+    letter-spacing: 0.3px;
+    a {
+      text-decoration: none;
+    }
+  }
+}
