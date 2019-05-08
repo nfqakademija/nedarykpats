@@ -33,9 +33,9 @@ class AdvertController extends AbstractController
             $advert = $advertCreationHandler->handle($advertFormDTO);
 
             if ($advert->isConfirmed()) {
-                $this->addFlash('success', 'Uzklausa išsaugota');
+                $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
             } else {
-                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas');
+                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas el. paštu');
             }
 
             return $this->redirect('/advert/'. $advert->getid());
@@ -79,7 +79,7 @@ class AdvertController extends AbstractController
             $entityManager->persist($offer);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Siūlymas išsaugotas');
+            $this->addFlash('success', 'Siūlymas išsaugotas sėkmingai');
 
             return $this->redirect($request->getUri());
         }

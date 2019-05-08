@@ -3,15 +3,12 @@
   padding-bottom: var(--spaceSmall);
   border-bottom: 1px solid var(--colorLightGray);
   margin-bottom: var(--spaceSmall);
-  word-break: break-all;
+  //word-break: break-all;
  
   &--single {
     border-bottom: none;
   }
 }
-
-
-
 
 .Header4{
   text-align: center;
