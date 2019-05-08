@@ -48,7 +48,7 @@ class SecurityController extends AbstractController
     ) {
         $recipient = $request->request->get('email');
         $singleUseLoginHandler->handle($recipient);
-        $this->addFlash('success', 'Išsiųsta el.paštu nuoroda');
+        $this->addFlash('success', 'Nuoroda išsiųsta el. paštu');
         return $this->redirectToRoute('home');
     }
 
@@ -86,15 +86,15 @@ class SecurityController extends AbstractController
         );
 
         if ($token->getAdvert()) {
-            $this->addFlash('success', 'Skelbimas patalpintas sėkmingai');
+            $this->addFlash('success', 'Sveikiname! Skelbimas patalpintas sėkmingai');
             return $this->redirectToRoute('advert', ['id' => $token->getAdvert()->getId()]);
         }
         if ($token->getOffer()) {
-            $this->addFlash('success', 'Siūlymas patalpintas sėkmingai');
+            $this->addFlash('success', 'Sveikiname! Siūlymas patalpintas sėkmingai');
             return $this->redirectToRoute('/advert/'. $result['advertId']);
         }
 
-        $this->addFlash('success', 'Prisijungimas sėkmingas!');
+        $this->addFlash('success', 'Svekiname prisijungus! Dabar galite kelti skelbimus, teikti pasiūymus.');
         return $this->redirectToRoute('home');
     }
 

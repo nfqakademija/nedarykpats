@@ -1,20 +1,29 @@
-
 {% if app.session.flashBag.has('success') %}
-<div class=" " >
-        <span class="Alert-icon">
-            <img src="/img/success.svg" alt="success">
-               {% for msg in app.session.flashBag.get('success') %}
-                   {{ msg }}
-               {% endfor %}
-        </span>
+<div class="Content Content--dialog">
+    <div class="Content-Block u-align-center">
+        <div class="Alert">
+                <span class="Alert-icon">
+                    <img src="/img/success.svg" alt="success">
+                       {% for msg in app.session.flashBag.get('success') %}
+                           {{ msg }}
+                       {% endfor %}
+                </span>
+        </div>
+    </div>
 </div>
+
 {% elseif app.session.flashBag.has('fail') %}
-<div class=" ">
-        <span class="Alert-icon">
-            <img src="/img/fail.svg" alt="fail">
-               {% for msg in app.session.flashBag.get('fail') %}
-                   {{ msg }}
-               {% endfor %}
-        </span>
-</div>
+        <div class="Content Content--dialog">
+            <div class="Content-Block u-align-center">
+                <div class="Alert">
+                        <span class="Alert-icon">
+                            <img src="/img/fail.svg" alt="fail">
+                               {% for msg in app.session.flashBag.get('fail') %}
+                                   {{ msg }}
+                               {% endfor %}
+                        </span>
+                </div>
+            </div>
+        </div>
 {% endif %}
+

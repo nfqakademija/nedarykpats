@@ -1,6 +1,13 @@
 .u-display-none {
   display: none;
 }
+
+.u-display-hidden {
+  visibility: hidden;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
 .u-color-orange {
   background-color: var(--colorOrange);
 }

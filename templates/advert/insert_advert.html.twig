@@ -11,10 +11,11 @@
             {{ form_start(advertForm, {'attr': {'class' : 'Form Form--column'}}) }}
 
             <div class="Form-image">
-                <img alt="create_form" src="/img/image_form.png" />
+                <img alt="create_form" src="/img/image_form-2.jpg" />
             </div>
 
             <div class="Form-content">
+                <h3 class="u-margin-top">Įkelti naują skelbimą</h3>
                 {#TODO: kai userio nera, erroras#}
                 {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
                     <div class="Form-item">
@@ -56,7 +57,7 @@
 
 
                 <div class="Form-item" hidden>
-                    {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top', 'id': 'advert_categories'}}) }}
+                    {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top u-display-hidden', 'id': 'advert_categories'}}) }}
                 </div>
 
                 {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
