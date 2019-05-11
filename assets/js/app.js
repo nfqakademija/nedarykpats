@@ -1,8 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AddCategories from './components/createForm/AddCategories.jsx';
-import AlertDialog from './components/dialogs/AlertDialog';
-import LayoutMasonry from './components/layout/LayoutMasonry';
 
 // require('bootstrap');
 require('../css/app.scss');
@@ -19,18 +17,16 @@ require('../css/app.scss');
 const categories = document.getElementById('AdvertCategories');
 if (categories) {
     try {
-        ReactDOM.render(
-        <AddCategories
-        {...(categories.dataset)}/>,
-        categories
-    );
+        ReactDOM.render(<AddCategories {...categories.dataset} />, categories);
     } catch (error) {
         console.error(error);
     }
 }
 
-//--Add style to component
-let categoryContainer = document.getElementsByClassName("css-1pcexqc-container");
-for(let i = 0; i < categoryContainer.length; i++) {
-    categoryContainer[i].className += " Form-select";
-};
+// --Add style to component
+const categoryContainer = document.getElementsByClassName(
+    'css-1pcexqc-container'
+);
+for (let i = 0; i < categoryContainer.length; i += 1) {
+    categoryContainer[i].className += ' Form-select';
+}

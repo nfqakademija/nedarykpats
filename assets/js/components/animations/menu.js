@@ -1,5 +1,5 @@
 //------------------------
-//-- Mobile navigation ---
+// -- Mobile navigation ---
 //------------------------
 const nav = document.querySelector('#nav');
 const menu = document.querySelector('#menu');
@@ -19,15 +19,15 @@ menuToggle.addEventListener('click', e => {
     animateSplash();
 });
 
-
 //----------------------------------------
-//-- Mobile form splash screen dalay -----
+// -- Mobile form splash screen dalay -----
 //----------------------------------------
 const item = document.querySelector('.Nav-link');
 item.addEventListener('click', e => {
-    const width = window.innerWidth
-        || document.documentElement.clientWidth
-        || document.body.clientWidth;
+    const width =
+        window.innerWidth ||
+        document.documentElement.clientWidth ||
+        document.body.clientWidth;
 
     if (width < 1200) {
         e.preventDefault();
@@ -35,20 +35,8 @@ item.addEventListener('click', e => {
         const goTo = item.getAttribute('href');
         animateSplash();
 
-        setTimeout(function () {
+        setTimeout(function() {
             window.location = goTo;
         }, 700);
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-

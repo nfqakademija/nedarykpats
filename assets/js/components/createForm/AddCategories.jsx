@@ -8,38 +8,36 @@ class AddCategories extends React.Component {
         this.state = {
             selectedOption: null,
             categories: [],
-            dom: document.getElementById(this.props.originalInputId),
+            dom: document.getElementById(this.props.originalInputId)
         };
 
         this.getValuesFromFile();
     }
 
-    handleChange = (selectedOption) => {
+    handleChange = selectedOption => {
         this.setState({ selectedOption });
     };
 
     getValuesFromFile = () => {
-        const dom = this.state.dom;
+        const { dom, categories } = this.state;
 
-        for (let i = 0; i < dom.length; i++) {
-            this.state.categories.push(
-                {
-                    value: dom[i].value,
-                    label: dom[i].text
-                }
-            );
+        for (let i = 0; i < dom.length; i += 1) {
+            categories.push({
+                value: dom[i].value,
+                label: dom[i].text
+            });
         }
-        return this.state.categories;
+        return categories;
     };
 
-    removeSelectedValues = (array) => {
-        return array.forEach(function (label, index) {
+    removeSelectedValues = array => {
+        return array.forEach(function(label, index) {
             array[index].removeAttribute('selected');
         });
     };
 
     addSelectedValues = (array, selected) => {
-        return array.forEach(function (label, index) {
+        return array.forEach(function(label, index) {
             if (array[index].text === selected) {
                 array[index].setAttribute('selected', true);
             }
@@ -47,25 +45,27 @@ class AddCategories extends React.Component {
     };
 
     updateSelectedValues = () => {
-        const selected = this.state.selectedOption || 0;
-        const domOptions = this.state.dom.querySelectorAll('option');
+        const { selectedOption, dom } = this.state;
+        const selected = selectedOption || 0;
+        const domOptions = dom.querySelectorAll('option');
 
         this.removeSelectedValues(domOptions);
 
-        for (let i = 0; i < selected.length; i++) {
+        for (let i = 0; i < selected.length; i += 1) {
             this.addSelectedValues(domOptions, selected[i].label);
         }
     };
 
     render() {
-        const { selectedOption } = this.state;
+        const { selectedOption, categories } = this.state;
+        const { handleChange } = this;
         this.updateSelectedValues();
 
         return (
             <Select
                 value={selectedOption}
-                onChange={this.handleChange}
-                options={this.state.categories}
+                onChange={handleChange}
+                options={categories}
                 isMulti
                 isSearchable
             />

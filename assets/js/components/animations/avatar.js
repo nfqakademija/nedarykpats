@@ -29,7 +29,7 @@ function animateAvatar(email, password) {
         hair = document.querySelector('.hair');
 
     let caretPos, curEmailIndex, screenCenter, svgCoords, eyeMaxHorizD = 20, eyeMaxVertD = 10, noseMaxHorizD = 23,
-        noseMaxVertD = 10, dFromC, eyeDistH, eyeLDistV, eyeRDistV, eyeDistR, mouthStatus = "small";
+        noseMaxVertD = 10, dFromC, eyeDistH = "small";
 
     email.type = 'text';
 

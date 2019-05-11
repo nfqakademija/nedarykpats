@@ -7,34 +7,31 @@ class Layout extends React.Component {
         super(props);
         this.state = {
             domAdvertList: this.props.layoutItems,
-            advertList: [],
+            advertList: []
         };
         this.createAdvert();
     }
 
     createAdvert = () => {
         const { domAdvertList, advertList } = this.state;
-        for (let i = 0; i < domAdvertList.length; i++) {
-            const el = domAdvertList[i];
-            advertList.push(domAdvertList[i])
+        for (let i = 0; i < domAdvertList.length; i += 1) {
+            advertList.push(domAdvertList[i]);
         }
     };
 
     createAdvertList = () => {
         const { domAdvertList, advertList } = this.state;
-        for (let i = 0; i < domAdvertList.length; i++) {
+        for (let i = 0; i < domAdvertList.length; i += 1) {
             const el = domAdvertList[i];
-            advertList.push(
-                {
-                    id: i,
-                    name: el
-                }
-            )
+            advertList.push({
+                id: i,
+                name: el
+            });
         }
     };
 
     render() {
-        let { domAdvertList, advertList } = this.state;
+        let { advertList } = this.state;
         let items = [
             {id: 1, name: <section className="Ad u-visibility-parent"><header className="Ad-header"><div> 2019-05-08 </div></header><h3 className="Header">Ieskau kas onia</h3><div className="Ad-body"><div className="Ad-text Ad-text--top"><p>Ieskau zmogaus turisgaletu sumontuoti vonia bei atliktiapdailosdarbus</p></div></div></section>},
             {id: 2, name: <section className="Ad u-visibility-parent"><header className="Ad-header"><div> 2019-05-08 </div></header><h3 className="Header">Ieskau kas sumontuotu vonia</h3><div className="Ad-body"><div className="Ad-text Ad-text--top"><p>Ieskau zmogaus turisgaletu sumontuoti vonia bei atliktiapdailosdarbus</p></div></div></section>},
@@ -51,22 +48,20 @@ class Layout extends React.Component {
         };
 
         items = items.map(function(item) {
-            return <div key={item.id}>{item.name}</div>
+            return <div key={item.id}>{item.name}</div>;
         });
 
         advertList = advertList.map(function(item) {
-            return <div>{item.name}</div>
+            return <div>{item.name}</div>;
         });
-        console.log(advertList);
 
         return (
             <Masonry
                 breakpointCols={breakpointColumnsObj}
                 className="my-masonry-grid"
                 columnClassName="my-masonry-grid_column"
-            >
-            </Masonry>
-        )
+            />
+        );
     }
 }
 
