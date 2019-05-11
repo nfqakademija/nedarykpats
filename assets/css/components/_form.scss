@@ -1,6 +1,9 @@
 .Form {
-  @include shadowBlockForm();
   width: 100%;
+  
+  &-background {
+	@include shadowBlockForm();
+  }
   
   &-avatar {
 	
@@ -79,7 +82,7 @@
 	  display: inline;
 	  width: 100%;
 	  border-radius: var(--radiusSmall);
-	  border-width: var(--borderSmall);
+	  border-width: var(--borderxSmall);
 	  border-style: solid;
 	  border-color: var(--colorBlack);
 	}
@@ -109,7 +112,7 @@
 	padding: var(--spaceTiny) var(--spaceTopBotTextSmall);
 	margin-bottom: var(--spaceMedium);
 	border-radius: var(--radiusSmall);
-	border-width: var(--borderSmall);
+	border-width: var(--borderxSmall);
 	border-style: solid;
 	border-color: var(--colorBlack);
   }

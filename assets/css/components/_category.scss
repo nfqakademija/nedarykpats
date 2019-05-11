@@ -3,17 +3,18 @@
   display: inline-block;
   color: var(--colorWhite);
   border-radius: var(--radiusMedium);
-  padding: var(--spaceTopBotTextSmall) var(--spaceLeftRightTexMedium);
+  padding: var(--spaceTopBotTextSmall) var(--spaceLeftRightTextSmall);
   text-transform: uppercase;
   font-size: var(--fontSizeMedium);
   letter-spacing: 0.3px;
   margin-top: var(--spaceSmall);
   margin-right: var(--spaceSmall);
+  border-width: var(--borderSmall);
+  border-style: solid;
   
   &--filter {
 	font-size: var(--fontSize);
-	border-width: var(--borderSmall);
-	border-style: solid;
+	padding: var(--spaceTopBotTextSmall) var(--spaceLeftRightTexMedium);
 	li {
 	  display: inline-block;
 	  list-style: none;

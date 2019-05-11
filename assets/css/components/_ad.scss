@@ -1,7 +1,6 @@
 .Ad {
   @include shadowBlockForm();
-  height: 500px;
-  display: flex;
+  //display: flex;
   flex-direction: column;
   
   &-header {
@@ -21,41 +20,36 @@
   &-text {
 	
 	p {
+	  @include hyphens();
 	  overflow: hidden;
 	  text-overflow: ellipsis;
 	  display: -webkit-box;
 	  line-height: var(--lineHeight);
 	  max-height: var(--lineHeightForLines);
-	  -webkit-line-clamp: 4;
 	  -webkit-box-orient: vertical;
-	  
-	  -ms-word-break: break-all;
-	  word-break: break-all;
-	  
-	  /* Non standard for WebKit */
-	  word-break: break-word;
-	  
-	  -webkit-hyphens: auto;
-	  -moz-hyphens: auto;
-	  hyphens: auto;
-	  
+	  -webkit-line-clamp: 4;
+	}
+  }
+  
+  &-categories {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding: 0;
+  }
+  
+  &-link {
+	@include transitionAll();
+	cursor: pointer;
+	
+	&:hover {
+	  @include box-shadow-hover();
 	}
   }
   
   &-text--top {
 	align-self: flex-start;
 	flex-grow: 1;
-  }
-  
-  &-footer--bottom {
-	align-self: flex-end;
-  }
-  
-  &-categories {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-end;
-	padding: 0;
   }
   
   &--single {

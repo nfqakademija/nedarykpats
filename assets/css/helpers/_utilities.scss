@@ -47,18 +47,10 @@
   margin-top: var(--spaceMedium);
 }
 
-.u-no-margin-top {
-  margin-top: 0 !important;
+.u-margin-top-large {
+  margin-top: var(--spaceLarge);
 }
 
-.u-visibility-parent {
-  
-  .u-visibility-flex-child {
-    @include transitionAll;
-    opacity: 0.2;
-  }
-  
-  &:hover .u-visibility-flex-child {
-    opacity: 1;
-  }
+.u-no-margin-top {
+  margin-top: 0 !important;
 }
