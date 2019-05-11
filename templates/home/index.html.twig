@@ -17,7 +17,7 @@
             {% include 'components/filter_bar.html.twig' with {'header': 'Visi skelbimai'} %}
 
             {% block ads %}
-                <section id="Ads" class="Ads">
+                <section id="Ads" class="LayoutGrid">
                     {% for advert in filteredAdverts %}
                         {% include 'components/advert_item.html.twig' %}
                     {% endfor %}

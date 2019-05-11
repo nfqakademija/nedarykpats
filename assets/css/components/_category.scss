@@ -60,6 +60,9 @@
   &--blue {
 	@include categoryColor(var(--colorBlue));
   }
+  &--black {
+	@include categoryColor(var(--colorBlack));
+  }
 }
 
 .not-active {

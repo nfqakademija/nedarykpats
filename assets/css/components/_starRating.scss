@@ -1,0 +1,20 @@
+.StarRating{
+  
+  &-star {
+  
+    &.checked {
+      color: var(--colorYellow);
+    }
+  }
+  
+  &--small {
+    .fa {
+      font-weight: normal;
+    }
+    
+    .fa.checked {
+      font-weight: bold;
+    }
+  }
+}
+

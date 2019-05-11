@@ -10,8 +10,6 @@
   
   &-image {
     border-radius: var(--radiusLarge);
-    margin-right: var(--spaceMedium);
-    margin-top: var(--spaceSmall);
     img {
       max-width: var(--imgSmall);
       height: var(--imgSmall);
@@ -22,15 +20,23 @@
       border-style: solid;
     }
   }
+  
+  &-author {
+    font-weight: var(--bold);
+    margin-bottom: var(--spaceTopBotTextSmall);
+  }
   &-content{
 	width: 100%;
   }
   
   &-header {
-    font-weight: var(--bold);
     color: var(--colorGrey);
     display: flex;
     justify-content: space-between;
+    
+    &--center {
+      align-items: center;
+    }
   }
   
   &-text{

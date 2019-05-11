@@ -139,4 +139,13 @@ class HomeController extends AbstractController
 
         return $page;
     }
+
+    /**
+     * @Route("/profile", name="profile")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function userProfile()
+    {
+        return $this->render('user/profile.html.twig', []);
+    }
 }

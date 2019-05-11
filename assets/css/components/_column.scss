@@ -1,0 +1,15 @@
+.Column {
+  
+  &-3 {
+	@include hyphens();
+	flex: 1;
+	* {
+	  align-items: center;
+	  text-align: center;
+	}
+	
+	&--longer {
+	  flex: 2;
+	}
+  }
+}

@@ -6,7 +6,7 @@
 
 @import "layout/content";
 @import "components/filterBar";
-@import "components/ads";
+@import "components/layoutGrid";
 @import "components/ad";
 @import "components/header";
 @import "components/date";
@@ -27,12 +27,14 @@
 @import "layout/components";
 @import "components/statusBar";
 @import "components/switch";
+@import "components/column";
+@import "components/starRating";
+
 
 
 @media (min-width: 600px) {
   @import "layout/content_medium";
-  @import "components/ads_medium";
-  @import "components/ad_medium";
+  @import "components/layoutGrid_medium";
   @import "components/pagination_medium";
   @import "components/comments_medium";
   @import "components/selectedAd_medium";
@@ -44,7 +46,8 @@
 
 @media (min-width: 1200px) {
   @import "layout/content_large";
-  @import "components/ads_large";
+  @import "components/layoutGrid_large";
+  @import "components/ad_large";
   @import "components/pagination_large";
   @import "components/comments_large";
   @import "components/selectedAd_large";
@@ -52,6 +55,7 @@
   @import "components/sectionBlock_large";
   @import "components/form_large";
   @import "layout/header_large";
+  @import "components/column_large";
 }
 
 

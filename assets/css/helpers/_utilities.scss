@@ -17,6 +17,10 @@
   justify-content: center;
 }
 
+.u-align-top {
+  align-items: flex-start !important;
+}
+
 .u-text-center {
   text-align: center;
 }
@@ -43,8 +47,17 @@
   margin-bottom: var(--spaceMedium);
 }
 
+.u-margin-left-right {
+  margin-left: var(--spaceMedium);
+  margin-right: var(--spaceMedium);
+}
+
 .u-margin-top {
   margin-top: var(--spaceMedium);
+}
+
+.u-margin-top-small {
+  margin-top: var(--spaceSmall);
 }
 
 .u-margin-top-large {
