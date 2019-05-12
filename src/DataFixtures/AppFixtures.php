@@ -68,7 +68,7 @@ class AppFixtures extends Fixture
         }
 
         foreach ($this->getOfferData() as $singleOffer) {
-            $offer = $this->getOffer($singleOffer, $adverts);
+            $offer = $this->getOffer($singleOffer, $adverts, $users);
             $this->addReference($singleOffer['reference'], $offer);
             $manager->persist($offer);
         }
@@ -139,13 +139,14 @@ class AppFixtures extends Fixture
     /**
      * @param array $offer
      * @param array $adverts
+     * @param array $users
      * @return Offer
      * @throws \Exception
      */
-    private function getOffer(array $offer, array $adverts)
+    private function getOffer(array $offer, array $adverts, array $users)
     {
         return (new Offer())
-            ->setEmail($offer['email'])
+            ->setUser($users[$offer['email']])
             ->setText($offer['text'])
             ->setAdvert($adverts[$offer['advert']])
             ->setCreatedAt(new \DateTime('now'))

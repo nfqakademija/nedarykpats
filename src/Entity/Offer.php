@@ -20,18 +20,10 @@ class Offer
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Advert", inversedBy="offers")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      * @var Advert
      */
     private $advert;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @var string
-     * @Assert\Email(message="Pateiktas neteisingas el. paštas", mode="loose")
-     * @Assert\NotBlank
-     */
-    private $email;
 
     /**
      * @ORM\Column(type="text")
@@ -63,6 +55,13 @@ class Offer
      * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="offer", cascade={"persist", "remove"})
      */
     private $token;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="offers")
+     * @ORM\JoinColumn(nullable=false)
+     * @var User
+     */
+    private $user;
 
 
     /**
@@ -97,26 +96,6 @@ class Offer
     public function setAdvert(Advert $advert): self
     {
         $this->advert = $advert;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getEmail(): ?string
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param string $email
-     * @return Offer
-     */
-    public function setEmail(string $email): self
-    {
-        $this->email = $email;
-
         return $this;
     }
 
@@ -158,6 +137,9 @@ class Offer
         return $this;
     }
 
+    /**
+     * @return bool
+     */
     public function isConfirmed(): bool
     {
         return $this->isConfirmed;
@@ -175,11 +157,18 @@ class Offer
         return $this;
     }
 
+    /**
+     * @return Token|null
+     */
     public function getToken(): ?Token
     {
         return $this->token;
     }
 
+    /**
+     * @param Token|null $token
+     * @return Offer
+     */
     public function setToken(?Token $token): self
     {
         $this->token = $token;
@@ -189,6 +178,25 @@ class Offer
         if ($newOffer !== $token->getOffer()) {
             $token->setOffer($newOffer);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param User|null $user
+     * @return Offer
+     */
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

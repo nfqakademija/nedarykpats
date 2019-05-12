@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
+use App\Form\OfferType;
 use App\Handler\AdvertCreationHandler;
 use App\Entity\Advert;
-use App\Entity\Offer;
 use App\Form\AdvertType;
+use App\Handler\OfferCreationHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -51,35 +51,26 @@ class AdvertController extends AbstractController
      * @ParamConverter("advert", class="App:Advert")
      * @param Advert $advert
      * @param Request $request
+     * @param OfferCreationHandler $offerCreationHandler
      * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function advert(
-        Advert $advert,
-        Request $request
-    ) {
-
-        $offer = new Offer();
-
-        $offerForm = $this->createFormBuilder($offer)
-            ->add('email')
-            ->add('text')
-            ->add('save', SubmitType::class, ['label' => 'Siųsti'])
-            ->getForm();
+    public function advert(Advert $advert, Request $request, OfferCreationHandler $offerCreationHandler)
+    {
+        $offerForm = $this->createForm(OfferType::class);
 
         $offerForm->handleRequest($request);
 
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
-            $offer = $offerForm->getData();
-            $offer->setIsConfirmed(true);
-            $offer->setCreatedAt(new \DateTime('now'));
-            $offer->setAdvert($advert);
+            $offerFormDTO = $offerForm->getData();
+            $offerFormDTO->setAdvert($advert);
+            $offer = $offerCreationHandler->handle($offerFormDTO);
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($offer);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Siūlymas išsaugotas sėkmingai');
+            if ($offer->isConfirmed()) {
+                $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
+            } else {
+                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas el. paštu');
+            }
 
             return $this->redirect($request->getUri());
         }

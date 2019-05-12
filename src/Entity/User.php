@@ -75,7 +75,7 @@ class User implements UserInterface
     private $isConfirmed;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", cascade={"persist", "remove"})
      */
     private $token;
 
@@ -93,6 +93,11 @@ class User implements UserInterface
     private $createdAt;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Offer", mappedBy="user", orphanRemoval=true)
+     */
+    private $offers;
+
+    /**
      * User constructor.
      * @throws \Exception
      */
@@ -100,6 +105,7 @@ class User implements UserInterface
     {
         $this->adverts = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
+        $this->offers = new ArrayCollection();
     }
 
     /**
@@ -371,6 +377,37 @@ class User implements UserInterface
     public function setCreatedAt(\DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Offer[]
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers[] = $offer;
+            $offer->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->contains($offer)) {
+            $this->offers->removeElement($offer);
+            // set the owning side to null (unless already changed)
+            if ($offer->getUser() === $this) {
+                $offer->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -62,10 +62,9 @@
                 {#</section>#}
             </section>
 
-            {% if app.user != advert.user %}
             {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
                 {% for offer in advert.offers %}
-                    {% if app.user.email == offer.email %}
+                    {% if app.user.email == offer.user.email or app.user == advert.user %}
                     <section class="Comments">
                         <section class="Comments-block">
                             <div class="Comments-content">
@@ -76,7 +75,7 @@
                                     <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
                                 </div>
                                 <div class="Comments-text">
-                                    <div class="Comments-author">{{ offer.email }}</div>
+                                    <div class="Comments-author">{{ offer.user.username }}</div>
                                     <p>{{ offer.text }}</p>
                                 </div>
                             </div>
@@ -85,27 +84,7 @@
                     {% endif %}
                 {% endfor %}
             {% endif %}
-            {% elseif(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
-                {% for offer in advert.offers %}
-                    <section class="Comments">
-                        <section class="Comments-block">
-                            <div class="Comments-content">
-                                <div class="Comments-header">
-                                    <span class="Comments-image">
-                                        <img src="/img/user1.png" alt="user">
-                                    </span>
-                                    <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
-                                </div>
-                                <div class="Comments-text">
-                                    <div class="Comments-author">{{ offer.email }}</div>
-                                    <p>{{ offer.text }}</p>
-                                </div>
-                            </div>
-                        </section>
-                    </section>
-                {% endfor %}
-            {% endif %}
-
+            {% if app.user != advert.user %}
             {{ form_start(offerForm, {'attr': {'class' : 'ReplayBlock'}}) }}
 
                 {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
@@ -113,7 +92,7 @@
                 {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
 
             {{ form_end(offerForm) }}
-
+            {% endif %}
         </div>
     </div>
 {% endblock %}
