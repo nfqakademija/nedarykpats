@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\DTO;
-
 
 class ProfileDetailsDTO
 {
@@ -75,8 +73,4 @@ class ProfileDetailsDTO
         $this->description = $description;
         return $this;
     }
-
-
-
-
 }

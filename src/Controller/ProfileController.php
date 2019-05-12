@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Controller;
 
 use App\Form\ProfileDetailsType;
@@ -8,7 +7,6 @@ use App\Handler\ProfileHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-
 
 class ProfileController extends AbstractController
 {
@@ -26,12 +24,11 @@ class ProfileController extends AbstractController
         $profileForm->handleRequest($request);
 
         if ($profileForm->isSubmitted()) {
-
             $user = $this->getUser();
 
             $profileDetailsDTO = $profileForm->getData();
 
-            $profileHandler->handle($user, $profileDetailsDTO );
+            $profileHandler->handle($user, $profileDetailsDTO);
 
             $this->addFlash('success', 'Profilis išsaugotas');
 
@@ -42,6 +39,4 @@ class ProfileController extends AbstractController
             'profileForm' => $profileForm->createView(),
         ]);
     }
-
-
 }

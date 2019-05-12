@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Handler;
-
 
 use App\DTO\ProfileDetailsDTO;
 use App\Entity\User;
@@ -33,19 +31,17 @@ class ProfileHandler
     public function handle(User $user, ProfileDetailsDTO $profileDetailsDTO)
     {
 
-        if ($profileDetailsDTO->getName()){
+        if ($profileDetailsDTO->getName()) {
             $user->setName($profileDetailsDTO->getName());
         }
-        if ($profileDetailsDTO->getLastName()){
+        if ($profileDetailsDTO->getLastName()) {
             $user->setLastName($profileDetailsDTO->getLastName());
         }
 
-        if ($profileDetailsDTO->getDescription());{
+        if ($profileDetailsDTO->getDescription()) {
             $user->setDescription($profileDetailsDTO->getDescription());
         }
 
         $this->entityManager->flush();
     }
-
-
 }
