@@ -3,7 +3,6 @@
 
 namespace App\DTO;
 
-
 use App\Entity\Advert;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -37,7 +36,7 @@ class OfferFormDTO
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getEmail(): ?string
     {
         return $this->email;
     }
@@ -46,7 +45,7 @@ class OfferFormDTO
      * @param string $email
      * @return OfferFormDTO
      */
-    public function setEmail(string $email): OfferFormDTO
+    public function setEmail(?string $email): OfferFormDTO
     {
         $this->email = $email;
         return $this;
@@ -55,7 +54,7 @@ class OfferFormDTO
     /**
      * @return Advert
      */
-    public function getAdvert(): Advert
+    public function getAdvert(): ?Advert
     {
         return $this->advert;
     }
@@ -64,7 +63,7 @@ class OfferFormDTO
      * @param Advert $advert
      * @return OfferFormDTO
      */
-    public function setAdvert(Advert $advert): OfferFormDTO
+    public function setAdvert(?Advert $advert): OfferFormDTO
     {
         $this->advert = $advert;
         return $this;
@@ -73,7 +72,7 @@ class OfferFormDTO
     /**
      * @return string
      */
-    public function getText(): string
+    public function getText(): ?string
     {
         return $this->text;
     }
@@ -82,7 +81,7 @@ class OfferFormDTO
      * @param string $text
      * @return OfferFormDTO
      */
-    public function setText(string $text): OfferFormDTO
+    public function setText(?string $text): OfferFormDTO
     {
         $this->text = $text;
         return $this;

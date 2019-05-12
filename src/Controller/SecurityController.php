@@ -91,7 +91,7 @@ class SecurityController extends AbstractController
         }
         if ($token->getOffer()) {
             $this->addFlash('success', 'Sveikiname! Siūlymas patalpintas sėkmingai');
-            return $this->redirectToRoute('/advert/'. $result['advertId']);
+            return $this->redirectToRoute('advert', ['id' => $token->getAdvert()->getId()]);
         }
 
         $this->addFlash('success', 'Svekiname prisijungus! Dabar galite kelti skelbimus, teikti pasiūymus.');
