@@ -71,6 +71,11 @@ class Advert
      */
     private $token;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Offer", cascade={"persist", "remove"})
+     */
+    private $acceptedOffer;
+
 
     /**
      * Advert constructor.
@@ -295,6 +300,25 @@ class Advert
         if ($newAdvert !== $token->getAdvert()) {
             $token->setAdvert($newAdvert);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Offer|null
+     */
+    public function getAcceptedOffer(): ?Offer
+    {
+        return $this->acceptedOffer;
+    }
+
+    /**
+     * @param Offer|null $acceptedOffer
+     * @return Advert
+     */
+    public function setAcceptedOffer(?Offer $acceptedOffer): self
+    {
+        $this->acceptedOffer = $acceptedOffer;
 
         return $this;
     }
