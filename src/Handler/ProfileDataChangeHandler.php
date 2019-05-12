@@ -6,7 +6,7 @@ use App\DTO\ProfileDetailsDTO;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
-class ProfileHandler
+class ProfileDataChangeHandler
 {
     /**
      * @var EntityManagerInterface

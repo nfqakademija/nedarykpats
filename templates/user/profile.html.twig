@@ -84,13 +84,47 @@
                     </div>
                 {% endif %}
 
-                {{ form_start(profileForm) }}
 
-{#                {{ form_row(profileForm.name) }}#}
-                {{ form_row(profileForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
-                {{ form_end(profileForm) }}
+                <form method="post" class="Form Form-background Form--short">
+                    {{ form_start(profileDetailsForm) }}
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.name) }}
+                        {{ form_widget(profileDetailsForm.name) }}
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.lastName) }}
+                        {{ form_widget(profileDetailsForm.lastName) }}
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.description) }}
+                        {{ form_widget(profileDetailsForm.description) }}
+                    </div>
+                    {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
+                    {{ form_end(profileDetailsForm) }}
+                </form>
 
-                    <section class="Comments">
+
+                <form method="post" class="Form Form-background Form--short">
+                {{ form_start(profilePasswordForm) }}
+                    <div class="Form-item">
+                        {{ form_label(profilePasswordForm.newPassword) }}
+                        {{ form_widget(profilePasswordForm.newPassword) }}
+                        <span class="Form-errors">
+                            {{ form_errors(profilePasswordForm.newPassword) }}
+                        </span>
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profilePasswordForm.newPasswordConfirmation) }}
+                        {{ form_widget(profilePasswordForm.newPasswordConfirmation) }}
+                        <span class="Form-errors">
+                            {{ form_errors(profilePasswordForm.newPasswordConfirmation) }}
+                </span>
+                    </div>
+                {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
+                {{ form_end(profilePasswordForm) }}
+                </form>
+
+                <section class="Comments">
                         <section class="Comments-block">
                             <div class="Comments-content">
                                 <div class="Comments-header Comments-header--center">
