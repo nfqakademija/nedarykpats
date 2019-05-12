@@ -3,7 +3,6 @@
 
 namespace App\DTO;
 
-
 class ProfilePasswordDTO
 {
     /**
@@ -51,7 +50,4 @@ class ProfilePasswordDTO
         $this->newPassword = $newPassword;
         return $this;
     }
-
-
-
 }
