@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\DTO\AdvertFormDTO;
 use App\Entity\Category;
+use App\Entity\City;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -14,6 +15,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AdvertType extends AbstractType
 {
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -29,10 +34,17 @@ class AdvertType extends AbstractType
                     'multiple' => true
                 ]
             )
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'name'
+            ])
             ->add('save', SubmitType::class, ['label' => 'Skelbti'])
         ;
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
