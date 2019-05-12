@@ -6,6 +6,7 @@ use App\Entity\Advert;
 use App\Entity\Category;
 use App\Entity\Offer;
 use App\Entity\User;
+use App\Entity\City;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -37,6 +38,16 @@ class AppFixtures extends Fixture
             $manager->persist($category);
             $categories[$singleCategory['slug']] = $category;
         }
+
+        $cities = [];
+        foreach ($this->getCityData() as $cityData){
+            $city = $this->getCity($cityData);
+            $this->addReference($cityData['name'], $city);
+            $manager->persist($city);
+            $cities[$cityData['name']] = $city;
+
+        }
+
 
         $users = [];
         foreach ($this->getUserData() as $userData) {
@@ -77,9 +88,11 @@ class AppFixtures extends Fixture
             ->setCssStyle($category['cssStyle']);
     }
 
+
     /**
-     * @param array $user
+     * @param array $userData
      * @return User
+     * @throws \Exception
      */
     private function getUser(array $userData)
     {
@@ -137,6 +150,21 @@ class AppFixtures extends Fixture
             ->setAdvert($adverts[$offer['advert']])
             ->setCreatedAt(new \DateTime('now'))
             ->setIsConfirmed($offer['is_confirmed']);
+    }
+
+
+    /**
+     * @param array $cityData
+     * @return City
+     */
+    private function getCity( array $cityData)
+    {
+        $city = new City();
+
+        $city->setName($cityData['name'])
+            ->setPosition($cityData['position']);
+
+        return $city;
     }
 
     /**
@@ -395,49 +423,282 @@ class AppFixtures extends Fixture
                     'password' => 'aurimas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => false,
+                    'name' => 'Aurimas',
+                    'last_name' => 'Vilys',
                 ],
                 [
                     'email' => 'martyna@uzsakove.lt',
                     'password' => 'martyna',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
+                    'name' => 'Martyna',
+                    'last_name' => 'B',
                 ],
                 [
                     'email' => 'vilius@uzsakovas.lt',
                     'password' => 'vilius',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
+                    'name' => 'Vilius',
+                    'last_name' => 'Gumonis',
                 ],
                 [
                     'email' => 'laurynas@uzsakovas.lt',
                     'password' => 'laurynas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
+                    'name' => 'Laurynas',
+                    'last_name' => 'Valenta',
                 ],
                 [
                     'email' => 'aurimas@rangovas.lt',
                     'password' => 'aurimas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
+                    'name' => 'Aurimas',
+                    'last_name' => 'Vilys',
+                    'descriptions' => 'Profesionalus sienų dažytojas'
                 ],
                 [
                     'email' => 'martyna@rangove.lt',
                     'password' => 'martyna',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
+                    'name' => 'Martyna',
+                    'last_name' => 'B',
+                    'descriptions' => 'Profesionali interjero dizainerė'
                 ],
                 [
                     'email' => 'vilius@rangovas.lt',
                     'password' => 'vilius',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
+                    'name' => 'Vilius',
+                    'last_name' => 'Gumonis',
+                    'descriptions' => 'Profesionalus  santechnikas'
                 ],
                 [
                     'email' => 'laurynas@rangovas.lt',
                     'password' => 'laurynas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
+                    'name' => 'Laurynas',
+                    'last_name' => 'Valenta',
+                    'descriptions' => 'Profesionalus darbų vykdytojas'
                 ],
             ];
     }
+
+
+    private function getCityData()
+    {
+        return [
+            [
+                'name' => 'Vilnius',
+                'position' => 'primary'
+            ],
+            [
+                'name' => 'Kaunas',
+                'position' => 'primary'
+            ],
+            [
+                'name' => 'Klaipėda',
+                'position' => 'primary'
+            ],
+
+            [
+                'name' => 'Šiauliai',
+                'position' => 'primary'
+            ],
+
+            [
+                'name' => 'Panevežys',
+                'position' => 'primary'
+            ],
+
+            [
+                'name' => 'Alytus',
+                'position' => 'primary'
+            ],
+            [
+                'name' => 'Marijampolė',
+                'position' => 'primary'
+            ],
+            [
+                'name' => 'Akmenės savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Alytaus miesto savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Alytays savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Anykščių savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Birštono savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Druskininku savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Elektrėnų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Ignalinos savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Jonavos savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Joniškio savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Jurbanko savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kaišiadorių savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kalvarijų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kauno miesto savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kazlų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kėdainių savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kelmės savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Klaipėdos savivaldybė savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kretingos savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Kupiškio savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Lazdijų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Marijampolės savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Mažeikių miesto savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Molėtų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Neringos savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Paktruonio savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Plungės savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Prienų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Radviliškio savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Raseinių savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Rietavo savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Šakių savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Šalčinikų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Šilalės savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Širvintų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Tauragės savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Telšių savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Trakų savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Ukmergės savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Varėnos savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Vilkaviškio savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Visagino savivaldybė',
+                'position' => 'secondary'
+            ],
+            [
+                'name' => 'Zarasų savivaldybė',
+                'position' => 'secondary'
+            ]
+        ];
+
+    }
+
+
 }
