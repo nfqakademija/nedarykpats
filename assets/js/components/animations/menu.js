@@ -40,3 +40,26 @@ item.addEventListener('click', e => {
         }, 700);
     }
 });
+
+//----------------------------------------
+// -- Menu fropdown login button ---------
+//----------------------------------------
+
+const navDropdown = document.getElementById('Nav-dropdown');
+if (navDropdown) {
+    const dropdown = document.querySelector('.dropdown');
+
+    navDropdown.addEventListener('click', e => {
+        dropdown.classList.toggle('is-visible');
+    });
+
+    window.onclick = function(event) {
+        const isVisible = dropdown.classList.contains('is-visible');
+        const isAvatar = !event.target.classList.contains('Nav-avatar');
+        const isAngle = !event.target.classList.contains('fa-angle-down');
+
+        if (isAvatar && isAngle && isVisible) {
+            dropdown.classList.remove('is-visible');
+        }
+    };
+}

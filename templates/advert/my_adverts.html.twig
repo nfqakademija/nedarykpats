@@ -4,10 +4,14 @@
 
 {% block body %}
 
-    <div class="Content Content--top Content--GreyBg">
+    <div class="Content Content--top">
         <div class="Content-Block">
-
             {% include 'components/filter_bar.html.twig' with {'header' : ''} %}
+        </div>
+    </div>
+
+    <div class="Content Content--GreyBg">
+        <div class="Content-Block">
 
             {% block ads %}
                 {% if filteredAdverts|length < 1 %}
@@ -17,7 +21,7 @@
                     </div>
                 {% endif %}
 
-                <section id="Ads" class="Ads">
+                <section id="Ads" class="LayoutGrid">
 
                     {% for advert in filteredAdverts %}
                         {% include 'components/advert_item.html.twig' %}

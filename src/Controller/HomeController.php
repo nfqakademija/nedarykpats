@@ -148,4 +148,13 @@ class HomeController extends AbstractController
     {
         return $this->render('user/profile.html.twig', []);
     }
+
+    /**
+     * @Route("/template", name="template")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function emailTemplate()
+    {
+        return $this->render('email_templates/confirmation.html.twig', []);
+    }
 }

@@ -11,10 +11,16 @@
          {#data-alert-title="Dar vienas žingsnis..."#}
          {#data-alert-message="test">#}
 
+    <div class="Content">
+        <div class="Content-Block">
+            {% include 'components/filter_bar.html.twig' with {'header': 'Visi skelbimai'} %}
+        </div>
+    </div>
+
     <div class="Content Content--GreyBg">
         <div class="Content-Block">
 
-            {% include 'components/filter_bar.html.twig' with {'header': 'Visi skelbimai'} %}
+
 
             {% block ads %}
                 <section id="Ads" class="LayoutGrid">

@@ -16,6 +16,10 @@
 	}
   }
   
+  &-dropdown {
+	display: none;
+  }
+  
   &-menu {
 	padding: 0;
 	display: flex;
@@ -31,11 +35,21 @@
 	list-style-type: none;
 	opacity:0;
 	transition: all .3s cubic-bezier(0.000, 0.995, 0.990, 1.000) .3s;
+ 
+	& > .dropdown {
+	  list-style-type: none;
+	  padding-left: 0;
+	}
   }
   @for $i from 1 through 5 {
 	&-item:nth-child(#{$i}){
 	  transform:translateY(-40px * $i);
 	}
+  }
+  
+  &-subItem {
+	padding: var(--spaceTopBotTextSmall) var(--spaceTopBotTextMedium);
+	text-align: left;
   }
   
   &-link {

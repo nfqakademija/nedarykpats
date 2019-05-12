@@ -13,10 +13,51 @@
 	height: auto;
   }
   
+  &-avatar {
+	display: block;
+	width: 50px;
+  }
+  
+  &-dropdown {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+  }
+  
   &-item {
+	margin-left: var(--spaceLarge);
 	list-style-type: none;
 	opacity: 1;
+ 
+	& > .dropdown {
+	  display: none;
+	  margin-top: 20px;
+	  position: absolute;
+	  right: 0;
+	  z-index: 1;
+	  background-color: var(--colorGray);
+	  padding: 0;
+	  
+	  &:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		right: 20%;
+		width: 0;
+		height: 0;
+		border: 20px solid transparent;
+		border-bottom-color: var(--colorGray);
+		border-top: 0;
+		border-right: 10px;
+		margin-top: -20px;
+	  }
+	}
+ 
+	& > .dropdown.is-visible {
+	  display: block;
+	}
   }
+  
   
   @for $i from 1 through 5 {
 	&-item:nth-child(#{$i}){
@@ -29,7 +70,6 @@
 	display: block;
 	letter-spacing: 0.2px;
 	font-size: var(--fontSize);
-	margin-left: var(--spaceLarge);
 	padding-left: 0;
 	padding-right: 0;
 	text-transform: none;

@@ -27,10 +27,23 @@
                                 <li class="Nav-item"><a class="Nav-link" href="/#FilterBar">Visi skelbimai</a></li>
                                 <li class="Nav-item"><a class="Nav-link" href="{{ path('new_advert') }}">Įkelti naują</a></li>
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                {#<li class="Nav-item">{{ app.user.username }}</li>#}
+
                                 <li class="Nav-item"><a class="Nav-link" href="{{ path('my_adverts') }}">Mano skelbimai</a></li>
-                                <li class="Nav-item"><a class="Nav-link" href="{{ path('profile') }}">Profilis</a></li>
-                                <li class="Nav-item"><a class="Nav-link" href="{{ path('logout') }}">Atsijungti</a></li>
+
+                                <li class="Nav-item">
+                                    <span id="Nav-dropdown" class="Nav-dropdown">
+                                        <img class="Nav-avatar" src="/img/user1.png" alt="user">
+                                        <i class="fas fa-angle-down"></i>
+                                    </span>
+                                    <ul class="dropdown">
+                                        <li class="Nav-subItem"><span class="Nav-link">{{ app.user.username }}</span></li>
+                                        <li class="Nav-subItem"><a class="Nav-link" href="{{ path('profile') }}">Profilis</a></li>
+                                        <li class="Nav-subItem"><a class="Nav-link" href="{{ path('logout') }}">Atsijungti</a></li>
+                                    </ul>
+
+                                </li>
+
+
                             {% else %}
                                 <li class="Nav-item"><a class="Nav-link Nav-link--login" href="{{ path('login') }}">Prisijungti</a></li>
                             {% endif %}

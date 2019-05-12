@@ -3,12 +3,15 @@
 {% block title %}Naujas skelbimas{% endblock %}
 
 {% block body %}
+<div class="Content Content--top">
+    <div class="Content-Block">
+    </div>
+</div>
 
-    <div class="Content Content--top Content--GreyBg ">
-
+    <div class="Content Content--GreyBg">
         <div class="Content-Block">
 
-            {{ form_start(advertForm, {'attr': {'class' : 'Form Form--column u-margin-top-large'}}) }}
+            {{ form_start(advertForm, {'attr': {'class' : 'Form Form--column u-padding-top'}}) }}
 
             <div class="Form-image">
                 <img alt="create_form" src="/img/image_form-2.png" />

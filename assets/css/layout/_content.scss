@@ -2,13 +2,10 @@
   padding: var(--spaceMedium);
   padding-top: 0;
   
-  &--top {
-    min-height: var(--screen-height);
-  }
-  
   &--GreyBg {
     background:  var(--colorGray);
-    background: linear-gradient(0deg,  var(--colorGray) 80%,  var(--colorWhite) 80%);
+    min-height: var(--screen-height);
+    //background: linear-gradient(0deg,  var(--colorGray) 80%,  var(--colorWhite) 80%);
   }
   
   &-Block {
