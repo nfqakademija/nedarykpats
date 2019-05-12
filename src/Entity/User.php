@@ -54,7 +54,7 @@ class User implements UserInterface
     private $isConfirmed;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Token", mappedBy="user", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Token", mappedBy="user", cascade={"persist", "remove"})
      */
     private $token;
 
