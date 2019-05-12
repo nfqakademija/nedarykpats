@@ -60,6 +60,11 @@ class Advert
     private $user;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\City", mappedBy="name", orphanRemoval=true)
+     */
+    private $city;
+
+    /**
      * @ORM\Column(type="boolean")
      * @var bool
      */
@@ -124,6 +129,25 @@ class Advert
     public function setText(string $text): ?self
     {
         $this->text = $text;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param City $city
+     * @return Advert
+     */
+    public function setCity(City $city)
+    {
+        $this->city = $city;
+
         return $this;
     }
 
