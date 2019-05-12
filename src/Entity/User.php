@@ -36,6 +36,27 @@ class User implements UserInterface
      */
     private $roles = [];
 
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    private $lastName;
+
+
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @var string
+     */
+    private $description;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      * @var string
@@ -105,6 +126,62 @@ class User implements UserInterface
     {
         $this->email = $email;
 
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return User
+     */
+    public function setName(string $name): User
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     * @return User
+     */
+    public function setLastName(string $lastName): User
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return User
+     */
+    public function setDescription(string $description): User
+    {
+        $this->description = $description;
         return $this;
     }
 
