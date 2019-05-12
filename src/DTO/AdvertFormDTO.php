@@ -2,6 +2,7 @@
 namespace App\DTO;
 
 use App\Entity\Category;
+use App\Entity\City;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,6 +25,12 @@ class AdvertFormDTO
      * @var string
      */
     private $text;
+
+
+    /**
+     * @var City
+     */
+    private $city;
 
     /**
      * @var ArrayCollection|Category
@@ -73,6 +80,25 @@ class AdvertFormDTO
         $this->text = $text;
         return $this;
     }
+
+    /**
+     * @return City
+     */
+    public function getCity(): City
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param City $city
+     * @return AdvertFormDTO
+     */
+    public function setCity(City $city): AdvertFormDTO
+    {
+        $this->city = $city;
+        return $this;
+    }
+
 
     /**
      * @return ArrayCollection|Category[]
