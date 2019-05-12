@@ -3,35 +3,32 @@
 
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class ProfilePasswordDTO
 {
-    /**
-     * @var string
-     */
-    private $oldPassword;
 
     /**
      * @var string
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max="4096",
+     *     min="6",
+     *     minMessage = "Your password should be at least {{ limit }} characters",
+     * )
      */
     private $newPassword;
 
     /**
-     * @return string
+     * @var string
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max="4096",
+     *     min="6",
+     *     minMessage = "Your password should be at least {{ limit }} characters",
+     * )
      */
-    public function getOldPassword(): ?string
-    {
-        return $this->oldPassword;
-    }
-
-    /**
-     * @param string $oldPassword
-     * @return ProfilePasswordDTO
-     */
-    public function setOldPassword(?string $oldPassword): ProfilePasswordDTO
-    {
-        $this->oldPassword = $oldPassword;
-        return $this;
-    }
+    private $newPasswordConfirmation;
 
     /**
      * @return string
@@ -48,6 +45,24 @@ class ProfilePasswordDTO
     public function setNewPassword(?string $newPassword): ProfilePasswordDTO
     {
         $this->newPassword = $newPassword;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getNewPasswordConfirmation(): ?string
+    {
+        return $this->newPasswordConfirmation;
+    }
+
+    /**
+     * @param string $newPasswordConfirmation
+     * @return ProfilePasswordDTO
+     */
+    public function setNewPasswordConfirmation(?string $newPasswordConfirmation): ProfilePasswordDTO
+    {
+        $this->newPasswordConfirmation = $newPasswordConfirmation;
         return $this;
     }
 }
