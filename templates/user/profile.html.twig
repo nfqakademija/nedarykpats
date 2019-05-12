@@ -70,6 +70,26 @@
                         </section>
                     </section>
 
+
+
+
+                {% if app.session.flashBag.has('success') %}
+                    <div class="Alert Alert-success">
+                    <span class="Alert-icon">
+                        <img src="/img/success.svg" alt="success">
+                           {% for msg in app.session.flashBag.get('success') %}
+                               {{ msg }}
+                           {% endfor %}
+                    </span>
+                    </div>
+                {% endif %}
+
+                {{ form_start(profileForm) }}
+
+{#                {{ form_row(profileForm.name) }}#}
+                {{ form_row(profileForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+                {{ form_end(profileForm) }}
+
                     <section class="Comments">
                         <section class="Comments-block">
                             <div class="Comments-content">
