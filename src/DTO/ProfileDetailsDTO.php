@@ -23,7 +23,7 @@ class ProfileDetailsDTO
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -32,7 +32,7 @@ class ProfileDetailsDTO
      * @param string $name
      * @return ProfileDetailsDTO
      */
-    public function setName(string $name): ProfileDetailsDTO
+    public function setName(?string $name): ProfileDetailsDTO
     {
         $this->name = $name;
         return $this;
@@ -41,7 +41,7 @@ class ProfileDetailsDTO
     /**
      * @return string
      */
-    public function getLastName(): string
+    public function getLastName(): ?string
     {
         return $this->lastName;
     }
@@ -50,7 +50,7 @@ class ProfileDetailsDTO
      * @param string $lastName
      * @return ProfileDetailsDTO
      */
-    public function setLastName(string $lastName): ProfileDetailsDTO
+    public function setLastName(?string $lastName): ProfileDetailsDTO
     {
         $this->lastName = $lastName;
         return $this;
@@ -59,7 +59,7 @@ class ProfileDetailsDTO
     /**
      * @return string
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -68,7 +68,7 @@ class ProfileDetailsDTO
      * @param string $description
      * @return ProfileDetailsDTO
      */
-    public function setDescription(string $description): ProfileDetailsDTO
+    public function setDescription(?string $description): ProfileDetailsDTO
     {
         $this->description = $description;
         return $this;
