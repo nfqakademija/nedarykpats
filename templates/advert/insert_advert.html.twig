@@ -42,6 +42,15 @@
                     </span>
                 </div>
 
+
+                <div class="Form-item">
+                    {{ form_label(advertForm.title,'Miestas') }}
+                    {{ form_widget(advertForm.city) }}
+                    <span class="Form-errors">
+                         {{ form_errors(advertForm.city) }}
+                    </span>
+                </div>
+
                 <div class="Form-item">
                     {{ form_label(advertForm.text, 'Skelbimo tekstas') }}
                     {{ form_widget(advertForm.text, {'attr': {'rows': '10'} }) }}
