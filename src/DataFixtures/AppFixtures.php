@@ -51,7 +51,7 @@ class AppFixtures extends Fixture
 
         $users = [];
         foreach ($this->getUserData() as $userData) {
-            $user = $this->getUser($userData);
+            $user = $this->getUser($userData, $cities);
             $this->addReference($userData['email'], $user);
             $manager->persist($user);
             $users[$userData['email']] = $user;
@@ -61,7 +61,7 @@ class AppFixtures extends Fixture
         $date = new \DateTime(date('Y-m-d'));
         foreach ($this->getAdvertsData() as $singleAdvert) {
             $date->modify('-1 day');
-            $advert = $this->getAdvert($singleAdvert, $categories, $date->format('Y-m-d H:i:s'), $users);
+            $advert = $this->getAdvert($singleAdvert, $categories, $date->format('Y-m-d H:i:s'), $users, $cities);
             $this->addReference($singleAdvert['reference'], $advert);
             $manager->persist($advert);
             $adverts[$singleAdvert['reference']] = $advert;
@@ -94,14 +94,21 @@ class AppFixtures extends Fixture
      * @return User
      * @throws \Exception
      */
-    private function getUser(array $userData)
+    private function getUser(array $userData, array $cities)
     {
         $user = new User();
         $user->setEmail($userData['email'])
+            ->setName($userData['name'])
+            ->setLastName($userData['last_name'])
+            ->setCity($cities[$userData['city']])
             ->setRoles($userData['roles'])
             ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
             ->setCreatedAt(new \DateTime('now'))
             ->setIsConfirmed($userData['is_confirmed']);
+
+        if ($userData['descriptions']) {
+            $user->setDescription($userData['descriptions']);
+        }
         return $user;
     }
 
@@ -113,7 +120,7 @@ class AppFixtures extends Fixture
      * @return Advert
      * @throws \Exception
      */
-    private function getAdvert(array $advert, array $categories, string $date, array $users)
+    private function getAdvert(array $advert, array $categories, string $date, array $users, array $cities)
     {
 
         $singleAdvert = new Advert();
@@ -121,6 +128,7 @@ class AppFixtures extends Fixture
             ->setTitle($advert['title'])
             ->setText($advert['text'])
             ->setCreatedAt(new \DateTime($date))
+            ->setCity($cities[$advert['city']])
             ->setUser($users[$advert['email']])
             ->setIsConfirmed($advert['is_confirmed']);
 
@@ -237,6 +245,7 @@ class AppFixtures extends Fixture
             [
                 [
                     'reference' => 'laiptines-dazymas',
+                    'city' => 'Vilnius',
                     'email' => 'aurimas@uzsakovas.lt',
                     'title' => 'Laiptinės dažymas',
                     'categories' => ['statybos', 'remontas'],
@@ -246,6 +255,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'reikalingas-elektrikas',
                     'email' => 'martyna@uzsakove.lt',
+                    'city' => 'Šalčinikų savivaldybė',
                     'title' => 'Reikalingas elektrikas',
                     'categories' => ['elektra'],
                     'text' => 'Reikalingas elektrikas 700m2 namo elektros instaliacijai įrengti. Objektas Trakų/Elektrėnų rajone.',
@@ -254,6 +264,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'vonios-plyteliu',
                     'email' => 'vilius@uzsakovas.lt',
+                    'city' => 'Šalčinikų savivaldybė',
                     'title' => 'Vonios plytelių klijavimas',
                     'categories' => ['apdailos-darbai', 'remontas'],
                     'text' => 'Norime atnaujinti vonią, ieškome plytelių klojėjo. Butas Vilniaus rajone, susiekimas automobiliu.',
@@ -262,6 +273,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'reikalingas-sodininkas',
                     'email' => 'laurynas@uzsakovas.lt',
+                    'city' => 'Vilnius',
                     'title' => 'Reikalingas Sodininkas',
                     'categories' => ['lauko-darbai'],
                     'text' => 'Reikalingas sodininkas privačiam namui Vilniuje (Antakalnis). Darbų apimtis: teritorijos tvarkymas, augalų sodinimas, ravėjimas, augalų ir medžių genėjimas ir t.t. Darbas pilna diena, 3-4 kartus per savaitę.',
@@ -270,6 +282,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'ieskome-santechniko',
                     'email' => 'aurimas@uzsakovas.lt',
+                    'city' => 'Vilnius',
                     'title' => 'Ieškome santechniko',
                     'categories' => ['remontas', 'santechnika'],
                     'text' => 'Reikalingas santechnikas visai buto santechnikai atnaujinti.',
@@ -278,6 +291,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'silpnu-sroviu-montotuojas',
                     'email' => 'martyna@uzsakove.lt',
+                    'city' => 'Šalčinikų savivaldybė',
                     'title' => 'Ieškome silpnų srovių montotuojo',
                     'categories' => ['elektra'],
                     'text' => 'Ieškome silpnų srovių montotuojo. darbo pobūdis - kabelių ir įrangos montavimas. Silpnų srovių komutavimo ir sistemų paleidimų gebėjimas - privalumas.',
@@ -286,6 +300,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'darbų-vadovas',
                     'email' => 'vilius@uzsakovas.lt',
+                    'city' => 'Vilnius',
                     'title' => 'Reikalingas darbų vadovas',
                     'categories' => ['remontas', 'apdailos-darbai', 'elektra', 'santechnika'],
                     'text' => 'Iešome darbų vadovo buto renovacijai. Butas - 60m2, mansarda, senamiestis.',
@@ -294,6 +309,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'darbų-vadovas-2',
                     'email' => 'laurynas@uzsakovas.lt',
+                    'city' => 'Šalčinikų savivaldybė',
                     'title' => 'Statybos vadovas Utenoje',
                     'categories' => ['remontas', 'apdailos-darbai', 'statybos'],
                     'text' => 'Ieškome atestuoto statybos darbų vadovo nedidelių objektų statybos darbams, t.p.griovimo darbams. Reikalavimai: vairuotojo pažymėjimas, dokumentų pildymas, darbas su klientais, jų paieška. Galime suteikti gyvenamąjį plotą darbo dienomis.',
@@ -302,6 +318,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'technikos-pajungimas',
                     'email' => 'aurimas@uzsakovas.lt',
+                    'city' => 'Šalčinikų savivaldybė',
                     'title' => 'Buitinės technikos pajungimas',
                     'categories' => ['buitines-technikos-pajungimas'],
                     'text' => 'Reikia pajungti visą buitinę techniką (indaplovę, kaitlentę, skalbimo mašiną, šaldytuvą, gartraukį) naujoje virtuvėje. Vilnius (Pašilaičiai).',
@@ -310,6 +327,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'baldu-isrinkimas',
                     'email' => 'martyna@uzsakove.lt',
+                    'city' => 'Vilnius',
                     'title' => 'Baldų išrinkimas/surinkimas',
                     'categories' => ['remontas', 'baldai', 'kita'],
                     'text' => 'Kraustomės, reikia išrinkti visus baldus, o naujame bute surinkti. Vėliau būtų daugiau baldų, kuriuos reiktų surinkti',
@@ -426,6 +444,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => false,
                     'name' => 'Aurimas',
                     'last_name' => 'Vilys',
+                    'descriptions' => '',
+                    'city' => 'Vilnius',
                 ],
                 [
                     'email' => 'martyna@uzsakove.lt',
@@ -434,6 +454,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => true,
                     'name' => 'Martyna',
                     'last_name' => 'B',
+                    'descriptions' => '',
+                    'city' => 'Vilnius',
                 ],
                 [
                     'email' => 'vilius@uzsakovas.lt',
@@ -442,6 +464,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => true,
                     'name' => 'Vilius',
                     'last_name' => 'Gumonis',
+                    'descriptions' => '',
+                    'city' => 'Vilnius',
                 ],
                 [
                     'email' => 'laurynas@uzsakovas.lt',
@@ -450,6 +474,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => true,
                     'name' => 'Laurynas',
                     'last_name' => 'Valenta',
+                    'descriptions' => '',
+                    'city' => 'Vilnius',
                 ],
                 [
                     'email' => 'aurimas@rangovas.lt',
@@ -458,7 +484,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => true,
                     'name' => 'Aurimas',
                     'last_name' => 'Vilys',
-                    'descriptions' => 'Profesionalus sienų dažytojas'
+                    'descriptions' => 'Profesionalus sienų dažytojas',
+                    'city' => 'Vilnius',
                 ],
                 [
                     'email' => 'martyna@rangove.lt',
@@ -467,7 +494,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => true,
                     'name' => 'Martyna',
                     'last_name' => 'B',
-                    'descriptions' => 'Profesionali interjero dizainerė'
+                    'descriptions' => 'Profesionali interjero dizainerė',
+                    'city' => 'Vilnius',
                 ],
                 [
                     'email' => 'vilius@rangovas.lt',
@@ -476,7 +504,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => true,
                     'name' => 'Vilius',
                     'last_name' => 'Gumonis',
-                    'descriptions' => 'Profesionalus  santechnikas'
+                    'descriptions' => 'Profesionalus  santechnikas',
+                    'city' => 'Vilnius',
                 ],
                 [
                     'email' => 'laurynas@rangovas.lt',
@@ -485,7 +514,8 @@ class AppFixtures extends Fixture
                     'is_confirmed' => true,
                     'name' => 'Laurynas',
                     'last_name' => 'Valenta',
-                    'descriptions' => 'Profesionalus darbų vykdytojas'
+                    'descriptions' => 'Profesionalus darbų vykdytojas',
+                    'city' => 'Vilnius',
                 ],
             ];
     }

@@ -24,7 +24,6 @@ class ProfileController extends AbstractController
         ProfileDataChangeHandler $profileHandler,
         ProfilePasswordChangeHandler $profilePasswordChangeHandler
     ) {
-
         $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $this->getUser());
         $profilePasswordForm = $this->createForm(ProfilePasswordFormType::class);
 
@@ -45,10 +44,8 @@ class ProfileController extends AbstractController
         }
 
         if ($profileDetailsForm->isSubmitted() && $profileDetailsForm->isValid()) {
-            $user = $this->getUser();
-
             $profileDetailsDTO = $profileDetailsForm->getData();
-            $profileHandler->handle($user, $profileDetailsDTO);
+            $profileHandler->handle($profileDetailsDTO);
             $this->addFlash('success', 'Profilio duomenys atnaujinti');
 
             return $this->redirectToRoute('profile');

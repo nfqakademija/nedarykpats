@@ -81,6 +81,7 @@ class AdvertCreationHandler
         $advert->setTitle($advertFormDTO->getTitle())
             ->setText($advertFormDTO->getText())
             ->setCategories($advertFormDTO->getCategories())
+            ->setCity($advertFormDTO->getCity())
             ->setUser($user)
             ->setIsConfirmed($advertConfirmed);
 

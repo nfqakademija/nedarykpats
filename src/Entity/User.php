@@ -98,6 +98,12 @@ class User implements UserInterface
     private $offers;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\City")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $city;
+
+    /**
      * User constructor.
      * @throws \Exception
      */
@@ -408,6 +414,18 @@ class User implements UserInterface
                 $offer->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

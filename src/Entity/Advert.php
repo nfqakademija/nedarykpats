@@ -60,11 +60,6 @@ class Advert
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\City", mappedBy="name", orphanRemoval=true)
-     */
-    private $city;
-
-    /**
      * @ORM\Column(type="boolean")
      * @var bool
      */
@@ -80,6 +75,13 @@ class Advert
      * @ORM\OneToOne(targetEntity="App\Entity\Offer", cascade={"persist", "remove"})
      */
     private $acceptedOffer;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="adverts")
+     * @ORM\JoinColumn(nullable=false)
+     * @var City
+     */
+    private $city;
 
 
     /**
@@ -134,25 +136,6 @@ class Advert
     public function setText(string $text): ?self
     {
         $this->text = $text;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getCity()
-    {
-        return $this->city;
-    }
-
-    /**
-     * @param City $city
-     * @return Advert
-     */
-    public function setCity(City $city)
-    {
-        $this->city = $city;
-
         return $this;
     }
 
@@ -343,6 +326,25 @@ class Advert
     public function setAcceptedOffer(?Offer $acceptedOffer): self
     {
         $this->acceptedOffer = $acceptedOffer;
+
+        return $this;
+    }
+
+    /**
+     * @return City|null
+     */
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param City|null $city
+     * @return Advert
+     */
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

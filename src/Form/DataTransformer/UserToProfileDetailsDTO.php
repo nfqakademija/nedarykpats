@@ -20,7 +20,8 @@ class UserToProfileDetailsDTO implements DataTransformerInterface
         $profileDetailsDTO
             ->setName($user->getName())
             ->setLastName($user->getLastName())
-            ->setDescription($user->getDescription());
+            ->setDescription($user->getDescription())
+            ->setCity($user->getCity());
 
         return $profileDetailsDTO;
     }
