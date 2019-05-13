@@ -98,6 +98,4 @@ class ProfileDetailsDTO
         $this->city = $city;
         return $this;
     }
-
-
 }
