@@ -31,11 +31,12 @@ class AdvertController extends AbstractController
         if ($advertForm->isSubmitted() && $advertForm->isValid()) {
             $advertFormDTO = $advertForm->getData();
             $advert = $advertCreationHandler->handle($advertFormDTO);
+            $email = $advertFormDTO->getEmail();
 
             if ($advert->isConfirmed()) {
                 $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
             } else {
-                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas el. paštu');
+                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas šiuo el. paštu ' . $email);
             }
 
             return $this->redirect('/advert/'. $advert->getid());
@@ -65,11 +66,12 @@ class AdvertController extends AbstractController
             $offerFormDTO = $offerForm->getData();
             $offerFormDTO->setAdvert($advert);
             $offer = $offerCreationHandler->handle($offerFormDTO);
+            $email = $offerFormDTO->getEmail();
 
             if ($offer->isConfirmed()) {
                 $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
             } else {
-                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas el. paštu');
+                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas šiuo el. paštu ' . $email);
             }
 
             return $this->redirect($request->getUri());

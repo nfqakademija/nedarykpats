@@ -4,5 +4,9 @@
   &--single {
     grid-template-columns: none;
   }
+  
+  &--col2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 

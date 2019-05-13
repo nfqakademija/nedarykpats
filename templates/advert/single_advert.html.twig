@@ -1,8 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="Content Content--top Content--GreyBg ">
-        <div class="Content-Block">
+
+<div class="Content Content--top">
+    <div class="Content-Block">
+    </div>
+</div>
+
+<div class="Content Content--GreyBg">
+    <div class="Content-Block">
+
+    <div class="Content Content--GreyBg ">
+        <se class="Content-Block">
 
             <div class="u-display-right">
                 <a class="Button" href="/#FilterBar">Atgal</a>
@@ -65,22 +74,30 @@
             {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
                 {% for offer in advert.offers %}
                     {% if app.user.email == offer.user.email or app.user == advert.user %}
-                    <section class="Comments">
-                        <section class="Comments-block">
-                            <div class="Comments-content">
-                                <div class="Comments-header">
-                                    <span class="Comments-image">
-                                        <img src="/img/user1.png" alt="user">
-                                    </span>
-                                    <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+
+                    <section class="LayoutGrid LayoutGrid--col2">
+                        <section class="Comments">
+                            <section class="Comments-block">
+                                <div class="Comments-content">
+                                    <div class="Comments-header">
+                                        <span class="Comments-image">
+                                            <img src="/img/user1.png" alt="user">
+                                        </span>
+                                        <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+                                    </div>
+                                    <div class="Comments-text">
+                                        <div class="Comments-author">{{ offer.user.username }}</div>
+                                        <p>{{ offer.text }}</p>
+                                    </div>
+                                    <div class="u-margin-top-bottom u-align-space-around">
+                                        <Button class="Button Button--blue u-margin-top-small"><i class="fas fa-check"></i> Priimti</Button>
+                                        <Button class="Button u-margin-top-small"><i class="fas fa-times"></i> Atmesti</Button>
+                                    </div>
                                 </div>
-                                <div class="Comments-text">
-                                    <div class="Comments-author">{{ offer.user.username }}</div>
-                                    <p>{{ offer.text }}</p>
-                                </div>
-                            </div>
+                            </section>
                         </section>
                     </section>
+
                     {% endif %}
                 {% endfor %}
             {% endif %}

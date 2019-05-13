@@ -37,10 +37,11 @@ class RegistrationController extends AbstractController
             $this->setUserProperties($user, $passwordEncoder, $form);
 
             $registrationHandler->handle($user);
+            $email = $user->getEmail();
 
             $this->addFlash(
                 'success',
-                'Norėdami baigti registraciją, paspauskite ant nuorodos, išsiųstos pateiktu el. paštu'
+                'Norėdami baigti registraciją, pasitikrinkite el. paštą ' . $email
             );
 
             return new RedirectResponse($this->generateUrl('home'));

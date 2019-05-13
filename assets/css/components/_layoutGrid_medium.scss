@@ -4,4 +4,8 @@
   grid-gap: var(--spaceMedium);
   grid-template-columns: repeat(2, 1fr);
   align-items: flex-start;
+  
+  &--col2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
