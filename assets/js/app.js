@@ -1,23 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AddCategories from './components/createForm/AddCategories.jsx';
+import Review from './components/review/review.jsx';
 
-// require('bootstrap');
 require('../css/app.scss');
-
-// const layoutItems = document.querySelectorAll('.Ad');
-// const layoutRoot = document.querySelectorAll('#Ads');
-// ReactDOM.render(
-//     <LayoutMasonry
-//         layoutRoot = {layoutRoot}
-//         layoutItems = {layoutItems}/>,
-//     document.getElementById("Ads")
-// );
 
 const categories = document.getElementById('AdvertCategories');
 if (categories) {
     try {
         ReactDOM.render(<AddCategories {...categories.dataset} />, categories);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+const review = document.getElementById('writeReview');
+if (review) {
+    try {
+        ReactDOM.render(<Review />, review);
     } catch (error) {
         console.error(error);
     }

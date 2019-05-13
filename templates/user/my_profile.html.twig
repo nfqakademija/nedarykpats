@@ -10,21 +10,6 @@
     <div class="Content Content--GreyBg ">
         <div class="Content-Block">
 
-            {% if app.session.flashBag.has('success') %}
-                <div class="Alert Alert-success">
-                    <span class="Alert-icon">
-                        <img src="/img/success.svg" alt="success">
-                           {% for msg in app.session.flashBag.get('success') %}
-                               {{ msg }}
-                           {% endfor %}
-                    </span>
-                </div>
-            {% endif %}
-
-            <div class="u-display-right">
-                <a href="#EditUserModal" class="Button">Redaguoti <i class="fas fa-user-edit"></i> </a>
-            </div>
-
             <section class="Form Form--column u-align-top u-padding-top">
                 <div class="Column-3">
                     <div class="Form-avatar u-align-center u-margin-bottom u-col-3">
@@ -60,12 +45,6 @@
                 </div>
             </section>
 
-            <a href="#writeReviewModal">Write Review</a>
-
-            <section id="writeReviewModal" class="Modal">
-                <div id="writeReview"></div>
-            </section>
-
             <section class="LayoutGrid">
                     <section class="Comments">
                         <section class="Comments-block">
@@ -90,6 +69,64 @@
                             </div>
                         </section>
                     </section>
+
+
+
+
+                {% if app.session.flashBag.has('success') %}
+                    <div class="Alert Alert-success">
+                    <span class="Alert-icon">
+                        <img src="/img/success.svg" alt="success">
+                           {% for msg in app.session.flashBag.get('success') %}
+                               {{ msg }}
+                           {% endfor %}
+                    </span>
+                    </div>
+                {% endif %}
+
+
+                <form method="post" class="Form Form-background Form--short">
+                    {{ form_start(profileDetailsForm) }}
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.name) }}
+                        {{ form_widget(profileDetailsForm.name) }}
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.lastName) }}
+                        {{ form_widget(profileDetailsForm.lastName) }}
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.description) }}
+                        {{ form_widget(profileDetailsForm.description) }}
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.city,'Miestas') }}
+                        {{ form_widget(profileDetailsForm.city) }}
+                    </div>
+                    {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
+                    {{ form_end(profileDetailsForm) }}
+                </form>
+
+
+                <form method="post" class="Form Form-background Form--short">
+                {{ form_start(profilePasswordForm) }}
+                    <div class="Form-item">
+                        {{ form_label(profilePasswordForm.newPassword) }}
+                        {{ form_widget(profilePasswordForm.newPassword) }}
+                        <span class="Form-errors">
+                            {{ form_errors(profilePasswordForm.newPassword) }}
+                        </span>
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profilePasswordForm.newPasswordConfirmation) }}
+                        {{ form_widget(profilePasswordForm.newPasswordConfirmation) }}
+                        <span class="Form-errors">
+                            {{ form_errors(profilePasswordForm.newPasswordConfirmation) }}
+                </span>
+                    </div>
+                {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
+                {{ form_end(profilePasswordForm) }}
+                </form>
 
                 <section class="Comments">
                         <section class="Comments-block">
@@ -122,7 +159,7 @@
                                         <span class="Comments-image">
                                             <img src="/img/user1.png" alt="user">
                                         </span>
-                                        <span class="StarRating StarRating--small u-align-center">
+                                    <span class="StarRating StarRating--small u-align-center">
                                             <span class="StarRating-star fa fa-star checked"></span>
                                             <span class="StarRating-star fa fa-star checked"></span>
                                             <span class="StarRating-star fa fa-star checked"></span>
@@ -140,66 +177,7 @@
                     </section>
             </section>
 
-            <section id="EditUserModal" class="Modal">
-
-                {#TODO: ar useriui reikia kategorijų?#}
-
-                <div>
-                    <a href="#" title="Close" class="Modal-close">Close</a>
-
-                    <form method="post" class="Form Form-background Form--short">
-                        {{ form_start(profileDetailsForm) }}
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.name) }}
-                            {{ form_widget(profileDetailsForm.name) }}
-                        </div>
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.lastName) }}
-                            {{ form_widget(profileDetailsForm.lastName) }}
-                        </div>
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.description) }}
-                            {{ form_widget(profileDetailsForm.description) }}
-                        </div>
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.city,'Miestas') }}
-                            {{ form_widget(profileDetailsForm.city) }}
-                        </div>
-                        {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
-                        {{ form_end(profileDetailsForm) }}
-                    </form>
-
-
-                    <form method="post" class="Form Form-background Form--short">
-                        {{ form_start(profilePasswordForm) }}
-                        <div class="Form-item">
-                            {{ form_label(profilePasswordForm.newPassword) }}
-                            {{ form_widget(profilePasswordForm.newPassword) }}
-                            <span class="Form-errors">
-                                {{ form_errors(profilePasswordForm.newPassword) }}
-                            </span>
-                        </div>
-                        <div class="Form-item">
-                            {{ form_label(profilePasswordForm.newPasswordConfirmation) }}
-                            {{ form_widget(profilePasswordForm.newPasswordConfirmation) }}
-                            <span class="Form-errors">
-                                {{ form_errors(profilePasswordForm.newPasswordConfirmation) }}
-                    </span>
-                        </div>
-                        {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
-                        {{ form_end(profilePasswordForm) }}
-                    </form>
-
-                </div>
-            </section>
-
         </div>
     </div>
-
-    <script>
-        var usingVersionedFileJs = true;
-        var usingReactApp = true;
-    </script>
-    {{ parent() }}
 
 {% endblock %}
