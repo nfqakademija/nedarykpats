@@ -2,6 +2,8 @@
 
 namespace App\DTO;
 
+use App\Entity\City;
+
 class ProfileDetailsDTO
 {
 
@@ -19,6 +21,11 @@ class ProfileDetailsDTO
      * @var string
      */
     private $description;
+
+    /**
+     * @var City
+     */
+    private $city;
 
     /**
      * @return string
@@ -73,4 +80,24 @@ class ProfileDetailsDTO
         $this->description = $description;
         return $this;
     }
+
+    /**
+     * @return City
+     */
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param City $city
+     * @return ProfileDetailsDTO
+     */
+    public function setCity(?City $city): ProfileDetailsDTO
+    {
+        $this->city = $city;
+        return $this;
+    }
+
+
 }

@@ -99,6 +99,10 @@
                         {{ form_label(profileDetailsForm.description) }}
                         {{ form_widget(profileDetailsForm.description) }}
                     </div>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.city,'Miestas') }}
+                        {{ form_widget(profileDetailsForm.city) }}
+                    </div>
                     {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
                     {{ form_end(profileDetailsForm) }}
                 </form>

@@ -83,7 +83,7 @@ class AdvertFormDTO
     /**
      * @return City
      */
-    public function getCity(): City
+    public function getCity(): ?City
     {
         return $this->city;
     }
@@ -92,7 +92,7 @@ class AdvertFormDTO
      * @param City $city
      * @return AdvertFormDTO
      */
-    public function setCity(City $city): AdvertFormDTO
+    public function setCity(?City $city): AdvertFormDTO
     {
         $this->city = $city;
         return $this;

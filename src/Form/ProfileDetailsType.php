@@ -3,7 +3,9 @@
 namespace App\Form;
 
 use App\DTO\ProfileDetailsDTO;
+use App\Entity\City;
 use App\Form\DataTransformer\UserToProfileDetailsDTO;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -37,6 +39,10 @@ class ProfileDetailsType extends AbstractType
             ->add('name', TextType::class, ['empty_data' => 'Default value'])
             ->add('lastName', TextType::class, ['empty_data' => 'Default value'])
             ->add('description', TextareaType::class, ['empty_data' => 'Default value'])
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choice_label' => 'name'
+            ])
             ->add('save', SubmitType::class, ['label' => 'Išsaugoti'])
             ->addModelTransformer($this->userToProfileDetailsDTOTransformer);
     }
