@@ -1,20 +1,18 @@
 <?php
 
 
-namespace App\Form\DataTransformer;
+namespace App\DataTransformer;
 
 use App\DTO\ProfileDetailsDTO;
 use App\Entity\User;
-use Symfony\Component\Form\DataTransformerInterface;
 
-class UserToProfileDetailsDTO implements DataTransformerInterface
+class UserToProfileDetailsDTO
 {
-
     /**
      * @param User $user
      * @return ProfileDetailsDTO
      */
-    public function transform($user)
+    public function transform(User $user)
     {
         $profileDetailsDTO = new ProfileDetailsDTO();
         $profileDetailsDTO
@@ -24,15 +22,5 @@ class UserToProfileDetailsDTO implements DataTransformerInterface
             ->setCity($user->getCity());
 
         return $profileDetailsDTO;
-    }
-
-    /**
-     * @param ProfileDetailsDTO $profileDTO
-     * @return ProfileDetailsDTO void
-     * @throws \Exception
-     */
-    public function reverseTransform($profileDTO)
-    {
-        return $profileDTO;
     }
 }
