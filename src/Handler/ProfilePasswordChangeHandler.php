@@ -44,22 +44,15 @@ class ProfilePasswordChangeHandler
 
     /**
      * @param ProfilePasswordDTO $profilePasswordDTO
-     * @return bool
+     * @return void
      */
-    public function handle(ProfilePasswordDTO $profilePasswordDTO): bool
+    public function handle(ProfilePasswordDTO $profilePasswordDTO): void
     {
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
-        $success = false;
-
-        if ($profilePasswordDTO->getNewPassword() === $profilePasswordDTO->getNewPasswordConfirmation()) {
-            $newPassword = $this->passwordEncoder->encodePassword($user, $profilePasswordDTO->getNewPassword());
-            $user->setPassword($newPassword);
-            $this->entityManager->flush();
-            $success = true;
-        }
-
-        return $success;
+        $newPassword = $this->passwordEncoder->encodePassword($user, $profilePasswordDTO->getNewPassword());
+        $user->setPassword($newPassword);
+        $this->entityManager->flush();
     }
 }

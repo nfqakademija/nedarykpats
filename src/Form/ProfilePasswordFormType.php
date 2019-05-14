@@ -15,7 +15,6 @@ class ProfilePasswordFormType extends AbstractType
     {
         $builder
             ->add('newPassword', PasswordType::class)
-            ->add('newPasswordConfirmation', PasswordType::class)
             ->add('save', SubmitType::class, ['label' => 'Pakeisti']);
     }
 

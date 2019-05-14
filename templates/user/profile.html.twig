@@ -180,13 +180,6 @@
                                 {{ form_errors(profilePasswordForm.newPassword) }}
                             </span>
                         </div>
-                        <div class="Form-item">
-                            {{ form_label(profilePasswordForm.newPasswordConfirmation) }}
-                            {{ form_widget(profilePasswordForm.newPasswordConfirmation) }}
-                            <span class="Form-errors">
-                                {{ form_errors(profilePasswordForm.newPasswordConfirmation) }}
-                    </span>
-                        </div>
                         {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
                         {{ form_end(profilePasswordForm) }}
                     </form>
