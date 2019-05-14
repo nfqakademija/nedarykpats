@@ -53,6 +53,10 @@
   padding-top: var(--spaceMedium);
 }
 
+.u-margin-around {
+  margin: var(--spaceSmall) var(--spaceMedium);
+}
+
 .u-margin-top-bottom {
   margin-bottom: var(--spaceMedium);
   margin-top: var(--spaceLarge);
@@ -81,4 +85,14 @@
 
 .u-no-margin-top {
   margin-top: 0 !important;
+}
+
+.u-lineCount-1 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: var(--lineHeight);
+  max-height: var(--lineHeightForLines);
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
 }

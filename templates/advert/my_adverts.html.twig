@@ -6,12 +6,12 @@
 
     <div class="Content Content--top">
         <div class="Content-Block">
-            {% include 'components/filter_bar.html.twig' with {'header' : ''} %}
+            {#{% include 'components/filter_bar.html.twig' with {'header' : ''} %}#}
         </div>
     </div>
 
     <div class="Content Content--GreyBg">
-        <div class="Content-Block">
+        <div class="Content-Block u-padding-top">
 
             {% block ads %}
                 {% if filteredAdverts|length < 1 %}
@@ -21,10 +21,40 @@
                     </div>
                 {% endif %}
 
-                <section id="Ads" class="LayoutGrid">
+                <section id="Ads" class="LayoutLine">
 
                     {% for advert in filteredAdverts %}
-                        {% include 'components/advert_item.html.twig' %}
+
+                        <section class="LayoutLine-item LayoutLine-item--link"
+                                 onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">
+
+                            <div class="LayoutLine-leftSide">
+                                {#TODO: prideti stausa#}
+                                <div class="Bid Bid--center">
+                                {% if advert.getOffersCount()  > 0 %}
+                                    <span class="Bid-header">Aplikavo</span>
+                                    <span class="Bid-count">{{ advert.getOffersCount() }}</span>
+                                    {% else %}
+                                    <span class="Bid-header">&#8203;</span>
+                                    <span class="Bid-count">&#8203;</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="LayoutLine-title">
+                                <h3 class="Header">{{ advert.title }}</h3>
+                                <div> {{ advert.createdAt|date("Y-m-d") }} </div>
+                                <p class="u-lineCount-1">{{ advert.text }}</p>
+                            </div>
+
+                            <div class="LayoutLine-rightSide">
+                                <div class="Button Button--default u-margin-around"><i class="fas fa-edit"></i> Tikrinti</div>
+                                <div class="Button Button--default Button--red u-margin-around"><i class="fas fa-times"></i> Trinti</div>
+                                {#TODO: netrinti, mygtukas bus naudojamas atsiradus duomenu istraukimo logikai#}
+                                {#<div class="Button Button--default Button--yellow u-margin-around"><i class="fas fa-star"></i> Vertinti</div>#}
+                            </div>
+                        </section>
+
                     {% endfor %}
 
                 </section>
