@@ -16,12 +16,12 @@
         <div class="Content Content--dialog">
             <div class="Content-Block u-align-center">
                 <div class="Alert">
-                        <span class="Alert-icon">
-                            <img src="/img/fail.svg" alt="fail">
-                               {% for msg in app.session.flashBag.get('fail') %}
-                                   {{ msg }}
-                               {% endfor %}
-                        </span>
+                    <span class="Alert-icon">
+                        <img src="/img/fail.svg" alt="fail">
+                           {% for msg in app.session.flashBag.get('fail') %}
+                               {{ msg }}
+                           {% endfor %}
+                    </span>
                 </div>
             </div>
         </div>

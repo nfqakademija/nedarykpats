@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Form\ProfileDetailsType;
+use App\Entity\User;
 use App\Form\ProfilePasswordFormType;
 use App\Handler\ProfileDataChangeHandler;
 use App\Handler\ProfilePasswordChangeHandler;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,12 +16,15 @@ class ProfileController extends AbstractController
 {
 
     /**
-     * @Route ("/profile" , name="profile")
+     * @Route ("/profile/{id}" , name="profile", requirements={"id"="\d+"})
+     * @ParamConverter("user", class="App:User"))
+     * @param User $user
      * @param Request $request
      * @param ProfileDataChangeHandler $profileHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function index(
+        User $user,
         Request $request,
         ProfileDataChangeHandler $profileHandler,
         ProfilePasswordChangeHandler $profilePasswordChangeHandler
@@ -53,7 +58,8 @@ class ProfileController extends AbstractController
 
         return $this->render('user/profile.html.twig', [
             'profileDetailsForm' => $profileDetailsForm->createView(),
-            'profilePasswordForm' => $profilePasswordForm->createView()
+            'profilePasswordForm' => $profilePasswordForm->createView(),
+            'user' => $user
         ]);
     }
 }
