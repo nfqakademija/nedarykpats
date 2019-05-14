@@ -6,7 +6,8 @@
 
 @import "layout/content";
 @import "components/filterBar";
-@import "components/layoutGrid";
+@import "layout/layoutGrid";
+@import "layout/layoutLine";
 @import "components/ad";
 @import "components/header";
 @import "components/date";
@@ -36,7 +37,8 @@
 
 @media (min-width: 600px) {
   @import "layout/content_medium";
-  @import "components/layoutGrid_medium";
+  @import "layout/layoutGrid_medium";
+  @import "layout/layoutLine_medium";
   @import "components/pagination_medium";
   @import "components/comments_medium";
   @import "components/selectedAd_medium";
@@ -48,7 +50,8 @@
 
 @media (min-width: 1200px) {
   @import "layout/content_large";
-  @import "components/layoutGrid_large";
+  @import "layout/layoutGrid_large";
+  @import "layout/layoutLine_large";
   @import "components/ad_large";
   @import "components/pagination_large";
   @import "components/comments_large";

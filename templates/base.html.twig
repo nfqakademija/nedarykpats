@@ -37,7 +37,7 @@
                                     </span>
                                     <ul class="dropdown">
                                         <li class="Nav-subItem"><span class="Nav-link">{{ app.user.username }}</span></li>
-                                        <li class="Nav-subItem"><a class="Nav-link" href="{{ path('profile') }}">Profilis</a></li>
+                                        <li class="Nav-subItem"><a class="Nav-link" href='{{ path('profile', {'id': app.user.id }) }}'>Profilis</a></li>
                                         <li class="Nav-subItem"><a class="Nav-link" href="#">Pasiūlymai</a></li>
                                         <li class="Nav-subItem"><a class="Nav-link" href="{{ path('logout') }}">Atsijungti</a></li>
                                     </ul>

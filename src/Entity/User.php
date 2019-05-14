@@ -104,6 +104,11 @@ class User implements UserInterface
     private $city;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="receivingUser")
+     */
+    private $feedback;
+
+    /**
      * User constructor.
      * @throws \Exception
      */
@@ -112,6 +117,7 @@ class User implements UserInterface
         $this->adverts = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->offers = new ArrayCollection();
+        $this->feedback = new ArrayCollection();
     }
 
     /**
@@ -395,6 +401,10 @@ class User implements UserInterface
         return $this->offers;
     }
 
+    /**
+     * @param Offer $offer
+     * @return User
+     */
     public function addOffer(Offer $offer): self
     {
         if (!$this->offers->contains($offer)) {
@@ -405,6 +415,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Offer $offer
+     * @return User
+     */
     public function removeOffer(Offer $offer): self
     {
         if ($this->offers->contains($offer)) {
@@ -418,14 +432,60 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return City|null
+     */
     public function getCity(): ?City
     {
         return $this->city;
     }
 
+    /**
+     * @param City|null $city
+     * @return User
+     */
     public function setCity(?City $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Feedback[]
+     */
+    public function getFeedback(): Collection
+    {
+        return $this->feedback;
+    }
+
+    /**
+     * @param Feedback $feedback
+     * @return User
+     */
+    public function addFeedback(Feedback $feedback): self
+    {
+        if (!$this->feedback->contains($feedback)) {
+            $this->feedback[] = $feedback;
+            $feedback->setReceivingUser($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param Feedback $feedback
+     * @return User
+     */
+    public function removeFeedback(Feedback $feedback): self
+    {
+        if ($this->feedback->contains($feedback)) {
+            $this->feedback->removeElement($feedback);
+            // set the owning side to null (unless already changed)
+            if ($feedback->getReceivingUser() === $this) {
+                $feedback->setReceivingUser(null);
+            }
+        }
 
         return $this;
     }

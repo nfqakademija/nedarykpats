@@ -80,9 +80,11 @@
                             <section class="Comments-block">
                                 <div class="Comments-content">
                                     <div class="Comments-header">
-                                        <span class="Comments-image">
-                                            <img src="/img/user1.png" alt="user">
-                                        </span>
+                                       <a href='{{ path('profile', {'id': offer.user.id }) }}'>
+                                           <span class="Comments-image">
+                                                <img src="/img/user1.png" alt="user">
+                                            </span>
+                                       </a>
                                         <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
                                     </div>
                                     <div class="Comments-text">

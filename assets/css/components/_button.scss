@@ -31,5 +31,32 @@
     width: 100%;
   }
   
+  &--default {
+    display: block;
+    width: auto;
+    padding-left: 0;
+    padding-right: 0;
+    border-color: var(--colorMediumGrey);
+    color: var(--colorMediumGrey);
+  }
+  
+  &--red {
+    border-color: var(--colorRed);
+    color: var(--colorRed);
+    
+    &:hover {
+      background-color: var(--colorRed);
+    }
+  }
+  
+  &--yellow {
+    border-color: var(--colorYellow);
+    color: var(--colorYellow);
+  
+    &:hover {
+      background-color: var(--colorYellow);
+    }
+  }
+  
 }
 
