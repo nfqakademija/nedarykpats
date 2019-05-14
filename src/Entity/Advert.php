@@ -83,6 +83,11 @@ class Advert
      */
     private $city;
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Feedback", mappedBy="advert", cascade={"persist", "remove"})
+     */
+    private $feedback;
+
 
     /**
      * Advert constructor.
@@ -345,6 +350,30 @@ class Advert
     public function setCity(?City $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * @return Feedback|null
+     */
+    public function getFeedback(): ?Feedback
+    {
+        return $this->feedback;
+    }
+
+    /**
+     * @param Feedback $feedback
+     * @return Advert
+     */
+    public function setFeedback(Feedback $feedback): self
+    {
+        $this->feedback = $feedback;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $feedback->getAdvert()) {
+            $feedback->setAdvert($this);
+        }
 
         return $this;
     }
