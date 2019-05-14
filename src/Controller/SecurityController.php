@@ -76,7 +76,7 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        $result = $tokenConsumerService->consume($token);
+        $tokenConsumerService->consume($token);
 
         $guardHandler->authenticateUserAndHandleSuccess(
             $token->getUser(),
