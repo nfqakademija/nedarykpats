@@ -40,25 +40,33 @@ class OfferCreationHandler
     private $tokenGeneratorService;
 
     /**
+     * @var UserUpdateHandler
+     */
+    private $userUpdateHandler;
+
+    /**
      * AdvertCreationHandler constructor.
      * @param EntityManagerInterface $entityManager
      * @param TokenStorageInterface $tokenStorage
      * @param UserCreationHandler $userCreationHandler
      * @param EmailHandler $emailHandler
      * @param TokenGeneratorService $tokenGeneratorService
+     * @param UserUpdateHandler $userUpdateHandler
      */
     public function __construct(
         EntityManagerInterface $entityManager,
         TokenStorageInterface $tokenStorage,
         UserCreationHandler $userCreationHandler,
         EmailHandler $emailHandler,
-        TokenGeneratorService $tokenGeneratorService
+        TokenGeneratorService $tokenGeneratorService,
+        UserUpdateHandler $userUpdateHandler
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
         $this->userCreationHandler = $userCreationHandler;
         $this->emailHandler = $emailHandler;
         $this->tokenGeneratorService = $tokenGeneratorService;
+        $this->userUpdateHandler = $userUpdateHandler;
     }
 
     /**
@@ -78,7 +86,17 @@ class OfferCreationHandler
             $offerConfirmed = false;
         }
         if (!$user instanceof User) {
-            $user = $this->userCreationHandler->createUser($offerFormDTO->getEmail());
+            $user = $this->userCreationHandler->createUser(
+                $offerFormDTO->getEmail(),
+                $offerFormDTO->getFirstName(),
+                $offerFormDTO->getLastName()
+            );
+        } else {
+            $user = $this->userUpdateHandler->handle(
+                $user,
+                $offerFormDTO->getFirstName(),
+                $offerFormDTO->getLastName()
+            );
         }
 
         $offer = new Offer();

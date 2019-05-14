@@ -103,8 +103,33 @@
             {% endif %}
             {% if app.user != advert.user %}
             {{ form_start(offerForm, {'attr': {'class' : 'ReplayBlock'}}) }}
+                {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
+                    {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
+                    {{ form_row(offerForm.firstName, { 'label': 'Vardas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo vardas"  }  }) }}
+                    {{ form_row(offerForm.lastName, { 'label': 'Pavardė', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo pavardė"  }  }) }}
+                {% else %}
+                    {#TODO: slėpti. Reikia input paslėpimo#}
+                    <div class="Form-item" hidden>
+                        {{ form_row(offerForm.email, { 'value' : app.user.email, 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
+                    </div>
+                    {% if app.user.name is not empty %}
+                        {#TODO: slėpti. Reikia input paslėpimo#}
+                         <div class="Form-item" hidden>
+                            {{ form_row(offerForm.firstName, { 'value':app.user.name, 'label': 'Vardas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo vardas"  }  }) }}
+                        </div>
+                    {% else %}
+                            {{ form_row(offerForm.firstName, { 'label': 'Vardas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo vardas"  }  }) }}
+                    {% endif %}
+                    {% if app.user.lastname is not empty %}
+                        {#TODO: slėpti. Reikia input paslėpimo#}
+                         <div class="Form-item" hidden>
+                            {{ form_row(offerForm.lastName, { 'value':app.user.lastname, 'label': 'Pavardė', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo pavardė"  }  }) }}
+                         </div>
+                    {% else %}
+                        {{ form_row(offerForm.lastName, { 'label': 'Pavardė', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo pavardė"  }  }) }}
+                    {% endif %}
+                {% endif %}
 
-                {{ form_row(offerForm.email, { 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
                 {{ form_row(offerForm.text, {'label': 'Skelbimo tekstas', 'attr' : { 'class' : 'ReplayBlock-content', 'placeholder' : "Parašyk žinutę su trumpa informacija apie save.", 'rows': "8" }}) }}
                 {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
 
