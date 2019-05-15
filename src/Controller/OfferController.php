@@ -6,6 +6,7 @@ use App\Entity\Offer;
 use App\Handler\OfferStatusHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class OfferController extends AbstractController
@@ -64,4 +65,15 @@ class OfferController extends AbstractController
 
         return $this->redirectToRoute('advert', ['id' => $advert->getId()]);
     }
+
+    /**
+     * @Route("/my-offers/", name="my_offers")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function myOffer()
+    {
+        return $this->render('offer/my_offers.html.twig', []);
+    }
 }
+
+

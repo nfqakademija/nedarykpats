@@ -8,5 +8,9 @@
   &--col2 {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  &--col3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
