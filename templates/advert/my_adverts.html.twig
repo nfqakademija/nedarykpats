@@ -48,10 +48,14 @@
                             </div>
 
                             <div class="LayoutLine-rightSide">
-                                <div class="Button Button--default u-margin-around"><i class="fas fa-edit"></i> Tikrinti</div>
-                                <div class="Button Button--default Button--red u-margin-around"><i class="fas fa-times"></i> Trinti</div>
-                                {#TODO: netrinti, mygtukas bus naudojamas atsiradus duomenu istraukimo logikai#}
-                                {#<div class="Button Button--default Button--yellow u-margin-around"><i class="fas fa-star"></i> Vertinti</div>#}
+                                {% if advert.acceptedOffer %}
+                                    {% if not advert.feedback %}
+                                        <div class="Button Button--default Button--yellow u-margin-around"><i class="fas fa-star"></i> Vertinti</div>
+                                    {% endif %}
+                                {% else %}
+                                    <div class="Button Button--default u-margin-around"><i class="fas fa-edit"></i> Tikrinti</div>
+                                    <div class="Button Button--default Button--red u-margin-around"><i class="fas fa-times"></i> Trinti</div>
+                                {% endif %}
                             </div>
                         </section>
 
