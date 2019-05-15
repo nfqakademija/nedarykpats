@@ -7,7 +7,7 @@ class LoginAvatar extends Component{
         return(
             <div className="Form-avatar u-align-center u-margin-top-bottom">
 
-                čia bus avataras :)
+                <div>Cia bus avatras</div>
 
             </div>
         )

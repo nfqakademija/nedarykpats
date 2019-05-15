@@ -8,61 +8,59 @@
 
             <div id="LoginForm"></div>
 
-            <div class="Form Form-background Form--short">
+            {#<div class="Form Form-background Form--short">#}
 
-                <div class="Form-avatar u-align-center u-margin-top-bottom">
-                    {% include 'components/avatar.html.twig' %}
-                </div>
+                {#<div class="Form-avatar u-align-center u-margin-top-bottom">#}
+                    {#{% include 'components/avatar.html.twig' %}#}
+                {#</div>#}
 
-                <h3 class="u-text-center u-margin-bottom">Prisijungti</h3>
-
-                <form method="post" id="login-directly" >
+                {#<form method="post" id="login-directly" >#}
                     {#TODO: sutvarkyti errorus, atskirti, kuriam inputui kas priklauso#}
-                    <div class="Form-item">
-                        <label for="floatField">El. paštas</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" required />
-                        <span class="Form-errors">
-                            {% if error %}
-                             <span class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-                            {% endif %}
-                         </span>
-                    </div>
-                    <div class="Form-item">
-                        <label for="floatField">Slaptažodis</label>
-                        <input type="password" name="password" id="inputPassword" required />
-                    </div>
+                    {#<div class="Form-item">#}
+                        {#<label for="floatField">El. paštas</label>#}
+                        {#<input type="email" value="{{ last_username }}" name="email" id="inputEmail" required />#}
+                        {#<span class="Form-errors">#}
+                            {#{% if error %}#}
+                             {#<span class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>#}
+                            {#{% endif %}#}
+                         {#</span>#}
+                    {#</div>#}
+                    {#<div class="Form-item">#}
+                        {#<label for="floatField">Slaptažodis</label>#}
+                        {#<input type="password" name="password" id="inputPassword" required />#}
+                    {#</div>#}
 
-                    <input type="hidden" name="_csrf_token"
+                    <input id="csrf_token" type="hidden" name="_csrf_token"
                            value="{{ csrf_token('authenticate') }}">
 
-                    <button class="Button Button--blue Button--long" type="submit">Prisijungti</button>
+                    {#<button class="Button Button--blue Button--long" type="submit">Prisijungti</button>#}
 
-                    <div class="u-text-center u-margin-top-bottom">----------- arba -------------</div>
+                    {#<div class="u-text-center u-margin-top-bottom">----------- arba -------------</div>#}
 
-                    <a class="Button Button--google Button--long" href="/connect/google">Google</a>
+                    {#<a class="Button Button--google Button--long" href="/connect/google">Google</a>#}
 
-                    <div class="u-text-center u-margin-top-bottom">----------- arba -------------</div>
+                    {#<div class="u-text-center u-margin-top-bottom">----------- arba -------------</div>#}
 
-                </form>
+                {#</form>#}
 
-                <form method="post" id="login-external" action="{{ path('login_external') }}">
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <div class="Form-item">
-                        <label for="floatField">El. paštas</label>
-                        <input type="email" value="" name="email" id="inputEmail2" required />
-                        <span class="Form-errors">
-                         {% if error %}
-                             <span class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>
-                         {% endif %}
-                            </span>
-                    </div>
-                    <button class="Button Button--blue Button--long" type="submit">
-                        Prisijungti
-                    </button>
-                </form>
+                {#<form method="post" id="login-external" action="{{ path('login_external') }}">#}
+                    {#<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">#}
+                    {#<div class="Form-item">#}
+                        {#<label for="floatField">El. paštas</label>#}
+                        {#<input type="email" value="" name="email" id="inputEmail2" required />#}
+                        {#<span class="Form-errors">#}
+                         {#{% if error %}#}
+                             {#<span class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</span>#}
+                         {#{% endif %}#}
+                            {#</span>#}
+                    {#</div>#}
+                    {#<button class="Button Button--blue Button--long" type="submit">#}
+                        {#Prisijungti#}
+                    {#</button>#}
+                {#</form>#}
 
-                <p class="Header4">Dar neturi paskyros? <a id="registerLink" href="{{ path('register') }}">Registruotis!</a></p>
-            </div>
+                {#<p class="Header4">Dar neturi paskyros? <a id="registerLink" href="{{ path('register') }}">Registruotis!</a></p>#}
+            {#</div>#}
 
             <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
 
@@ -71,6 +69,7 @@
                 var usingReactApp = true;
             </script>
             {{ parent() }}
+        </div>
     </div>
 
 {% endblock %}

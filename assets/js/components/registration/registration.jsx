@@ -7,7 +7,7 @@ class Registration extends Component{
                 <h1>Jūsų neužsiregistarvęs!</h1>
 
                 <div className="u-margin-top-bottom u-align-center">
-                    <a href="#" className="Button Button--blue"> Užregistruoti </a>
+                    <a href="/register" className="Button Button--blue"> Užregistruoti </a>
                 </div>
             </div>
         )

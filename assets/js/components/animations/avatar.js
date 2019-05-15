@@ -1,16 +1,17 @@
+//--Register
 const email = document.querySelector('#registration_form_email');
-const emailLogin = document.querySelector('#inputEmail');
-
 const password = document.querySelector('#registration_form_plainPassword');
-const passwordLogin = document.querySelector('#inputPassword');
-
 if (email) {
     animateAvatar(email, password);
 }
 
-if (emailLogin) {
-    animateAvatar(emailLogin, passwordLogin);
-}
+//TODO: netrinti, reikalinga meistriuko avatarui
+//--Login
+// const emailLogin = document.querySelector('#inputEmail');
+// const passwordLogin = document.querySelector('#inputPassword');
+// if (emailLogin) {
+//     animateAvatar(emailLogin, emailLogin);
+// }
 
 //------------------------------
 //-----Avatar animation---------

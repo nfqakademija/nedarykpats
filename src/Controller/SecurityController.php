@@ -140,27 +140,22 @@ class SecurityController extends AbstractController
         string $email,
         UserRepository $userRepository
     ): Response {
+
+        $isEmail = false;
+        $isSingleUser = false;
+
         $user = $userRepository->findOneBy(['email' => $email]);
 
         if (!empty($user)) {
-            $password = $user->getPassword();
-            if (!empty($password)) {
-                return new JsonResponse([
-                    'isEmail' => true,
-                    'isSingleUser' => false
-
-                ]);
+            $isEmail = true;
+            if (empty($user->getPassword())) {
+                $isSingleUser = true;
             }
-            return new JsonResponse([
-                'isEmail' => true,
-                'isSingleUser' => true
-
-            ]);
         }
 
         return new JsonResponse([
-            'isEmail' => false,
-            'isSingleUser' => false
+            'isEmail' => $isEmail,
+            'isSingleUser' => $isSingleUser
         ]);
     }
 }

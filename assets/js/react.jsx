@@ -28,7 +28,6 @@ if (typeof usingReactApp !== 'undefined') {
 
         const init = () => {
             const floatContainers = document.querySelectorAll('.Form-item');
-
             floatContainers.forEach(element => {
                 const { value } = element.querySelector(
                     'input, textarea, select'

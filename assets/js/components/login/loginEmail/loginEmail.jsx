@@ -6,11 +6,7 @@ class LoginEmail extends Component{
     saveAndContinue = (e) => {
         e.preventDefault();
         this.props.nextStep();
-    };
 
-    back  = (e) => {
-        e.preventDefault();
-        this.props.prevStep();
     };
 
     render(){
@@ -18,12 +14,18 @@ class LoginEmail extends Component{
 
         return(
             <div className="Form Form-background Form--short">
-                <Avatar />
+
+                {/*<Avatar />*/}
+                <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
+
                 <div className="Form-item">
                     <label htmlFor="floatField">El. paštas</label>
-                    <input type="email" name="email" id="inputEmail" required
+                    <input type="email"
+                           name="email"
+                           id="inputEmail"
                            onChange={this.props.handleChange('email')}
                            defaultValue={values.firstName}
+                           required
                     />
                 </div>
 

@@ -45,6 +45,7 @@ class Login extends Component {
         const { email, password } = this.state;
     };
 
+    // TODO: jei nieko neiveda, kas tada? t.y. kai email laukelis tuscias
     checkEmail = () => {
         const { email } = this.state;
         const { step } = this.state;
@@ -71,6 +72,7 @@ class Login extends Component {
                     else {
                         nextStepValue(5);
                     }
+
                 })
                 .catch(function (error) {
 
@@ -104,7 +106,7 @@ class Login extends Component {
                     <div>
                         {loading ? <LoadingSpinner/> :
                             <Password
-                                nextStep={this.nextStep}
+                                // nextStep={this.nextStep}
                                 handleChange={this.handleChange}
                                 values={values}
                                 results={data}
