@@ -28,13 +28,17 @@ class UserCreationHandler
 
     /**
      * @param string $email
+     * @param string|null $firstName
+     * @param string|null $lastName
      * @return User
      * @throws \Exception
      */
-    public function createUser(string $email)
+    public function createUser(string $email, ?string $firstName = null, ?string $lastName = null)
     {
         $user = new User();
         $user->setEmail($email)
+            ->setName($firstName)
+            ->setLastName($lastName)
             ->setRoles(['ROLE_USER'])
             ->setIsConfirmed(false)
             ->setCreatedAt(new \DateTime('now'));

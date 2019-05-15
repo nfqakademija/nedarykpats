@@ -11,6 +11,16 @@ class OfferFormDTO
 
     /**
      * @var string
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     */
+    private $lastName;
+
+    /**
+     * @var string
      * @Assert\Email(message="Pateiktas neteisingas el. paštas", mode="loose")
      * @Assert\NotBlank
      */
@@ -84,6 +94,42 @@ class OfferFormDTO
     public function setText(?string $text): OfferFormDTO
     {
         $this->text = $text;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName(): ?string
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     * @return OfferFormDTO
+     */
+    public function setFirstName(?string $firstName): OfferFormDTO
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName(): ?string
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     * @return OfferFormDTO
+     */
+    public function setLastName(?string $lastName): OfferFormDTO
+    {
+        $this->lastName = $lastName;
         return $this;
     }
 }

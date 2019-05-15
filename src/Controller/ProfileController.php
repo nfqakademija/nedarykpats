@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\DataTransformer\UserToProfileDetailsDTO;
 use App\Form\ProfileDetailsType;
 use App\Entity\User;
 use App\Form\ProfilePasswordFormType;
@@ -21,6 +22,7 @@ class ProfileController extends AbstractController
      * @param User $user
      * @param Request $request
      * @param ProfileDataChangeHandler $profileHandler
+     * @param ProfilePasswordChangeHandler $profilePasswordChangeHandler
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function index(
@@ -29,7 +31,8 @@ class ProfileController extends AbstractController
         ProfileDataChangeHandler $profileHandler,
         ProfilePasswordChangeHandler $profilePasswordChangeHandler
     ) {
-        $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $this->getUser());
+        $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
+        $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $profileDetailsDTO);
         $profilePasswordForm = $this->createForm(ProfilePasswordFormType::class);
 
         $profileDetailsForm->handleRequest($request);
@@ -38,14 +41,10 @@ class ProfileController extends AbstractController
         if ($profilePasswordForm->isSubmitted() && $profilePasswordForm->isValid()) {
             $profilePasswordDTO = $profilePasswordForm->getData();
 
-            $success = $profilePasswordChangeHandler->handle($profilePasswordDTO);
+            $profilePasswordChangeHandler->handle($profilePasswordDTO);
 
-            if ($success) {
-                $this->addFlash('success', 'Profilio slaptažodis sėkmingai atnaujintas');
-            } else {
-                $this->addFlash('success', 'Pateikti slaptažodžiai nesutampa');
-            }
-            return $this->redirectToRoute('profile');
+            $this->addFlash('success', 'Profilio slaptažodis sėkmingai atnaujintas');
+            return $this->redirectToRoute('profile', ['id' => $user->getId()]);
         }
 
         if ($profileDetailsForm->isSubmitted() && $profileDetailsForm->isValid()) {
@@ -53,7 +52,7 @@ class ProfileController extends AbstractController
             $profileHandler->handle($profileDetailsDTO);
             $this->addFlash('success', 'Profilio duomenys atnaujinti');
 
-            return $this->redirectToRoute('profile');
+            return $this->redirectToRoute('profile', ['id' => $user->getId()]);
         }
 
         return $this->render('user/profile.html.twig', [

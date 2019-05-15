@@ -24,7 +24,7 @@ class TokenConsumerService
 
     /**
      * @param Token $token
-     * @return array
+     * @return void
      */
     public function consume(Token $token): void
     {
