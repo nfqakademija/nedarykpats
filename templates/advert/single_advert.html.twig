@@ -73,7 +73,7 @@
 
             {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
                 {% for offer in advert.offers %}
-                    {% if app.user.email == offer.user.email or app.user == advert.user %}
+                    {% if app.user == offer.user or app.user == advert.user %}
 
                     <section class="LayoutGrid LayoutGrid--col2">
                         <section class="Comments">
@@ -92,8 +92,11 @@
                                         <p>{{ offer.text }}</p>
                                     </div>
                                     <div class="u-margin-top-bottom u-align-space-around">
-                                        <Button class="Button Button--blue u-margin-top-small"><i class="fas fa-check"></i> Priimti</Button>
-                                        <Button class="Button u-margin-top-small"><i class="fas fa-times"></i> Atmesti</Button>
+                                        {% if not advert.acceptedOffer and advert.user == app.user %}
+                                        <a class="Button Button--blue u-margin-top-small" href="{{ path('confirm_offer', {'id': offer.id}) }}"><i class="fas fa-check"></i> Priimti</a>
+                                        {% elseif advert.acceptedOffer and not advert.feedback and (app.user == advert.user or app.user == offer.user) %}
+                                        <a class="Button u-margin-top-small" href="{{ path('decline_offer', {'id': offer.id}) }}"><i class="fas fa-times"></i> Atmesti</a>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </section>

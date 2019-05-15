@@ -18,7 +18,7 @@ class FeedbackCreationHandler
 
 
     /**
-     * UserCreationHandler constructor.
+     * FeedbackCreationHandler constructor.
      * @param EntityManagerInterface $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
