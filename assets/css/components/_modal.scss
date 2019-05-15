@@ -18,9 +18,9 @@
   }
   
   & > div {
-	@include box-shadow;
+	//@include box-shadow;
 	border-radius: var(--radiusSmall);
-	width: 400px;
+	//width: 400px;
 	position: absolute;
 	top: 50%;
 	left: 50%;

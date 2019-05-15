@@ -143,27 +143,25 @@
 
             <section id="EditUserModal" class="Modal">
 
-                {#TODO: ar useriui reikia kategorijų?#}
-
                 <div>
                     <a href="#" title="Close" class="Modal-close">Close</a>
 
-                    <form method="post" class="Form Form-background Form--short">
+                    <form method="post" class="Form Form-background">
                         {{ form_start(profileDetailsForm) }}
                         <div class="Form-item">
-                            {{ form_label(profileDetailsForm.name) }}
+                            {{ form_label(profileDetailsForm.name, 'Vardas') }}
                             {{ form_widget(profileDetailsForm.name) }}
                         </div>
                         <div class="Form-item">
-                            {{ form_label(profileDetailsForm.lastName) }}
+                            {{ form_label(profileDetailsForm.lastName, 'Pavardė') }}
                             {{ form_widget(profileDetailsForm.lastName) }}
                         </div>
                         <div class="Form-item">
-                            {{ form_label(profileDetailsForm.description) }}
-                            {{ form_widget(profileDetailsForm.description) }}
+                            {{ form_label(profileDetailsForm.description, 'Aprašymas apie tave') }}
+                            {{ form_widget(profileDetailsForm.description, {'attr': {'rows': '10'} }) }}
                         </div>
                         <div class="Form-item">
-                            {{ form_label(profileDetailsForm.city,'Miestas') }}
+                            {{ form_label(profileDetailsForm.city, 'Miestas') }}
                             {{ form_widget(profileDetailsForm.city) }}
                         </div>
                         {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
@@ -171,10 +169,10 @@
                     </form>
 
 
-                    <form method="post" class="Form Form-background Form--short">
+                    <form method="post" class="Form Form-background">
                         {{ form_start(profilePasswordForm) }}
                         <div class="Form-item">
-                            {{ form_label(profilePasswordForm.newPassword) }}
+                            {{ form_label(profilePasswordForm.newPassword, 'Naujas slaptažodis') }}
                             {{ form_widget(profilePasswordForm.newPassword) }}
                             <span class="Form-errors">
                                 {{ form_errors(profilePasswordForm.newPassword) }}
