@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\RegistrationFormType;
 use App\Handler\SingleUseLoginHandler;
+use App\Repository\UserRepository;
 use App\Security\LoginAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -110,7 +111,6 @@ class SecurityController extends AbstractController
             ->getClient('google')
             ->redirect();
     }
-
     /**
      *
      * @Route("/connect/google/check", name="connect_google_check")
@@ -128,5 +128,39 @@ class SecurityController extends AbstractController
             $this->addFlash('success', 'Sveiki, '. $user);
             return $this->redirectToRoute('home');
         }
+    }
+
+    /**
+     * @Route("/check/email/{email}", name="check_email", requirements={"POST"})
+     * @param string $email
+     * @param UserRepository $userRepository
+     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function checkEmailAction(
+        string $email,
+        UserRepository $userRepository
+    ): Response {
+        $user = $userRepository->findOneBy(['email' => $email]);
+
+        if (!empty($user)) {
+            $password = $user->getPassword();
+            if (!empty($password)) {
+                return new JsonResponse([
+                    'isEmail' => true,
+                    'isSingleUser' => false
+
+                ]);
+            }
+            return new JsonResponse([
+                'isEmail' => true,
+                'isSingleUser' => true
+
+            ]);
+        }
+
+        return new JsonResponse([
+            'isEmail' => false,
+            'isSingleUser' => false
+        ]);
     }
 }

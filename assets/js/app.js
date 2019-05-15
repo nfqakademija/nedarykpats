@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import AddCategories from './components/createForm/AddCategories.jsx';
 import Review from './components/review/review.jsx';
+import Login from './components/login/login.jsx';
 
 require('../css/app.scss');
 
@@ -18,6 +19,16 @@ const review = document.getElementById('writeReview');
 if (review) {
     try {
         ReactDOM.render(<Review />, review);
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+const loginForm = document.getElementById('LoginForm');
+if (loginForm) {
+    try {
+        ReactDOM.render(<Login />, loginForm);
     } catch (error) {
         console.error(error);
     }
