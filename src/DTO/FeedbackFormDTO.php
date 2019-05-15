@@ -4,21 +4,22 @@
 namespace App\DTO;
 
 use App\Entity\Advert;
+use App\Entity\User;
 
 class FeedbackFormDTO
 {
     /**
-     * @var Advert|null
+     * @var int|null
      */
     private $advert;
 
     /**
-     * @var string|null
+     * @var int|null
      */
     private $receivingUser;
 
     /**
-     * @var string|null
+     * @var int|null
      */
     private $score;
 
@@ -28,54 +29,54 @@ class FeedbackFormDTO
     private $message;
 
     /**
-     * @return Advert|null
+     * @return int|null
      */
-    public function getAdvert(): ?Advert
+    public function getAdvert(): ?int
     {
         return $this->advert;
     }
 
     /**
-     * @param Advert|null $advert
+     * @param int|null $advert
      * @return FeedbackFormDTO
      */
-    public function setAdvert(?Advert $advert): FeedbackFormDTO
+    public function setAdvert(?int $advert): FeedbackFormDTO
     {
         $this->advert = $advert;
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getReceivingUser(): ?string
+    public function getReceivingUser(): ?int
     {
         return $this->receivingUser;
     }
 
     /**
-     * @param string|null $receivingUser
+     * @param int|null $receivingUser
      * @return FeedbackFormDTO
      */
-    public function setReceivingUser(?string $receivingUser): FeedbackFormDTO
+    public function setReceivingUser(?int $receivingUser): FeedbackFormDTO
     {
         $this->receivingUser = $receivingUser;
         return $this;
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
-    public function getScore(): ?string
+    public function getScore(): ?int
     {
         return $this->score;
     }
 
     /**
-     * @param string|null $score
+     * @param int|null $score
      * @return FeedbackFormDTO
      */
-    public function setScore(?string $score): FeedbackFormDTO
+    public function setScore(?int $score): FeedbackFormDTO
     {
         $this->score = $score;
         return $this;

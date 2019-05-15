@@ -23,6 +23,7 @@ class FeedbackFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => FeedbackFormDTO::class,
+            'csrf_protection' => false
         ]);
     }
 }
