@@ -22,7 +22,7 @@ class ProfileDetailsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', TextType::class)
+            ->add('firstName', TextType::class)
             ->add('lastName', TextType::class)
             ->add('description', TextareaType::class)
             ->add('city', EntityType::class, [

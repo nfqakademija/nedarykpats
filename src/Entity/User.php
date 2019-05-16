@@ -41,7 +41,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      * @var string
      */
-    private $name;
+    private $firstName;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -150,18 +150,18 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getName(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->name;
+        return $this->firstName;
     }
 
     /**
-     * @param string $name
+     * @param string $firstName
      * @return User
      */
-    public function setName(?string $name): User
+    public function setFirstName(?string $firstName): User
     {
-        $this->name = $name;
+        $this->firstName = $firstName;
         return $this;
     }
 
