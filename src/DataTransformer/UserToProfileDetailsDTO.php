@@ -16,7 +16,7 @@ class UserToProfileDetailsDTO
     {
         $profileDetailsDTO = new ProfileDetailsDTO();
         $profileDetailsDTO
-            ->setName($user->getName())
+            ->setFirstName($user->getFirstName())
             ->setLastName($user->getLastName())
             ->setDescription($user->getDescription())
             ->setCity($user->getCity());
