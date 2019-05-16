@@ -255,7 +255,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'reikalingas-elektrikas',
                     'email' => 'martyna@uzsakove.lt',
-                    'city' => 'Šalčinikų savivaldybė',
+                    'city' => 'Šalčinikai',
                     'title' => 'Reikalingas elektrikas',
                     'categories' => ['elektra'],
                     'text' => 'Reikalingas elektrikas 700m2 namo elektros instaliacijai įrengti. Objektas Trakų/Elektrėnų rajone.',
@@ -264,7 +264,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'vonios-plyteliu',
                     'email' => 'vilius@uzsakovas.lt',
-                    'city' => 'Šalčinikų savivaldybė',
+                    'city' => 'Šalčinikai',
                     'title' => 'Vonios plytelių klijavimas',
                     'categories' => ['apdailos-darbai', 'remontas'],
                     'text' => 'Norime atnaujinti vonią, ieškome plytelių klojėjo. Butas Vilniaus rajone, susiekimas automobiliu.',
@@ -291,7 +291,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'silpnu-sroviu-montotuojas',
                     'email' => 'martyna@uzsakove.lt',
-                    'city' => 'Šalčinikų savivaldybė',
+                    'city' => 'Šalčinikai',
                     'title' => 'Ieškome silpnų srovių montotuojo',
                     'categories' => ['elektra'],
                     'text' => 'Ieškome silpnų srovių montotuojo. darbo pobūdis - kabelių ir įrangos montavimas. Silpnų srovių komutavimo ir sistemų paleidimų gebėjimas - privalumas.',
@@ -309,7 +309,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'darbų-vadovas-2',
                     'email' => 'laurynas@uzsakovas.lt',
-                    'city' => 'Šalčinikų savivaldybė',
+                    'city' => 'Šalčinikai',
                     'title' => 'Statybos vadovas Utenoje',
                     'categories' => ['remontas', 'apdailos-darbai', 'statybos'],
                     'text' => 'Ieškome atestuoto statybos darbų vadovo nedidelių objektų statybos darbams, t.p.griovimo darbams. Reikalavimai: vairuotojo pažymėjimas, dokumentų pildymas, darbas su klientais, jų paieška. Galime suteikti gyvenamąjį plotą darbo dienomis.',
@@ -318,7 +318,7 @@ class AppFixtures extends Fixture
                 [
                     'reference' => 'technikos-pajungimas',
                     'email' => 'aurimas@uzsakovas.lt',
-                    'city' => 'Šalčinikų savivaldybė',
+                    'city' => 'Šalčinikai',
                     'title' => 'Buitinės technikos pajungimas',
                     'categories' => ['buitines-technikos-pajungimas'],
                     'text' => 'Reikia pajungti visą buitinę techniką (indaplovę, kaitlentę, skalbimo mašiną, šaldytuvą, gartraukį) naujoje virtuvėje. Vilnius (Pašilaičiai).',
@@ -560,10 +560,6 @@ class AppFixtures extends Fixture
                 'position' => 'secondary'
             ],
             [
-                'name' => 'Alytus',
-                'position' => 'secondary'
-            ],
-            [
                 'name' => 'Anykščiai',
                 'position' => 'secondary'
             ],
@@ -604,10 +600,6 @@ class AppFixtures extends Fixture
                 'position' => 'secondary'
             ],
             [
-                'name' => 'Kaunas',
-                'position' => 'secondary'
-            ],
-            [
                 'name' => 'Kazlų Ruda',
                 'position' => 'secondary'
             ],
@@ -629,10 +621,6 @@ class AppFixtures extends Fixture
             ],
             [
                 'name' => 'Lazdijai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Marijampolė',
                 'position' => 'secondary'
             ],
             [
