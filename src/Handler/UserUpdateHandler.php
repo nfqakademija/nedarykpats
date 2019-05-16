@@ -34,8 +34,8 @@ class UserUpdateHandler
      */
     public function handle(User $user, ?string $firstName, ?string $lastName)
     {
-        if ($user->getName() === null) {
-            $user->setName($firstName);
+        if ($user->getFirstName() === null) {
+            $user->setFirstName($firstName);
         }
         if ($user->getLastName() === null) {
             $user->setLastName($lastName);

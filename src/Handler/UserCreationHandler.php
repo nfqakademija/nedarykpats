@@ -37,7 +37,7 @@ class UserCreationHandler
     {
         $user = new User();
         $user->setEmail($email)
-            ->setName($firstName)
+            ->setFirstName($firstName)
             ->setLastName($lastName)
             ->setRoles(['ROLE_USER'])
             ->setIsConfirmed(false)

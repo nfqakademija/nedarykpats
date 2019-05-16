@@ -118,10 +118,10 @@
                     <div class="Form-item" hidden>
                         {{ form_row(offerForm.email, { 'value' : app.user.email, 'label': 'Elektroninis paštas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo el. paštas"  }  }) }}
                     </div>
-                    {% if app.user.name is not empty %}
+                    {% if app.user.firstName is not empty %}
                         {#TODO: slėpti. Reikia input paslėpimo#}
                          <div class="Form-item" hidden>
-                            {{ form_row(offerForm.firstName, { 'value':app.user.name, 'label': 'Vardas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo vardas"  }  }) }}
+                            {{ form_row(offerForm.firstName, { 'value':app.user.firstName, 'label': 'Vardas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo vardas"  }  }) }}
                         </div>
                     {% else %}
                             {{ form_row(offerForm.firstName, { 'label': 'Vardas', 'attr':{ 'class': 'ReplayBlock-mail u-margin-bottom', 'placeholder' : " Tavo vardas"  }  }) }}
