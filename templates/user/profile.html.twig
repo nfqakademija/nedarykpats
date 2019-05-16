@@ -67,6 +67,7 @@
                 <div id="writeReview"></div>
             </section>
 
+            {% for feedback in user.feedback %}
             <section class="LayoutGrid">
                     <section class="Comments">
                         <section class="Comments-block">
@@ -76,71 +77,23 @@
                                         <img src="/img/user1.png" alt="user">
                                     </span>
                                     <span class="StarRating StarRating--small u-align-center">
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                        <span class="StarRating-star fa fa-star"></span>
-                                        <span class="StarRating-star fa fa-star"></span>
+                                        <span class="StarRating-star fa fa-star {{ feedback.score >= 1 ? 'checked' : '' }}"></span>
+                                        <span class="StarRating-star fa fa-star {{ feedback.score >= 2 ? 'checked' : '' }}"></span>
+                                        <span class="StarRating-star fa fa-star {{ feedback.score >= 3 ? 'checked' : '' }}"></span>
+                                        <span class="StarRating-star fa fa-star {{ feedback.score >= 4 ? 'checked' : '' }}"></span>
+                                        <span class="StarRating-star fa fa-star {{ feedback.score >= 5 ? 'checked' : '' }}"></span>
                                     </span>
                                     <span class="Comments-date">2019-09-09</span>
                                 </div>
                                 <div class="Comments-text">
-                                    <div class="Comments-author">Vardenis Pavardenis</div>
-                                    <p>Labai darbštus, lankstus, patikimas meistras, kuris žino ką daro. Visi darbai atlikti greitai ir kokybiškai. REKOMENDUOJU 100%.</p>
-                                </div>
-                            </div>
-                        </section>
-                    </section>
-
-                <section class="Comments">
-                        <section class="Comments-block">
-                            <div class="Comments-content">
-                                <div class="Comments-header Comments-header--center">
-                                    <span class="Comments-image">
-                                        <img src="/img/user1.png" alt="user">
-                                    </span>
-                                    <span class="StarRating StarRating--small u-align-center">
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                        <span class="StarRating-star fa fa-star checked"></span>
-                                    </span>
-                                    <span class="Comments-date">2019-09-09</span>
-                                </div>
-                                <div class="Comments-text">
-                                    <div class="Comments-author">Vardenis Pavardenis</div>
-                                    <p>Patikimas,sukalbamas zmogus. Puikiai ismano savo darba. Esu patenkinta atliktais darbais. Svarbiausia ,kad kainos meistro tikrai nesikandzioja</p>
-                                </div>
-                            </div>
-                        </section>
-                    </section>
-
-                    <section class="Comments">
-                        <section class="Comments-block">
-                            <div class="Comments-content">
-                                <div class="Comments-header Comments-header--center">
-                                        <span class="Comments-image">
-                                            <img src="/img/user1.png" alt="user">
-                                        </span>
-                                        <span class="StarRating StarRating--small u-align-center">
-                                            <span class="StarRating-star fa fa-star checked"></span>
-                                            <span class="StarRating-star fa fa-star checked"></span>
-                                            <span class="StarRating-star fa fa-star checked"></span>
-                                            <span class="StarRating-star fa fa-star"></span>
-                                            <span class="StarRating-star fa fa-star"></span>
-                                        </span>
-                                    <span class="Comments-date">2019-09-09</span>
-                                </div>
-                                <div class="Comments-text">
-                                    <div class="Comments-author">Vardenis Pavardenis</div>
-                                    <p>Meistras dirba greitai, kruopščiai ir tvarkingai. Negaili patarimų kaip būtų geriau ir kas būtų pigiau ir t.t. Rekomenduoju ir garantuoju, kad jo atliktu darbu liksite patenkinti.</p>
+                                    <div class="Comments-author">{{ feedback.advert.user.name }} {{ feedback.advert.user.lastName }}</div>
+                                    <p>{{ feedback.message }}</p>
                                 </div>
                             </div>
                         </section>
                     </section>
             </section>
-
+            {% endfor %}
             <section id="EditUserModal" class="Modal">
 
                 <div>

@@ -9,9 +9,8 @@
 
 <div class="Content Content--GreyBg">
     <div class="Content-Block">
-
     <div class="Content Content--GreyBg ">
-        <se class="Content-Block">
+        <section class="Content-Block">
 
             <div class="u-display-right">
                 <a class="Button" href="/#FilterBar">Atgal</a>
@@ -96,7 +95,7 @@
                                             {% if advert.acceptedOffer.id == offer.id  and not advert.feedback%}
                                                 <a class="Button u-margin-top-small" href="{{ path('decline_offer', {'id': offer.id}) }}"><i class="fas fa-times"></i> Atmesti</a>
                                             {% endif %}
-                                        {% else %}
+                                        {% else if app.user != offer.user %}
                                                 <a class="Button Button--blue u-margin-top-small" href="{{ path('confirm_offer', {'id': offer.id}) }}"><i class="fas fa-check"></i> Priimti</a>
                                         {% endif %}
                                     </div>
@@ -142,6 +141,9 @@
 
             {{ form_end(offerForm) }}
             {% endif %}
-        </div>
+
+        </section>
     </div>
+    </div>
+</div>
 {% endblock %}

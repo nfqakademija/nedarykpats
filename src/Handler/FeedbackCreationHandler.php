@@ -30,6 +30,7 @@ class FeedbackCreationHandler
     /**
      * @param FeedbackFormDTO $feedbackFormDTO
      * @return bool
+     * @throws \Exception
      */
     public function handle(FeedbackFormDTO $feedbackFormDTO) : bool
     {
@@ -42,7 +43,8 @@ class FeedbackCreationHandler
                 ->setAdvert($advert)
                 ->setReceivingUser($receivingUser)
                 ->setScore($feedbackFormDTO->getScore())
-                ->setMessage($feedbackFormDTO->getMessage());
+                ->setMessage($feedbackFormDTO->getMessage())
+                ->setCreatedAt(new \DateTime('now'));
 
             $this->entityManager->persist($feedback);
             $this->entityManager->flush();
