@@ -146,6 +146,6 @@ class HomeController extends AbstractController
      */
     public function emailTemplate()
     {
-        return $this->render('email_templates/confirmation.html.twig', []);
+        return $this->render('email_templates/confirmation_offer.html.twig', []);
     }
 }
