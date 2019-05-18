@@ -44,6 +44,7 @@
         "react-dom": "^16.8.6",
         "react-html-converter": "^0.3.2",
         "react-masonry-css": "^1.0.12",
-        "react-select": "^2.4.3"
+        "react-select": "^2.4.3",
+        "react-star-rating-component": "^1.4.1"
     }
 }

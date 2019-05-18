@@ -72,7 +72,7 @@ class Advert
     private $token;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Offer", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Offer", fetch="EAGER", cascade={"persist", "remove"})
      */
     private $acceptedOffer;
 

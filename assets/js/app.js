@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import AddCategories from './components/createForm/AddCategories.jsx';
-import Review from './components/review/review.jsx';
+import Review from './components/feedback/feedback.jsx';
 import Login from './components/login/login.jsx';
 
 require('../css/app.scss');
@@ -18,12 +18,11 @@ if (categories) {
 const review = document.getElementById('writeReview');
 if (review) {
     try {
-        ReactDOM.render(<Review />, review);
+        ReactDOM.render(<Review  {...review.dataset}/>, review);
     } catch (error) {
         console.error(error);
     }
 }
-
 
 const loginForm = document.getElementById('LoginForm');
 if (loginForm) {

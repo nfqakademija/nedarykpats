@@ -60,15 +60,9 @@
 
                 </div>
             </section>
-
-            <a href="#writeReviewModal">Write Review</a>
-
-            <section id="writeReviewModal" class="Modal">
-                <div id="writeReview"></div>
-            </section>
+            <section class="LayoutGrid">
 
             {% for feedback in user.feedback %}
-            <section class="LayoutGrid">
                     <section class="Comments">
                         <section class="Comments-block">
                             <div class="Comments-content">
@@ -92,8 +86,9 @@
                             </div>
                         </section>
                     </section>
-            </section>
+
             {% endfor %}
+            </section>
             <section id="EditUserModal" class="Modal">
 
                 <div>

@@ -38,7 +38,8 @@ class FeedbackCreationHandler
         $receivingUser = $this->entityManager->getRepository(User::class)->find($feedbackFormDTO->getReceivingUser());
 
         //TODO: kol nėra tvarkingų fikstūrų - pridėta, kad acceptedOffer === null.
-        if ($advert->getAcceptedOffer() === null || $advert->getAcceptedOffer()->getUser() == $receivingUser) {
+        //TODO: kodel lyginamas prisijunges asmuo su offerio user id?
+//        if ($advert->getAcceptedOffer() === null || $advert->getAcceptedOffer()->getUser() == $receivingUser) {
             $feedback = (new Feedback())
                 ->setAdvert($advert)
                 ->setReceivingUser($receivingUser)
@@ -49,8 +50,8 @@ class FeedbackCreationHandler
             $this->entityManager->persist($feedback);
             $this->entityManager->flush();
             return true;
-        } else {
-            return false;
-        }
+//        }
+
+        return false;
     }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { throws } from 'assert';
 
-class Content extends Component{
+class FeedbackContent extends Component{
     saveAndContinue = (e) => {
         e.preventDefault();
         this.props.nextStep();
@@ -13,13 +13,18 @@ class Content extends Component{
     }
 
     render(){
-        const { values } = this.props
+        const { values } = this.props;
+
         return(
             <div className="Review">
                 <p>Parašykite trumpą atslipeimą ir taip padėkite kitiems jį pasamdyti!</p>
-                <div className="Form-item">
-                     <textarea rows="5"> </textarea>
-                </div>
+                    <div className="Form-item">
+                        <textarea
+                            rows="5"
+                            onChange={this.props.handleChange('feedbackText')}
+                            defaultValue={values.feedbackText}
+                        />
+                    </div>
 
                 <div className="u-margin-top-bottom u-align-center">
                     <a className="Button Button--long" onClick={this.back}>Atgal</a>
@@ -30,4 +35,4 @@ class Content extends Component{
     }
 }
 
-export default Content;
+export default FeedbackContent;
