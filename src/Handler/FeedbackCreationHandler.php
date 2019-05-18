@@ -37,6 +37,11 @@ class FeedbackCreationHandler
         $advert = $this->entityManager->getRepository(Advert::class)->find($feedbackFormDTO->getAdvert());
         $receivingUser = $this->entityManager->getRepository(User::class)->find($feedbackFormDTO->getReceivingUser());
 
+//        TODO: uzkomentuoju,nes netestuota
+//        if ($advert->getFeedback()) {
+//            return false;
+//        }
+
         //TODO: kol nėra tvarkingų fikstūrų - pridėta, kad acceptedOffer === null.
         //TODO: kodel lyginamas prisijunges asmuo su offerio user id?
 //        if ($advert->getAcceptedOffer() === null || $advert->getAcceptedOffer()->getUser() == $receivingUser) {

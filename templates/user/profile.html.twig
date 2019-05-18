@@ -77,7 +77,7 @@
                                         <span class="StarRating-star fa fa-star {{ feedback.score >= 4 ? 'checked' : '' }}"></span>
                                         <span class="StarRating-star fa fa-star {{ feedback.score >= 5 ? 'checked' : '' }}"></span>
                                     </span>
-                                    <span class="Comments-date">2019-09-09</span>
+                                    <span class="Comments-date">{{ feedback.createdAt|date("Y-m-d") }}</span>
                                 </div>
                                 <div class="Comments-text">
                                     <div class="Comments-author">{{ feedback.advert.user.firstName }} {{ feedback.advert.user.lastName }}</div>
