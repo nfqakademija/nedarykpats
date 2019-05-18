@@ -1,37 +1,53 @@
 import React, { Component } from 'react';
-import { throws } from 'assert';
 
-class FeedbackContent extends Component{
-    saveAndContinue = (e) => {
+class FeedbackContent extends Component {
+    saveAndContinue = e => {
+        const { nextStep } = this.props;
         e.preventDefault();
-        this.props.nextStep();
-    }
+        nextStep();
+    };
 
-    back  = (e) => {
+    back = e => {
+        const { prevStep } = this.props;
         e.preventDefault();
-        this.props.prevStep();
-    }
+        prevStep();
+    };
 
-    render(){
-        const { values } = this.props;
+    render() {
+        const { values, handleChange } = this.props;
 
-        return(
+        return (
             <div className="Review">
-                <p>Parašykite trumpą atslipeimą ir taip padėkite kitiems jį pasamdyti!</p>
-                    <div className="Form-item">
-                        <textarea
-                            rows="5"
-                            onChange={this.props.handleChange('feedbackText')}
-                            defaultValue={values.feedbackText}
-                        />
-                    </div>
+                <p>
+                    Parašykite trumpą atslipeimą ir taip padėkite kitiems jį
+                    pasamdyti!
+                </p>
+                <div className="Form-item">
+                    <textarea
+                        rows="5"
+                        onChange={handleChange('feedbackText')}
+                        defaultValue={values.feedbackText}
+                    />
+                </div>
 
                 <div className="u-margin-top-bottom u-align-center">
-                    <a className="Button Button--long" onClick={this.back}>Atgal</a>
-                    <a className="Button Button--blue Button--long" onClick={this.saveAndContinue}>Tęsti </a>
+                    <button
+                        type="submit"
+                        className="Button Button--long"
+                        onClick={this.back}
+                    >
+                        Atgal
+                    </button>
+                    <button
+                        type="submit"
+                        className="Button Button--blue Button--long"
+                        onClick={this.saveAndContinue}
+                    >
+                        Tęsti
+                    </button>
                 </div>
             </div>
-        )
+        );
     }
 }
 

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 
-class FeedbackSuccess extends Component{
-
-    saveAndContinue = (e) => {
+class FeedbackSuccess extends Component {
+    saveAndContinue = e => {
         e.preventDefault();
-        // this.props.nextStep();
         const writeReview = document.getElementById('writeReviewModal');
         writeReview.classList.remove('show');
-    }
+    };
 
-    render(){
-        const {values: { rateValue, feedbackText }} = this.props;
+    render() {
+        const {
+            values: { rateValue, feedbackText }
+        } = this.props;
 
-        return(
+        return (
             <div className="Review">
                 <h1>Ačiū už atsiliepimą!</h1>
 
@@ -20,10 +20,16 @@ class FeedbackSuccess extends Component{
                 <div>{rateValue}</div>
 
                 <div className="u-margin-top-bottom u-align-center">
-                    <a onClick={this.saveAndContinue} className="Button Button--blue"> Uždaryti </a>
+                    <button
+                        type="submit"
+                        onClick={this.saveAndContinue}
+                        className="Button Button--blue"
+                    >
+                        Uždaryti
+                    </button>
                 </div>
             </div>
-        )
+        );
     }
 }
 

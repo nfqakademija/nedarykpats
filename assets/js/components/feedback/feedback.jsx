@@ -1,68 +1,73 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import Rate from '../.././components/feedback/feedbackRate/feedbackRate.jsx';
-import Content from '../.././components/feedback/feedbackContent/feedbackContent.jsx';
-import Success from '../.././components/feedback/feedbackSuccess/feedbackSuccess.jsx';
-import axios from "axios";
+import axios from 'axios';
+import Rate from './feedbackRate/feedbackRate.jsx';
+import Content from './feedbackContent/feedbackContent.jsx';
+import Success from './feedbackSuccess/feedbackSuccess.jsx';
+import LoadingSpinner from '../loadingSpinner/loadingSpinner.jsx';
 
 class Feedback extends Component {
-
     constructor() {
         super();
         this.state = {
             step: 1,
-            rateValue: '',
+            rateValue: 1,
             feedbackText: '',
             advert: '',
             user: '',
+            data: [],
+            loading: false
         };
     }
 
     nextStep = () => {
         const { step } = this.state;
         this.setState({
-            step : step + 1
-        })
-    }
+            step: step + 1
+        });
+    };
 
     prevStep = () => {
-        const { step } = this.state
+        const { step } = this.state;
         this.setState({
-            step : step - 1
-        })
-    }
+            step: step - 1
+        });
+    };
+
+    addRate = value => {
+        this.state.rateValue = value;
+    };
 
     handleChange = input => event => {
-        this.setState({ [input] : event.target.value })
+        this.setState({ [input]: event.target.value });
     };
 
     addFeedback = () => {
-        console.log('iskvieciau');
-        const rateValue = 8;
-        const feedbackText = 'pabandziau ideti duomenis dar karta';
+        const { rateValue } = this.state;
+        const { feedbackText } = this.state;
         const { nextStep } = this;
-        const advert = this.state.advert;
-        const user = this.state.user;
+        const { advert } = this.state;
+        const { user } = this.state;
 
-        console.log(advert, user);
-
-        axios.post('/api/feedback', {
-            score: rateValue,
-            message: feedbackText,
-            advert: advert,
-            receivingUser: user
-        })
-        .then(function (response) {
-            console.log(response);
-            nextStep();
-        })
-        .catch(function (error) {
-            console.log(error);
-            nextStep();
+        this.setState({ loading: true }, () => {
+            axios
+                .post('/api/feedback', {
+                    score: rateValue,
+                    message: feedbackText,
+                    advert,
+                    receivingUser: user
+                })
+                .then(function(response) {
+                    console.log(response);
+                    nextStep();
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    nextStep();
+                });
         });
-
-    }
+    };
 
     hideFeedback = () => {
         const writeReview = document.getElementById('writeReviewModal');
@@ -70,14 +75,14 @@ class Feedback extends Component {
             if (event.target === writeReview) {
                 writeReview.classList.remove('show');
             }
-        }
-    }
+        };
+    };
 
     showFeedback = e => {
         const { target } = e;
         this.setState({
             advert: target.dataset.feedbackAdvert,
-            user: target.dataset.feedbackUser,
+            user: target.dataset.feedbackUser
         });
         const writeReview = document.getElementById('writeReviewModal');
         writeReview.classList.add('show');
@@ -88,10 +93,10 @@ class Feedback extends Component {
     };
 
     render() {
-
-        const {step} = this.state;
+        const { step } = this.state;
         const { rateValue, feedbackText, advert, user } = this.state;
         const values = { rateValue, feedbackText, advert, user };
+        const { loading } = this.state;
 
         const floatContainers = document.querySelectorAll('.feedback');
         floatContainers.forEach(element => {
@@ -100,26 +105,33 @@ class Feedback extends Component {
 
         this.hideFeedback();
 
-        switch(step) {
+        switch (step) {
             case 1:
-                return <Rate
-                    nextStep={this.nextStep}
-                    handleChange = {this.handleChange}
-                    values={values}
-                />
+                return (
+                    <Rate
+                        nextStep={this.nextStep}
+                        addRate={this.addRate}
+                        handleValue={this.handleValue}
+                        values={values}
+                    />
+                );
             case 2:
-                return <Content
-                    nextStep={this.addFeedback}
-                    prevStep={this.prevStep}
-                    handleChange = {this.handleChange}
-                    values={values}
-                />
+                return (
+                    <div>
+                        {loading ? (
+                            <LoadingSpinner />
+                        ) : (
+                            <Content
+                                nextStep={this.addFeedback}
+                                prevStep={this.prevStep}
+                                handleChange={this.handleChange}
+                                values={values}
+                            />
+                        )}
+                    </div>
+                );
             case 3:
-                return <Success
-                    values={values}
-                    nextStep={this.nextStep}
-                />
-
+                return <Success values={values} nextStep={this.nextStep} />;
         }
     }
 }
