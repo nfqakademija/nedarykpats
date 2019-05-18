@@ -37,6 +37,10 @@ class FeedbackCreationHandler
         $advert = $this->entityManager->getRepository(Advert::class)->find($feedbackFormDTO->getAdvert());
         $receivingUser = $this->entityManager->getRepository(User::class)->find($feedbackFormDTO->getReceivingUser());
 
+        if ($advert->getFeedback()) {
+            return false;
+        }
+
         //TODO: kol nėra tvarkingų fikstūrų - pridėta, kad acceptedOffer === null.
         if ($advert->getAcceptedOffer() === null || $advert->getAcceptedOffer()->getUser() == $receivingUser) {
             $feedback = (new Feedback())

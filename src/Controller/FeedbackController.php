@@ -18,6 +18,7 @@ class FeedbackController extends AbstractController
      * @param Request $request
      * @param FeedbackCreationHandler $feedbackCreationHandler
      * @return Response
+     * @throws \Exception
      */
     public function newFeedback(Request $request, FeedbackCreationHandler $feedbackCreationHandler): Response
     {
