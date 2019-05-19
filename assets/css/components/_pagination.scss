@@ -1,9 +1,10 @@
 .Pagination {
+  
+  list-style: none;
+  
   &.u-align-center {
     display: inline;
   }
-  
-  list-style: none;
   
   li {
     text-align: center;

@@ -1,3 +1,6 @@
+/**
+ * Display
+ */
 .u-display-none {
   display: none;
 }
@@ -8,13 +11,30 @@
     -moz-appearance: none;
     appearance: none;
 }
+
+.u-display-flex {
+  display: flex;
+}
+
+.u-display-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/**
+ * Color
+ */
 .u-color-orange {
   background-color: var(--colorOrange);
 }
 
+/**
+ * Align
+ */
 .u-align-center {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .u-align-space-between {
@@ -28,31 +48,39 @@
   justify-content: space-around;
 }
 
-
 .u-align-top {
   align-items: flex-start !important;
 }
 
+/**
+ * Align text
+ */
 .u-text-center {
   text-align: center;
 }
 
-.u-display-flex {
-  display: flex;
-}
 
-.u-display-right {
-  display: flex;
-  justify-content: flex-end;
-}
-
+/**
+ * Height
+ */
 .u-height-full {
   min-height: 80%;
 }
+
+/**
+ * Padding
+ */
 .u-padding-top {
   padding-top: var(--spaceMedium);
 }
 
+.u-no-padding {
+  padding: 0;
+}
+
+/**
+ * Margin
+ */
 .u-margin-around {
   margin: var(--spaceSmall) var(--spaceMedium);
 }
@@ -87,6 +115,10 @@
   margin-top: 0 !important;
 }
 
+///////////////////////////////////
+/**
+ * Line count
+ */
 .u-lineCount-1 {
   overflow: hidden;
   text-overflow: ellipsis;

@@ -1,4 +1,19 @@
 .LayoutGrid {
   padding-top: var(--spaceLarge);
   display: block;
+  
+  &-item {
+    @include shadowBlockForm();
+      flex-direction: column;
+      flex: 1;
+    
+    &--link {
+      @include transitionAll();
+      	cursor: pointer;
+
+      	&:hover {
+      	  @include box-shadow-hover();
+      	}
+    }
+  }
 }

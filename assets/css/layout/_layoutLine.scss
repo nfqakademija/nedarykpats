@@ -8,7 +8,11 @@
     width: 100%;
     flex-direction: column;
     margin-bottom: var(--spaceMedium);
-    
+  
+    &--fullWidth {
+      @include shadowBlockForm();
+      width: 100%;
+    }
     
     &--link {
       cursor: pointer;
@@ -17,6 +21,11 @@
         @include box-shadow-hover();
       }
     }
+  }
+  &--flex {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap;
   }
   
 }

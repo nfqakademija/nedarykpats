@@ -1,0 +1,9 @@
+.Header3 {
+  text-transform: uppercase;
+  letter-spacing: .2px;
+  font-weight: var(--bold);
+  
+  & i {
+	font-size: var(--fontSizeBig);
+  }
+}

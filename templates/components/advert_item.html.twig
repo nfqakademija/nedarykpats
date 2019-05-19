@@ -1,7 +1,7 @@
-<section class="Ad Ad-link"
+<section class="LayoutGrid-item LayoutGrid-item--link"
          onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">
-    <header class="Ad-header">
-        <div> {{ advert.createdAt|date("Y-m-d") }} </div>
+    <header class="TopBar TopBar--justify">
+        <div class="Date"> {{ advert.createdAt|date("Y-m-d") }} </div>
 
         <div class="Bid">
             {% if advert.getOffersCount()  > 0 %}
@@ -14,7 +14,7 @@
         </div>
     </header>
 
-    <div class="Bid-header u-margin-top">
+    <div class="Bid-header">
         {% if (is_granted('IS_AUTHENTICATED_FULLY') and app.user == advert.user) %}
             Šis skelbimas tavo!
         {% else %}
@@ -22,17 +22,17 @@
         {% endif %}
     </div>
 
-    <h3 class="Header">{{ advert.title }}</h3>
-    <div class="Ad-body">
-        <div class="Ad-text Ad-text--top">
-            <p>{{ advert.text }}</p>
-        </div>
-        <footer class="Ad-footer u-margin-top">
-            <ul class="Ad-categories">
-                {% for advertCategory in advert.categories  %}
-                    <li class="Category {{ advertCategory.cssStyle }} not-active">{{ advertCategory.title }}</li>
-                {% endfor %}
-            </ul>
-        </footer>
+    <h3 class="Header1">{{ advert.title }}</h3>
+
+    <div class="Paragraph Paragraph--lineLimit-4">
+        <p>{{ advert.text }}</p>
     </div>
+
+    <footer class="u-margin-top">
+        <ul class="u-align-center u-no-padding">
+            {% for advertCategory in advert.categories  %}
+                <li class="Category {{ advertCategory.cssStyle }} not-active">{{ advertCategory.title }}</li>
+            {% endfor %}
+        </ul>
+    </footer>
 </section>

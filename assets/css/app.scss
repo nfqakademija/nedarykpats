@@ -1,19 +1,58 @@
+/**
+ * Helpers
+ */
 @import "helpers/reset";
 @import "helpers/variables";
 @import "helpers/mixins";
 @import "helpers/utilities";
+
+/**
+ * Base
+ */
 @import "base/base";
 
+/**
+ * Layout
+ */
 @import "layout/content";
-@import "components/filterBar";
 @import "layout/layoutGrid";
 @import "layout/layoutLine";
-@import "components/ad";
-@import "components/header";
+@import "layout/column";
+
+/**
+ * Page Header
+ */
+@import "components/pageHeader/pageHeader";
+@import "components/pageHeader/nav";
+@import "components/pageHeader/splash";
+
+/**
+ * Typography
+ */
+@import "components/typography/header1";
+@import "components/typography/header2";
+@import "components/typography/header3";
+@import "components/typography/header4";
+@import "components/typography/paragraph";
+
+/**
+ * Buttons
+ */
+@import "components/buttons/button";
+
+/**
+ * Forms
+ */
+@import "components/forms/form";
+@import "components/forms/autosuggest";
+
+/**
+ * Other components
+ */
+@import "components/filterBar";
 @import "components/date";
 @import "components/bid";
 @import "components/category";
-@import "components/button";
 @import "components/pagination";
 @import "components/comments";
 @import "components/selectedAd";
@@ -21,48 +60,93 @@
 @import "components/replayBlock";
 @import "components/sectionBlock";
 @import "components/alert";
-@import "components/form";
-@import "layout/header";
+@import "components/forms/form";
 @import "components/message";
 @import "components/avatarContainer";
-@import "layout/components";
 @import "components/statusBar";
 @import "components/switch";
-@import "components/column";
 @import "components/starRating";
 @import "components/modal";
 @import "components/review";
 @import "components/spinner";
+@import "components/topBar";
 
 
-
+/*********************************************************
+* MEDIUM SCREEN (IPAD)
+**********************************************************/
 @media (min-width: 600px) {
+/**
+ * Page Header
+ */
+  @import "components/pageHeader/pageHeader_medium";
+  
+/**
+ * Layout
+ */
   @import "layout/content_medium";
   @import "layout/layoutGrid_medium";
   @import "layout/layoutLine_medium";
+  
+/**
+ * Forms
+ */
+  @import "components/forms/form_medium";
+  @import "components/forms/autosuggest";
+  
+/**
+ * Other components
+ */
   @import "components/pagination_medium";
   @import "components/comments_medium";
   @import "components/selectedAd_medium";
   @import "components/statusBlock_medium";
   @import "components/sectionBlock_medium";
-  @import "components/form_medium";
-  @import "layout/header_medium";
+  
 }
 
+
+/*********************************************************
+* LARGE SCREEN (DESKTOP)
+**********************************************************/
 @media (min-width: 1200px) {
+/**
+* page Header
+*/
+  @import "components/pageHeader/pageHeader_large";
+  @import "components/pageHeader/nav_large";
+  
+ /**
+ * Layout
+ */
   @import "layout/content_large";
   @import "layout/layoutGrid_large";
   @import "layout/layoutLine_large";
-  @import "components/ad_large";
-  @import "components/pagination_large";
+  @import "layout/column_large";
+}
+
+/**
+ * Forms
+ */
+  @import "components/forms/form_large";
+  
+/**
+ * Other components
+ */
   @import "components/comments_large";
   @import "components/selectedAd_large";
   @import "components/statusBlock_large";
   @import "components/sectionBlock_large";
-  @import "components/form_large";
-  @import "layout/header_large";
-  @import "components/column_large";
-}
+
+
+
+
+
+
+
+
+
+
 
 
 .my-masonry-grid {

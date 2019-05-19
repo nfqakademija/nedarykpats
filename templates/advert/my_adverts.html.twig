@@ -46,20 +46,19 @@
                             </div>
 
                             <div class="LayoutLine-title">
-                                <h3 class="Header">{{ advert.title }}</h3>
-                                <div> {{ advert.createdAt|date("Y-m-d") }} </div>
-                                <p class="u-lineCount-1">{{ advert.text }}</p>
+                                <h3 class="Header1">{{ advert.title }}</h3>
+                                <div class="Date"> {{ advert.createdAt|date("Y-m-d") }} </div>
+                                <p class="Paragraph Paragraph--lineLimit-2">{{ advert.text }}</p>
                             </div>
 
                             <div class="LayoutLine-rightSide">
                                 <a href="{{ path('advert', {'id': advert.id }) }}" class="Button Button--default u-margin-around"><i class="fas fa-edit"></i> Peržiūrėti</a>
                                 {% if advert.acceptedOffer %}
-
+                                    {{ advert.acceptedOffer.user.id }}
                                     {% if not advert.feedback %}
-                                        {#TODO: neteisingai deda, nera offer user id#}
                                         {#TODO: ne visada reactas pasiima reiksmes,jei per greitai pasirenki "vertinti"#}
                                         <div class="Button Button--default Button--yellow u-margin-around feedback"
-                                             data-feedback-user={{ advert.user.id }}
+                                             data-feedback-user={{ advert.acceptedOffer.user.id }}
                                              data-feedback-advert={{ advert.id }}
                                         ><i class="fas fa-star"></i> Vertinti</div>
 

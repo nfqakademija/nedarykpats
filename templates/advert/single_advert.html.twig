@@ -28,9 +28,9 @@
                 </div>
             {% endif %}
 
-            <section class="SelectedAd">
-                <section class="SelectedAd-content">
-                    <header class="Ad-header">
+            <section class="LayoutLine LayoutLine--flex">
+                <section class="LayoutLine-item--fullWidth">
+                    <header class="TopBar TopBar--justify">
                         <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
                         {% if advert.getOffersCount()  > 0 %}
                             <div class="Bid">
@@ -39,24 +39,15 @@
                             </div>
                         {% endif %}
                     </header>
-                    <h3 class="Header Header--single">{{ advert.title }}</h3>
-                    <div class="Ad-body">
-                        <div>
-                            <p>{{ advert.text }}</p>
-                        </div>
+
+                    <h3 class="Header1">{{ advert.title }}</h3>
+
+                    <div class="Paragraph">
+                        <p>{{ advert.text }}</p>
                     </div>
 
-
-
-{#                    <div class="Ad-body">#}
-{#                        <div>#}
-{#                            <p>{{ advert.city.name }}</p>#}
-{#                        </div>#}
-{#                    </div>#}
-
-
-                    <footer class="Ad-footer">
-                        <ul class="Ad-categories">
+                    <footer class="u-margin-top">
+                        <ul class="u-no-padding">
                             {% for advertCategory in advert.categories  %}
                                 <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
                             {% endfor %}
@@ -64,10 +55,10 @@
                     </footer>
                 </section>
 
-                {#<section class="StatusBlock StatusBlock--hired">#}
-                    {#<img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">#}
-                    {#<p class="StatusBlock-title">Pasamdytas!</p>#}
-                {#</section>#}
+                <section class="StatusBlock StatusBlock--hired">
+                    <img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">
+                    <p class="StatusBlock-title">Pasamdytas!</p>
+                </section>
             </section>
 
             <section id="writeReviewModal" class="Modal">
@@ -155,6 +146,7 @@
             {% endif %}
 
         </section>
+        {#</section>#}
     </div>
     </div>
 </div>

@@ -1,0 +1,55 @@
+.Paragraph {
+  overflow: hidden;
+  @include hyphens();
+  
+  &--lineLimit-4 {
+    height: var(--lineHeightFourLines);
+  }
+  
+  &--lineLimit-2 {
+    height: var(--lineHeightTwoLines);
+  }
+  
+  &--lineLimit-4,
+  &--lineLimit-2 {
+    position: relative;
+    
+    &:after {
+      content: '\00a0';
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 40%;
+      line-height: var(--lineHeight);
+      background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+    }
+  }
+  @supports (-webkit-line-clamp: 4) {
+    &--lineLimit-4 {
+      display: -webkit-box;
+      line-height: var(--lineHeight);
+      max-height: var(--lineHeightForLines);
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+
+      &:after {
+        display: none;
+      }
+    }
+  }
+  
+  @supports (-webkit-line-clamp: 2) {
+    &--lineLimit-2 {
+      display: -webkit-box;
+      line-height: var(--lineHeight);
+      max-height: var(--lineHeightForLines);
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      
+      &:after {
+        display: none;
+      }
+    }
+  }
+  
+}
