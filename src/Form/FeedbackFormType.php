@@ -15,7 +15,6 @@ class FeedbackFormType extends AbstractType
             ->add('score')
             ->add('message')
             ->add('advert')
-            ->add('receivingUser')
         ;
     }
 

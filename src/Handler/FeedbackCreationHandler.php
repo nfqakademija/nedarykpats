@@ -6,8 +6,9 @@ namespace App\Handler;
 use App\DTO\FeedbackFormDTO;
 use App\Entity\Advert;
 use App\Entity\Feedback;
-use App\Entity\User;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 
 class FeedbackCreationHandler
 {
@@ -30,33 +31,27 @@ class FeedbackCreationHandler
     /**
      * @param FeedbackFormDTO $feedbackFormDTO
      * @return bool
-     * @throws \Exception
+     * @throws Exception
      */
-    public function handle(FeedbackFormDTO $feedbackFormDTO) : bool
+    public function handle(FeedbackFormDTO $feedbackFormDTO): bool
     {
+        /** @var Advert $advert */
         $advert = $this->entityManager->getRepository(Advert::class)->find($feedbackFormDTO->getAdvert());
-        $receivingUser = $this->entityManager->getRepository(User::class)->find($feedbackFormDTO->getReceivingUser());
 
-//        TODO: uzkomentuoju,nes netestuota
-//        if ($advert->getFeedbacks()) {
-//            return false;
-//        }
+        //Logic behind: Advert does not have accepted offer or Advert has Feedback then return false
+        if ($advert->getAcceptedOffer() === null || $advert->getFeedback() instanceof Feedback) {
+            return false;
+        }
 
-        //TODO: kol nėra tvarkingų fikstūrų - pridėta, kad acceptedOffer === null.
-        //TODO: kodel lyginamas prisijunges asmuo su offerio user id?
-//        if ($advert->getAcceptedOffer() === null || $advert->getAcceptedOffer()->getUser() == $receivingUser) {
-            $feedback = (new Feedback())
-                ->setAdvert($advert)
-                ->setReceivingUser($receivingUser)
-                ->setScore($feedbackFormDTO->getScore())
-                ->setMessage($feedbackFormDTO->getMessage())
-                ->setCreatedAt(new \DateTime('now'));
+        $feedback = (new Feedback())
+            ->setAdvert($advert)
+            ->setReceivingUser($advert->getAcceptedOffer()->getUser())
+            ->setScore($feedbackFormDTO->getScore())
+            ->setMessage($feedbackFormDTO->getMessage())
+            ->setCreatedAt(new DateTime('now'));
 
-            $this->entityManager->persist($feedback);
-            $this->entityManager->flush();
-            return true;
-//        }
-
-        return false;
+        $this->entityManager->persist($feedback);
+        $this->entityManager->flush();
+        return true;
     }
 }

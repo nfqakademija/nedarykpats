@@ -16,11 +16,6 @@ class FeedbackFormDTO
     /**
      * @var int|null
      */
-    private $receivingUser;
-
-    /**
-     * @var int|null
-     */
     private $score;
 
     /**
@@ -43,24 +38,6 @@ class FeedbackFormDTO
     public function setAdvert(?int $advert): FeedbackFormDTO
     {
         $this->advert = $advert;
-        return $this;
-    }
-
-    /**
-     * @return int|null
-     */
-    public function getReceivingUser(): ?int
-    {
-        return $this->receivingUser;
-    }
-
-    /**
-     * @param int|null $receivingUser
-     * @return FeedbackFormDTO
-     */
-    public function setReceivingUser(?int $receivingUser): FeedbackFormDTO
-    {
-        $this->receivingUser = $receivingUser;
         return $this;
     }
 
