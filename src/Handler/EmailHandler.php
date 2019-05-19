@@ -108,4 +108,26 @@ class EmailHandler
 
         $this->switfMailer->send($message);
     }
+
+    /**
+     * @param string $recipient
+     * @throws \Exception
+     */
+    public function sendEmailPasswordWasChanged(string $recipient, string $hash)
+    {
+        $message = (new \Swift_Message('Slaptažodis buvo pakeistas'))
+            ->setTo($recipient)
+            ->setBody(
+                $this->twigTemplating->render(
+                    'email_templates/password_was_changed.html.twig',
+                    [
+                        'email' => $recipient,
+                        'loginUrl' => $hash
+                    ]
+                ),
+                'text/html'
+            );
+
+        $this->switfMailer->send($message);
+    }
 }

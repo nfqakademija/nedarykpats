@@ -111,9 +111,12 @@
                 {% endif %}
                 </section>
 
-                {{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
-                <h3 class="Header1">Parašyk savo pasiūlymą!</h3>
+
+
                 {% if app.user != advert.user %}
+                    {{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
+
+                    <h3 class="Header1">Parašyk savo pasiūlymą!</h3>
 
                     {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
 
@@ -161,8 +164,9 @@
                     </div>
 
                     {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
-                    {% endif %}
+
                 {{ form_end(offerForm) }}
+                {% endif %}
             </section>
         </div>
     </div>
