@@ -46,6 +46,10 @@
 	  background-color: var(--colorLightGray2);
 	  padding: 0;
 	  
+	  .Nav-link {
+		padding: var(--spaceSmall) var(--spaceLarge);
+	  }
+	  
 	  &:after {
 		content: '';
 		position: absolute;
@@ -75,7 +79,8 @@
   }
   
   &-link {
-	padding: var(--spaceSmall) var(--spaceLarge);
+	padding-left: 0;
+	padding-right: 0;
 	color: var(--colorGrey);
 	display: block;
 	letter-spacing: 0.2px;

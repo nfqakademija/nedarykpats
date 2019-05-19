@@ -31,19 +31,19 @@ class CategoryRepository extends ServiceEntityRepository
 
     public function findUsersTopCategoryTitles(User $user)
     {
-       $entityManager = $this->getEntityManager();
+        $entityManager = $this->getEntityManager();
 
-       return $query = $entityManager->createQuery(
+        return $query = $entityManager->createQuery(
             'SELECT c.id, c.title, COUNT(1) AS Count
-       FROM App\Entity\Category c
-       JOIN c.adverts a
-       JOIN a.offers o
-       JOIN o.user u
-       WHERE u.id = ?1
-       GROUP BY c.id
-       ORDER BY Count DESC'
+            FROM App\Entity\Category c
+            JOIN c.adverts a
+            JOIN a.offers o
+            JOIN o.user u
+            WHERE u.id = ?1
+            GROUP BY c.id
+            ORDER BY Count DESC'
         )->setParameter(1, $user->getId())
-           ->setMaxResults( "3" )
-           ->getResult();
+            ->setMaxResults("3")
+            ->getResult();
     }
 }

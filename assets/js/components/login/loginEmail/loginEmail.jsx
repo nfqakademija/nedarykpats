@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import Avatar from '../loginAvatar/loginAvatar.jsx';
-import { throws } from 'assert';
 
 class LoginEmail extends Component{
-    saveAndContinue = (e) => {
+
+    saveAndContinue = e => {
         e.preventDefault();
         this.props.nextStep();
+    };
 
+    _handleKeyDown = e => {
+        if (e.key === 'Enter') {
+            this.saveAndContinue(e);
+        }
     };
 
     render(){
@@ -24,13 +29,17 @@ class LoginEmail extends Component{
                            name="email"
                            id="inputEmail"
                            onChange={this.props.handleChange('email')}
+                           onKeyDown={this._handleKeyDown}
                            defaultValue={values.firstName}
                            required
                     />
                 </div>
 
+
                 <div className="u-margin-top-bottom u-align-center">
-                    <a className="Button Button--blue Button--long" onClick={this.saveAndContinue}>Toliau </a>
+                    <a className="Button Button--blue Button--long"
+                       onClick={this.saveAndContinue}
+                    >Toliau </a>
                 </div>
             </div>
         );

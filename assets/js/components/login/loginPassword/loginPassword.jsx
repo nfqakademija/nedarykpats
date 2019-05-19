@@ -3,9 +3,13 @@ import Avatar from '../loginAvatar/loginAvatar.jsx';
 
 class LoginPassword extends Component{
 
-    saveAndContinue = (e) => {
-        e.preventDefault()
-        this.props.nextStep()
+    saveAndContinue = e => {
+        e.preventDefault();
+        this.props.nextStep();
+    };
+
+    _handleKeyDown = e => {
+        if (e.key === 'Enter') {}
     };
 
     render(){
@@ -30,19 +34,18 @@ class LoginPassword extends Component{
                 />
 
                 <div className="Form-item">
-                    {/*<label htmlFor="floatField">Slaptažodis</label>*/}
                     <input type="password"
                            name="password"
                            id="inputPassword"
                            placeholder="Slaptažodis"
                            required
                            onChange={this.props.handleChange('password')}
+                           onKeyDown={this._handleKeyDown}
                            defaultValue={values.password}
                     />
                 </div>
 
-
-                    <button className="Button Button--blue Button--long" type="submit"> Prisijungti</button>
+                <button className="Button Button--blue Button--long" type="submit"> Prisijungti</button>
 
             </form>
         )
