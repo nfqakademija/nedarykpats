@@ -99,7 +99,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Feedback", mappedBy="receivingUser")
      */
-    private $feedback;
+    private $feedbacks;
 
     /**
      * User constructor.
@@ -110,7 +110,7 @@ class User implements UserInterface
         $this->adverts = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->offers = new ArrayCollection();
-        $this->feedback = new ArrayCollection();
+        $this->feedbacks = new ArrayCollection();
     }
 
     /**
@@ -428,9 +428,9 @@ class User implements UserInterface
     /**
      * @return Collection|Feedback[]
      */
-    public function getFeedback(): Collection
+    public function getFeedbacks(): Collection
     {
-        return $this->feedback;
+        return $this->feedbacks;
     }
 
     /**
@@ -439,8 +439,8 @@ class User implements UserInterface
      */
     public function addFeedback(Feedback $feedback): self
     {
-        if (!$this->feedback->contains($feedback)) {
-            $this->feedback[] = $feedback;
+        if (!$this->feedbacks->contains($feedback)) {
+            $this->feedbacks[] = $feedback;
             $feedback->setReceivingUser($this);
         }
 
@@ -453,8 +453,8 @@ class User implements UserInterface
      */
     public function removeFeedback(Feedback $feedback): self
     {
-        if ($this->feedback->contains($feedback)) {
-            $this->feedback->removeElement($feedback);
+        if ($this->feedbacks->contains($feedback)) {
+            $this->feedbacks->removeElement($feedback);
             // set the owning side to null (unless already changed)
             if ($feedback->getReceivingUser() === $this) {
                 $feedback->setReceivingUser(null);

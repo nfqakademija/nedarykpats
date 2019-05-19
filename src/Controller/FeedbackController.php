@@ -15,7 +15,7 @@ class FeedbackController extends AbstractController
 {
 
     /**
-     * @Route("api/feedback", name="feedback", requirements={"POST"})
+     * @Route("api/feedbacks", name="feedbacks", requirements={"POST"})
      * @param Request $request
      * @param FeedbackCreationHandler $feedbackCreationHandler
      * @return Response
