@@ -10,12 +10,7 @@ class ProfileDetailsDTO
     /**
      * @var string
      */
-    private $firstName;
-
-    /**
-     * @var string
-     */
-    private $lastName;
+    private $name;
 
     /**
      * @var string
@@ -30,38 +25,21 @@ class ProfileDetailsDTO
     /**
      * @return string
      */
-    public function getFirstName(): ?string
+    public function getName(): ?string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
     /**
-     * @param string $firstName
+     * @param string $name
      * @return ProfileDetailsDTO
      */
-    public function setFirstName(?string $firstName): ProfileDetailsDTO
+    public function setName(?string $name): ProfileDetailsDTO
     {
-        $this->firstName = $firstName;
+        $this->name = $name;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     * @return ProfileDetailsDTO
-     */
-    public function setLastName(?string $lastName): ProfileDetailsDTO
-    {
-        $this->lastName = $lastName;
-        return $this;
-    }
 
     /**
      * @return string

@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="Column-3 Column-3--longer u-margin-left-right u-margin-top">
-                    <h3>{{ user.firstName }}  {{ user.lastName }} </h3>
+                    <h3>{{ user.name }}  </h3>
                     <p class="u-margin-top">{{ user.description }}</p>
                 </div>
                 <div class="Column-3 u-margin-top">
@@ -80,7 +80,7 @@
                                     <span class="Comments-date">{{ feedback.createdAt|date("Y-m-d") }}</span>
                                 </div>
                                 <div class="Comments-text">
-                                    <div class="Comments-author">{{ feedback.advert.user.firstName }} {{ feedback.advert.user.lastName }}</div>
+                                    <div class="Comments-author">{{ feedback.advert.user.name}} {{ feedback.advert.user.name }}</div>
                                     <p>{{ feedback.message }}</p>
                                 </div>
                             </div>
@@ -97,13 +97,10 @@
                     <form method="post" class="Form Form-background">
                         {{ form_start(profileDetailsForm) }}
                         <div class="Form-item">
-                            {{ form_label(profileDetailsForm.firstName, 'Vardas') }}
-                            {{ form_widget(profileDetailsForm.firstName) }}
+                            {{ form_label(profileDetailsForm.name, 'Vardas') }}
+                            {{ form_widget(profileDetailsForm.name) }}
                         </div>
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.lastName, 'Pavardė') }}
-                            {{ form_widget(profileDetailsForm.lastName) }}
-                        </div>
+
                         <div class="Form-item">
                             {{ form_label(profileDetailsForm.description, 'Aprašymas apie tave') }}
                             {{ form_widget(profileDetailsForm.description, {'attr': {'rows': '10'} }) }}

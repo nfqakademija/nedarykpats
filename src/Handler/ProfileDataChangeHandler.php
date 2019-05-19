@@ -41,12 +41,10 @@ class ProfileDataChangeHandler
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
-        if ($profileDetailsDTO->getFirstName()) {
-            $user->setFirstName($profileDetailsDTO->getFirstName());
+        if ($profileDetailsDTO->getName()) {
+            $user->setName($profileDetailsDTO->getName());
         }
-        if ($profileDetailsDTO->getLastName()) {
-            $user->setLastName($profileDetailsDTO->getLastName());
-        }
+
         if ($profileDetailsDTO->getDescription()) {
             $user->setDescription($profileDetailsDTO->getDescription());
         }

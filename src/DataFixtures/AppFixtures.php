@@ -98,8 +98,7 @@ class AppFixtures extends Fixture
     {
         $user = new User();
         $user->setEmail($userData['email'])
-            ->setFirstName($userData['first_name'])
-            ->setLastName($userData['last_name'])
+            ->setName($userData['name'])
             ->setCity($cities[$userData['city']])
             ->setRoles($userData['roles'])
             ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
@@ -442,8 +441,7 @@ class AppFixtures extends Fixture
                     'password' => 'aurimas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => false,
-                    'first_name' => 'Aurimas',
-                    'last_name' => 'Vilys',
+                    'name' => 'Aurimas Vilys',
                     'descriptions' => '',
                     'city' => 'Vilnius',
                 ],
@@ -452,8 +450,7 @@ class AppFixtures extends Fixture
                     'password' => 'martyna',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
-                    'first_name' => 'Martyna',
-                    'last_name' => 'B',
+                    'name' => 'Martyna B',
                     'descriptions' => '',
                     'city' => 'Vilnius',
                 ],
@@ -462,8 +459,7 @@ class AppFixtures extends Fixture
                     'password' => 'vilius',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
-                    'first_name' => 'Vilius',
-                    'last_name' => 'Gumonis',
+                    'name' => 'Vilius Gumonis',
                     'descriptions' => '',
                     'city' => 'Vilnius',
                 ],
@@ -472,8 +468,7 @@ class AppFixtures extends Fixture
                     'password' => 'laurynas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
-                    'first_name' => 'Laurynas',
-                    'last_name' => 'Valenta',
+                    'name' => 'Laurynas Valenta',
                     'descriptions' => '',
                     'city' => 'Vilnius',
                 ],
@@ -482,8 +477,7 @@ class AppFixtures extends Fixture
                     'password' => 'aurimas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
-                    'first_name' => 'Aurimas',
-                    'last_name' => 'Vilys',
+                    'name' => 'Aurimas Vilys',
                     'descriptions' => 'Profesionalus sienų dažytojas',
                     'city' => 'Vilnius',
                 ],
@@ -492,8 +486,7 @@ class AppFixtures extends Fixture
                     'password' => 'martyna',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
-                    'first_name' => 'Martyna',
-                    'last_name' => 'B',
+                    'name' => 'Martyna B',
                     'descriptions' => 'Profesionali interjero dizainerė',
                     'city' => 'Vilnius',
                 ],
@@ -502,8 +495,7 @@ class AppFixtures extends Fixture
                     'password' => 'vilius',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
-                    'first_name' => 'Vilius',
-                    'last_name' => 'Gumonis',
+                    'name' => 'Vilius Gumonis',
                     'descriptions' => 'Profesionalus  santechnikas',
                     'city' => 'Vilnius',
                 ],
@@ -512,8 +504,7 @@ class AppFixtures extends Fixture
                     'password' => 'laurynas',
                     'roles' => ['ROLE_USER'],
                     'is_confirmed' => true,
-                    'first_name' => 'Laurynas',
-                    'last_name' => 'Valenta',
+                    'name' => 'Laurynas Valenta',
                     'descriptions' => 'Profesionalus darbų vykdytojas',
                     'city' => 'Vilnius',
                 ],
