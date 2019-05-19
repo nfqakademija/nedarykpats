@@ -12,12 +12,7 @@ class OfferFormDTO
     /**
      * @var string
      */
-    private $firstName;
-
-    /**
-     * @var string
-     */
-    private $lastName;
+    private $name;
 
     /**
      * @var string
@@ -42,6 +37,17 @@ class OfferFormDTO
      * )
      */
     private $text;
+
+    /**
+     * @var bool
+     */
+    private $isRetracted;
+
+    /**
+     * @var bool
+     */
+    private $isDeclined;
+
 
     /**
      * @return string
@@ -100,36 +106,59 @@ class OfferFormDTO
     /**
      * @return string
      */
-    public function getFirstName(): ?string
+    public function getName(): ?string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
     /**
-     * @param string $firstName
+     * @param string $name
      * @return OfferFormDTO
      */
-    public function setFirstName(?string $firstName): OfferFormDTO
+    public function setName(?string $name): OfferFormDTO
     {
-        $this->firstName = $firstName;
+        $this->name = $name;
+
+        return $this;
+    }
+
+
+    /**
+     * @return bool|null
+     */
+    public function getIsRetracted(): ?bool
+    {
+        return $this->isRetracted;
+    }
+
+    /**
+     * @param bool|null $isRetracted
+     * @return OfferFormDTO
+     */
+    public function setIsRetracted(?bool $isRetracted): self
+    {
+        $this->isRetracted = $isRetracted;
+
         return $this;
     }
 
     /**
-     * @return string
+     * @return bool|null
      */
-    public function getLastName(): ?string
+    public function getIsDeclined(): ?bool
     {
-        return $this->lastName;
+        return $this->isDeclined;
     }
 
     /**
-     * @param string $lastName
+     * @param bool|null $isDeclined
      * @return OfferFormDTO
      */
-    public function setLastName(?string $lastName): OfferFormDTO
+    public function setIsDeclined(?bool $isDeclined): self
     {
-        $this->lastName = $lastName;
+        $this->isDeclined = $isDeclined;
+
         return $this;
     }
+
 }

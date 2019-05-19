@@ -63,6 +63,17 @@ class Offer
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isRetracted;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isDeclined;
+    
+
 
     /**
      * Offer constructor.
@@ -197,6 +208,44 @@ class Offer
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsRetracted(): ?bool
+    {
+        return $this->isRetracted;
+    }
+
+    /**
+     * @param bool|null $isRetracted
+     * @return Offer
+     */
+    public function setIsRetracted(?bool $isRetracted): self
+    {
+        $this->isRetracted = $isRetracted;
+
+        return $this;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getIsDeclined(): ?bool
+    {
+        return $this->isDeclined;
+    }
+
+    /**
+     * @param bool|null $isDeclined
+     * @return Offer
+     */
+    public function setIsDeclined(?bool $isDeclined): self
+    {
+        $this->isDeclined = $isDeclined;
 
         return $this;
     }

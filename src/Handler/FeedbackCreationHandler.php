@@ -38,7 +38,7 @@ class FeedbackCreationHandler
         $receivingUser = $this->entityManager->getRepository(User::class)->find($feedbackFormDTO->getReceivingUser());
 
 //        TODO: uzkomentuoju,nes netestuota
-//        if ($advert->getFeedback()) {
+//        if ($advert->getFeedbacks()) {
 //            return false;
 //        }
 

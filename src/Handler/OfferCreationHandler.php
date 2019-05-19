@@ -88,14 +88,12 @@ class OfferCreationHandler
         if (!$user instanceof User) {
             $user = $this->userCreationHandler->createUser(
                 $offerFormDTO->getEmail(),
-                $offerFormDTO->getFirstName(),
-                $offerFormDTO->getLastName()
+                $offerFormDTO->getName()
             );
         } else {
             $user = $this->userUpdateHandler->handle(
                 $user,
-                $offerFormDTO->getFirstName(),
-                $offerFormDTO->getLastName()
+                $offerFormDTO->getName()
             );
         }
 

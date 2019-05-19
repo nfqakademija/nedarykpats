@@ -12,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\CategoryRepository;
 
 class ProfileController extends AbstractController
 {
@@ -29,8 +30,12 @@ class ProfileController extends AbstractController
         User $user,
         Request $request,
         ProfileDataChangeHandler $profileHandler,
-        ProfilePasswordChangeHandler $profilePasswordChangeHandler
+        ProfilePasswordChangeHandler $profilePasswordChangeHandler,
+        CategoryRepository $categoryRepository
     ) {
+
+        var_dump($categoryRepository->findUsersTopCategories($user));
+
         $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
         $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $profileDetailsDTO);
         $profilePasswordForm = $this->createForm(ProfilePasswordFormType::class);
