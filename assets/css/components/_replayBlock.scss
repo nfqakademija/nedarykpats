@@ -1,30 +1,26 @@
-.ReplayBlock {
-  @include shadowBlockForm;
-  display: block;
-  margin-left: 0;
-  margin-right: 0;
-  
-  label{
-    display: none;
-  }
-  
-  &-content {
-    display: block;
-    width: 100%;
-    border: none;
-  }
-  
-  &-mail {
-    text-align: left;
-    border: none;
-    border-bottom: var(--borderxSmall) solid var(--colorGrey);
-    padding: var(--spaceTopBotTextSmall);
-    padding-left: 0;
-  }
-  
-  &-checkbox{
-    margin-top: var(--spaceMedium);
-    margin-bottom: var(--spaceMedium);
-  }
-
-}
+//.ReplayBlock {
+//  @include shadowBlockForm;
+//  display: block;
+//  margin-left: 0;
+//  margin-right: 0;
+//
+//  &-content {
+//    display: block;
+//    width: 100%;
+//    border: none;
+//  }
+//
+//  &-mail {
+//    text-align: left;
+//    border: none;
+//    border-bottom: var(--borderxSmall) solid var(--colorGrey);
+//    padding: var(--spaceTopBotTextSmall);
+//    padding-left: 0;
+//  }
+//
+//  &-checkbox{
+//    margin-top: var(--spaceMedium);
+//    margin-bottom: var(--spaceMedium);
+//  }
+//
+//}

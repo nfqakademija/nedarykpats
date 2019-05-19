@@ -19,7 +19,7 @@ class OfferType extends AbstractType
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
             ->add('text', TextareaType::class)
-            ->add('save', SubmitType::class, ['label' => 'Siųsti'])
+            ->add('save', SubmitType::class, ['label' => 'Įkelti'])
         ;
     }
 
