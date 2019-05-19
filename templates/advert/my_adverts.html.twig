@@ -6,7 +6,7 @@
 
     <div class="Content Content--top">
         <div class="Content-Block">
-            {#{% include 'components/filter_bar.html.twig' with {'header' : ''} %}#}
+            {% include 'components/filter_bar_my_adverts.html.twig' with {'header' : ''} %}
         </div>
     </div>
 
@@ -28,11 +28,10 @@
                     </section>
 
                     {% for advert in filteredAdverts %}
-
+                        {#<a href="{{ path('advert', {'id': advert.id }) }}">#}
                         <section class="LayoutLine-item LayoutLine-item--link">
                                  {#onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">#}
-
-                            <div class="LayoutLine-col-1">
+                            <div class="LayoutLine-col-1" onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">
                                 {#TODO: prideti stausa#}
                                 <div class="Bid Bid--center">
                                 {% if advert.getOffersCount()  > 0 %}
@@ -45,7 +44,7 @@
                                 </div>
                             </div>
 
-                            <div class="LayoutLine-col-9">
+                            <div class="LayoutLine-col-9" onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">
                                 <h3 class="Header1">{{ advert.title }}</h3>
                                 <div class="Date"> {{ advert.createdAt|date("Y-m-d") }} </div>
                                 <p class="Paragraph Paragraph--lineLimit-2">{{ advert.text }}</p>
@@ -66,7 +65,7 @@
                                 {% endif %}
                             </div>
                         </section>
-
+                        {#</a>#}
                     {% endfor %}
 
                 </section>
