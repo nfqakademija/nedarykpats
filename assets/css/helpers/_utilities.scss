@@ -7,9 +7,9 @@
 
 .u-display-hidden {
   visibility: hidden;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }
 
 .u-display-flex {
@@ -26,6 +26,14 @@
  */
 .u-color-orange {
   background-color: var(--colorOrange);
+}
+
+.u-color-green {
+  color: var(--colorLightGreen);
+}
+
+.u-color-red {
+  color: var(--colorRed);
 }
 
 /**
@@ -50,6 +58,12 @@
 
 .u-align-top {
   align-items: flex-start !important;
+}
+
+.u-align-middle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /**
