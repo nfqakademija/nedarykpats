@@ -28,17 +28,13 @@ class UserUpdateHandler
 
     /**
      * @param User $user
-     * @param string $firstName
-     * @param string $lastName
+     * @param string $name
      * @return User
      */
-    public function handle(User $user, ?string $firstName, ?string $lastName)
+    public function handle(User $user, ?string $name)
     {
-        if ($user->getFirstName() === null) {
-            $user->setFirstName($firstName);
-        }
-        if ($user->getLastName() === null) {
-            $user->setLastName($lastName);
+        if ($user->getName() === null) {
+            $user->setName($name);
         }
         return $user;
     }

@@ -41,14 +41,7 @@ class User implements UserInterface
      * @ORM\Column(type="string", nullable=true)
      * @var string
      */
-    private $firstName;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     * @var string
-     */
-    private $lastName;
-
+    private $name;
 
 
     /**
@@ -150,39 +143,20 @@ class User implements UserInterface
     /**
      * @return mixed
      */
-    public function getFirstName(): ?string
+    public function getName(): ?string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
     /**
-     * @param string $firstName
+     * @param string $name
      * @return User
      */
-    public function setFirstName(?string $firstName): User
+    public function setName(?string $name): User
     {
-        $this->firstName = $firstName;
+        $this->name = $name;
         return $this;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    /**
-     * @param string $lastName
-     * @return User
-     */
-    public function setLastName(?string $lastName): User
-    {
-        $this->lastName = $lastName;
-        return $this;
-    }
-
 
 
     /**
