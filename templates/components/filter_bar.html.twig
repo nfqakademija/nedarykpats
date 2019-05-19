@@ -7,7 +7,8 @@
     <ul class="FilterBar">
         {% for category in availableCategories %}
             <li>
-                <a class="Category Category--filter {{ category.cssStyle }} {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
+                <a class="Category Category--filter {{ category.cssStyle }}
+                    {% if category.slug not in selectedCategorySlugs %}not-active{% endif %}"
                    href="?filter={{ toggleQueryStrings[category.slug] }}#FilterBar">
                     <span class="Filter-title">{{ category.title }}</span>
                     <span class="Filter-icon">

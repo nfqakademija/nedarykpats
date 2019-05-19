@@ -31,7 +31,10 @@
     <footer class="u-margin-top">
         <ul class="u-align-center u-no-padding">
             {% for advertCategory in advert.categories  %}
-                <li class="Category {{ advertCategory.cssStyle }} not-active">{{ advertCategory.title }}</li>
+                <li class="Category {{ advertCategory.cssStyle }}
+                    {% if advertCategory.slug not in selectedCategorySlugs %}not-active{% endif %}">
+                    {{ advertCategory.title }}
+                </li>
             {% endfor %}
         </ul>
     </footer>
