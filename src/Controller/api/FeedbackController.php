@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api;
 
 use App\Entity\Advert;
 use App\Form\FeedbackFormType;
@@ -15,7 +15,7 @@ class FeedbackController extends AbstractController
 {
 
     /**
-     * @Route("api/feedback", name="feedback", requirements={"POST"})
+     * @Route("api/feedback", name="api_feedback", requirements={"POST"})
      * @param Request $request
      * @param FeedbackCreationHandler $feedbackCreationHandler
      * @return Response
@@ -29,7 +29,7 @@ class FeedbackController extends AbstractController
         if ($advert->getUser() !== $this->getUser()) {
             return new Response(
                 json_encode(['success' => false,]),
-                Response::HTTP_METHOD_NOT_ALLOWED
+                Response::HTTP_FORBIDDEN
             );
         }
 
