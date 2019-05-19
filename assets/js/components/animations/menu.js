@@ -42,7 +42,7 @@ item.addEventListener('click', e => {
 });
 
 //----------------------------------------
-// -- Menu fropdown login button ---------
+// -- Menu dropdown login button ---------
 //----------------------------------------
 
 const navDropdown = document.getElementById('Nav-dropdown');
@@ -57,8 +57,10 @@ if (navDropdown) {
         const isVisible = dropdown.classList.contains('is-visible');
         const isAvatar = !event.target.classList.contains('Nav-avatar');
         const isAngle = !event.target.classList.contains('fa-angle-down');
+        const isName = !event.target.classList.contains('userName');
+        const isDropdown = !event.target.classList.contains('is-dropdown');
 
-        if (isAvatar && isAngle && isVisible) {
+        if (isAvatar && isAngle && isVisible && isName && isDropdown) {
             dropdown.classList.remove('is-visible');
         }
     };

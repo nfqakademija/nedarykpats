@@ -31,12 +31,12 @@
                                 <li class="Nav-item"><a class="Nav-link" href="{{ path('my_adverts') }}">Mano skelbimai</a></li>
 
                                 <li class="Nav-item">
-                                    <span id="Nav-dropdown" class="Nav-dropdown">
+                                    <span id="Nav-dropdown" class="Nav-dropdown is-dropdown">
                                         <img class="Nav-avatar" src="/img/user1.png" alt="user">
+                                        <span class="userName u-margin-small-left-right"> {{ app.user.username }} </span>
                                         <i class="fas fa-angle-down"></i>
                                     </span>
                                     <ul class="dropdown">
-                                        <li class="Nav-subItem"><span class="Nav-link">{{ app.user.username }}</span></li>
                                         <li class="Nav-subItem"><a class="Nav-link" href='{{ path('profile', {'id': app.user.id }) }}'>Profilis</a></li>
                                         <li class="Nav-subItem"><a class="Nav-link" href="{{ path('my_offers') }}">Pasiūlymai</a></li>
                                         <li class="Nav-subItem"><a class="Nav-link" href="{{ path('logout') }}">Atsijungti</a></li>
