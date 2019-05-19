@@ -2,20 +2,10 @@
   @include hyphens();
   padding-bottom: var(--spaceSmall);
   margin-bottom: var(--spaceSmall);
-
-  //&--single {
-  //  border-bottom: none;
-  //}
-  //
-  ////&-3 {
-  //  text-transform: uppercase;
-  //  letter-spacing: .2px;
-  //  font-weight: var(--bold);
-  //
-  //  & i {
-  //    font-size: var(--fontSizeBig);
-  //  }
-  //}
+  
+  &--mainColor {
+    color: var(--colorMain);
+  }
   
   &--red {
     color: var(--colorRed)

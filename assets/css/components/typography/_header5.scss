@@ -1,0 +1,9 @@
+.Header5 {
+  font-weight: var(--bold);
+  text-transform: uppercase;
+  font-size: var(--fontSizeMedium);
+  
+  &--mainColor {
+    color: var(--colorMain);
+  }
+}

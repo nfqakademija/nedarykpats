@@ -6,4 +6,8 @@
   & i {
 	font-size: var(--fontSizeBig);
   }
+  
+  &--mainColor {
+    color: var(--colorMain);
+  }
 }

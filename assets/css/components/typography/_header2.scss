@@ -1,0 +1,15 @@
+.Header2 {
+  font-weight: var(--bold);
+  text-transform: uppercase;
+  font-size: var(--fontSize);
+  line-height: var(--fontSizeBig);
+  
+  & i {
+    padding-right: var(--spaceSmall);
+    font-size: var(--fontSizeBig);
+  }
+  
+  &--mainColor {
+	color: var(--colorMain);
+  }
+}

@@ -6,6 +6,10 @@
   padding-top: var(--spaceMedium);
   padding-bottom: var(--spaceMedium);
   
+  &--mainColor {
+	color: var(--colorMain);
+  }
+  
   a {
 	text-transform: uppercase;
 	font-size: 12px;
