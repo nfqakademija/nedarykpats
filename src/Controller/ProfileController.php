@@ -30,11 +30,8 @@ class ProfileController extends AbstractController
         User $user,
         Request $request,
         ProfileDataChangeHandler $profileHandler,
-        ProfilePasswordChangeHandler $profilePasswordChangeHandler,
-        CategoryRepository $categoryRepository
+        ProfilePasswordChangeHandler $profilePasswordChangeHandler
     ) {
-
-        var_dump($categoryRepository->findUsersTopCategories($user));
 
         $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
         $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $profileDetailsDTO);
