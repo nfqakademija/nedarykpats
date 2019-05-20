@@ -9,6 +9,7 @@ use App\Form\OfferType;
 use App\Handler\AdvertCreationHandler;
 use App\Handler\AdvertRemovalHandler;
 use App\Handler\OfferCreationHandler;
+use App\Repository\AdvertRepository;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -61,7 +62,7 @@ class AdvertController extends AbstractController
      * @return Response
      * @throws Exception
      */
-    public function advert(Advert $advert, Request $request, OfferCreationHandler $offerCreationHandler)
+    public function advert(Advert $advert, Request $request, OfferCreationHandler $offerCreationHandler, AdvertRepository $advertRepository)
     {
         $offerForm = $this->createForm(OfferType::class);
 
@@ -85,6 +86,7 @@ class AdvertController extends AbstractController
         return $this->render('advert/single_advert.html.twig', [
             'advert' => $advert,
             'offerForm' => $offerForm->createView(),
+            'offerUsers' => $advertRepository->findAdvertOffersUsers($advert)
         ]);
     }
 

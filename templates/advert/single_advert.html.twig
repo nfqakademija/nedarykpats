@@ -121,7 +121,7 @@
                     </section>
 
 
-                    {% if app.user != advert.user %}
+                    {% if app.user != advert.user and app.user not in offerUsers %}
                         {{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
 
                         <h3 class="Header1">Parašyk savo pasiūlymą!</h3>
