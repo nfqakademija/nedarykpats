@@ -14,15 +14,13 @@ class FeedbackFormType extends AbstractType
         $builder
             ->add('score')
             ->add('message')
-            ->add('advert')
-        ;
+            ->add('advert');
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'data_class' => FeedbackFormDTO::class,
-            'csrf_protection' => false
         ]);
     }
 }
