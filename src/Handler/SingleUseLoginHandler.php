@@ -52,15 +52,18 @@ class SingleUseLoginHandler
 
     /**
      * @param string $email
+     * @return bool
      * @throws \Exception
      */
-    public function handle(string $email)
+    public function handle(string $email): bool
     {
         $user = $this->userCreationHandler->getUser($email);
-        if (!$user) {
-            $user = $this->userCreationHandler->createUser($email);
+        if ($user instanceof User) {
+            $hash = $this->tokenGeneratorService->generate($user, null, null);
+            $this->emailHandler->sendSingleLoginEmail($email, $hash->getHash());
+
+            return true;
         }
-        $hash = $this->tokenGeneratorService->generate($user, null, null);
-        $this->emailHandler->sendSingleLoginEmail($email, $hash->getHash());
+        return false;
     }
 }

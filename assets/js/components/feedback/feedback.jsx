@@ -55,7 +55,7 @@ class Feedback extends Component {
                 .post('/api/feedback', {
                     score: rateValue,
                     message: feedbackText,
-                    advert
+                    advert,
                 })
                 .then(function(response) {
                     console.log(response);

@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\DTO\RegistrationFormDTO;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Handler\RegistrationHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,45 +31,38 @@ class RegistrationController extends AbstractController
         RegistrationHandler $registrationHandler
     ): Response {
 
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
+        $form = $this->createForm(RegistrationFormType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->setUserProperties($user, $passwordEncoder, $form);
+            /** @var RegistrationFormDTO $registrationFormDTO */
+            $registrationFormDTO = $form->getData();
 
-            $registrationHandler->handle($user);
-            $email = $user->getEmail();
+            $user = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->findUserByEmail($registrationFormDTO->getEmail());
 
-            $this->addFlash(
-                'success',
-                'Norėdami baigti registraciją, pasitikrinkite el. paštą ' . $email
-            );
+            if ($user instanceof User) {
+                $this->addFlash(
+                    'fail',
+                    'Jau egzistuoja vartotojas tokiu el.paštu' . $user->getEmail()
+                );
+                $form->get('email')->addError(new FormError('Jau egzistuoja vartotojas tokiu el.paštu'));
+            } else {
+                $user = $registrationHandler->handle($registrationFormDTO);
+                $email = $user->getEmail();
 
-            return new RedirectResponse($this->generateUrl('home'));
+                $this->addFlash(
+                    'success',
+                    'Norėdami baigti registraciją, pasitikrinkite el. paštą ' . $email
+                );
+
+                return new RedirectResponse($this->generateUrl('home'));
+            }
         }
 
         return $this->render('register/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @param User $user
-     * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param $form
-     * @throws \Exception
-     */
-    private function setUserProperties(User $user, UserPasswordEncoderInterface $passwordEncoder, $form)
-    {
-         $user->setPassword(
-             $passwordEncoder->encodePassword(
-                 $user,
-                 $form->get('plainPassword')->getData()
-             )
-         );
-         $user->setRoles(['ROLE_USER']);
-         $user->setIsConfirmed(false);
-         $user->setCreatedAt(new \DateTime('now'));
     }
 }

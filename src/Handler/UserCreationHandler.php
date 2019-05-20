@@ -50,11 +50,12 @@ class UserCreationHandler
     /**
      * @param string $email
      * @return User
+     * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function getUser(string $email) : ?User
     {
         $userRepository = $this->entityManager->getRepository(User::class);
-        $user = $userRepository->findOneBy(['email' => $email]);
+        $user = $userRepository->findUserByEmail($email);
         return $user;
     }
 }
