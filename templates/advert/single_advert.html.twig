@@ -67,53 +67,59 @@
                         <div id="writeReview"></div>
                     </section>
 
+
+
+
+                    {#......#}
                     <section class="LayoutGrid LayoutGrid--col2">
                         {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
                             {% for offer in advert.offers %}
                                 {% if app.user == offer.user or app.user == advert.user %}
 
-                                    <section class="Comments">
-                                        <section class="Comments-block">
-                                            <div class="Comments-content">
-                                                <div class="Comments-header">
-                                                    <a href='{{ path('profile', {'id': offer.user.id }) }}'>
-                                               <span class="Comments-image">
-                                                    <img src="/img/user1.png" alt="user">
-                                                </span>
-                                                    </a>
-                                                    <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
-                                                </div>
-                                                <div class="Comments-text">
-                                                    <div class="Comments-author">{{ offer.user.username }}</div>
-                                                    <p>{{ offer.text }}</p>
-                                                </div>
-                                                <div class="u-margin-top-bottom u-align-space-around">
-                                                    {% if app.user == offer.user %}
-                                                        <a class="Button u-margin-top-small"
-                                                           href="{{ path('decline_offer', {'id': offer.id}) }}"><i
-                                                                    class="fas fa-times"></i> Atmesti</a>
-                                                    {% else %}
-                                                        {% if advert.acceptedOffer %}
-                                                            {% if advert.acceptedOffer.id == offer.id  and not advert.feedback %}
-                                                                <a class="Button u-margin-top-small"
-                                                                   href="{{ path('decline_offer', {'id': offer.id}) }}"><i
-                                                                            class="fas fa-times"></i> Atmesti</a>
-                                                                <div class="Button Button--yellow u-margin-top-small feedback"
-                                                                     data-feedback-user={{ offer.user.id }}
-                                                                     data-feedback-advert={{ advert.id }}
-                                                                ><i class="fas fa-star"></i> Vertinti
-                                                                </div>
-                                                            {% endif %}
-                                                        {% else %}
-                                                            <a class="Button Button--blue u-margin-top-small"
-                                                               href="{{ path('confirm_offer', {'id': offer.id}) }}"><i
-                                                                        class="fas fa-check"></i> Priimti</a>
-                                                        {% endif %}
-                                                    {% endif %}
-                                                </div>
+                                <section class="Comments">
+                                    <section class="Comments-block">
+                                        <div class="Comments-content">
+                                            <div class="Comments-header">
+                                                <a href='{{ path('profile', {'id': offer.user.id }) }}'>
+                                                    <span class="Comments-image">
+                                                        <img src="/img/user1.png" alt="user">
+                                                    </span>
+                                                </a>
+                                                <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
                                             </div>
-                                        </section>
+                                            <div class="Comments-text">
+                                                <div class="Comments-author">{{ offer.user.username }}</div>
+                                                <p class="Paragraph">{{ offer.text }}</p>
+                                            </div>
+                                            <div class="u-margin-top-bottom u-align-space-around">
+                                                {% if app.user == offer.user %}
+                                                    <a class="Button u-margin-top-small"
+                                                       href="{{ path('decline_offer', {'id': offer.id}) }}">
+                                                        <i class="fas fa-times"></i>
+                                                        Atmesti
+                                                    </a>
+                                                {% else %}
+                                                    {% if advert.acceptedOffer %}
+                                                        {% if advert.acceptedOffer.id == offer.id  and not advert.feedback %}
+                                                            <a class="Button u-margin-top-small"
+                                                               href="{{ path('decline_offer', {'id': offer.id}) }}">
+                                                                <i class="fas fa-times"></i> Atmesti</a>
+                                                            <div class="Button Button--yellow u-margin-top-small feedback"
+                                                                 data-feedback-user={{ offer.user.id }}
+                                                                 data-feedback-advert={{ advert.id }}>
+                                                                <i class="fas fa-star"></i> Vertinti
+                                                            </div>
+                                                        {% endif %}
+                                                    {% else %}
+                                                        <a class="Button Button--blue u-margin-top-small"
+                                                           href="{{ path('confirm_offer', {'id': offer.id}) }}">
+                                                            <i class="fas fa-check"></i> Priimti</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
                                     </section>
+                                </section>
 
                                 {% endif %}
                             {% endfor %}
