@@ -62,8 +62,12 @@ class AdvertController extends AbstractController
      * @return Response
      * @throws Exception
      */
-    public function advert(Advert $advert, Request $request, OfferCreationHandler $offerCreationHandler, AdvertRepository $advertRepository)
-    {
+    public function advert(
+        Advert $advert,
+        Request $request,
+        OfferCreationHandler $offerCreationHandler,
+        AdvertRepository $advertRepository
+    ) {
         $offerForm = $this->createForm(OfferType::class);
 
         $offerForm->handleRequest($request);

@@ -54,7 +54,7 @@ class CategoryRepository extends ServiceEntityRepository
        GROUP BY c.id
        ORDER BY Count DESC'
         )->setParameter(1, $user->getId())
-            ->setMaxResults( "3" )
+            ->setMaxResults("3")
             ->getResult();
     }
 }
