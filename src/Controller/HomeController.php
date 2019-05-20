@@ -79,9 +79,15 @@ class HomeController extends AbstractController
         if ($request->query->get('filter') != null) {
             $selectedCategories = explode(',', $request->query->get('filter'));
         }
+        if ($request->query->get('advertsStatus') !== null) {
+            $filters->setAdvertStatus(intval($request->query->get('advertsStatus')));
+        } else {
+            $filters->setAdvertStatus(1);
+        }
 
         $filters->setKeywords($selectedCategories);
         $filteredAdverts = $advertRepository->findMyAdvertsByCategories($user, $filters, $page, self::ITEMS_PER_PAGE);
+
         $paginationPages = ceil($filteredAdverts->count() / self::ITEMS_PER_PAGE);
 
         if ($paginationPages > 0 && $page > $paginationPages) {

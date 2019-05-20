@@ -2,17 +2,17 @@
 
     <ul class="FilterBar">
         <li>
-            <a class="Category Category--filter">
+            <a class="Category Category--filter" href="{{ path('my_adverts', { 'advertsStatus': 1}) }}">
                 <span class="Filter-title">Aktyvūs</span>
             </a>
         </li>
         <li>
-            <a class="Category Category--filter">
+            <a class="Category Category--filter" href="{{ path('my_adverts', { 'advertsStatus': 2}) }}">
                 <span class="Filter-title">Neįvertinti</span>
             </a>
         </li>
         <li>
-            <a class="Category Category--filter">
+            <a class="Category Category--filter" href="{{ path('my_adverts', { 'advertsStatus': 3}) }}">
                 <span class="Filter-title">Buvę</span>
             </a>
         </li>

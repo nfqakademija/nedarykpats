@@ -26,7 +26,7 @@ class OfferController extends AbstractController
             if ($advert->getAcceptedOffer()) {
                 $this->addFlash('fail', 'Skelbimas jau turi patvirtintą pasiūlymą');
             } else {
-                $offerStatusHandler->handle($advert, $offer);
+                $offerStatusHandler->handleAccept($advert, $offer);
                 $this->addFlash('success', 'Sveikiname pasirinkus pateiktą pasiūlymą');
             }
         } else {
@@ -49,18 +49,20 @@ class OfferController extends AbstractController
 
         if ($advert->getUser() === $this->getUser()) {
             if ($advert->getAcceptedOffer() && !$advert->getFeedback()) {
-                $offerStatusHandler->handle($advert);
+                $offerStatusHandler->handleDecline($advert, $offer);
                 $this->addFlash('success', 'Pasiūlymas atšauktas');
             } else {
                 $this->addFlash('fail', 'Skelbimas neturi patvirtinto pasiūlymo');
             }
         } elseif ($offer->getUser() === $this->getUser()) {
             if ($advert->getAcceptedOffer() && !$advert->getFeedback()) {
-                $offerStatusHandler->handle($advert);
+                $offerStatusHandler->handleRetract($advert, $offer);
                 $this->addFlash('success', 'Jūsų pasiūlymas atšauktas');
             } else {
                 $this->addFlash('fail', 'Skelbimas neturi patvirtinto pasiūlymo');
             }
+        } else {
+            $this->addFlash('fail', 'Atmetimą gali atlikti tik skelbimo arba pasiūlymo sąvininkas');
         }
 
         return $this->redirectToRoute('advert', ['id' => $advert->getId()]);

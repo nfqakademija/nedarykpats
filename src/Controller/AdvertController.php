@@ -2,15 +2,21 @@
 
 namespace App\Controller;
 
+use App\Entity\Advert;
+use App\Entity\User;
+use App\Form\AdvertType;
 use App\Form\OfferType;
 use App\Handler\AdvertCreationHandler;
-use App\Entity\Advert;
-use App\Form\AdvertType;
+use App\Handler\AdvertRemovalHandler;
 use App\Handler\OfferCreationHandler;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use App\Repository\AdvertRepository;
+use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class AdvertController extends AbstractController
 {
@@ -19,8 +25,8 @@ class AdvertController extends AbstractController
      * @Route ("/advert" , name="new_advert")
      * @param Request $request
      * @param AdvertCreationHandler $advertCreationHandler
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
+     * @return RedirectResponse|Response
+     * @throws Exception
      */
     public function addNewAdvert(Request $request, AdvertCreationHandler $advertCreationHandler)
     {
@@ -39,7 +45,7 @@ class AdvertController extends AbstractController
                 $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas šiuo el. paštu ' . $email);
             }
 
-            return $this->redirect('/advert/'. $advert->getid());
+            return $this->redirect('/advert/' . $advert->getid());
         }
 
         return $this->render('advert/insert_advert.html.twig', [
@@ -53,11 +59,15 @@ class AdvertController extends AbstractController
      * @param Advert $advert
      * @param Request $request
      * @param OfferCreationHandler $offerCreationHandler
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Exception
+     * @return Response
+     * @throws Exception
      */
-    public function advert(Advert $advert, Request $request, OfferCreationHandler $offerCreationHandler)
-    {
+    public function advert(
+        Advert $advert,
+        Request $request,
+        OfferCreationHandler $offerCreationHandler,
+        AdvertRepository $advertRepository
+    ) {
         $offerForm = $this->createForm(OfferType::class);
 
         $offerForm->handleRequest($request);
@@ -80,6 +90,29 @@ class AdvertController extends AbstractController
         return $this->render('advert/single_advert.html.twig', [
             'advert' => $advert,
             'offerForm' => $offerForm->createView(),
+            'offerUsers' => $advertRepository->findAdvertOffersUsers($advert)
         ]);
+    }
+
+
+    /**
+     * @Route("/advert/{id}/remove", name="advert_remove", requirements={"id"="\d+"})
+     * @ParamConverter("advert", class="App:Advert")
+     * @param Advert $advert
+     * @param AdvertRemovalHandler $advertRemovalHandler
+     * @return RedirectResponse
+     */
+    public function removeAdvert(Advert $advert, AdvertRemovalHandler $advertRemovalHandler)
+    {
+        $user = $this->getUser();
+
+        if ($user instanceof User && $advert->getUser() === $user) {
+            $advertRemovalHandler->handle($advert);
+            $this->addFlash('success', 'Skelbimas sėkmingai pašalintas');
+            return $this->redirectToRoute('my_adverts');
+        } else {
+            $this->addFlash('fail', 'Skelbimo pašalinti nepavyko');
+            return $this->redirectToRoute('my_adverts');
+        }
     }
 }

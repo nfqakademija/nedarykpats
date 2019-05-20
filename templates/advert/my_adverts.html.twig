@@ -3,7 +3,7 @@
 {% block title %}Mano skelbimai{% endblock %}
 
 {% block body %}
-
+    {% include 'components/flash_bag.html.twig' %}
     <div class="Content Content--top">
         <div class="Content-Block">
             {% include 'components/filter_bar_my_adverts.html.twig' with {'header' : ''} %}
@@ -60,7 +60,7 @@
                                         ><i class="fas fa-star"></i> Vertinti</div>
                                     {% endif %}
                                 {% else %}
-                                    <div class="Button Button--default Button--red u-margin-around"><i class="fas fa-times"></i> Trinti</div>
+                                    <a class="Button Button--default Button--red u-margin-around" href="{{ path('advert_remove', {'id': advert.id}) }}"><i class="fas fa-times"></i> Trinti</a>
                                 {% endif %}
                             </div>
                         </section>

@@ -25,9 +25,35 @@ class OfferStatusHandler
         $this->entityManager = $entityManager;
     }
 
-    public function handle(Advert $advert, Offer $offer = null)
+    /**
+     * @param Advert $advert
+     * @param Offer $offer
+     */
+    public function handleAccept(Advert $advert, Offer $offer)
     {
         $advert->setAcceptedOffer($offer);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param Advert $advert
+     * @param Offer $offer
+     */
+    public function handleDecline(Advert $advert, Offer $offer)
+    {
+        $advert->setAcceptedOffer(null);
+        $offer->setIsDeclined(true);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * @param Advert $advert
+     * @param Offer $offer
+     */
+    public function handleRetract(Advert $advert, Offer $offer)
+    {
+        $advert->setAcceptedOffer(null);
+        $offer->setIsRetracted(true);
         $this->entityManager->flush();
     }
 }
