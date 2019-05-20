@@ -67,7 +67,26 @@ class AdvertRepository extends ServiceEntityRepository
                 ->innerJoin('a.categories', 'c')
                 ->andWhere($query->expr()->in('c.slug', $filters->getKeywords()));
         }
-
+        if ($filters->getAdvertStatus()) {
+            switch ($filters->getAdvertStatus()) {
+                case 1:
+                    $query->andWhere('a.acceptedOffer is null');
+                    break;
+                case 2:
+                    $query
+                        ->leftJoin('a.feedback', 'f')
+                        ->andWhere('a.acceptedOffer is not null')
+                        ->andWhere('f.id is null');
+                    break;
+                case 3:
+                    $query
+                        ->innerJoin('a.feedback', 'f')
+                        ->andWhere('a.acceptedOffer is not null');
+                    break;
+                default:
+                    break;
+            }
+        }
         $query->orderBy('a.createdAt', 'DESC');
 
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
