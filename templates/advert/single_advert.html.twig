@@ -2,180 +2,188 @@
 
 {% block body %}
 
-<div class="Content Content--top">
-    <div class="Content-Block">
+    {% include 'components/flash_bag.html.twig' %}
+
+    <div class="Content Content--top">
+        <div class="Content-Block">
+        </div>
     </div>
-</div>
 
-<div class="Content Content--GreyBg">
-    <div class="Content-Block">
-        <div class="Content Content--GreyBg ">
-            <section class="Content-Block">
+    <div class="Content Content--GreyBg">
+        <div class="Content-Block">
+            <div class="Content Content--GreyBg ">
+                <section class="Content-Block">
 
-                <div class="u-display-right">
-                    <a class="Button" href="/#FilterBar">Atgal</a>
-                </div>
+                    <div class="u-display-right">
+                        <a class="Button" href="/#FilterBar">Atgal</a>
+                    </div>
 
-                {#TODO: neskeminga zinute#}
-                {% if app.session.flashBag.has('success') %}
-                    <div class="Alert Alert-success">
+                    {#TODO: neskeminga zinute#}
+                    {% if app.session.flashBag.has('success') %}
+                        <div class="Alert Alert-success">
                         <span class="Alert-icon">
                             <img src="/img/success.svg" alt="success">
                                {% for msg in app.session.flashBag.get('success') %}
-                                {{ msg }}
+                                   {{ msg }}
                                {% endfor %}
                         </span>
-                    </div>
-                {% endif %}
-
-                <section class="LayoutLine LayoutLine--flex">
-                    <section class="LayoutLine-item--fullWidth">
-                        <header class="TopBar TopBar--justify">
-                            <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
-                            {% if advert.getOffersCount()  > 0 %}
-                                <div class="Bid">
-                                    <span class="Bid-header">Aplikavo</span>
-                                    <span class="Bid-count">{{ advert.getOffersCount() }}</span>
-                                </div>
-                            {% endif %}
-                        </header>
-
-                        <h3 class="Header1">{{ advert.title }}</h3>
-
-                        <div class="Paragraph">
-                            <p>{{ advert.text }}</p>
                         </div>
+                    {% endif %}
 
-                        <footer class="u-margin-top">
-                            <ul class="u-no-padding">
-                                {% for advertCategory in advert.categories  %}
-                                    <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
-                                {% endfor %}
-                            </ul>
-                        </footer>
+                    <section class="LayoutLine LayoutLine--flex">
+                        <section class="LayoutLine-item--fullWidth">
+                            <header class="TopBar TopBar--justify">
+                                <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
+                                {% if advert.getOffersCount()  > 0 %}
+                                    <div class="Bid">
+                                        <span class="Bid-header">Aplikavo</span>
+                                        <span class="Bid-count">{{ advert.getOffersCount() }}</span>
+                                    </div>
+                                {% endif %}
+                            </header>
+
+                            <h3 class="Header1">{{ advert.title }}</h3>
+
+                            <div class="Paragraph">
+                                <p>{{ advert.text }}</p>
+                            </div>
+
+                            <footer class="u-margin-top">
+                                <ul class="u-no-padding">
+                                    {% for advertCategory in advert.categories %}
+                                        <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </footer>
+                        </section>
+
+                        <section class="StatusBlock StatusBlock--hired">
+                            <img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">
+                            <p class="StatusBlock-title">Pasamdytas!</p>
+                        </section>
                     </section>
 
-                    <section class="StatusBlock StatusBlock--hired">
-                        <img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">
-                        <p class="StatusBlock-title">Pasamdytas!</p>
+                    <section id="writeReviewModal" class="Modal">
+                        <div id="writeReview"></div>
                     </section>
-                </section>
 
-                <section id="writeReviewModal" class="Modal">
-                    <div id="writeReview"></div>
-                </section>
+                    <section class="LayoutGrid LayoutGrid--col2">
+                        {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
+                            {% for offer in advert.offers %}
+                                {% if app.user == offer.user or app.user == advert.user %}
 
-                <section class="LayoutGrid LayoutGrid--col2">
-                {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
-                    {% for offer in advert.offers %}
-                        {% if app.user == offer.user or app.user == advert.user %}
-
-                            <section class="Comments">
-                                <section class="Comments-block">
-                                    <div class="Comments-content">
-                                        <div class="Comments-header">
-                                           <a href='{{ path('profile', {'id': offer.user.id }) }}'>
+                                    <section class="Comments">
+                                        <section class="Comments-block">
+                                            <div class="Comments-content">
+                                                <div class="Comments-header">
+                                                    <a href='{{ path('profile', {'id': offer.user.id }) }}'>
                                                <span class="Comments-image">
                                                     <img src="/img/user1.png" alt="user">
                                                 </span>
-                                           </a>
-                                            <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
-                                        </div>
-                                        <div class="Comments-text">
-                                            <div class="Comments-author">{{ offer.user.username }}</div>
-                                            <p>{{ offer.text }}</p>
-                                        </div>
-                                        <div class="u-margin-top-bottom u-align-space-around">
-                                            {% if advert.acceptedOffer %}
-                                                {% if app.user == offer.user  %}
-                                                    <a class="Button u-margin-top-small" href="{{ path('decline_offer', {'id': offer.id}) }}"><i class="fas fa-times"></i> Atmesti</a>
-                                                {% endif %}
-                                                {% if  app.user != offer.user and advert.acceptedOffer.id == offer.id  and not advert.feedback %}
-                                                    <a class="Button u-margin-top-small" href="{{ path('decline_offer', {'id': offer.id}) }}"><i class="fas fa-times"></i> Atmesti</a>
-                                                    <div class="Button Button--yellow u-margin-top-small feedback"
-                                                         data-feedback-user={{ offer.user.id }}
-                                                         data-feedback-advert={{ advert.id }}
-                                                    ><i class="fas fa-star"></i> Vertinti</div>
-                                                {% endif %}
-                                            {% elseif app.user != offer.user %}
-                                                    <a class="Button Button--blue u-margin-top-small" href="{{ path('confirm_offer', {'id': offer.id}) }}"><i class="fas fa-check"></i> Priimti</a>
-                                            {% endif %}
+                                                    </a>
+                                                    <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+                                                </div>
+                                                <div class="Comments-text">
+                                                    <div class="Comments-author">{{ offer.user.username }}</div>
+                                                    <p>{{ offer.text }}</p>
+                                                </div>
+                                                <div class="u-margin-top-bottom u-align-space-around">
+                                                    {% if app.user == offer.user %}
+                                                        <a class="Button u-margin-top-small"
+                                                           href="{{ path('decline_offer', {'id': offer.id}) }}"><i
+                                                                    class="fas fa-times"></i> Atmesti</a>
+                                                    {% else %}
+                                                        {% if advert.acceptedOffer %}
+                                                            {% if advert.acceptedOffer.id == offer.id  and not advert.feedback %}
+                                                                <a class="Button u-margin-top-small"
+                                                                   href="{{ path('decline_offer', {'id': offer.id}) }}"><i
+                                                                            class="fas fa-times"></i> Atmesti</a>
+                                                                <div class="Button Button--yellow u-margin-top-small feedback"
+                                                                     data-feedback-user={{ offer.user.id }}
+                                                                     data-feedback-advert={{ advert.id }}
+                                                                ><i class="fas fa-star"></i> Vertinti
+                                                                </div>
+                                                            {% endif %}
+                                                        {% else %}
+                                                            <a class="Button Button--blue u-margin-top-small"
+                                                               href="{{ path('confirm_offer', {'id': offer.id}) }}"><i
+                                                                        class="fas fa-check"></i> Priimti</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </section>
 
-                                        </div>
-                                    </div>
-                                </section>
-                            </section>
-
+                                {% endif %}
+                            {% endfor %}
                         {% endif %}
-                    {% endfor %}
-                {% endif %}
-                </section>
+                    </section>
 
 
+                    {% if app.user != advert.user %}
+                        {{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
 
-                {% if app.user != advert.user %}
-                    {{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
+                        <h3 class="Header1">Parašyk savo pasiūlymą!</h3>
 
-                    <h3 class="Header1">Parašyk savo pasiūlymą!</h3>
+                        {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
 
-                    {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
-
-                        <div class="Form-item">
-                            {{ form_label(offerForm.email,'Elektroninis paštas') }}
-                            {{ form_widget(offerForm.email) }}
-                            <span class="Form-errors">
+                            <div class="Form-item">
+                                {{ form_label(offerForm.email,'Elektroninis paštas') }}
+                                {{ form_widget(offerForm.email) }}
+                                <span class="Form-errors">
                              {{ form_errors(offerForm.email) }}
                             </span>
-                        </div>
+                            </div>
 
-                        <div class="Form-item">
-                            {{ form_label(offerForm.name,'Tavo vardas') }}
-                            {{ form_widget(offerForm.name) }}
-                            <span class="Form-errors">
+                            <div class="Form-item">
+                                {{ form_label(offerForm.name,'Tavo vardas') }}
+                                {{ form_widget(offerForm.name) }}
+                                <span class="Form-errors">
                              {{ form_errors(offerForm.name) }}
                             </span>
-                        </div>
-
-                    {% else %}
-
-                        <div class="Form-item" hidden>
-                            {{ form_widget(offerForm.email, {'value' : app.user.email}) }}
-                        </div>
-
-                        {% if app.user.name is not empty %}
-                            <div class="Form-item" hidden>
-                                {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
                             </div>
 
                         {% else %}
+
                             <div class="Form-item" hidden>
-                                {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
+                                {{ form_widget(offerForm.email, {'value' : app.user.email}) }}
                             </div>
-                         {% endif %}
 
-                    {% endif %}
+                            {% if app.user.name is not empty %}
+                                <div class="Form-item" hidden>
+                                    {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
+                                </div>
 
-                    <div class="Form-item">
-                        {{ form_label(offerForm.text, 'Žinutė skelbimo autoriui') }}
-                        {{ form_widget(offerForm.text, {'attr': {'rows': '10'} }) }}
-                        <span class="Form-errors">
+                            {% else %}
+                                <div class="Form-item" hidden>
+                                    {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
+                                </div>
+                            {% endif %}
+
+                        {% endif %}
+
+                        <div class="Form-item">
+                            {{ form_label(offerForm.text, 'Žinutė skelbimo autoriui') }}
+                            {{ form_widget(offerForm.text, {'attr': {'rows': '10'} }) }}
+                            <span class="Form-errors">
                          {{ form_errors(offerForm.text) }}
                     </span>
-                    </div>
+                        </div>
 
-                    {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+                        {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
 
-                {{ form_end(offerForm) }}
-                {% endif %}
-            </section>
+                        {{ form_end(offerForm) }}
+                    {% endif %}
+                </section>
+            </div>
         </div>
     </div>
-</div>
 
-<script>
-    var usingVersionedFileJs = true;
-    var usingReactApp = true;
-</script>
-{{ parent() }}
+    <script>
+        var usingVersionedFileJs = true;
+        var usingReactApp = true;
+    </script>
+    {{ parent() }}
 
 {% endblock %}
