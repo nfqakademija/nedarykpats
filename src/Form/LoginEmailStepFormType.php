@@ -16,8 +16,10 @@ class LoginEmailStepFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
+
         $resolver->setDefaults([
             'data_class' => LoginFormDTO::class,
+            'csrf_protection' => false
         ]);
     }
 }

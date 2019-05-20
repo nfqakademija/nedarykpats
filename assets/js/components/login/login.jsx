@@ -6,6 +6,7 @@ import Password from '../.././components/login/loginPassword/loginPassword.jsx';
 import Success from '../.././components/login/loginSuccess/loginSuccess.jsx';
 import SendEmail from '../.././components/login/loginSendEmail/loginSendEmail.jsx';
 import Registration from '../registration/registration.jsx';
+import Mistake from '../.././components/login/loginMistake/loginMistake.jsx';
 import LoadingSpinner from '../loadingSpinner/loadingSpinner.jsx';
 
 import axios from "axios";
@@ -31,6 +32,13 @@ class Login extends Component {
         })
     };
 
+    prevStep = () => {
+        const { step } = this.state;
+        this.setState({
+            step: step - 1
+        });
+    };
+
     handleChange = input => event => {
         this.setState({ [input] : event.target.value })
     };
@@ -39,7 +47,7 @@ class Login extends Component {
         this.setState({
             step : stepValue
         })
-    }
+    };
 
     signIn = () => {
         const { email, password } = this.state;
@@ -52,30 +60,46 @@ class Login extends Component {
         const { nextStepValue } = this;
 
         this.setState({ loading: true }, () => {
-            axios.get(`http://127.0.0.1:8000/check/email/`+ email)
-                .then(res => {
-
-                    this.setState({
-                        loading: false,
-                        data: res.data,
-                    });
-
-                    if (res.data.isEmail) {
-
-                        if (res.data.isSingleUser) {
-                            nextStepValue(4);
-                        }
-                        else {
+            this.setState({ loading: true }, () => {
+                axios.get('http://127.0.0.1:8000/api/public/user?email=' + email)
+                    .then( response =>  {
+                        console.log(response);
+                        this.setState({
+                            loading: false,
+                            data: response.data
+                        });
+                        if (response.data.authenticateUsingPassword) {
                             nextStepValue(2);
                         }
-                    }
-                    else {
+                        else {
+                            this.sendSingleLoginLink();
+                        }
+                    })
+                    .catch(function (error) {
+                        console.log(error);
                         nextStepValue(5);
-                    }
+                    });
+            });
+        });
+    };
 
+    sendSingleLoginLink = () => {
+        const { nextStep } = this;
+        const { email } = this.state;
+        const { nextStepValue } = this;
+
+        this.setState({ loading: true }, () => {
+            axios
+                .post('http://127.0.0.1:8000/api/public/user/send_login_link', {
+                    email: email,
                 })
-                .catch(function (error) {
-
+                .then(function(response) {
+                    console.log(response);
+                    nextStepValue(4);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    nextStepValue(6);
                 });
         });
     };
@@ -106,10 +130,11 @@ class Login extends Component {
                     <div>
                         {loading ? <LoadingSpinner/> :
                             <Password
-                                // nextStep={this.nextStep}
+                                prevStep={this.prevStep}
                                 handleChange={this.handleChange}
                                 values={values}
                                 results={data}
+                                sendSingleLoginLink={this.sendSingleLoginLink}
                             />
                         }
                     </div>
@@ -120,6 +145,8 @@ class Login extends Component {
                 return <SendEmail />
             case 5:
                 return <Registration />
+            case 6:
+                return <Mistake />
 
         }
     }

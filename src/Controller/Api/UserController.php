@@ -94,8 +94,8 @@ class UserController extends AbstractController
             }
         }
         return new Response(
-            json_encode(['loginLinkSent' => false, 'email' => $loginDTOData['email']]),
-            Response::HTTP_OK
+            json_encode(['loginLinkSent' => false,]),
+            Response::HTTP_BAD_REQUEST
         );
     }
 

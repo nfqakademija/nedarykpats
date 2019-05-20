@@ -129,33 +129,4 @@ class SecurityController extends AbstractController
             return $this->redirectToRoute('home');
         }
     }
-
-    /**
-     * @Route("/check/email/{email}", name="check_email", requirements={"POST"})
-     * @param string $email
-     * @param UserRepository $userRepository
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function checkEmailAction(
-        string $email,
-        UserRepository $userRepository
-    ): Response {
-
-        $isEmail = false;
-        $isSingleUser = false;
-
-        $user = $userRepository->findOneBy(['email' => $email]);
-
-        if (!empty($user)) {
-            $isEmail = true;
-            if (empty($user->getPassword())) {
-                $isSingleUser = true;
-            }
-        }
-
-        return new JsonResponse([
-            'isEmail' => $isEmail,
-            'isSingleUser' => $isSingleUser
-        ]);
-    }
 }
