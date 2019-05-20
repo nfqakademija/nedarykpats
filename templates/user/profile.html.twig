@@ -60,10 +60,11 @@
                     </div>
                     <div>
                         <h4 class="u-margin-top">Dirbu srityse</h4>
-                        <ul class="Ad-categories Ad-categories--left">
-                            <li class="Category Category--black not-active">Santechnika</li>
-                            <li class="Category Category--black not-active">Lauko darbai</li>
-                        </ul>
+                        {% if topCategories is not null %}
+                            {% for category in topCategories %}
+                                <li class="Category {{ category.cssStyle }}"> {{ category.title }}</li>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 
                 </div>

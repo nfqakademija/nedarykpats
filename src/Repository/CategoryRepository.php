@@ -15,11 +15,18 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
+    /**
+     * CategoryRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Category::class);
     }
 
+    /**
+     * @return mixed
+     */
     public function findAvailableCategoriesForFilter()
     {
         return $this->createQueryBuilder('category')
@@ -29,21 +36,25 @@ class CategoryRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function findUsersTopCategoryTitles(User $user)
     {
         $entityManager = $this->getEntityManager();
 
         return $query = $entityManager->createQuery(
-            'SELECT c.id, c.title, COUNT(1) AS Count
-            FROM App\Entity\Category c
-            JOIN c.adverts a
-            JOIN a.offers o
-            JOIN o.user u
-            WHERE u.id = ?1
-            GROUP BY c.id
-            ORDER BY Count DESC'
+            'SELECT c, COUNT(1) AS HIDDEN Count
+       FROM App\Entity\Category c
+       JOIN c.adverts a
+       JOIN a.offers o
+       JOIN o.user u
+       WHERE u.id = ?1
+       GROUP BY c.id
+       ORDER BY Count DESC'
         )->setParameter(1, $user->getId())
-            ->setMaxResults("3")
+            ->setMaxResults( "3" )
             ->getResult();
     }
 }

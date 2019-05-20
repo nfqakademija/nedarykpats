@@ -30,7 +30,8 @@ class ProfileController extends AbstractController
         User $user,
         Request $request,
         ProfileDataChangeHandler $profileHandler,
-        ProfilePasswordChangeHandler $profilePasswordChangeHandler
+        ProfilePasswordChangeHandler $profilePasswordChangeHandler,
+        CategoryRepository $categoryRepository
     ) {
 
         $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
@@ -70,7 +71,8 @@ class ProfileController extends AbstractController
             'profileDetailsForm' => $profileDetailsForm->createView(),
             'profilePasswordForm' => $profilePasswordForm->createView(),
             'user' => $user,
-            'rateAverage' => $rateAverage
+            'rateAverage' => $rateAverage,
+            'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
         ]);
     }
 }
