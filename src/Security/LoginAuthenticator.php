@@ -133,7 +133,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        return new Response(json_encode(['success' => true]));
+        return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
