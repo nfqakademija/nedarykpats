@@ -1,23 +1,24 @@
 //--Register
-const email = document.querySelector('#registration_form_email');
-const password = document.querySelector('#registration_form_plainPassword');
-if (email) {
-    animateAvatar(email, password);
-}
-
-//TODO: netrinti, reikalinga meistriuko avatarui
-//--Login
-// const emailLogin = document.querySelector('#inputEmail');
-// const passwordLogin = document.querySelector('#inputPassword');
-// if (emailLogin) {
-//     animateAvatar(emailLogin, emailLogin);
+// const email = document.querySelector('#registration_form_email');
+// const password = document.querySelector('#registration_form_plainPassword');
+// if (email) {
+//     //animateAvatar(email, password);
 // }
 
-//------------------------------
-//-----Avatar animation---------
-//------------------------------
+//--Login Email
+const emailLogin = document.querySelector('#inputEmail');
+if (emailLogin) {
+    animateAvatarEmail(emailLogin);
+}
 
-function animateAvatar(email, password) {
+//--Login Password
+const passwordLogin = document.querySelector('#inputPassword');
+if (passwordLogin) {
+    animateAvatarPassword(passwordLogin);
+}
+
+// ANIMATE HANDS IF LOGIN NAME
+function animateAvatarEmail(email) {
 
     let mySVG = document.querySelector('.avatarContainer'),
         armL = document.querySelector('.armL'),
@@ -196,6 +197,68 @@ function animateAvatar(email, password) {
     email.addEventListener('focus', onEmailFocus);
     email.addEventListener('blur', onEmailBlur);
     email.addEventListener('input', onEmailInput);
+    TweenMax.set(armL, {x: -93, y: 220, rotation: 105, transformOrigin: "top left"});
+    TweenMax.set(armR, {x: -93, y: 220, rotation: -105, transformOrigin: "top right"});
+}
+
+
+
+
+
+
+
+// ANIMATE HANDS IF LOGIN NAME PASSWORD
+function animateAvatarPassword(password) {
+
+    let mySVG = document.querySelector('.avatarContainer'),
+        armL = document.querySelector('.armL'),
+        armR = document.querySelector('.armR');
+
+    const onPasswordFocus = (e) => coverEyes();
+
+    const onPasswordBlur = (e) => uncoverEyes();
+
+    const coverEyes = () => {
+        TweenMax.to(armL, .45, {x: 0, y: 2, rotation: 0});
+        TweenMax.to(armR, .45, {x: 0, y: 2, rotation: 0, ease: Quad.easeOut});
+    };
+
+    const uncoverEyes = () => {
+        TweenMax.to(armL, 1.35, {y: 220, ease: Quad.easeOut});
+        TweenMax.to(armL, 1.35, {rotation: 105, ease: Quad.easeOut, delay: .1});
+        TweenMax.to(armR, 1.35, {y: 220, ease: Quad.easeOut});
+        TweenMax.to(armR, 1.35, {rotation: -105, ease: Quad.easeOut, delay: .1});
+    };
+
+    const getAngle = (x1, y1, x2, y2) => {
+        return Math.atan2(y1 - y2, x1 - x2);
+    };
+
+    const getPosition = (el) => {
+        let xPos = 0;
+        let yPos = 0;
+
+        while (el) {
+            if (el.tagName == "BODY") {
+                var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+                var yScroll = el.scrollTop || document.documentElement.scrollTop;
+
+                xPos += (el.offsetLeft - xScroll + el.clientLeft);
+                yPos += (el.offsetTop - yScroll + el.clientTop);
+
+            } else {
+                xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+                yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+            }
+
+            el = el.offsetParent;
+        }
+        return {
+            x: xPos,
+            y: yPos
+        };
+    };
+
     password.addEventListener('focus', onPasswordFocus);
     password.addEventListener('blur', onPasswordBlur);
     TweenMax.set(armL, {x: -93, y: 220, rotation: 105, transformOrigin: "top left"});

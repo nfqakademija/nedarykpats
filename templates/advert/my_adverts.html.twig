@@ -28,9 +28,8 @@
                     </section>
 
                     {% for advert in filteredAdverts %}
-                        {#<a href="{{ path('advert', {'id': advert.id }) }}">#}
                         <section class="LayoutLine-item LayoutLine-item--link">
-                                 {#onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">#}
+
                             <div class="LayoutLine-col-1" onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">
                                 {#TODO: prideti stausa#}
                                 <div class="Bid Bid--center">
@@ -65,7 +64,6 @@
                                 {% endif %}
                             </div>
                         </section>
-                        {#</a>#}
                     {% endfor %}
 
                 </section>

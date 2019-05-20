@@ -15,9 +15,10 @@ class LoginPassword extends Component{
     render(){
         const { values } = this.props;
         const csrf_token = document.getElementById('csrf_token').value;
+
         return(
             <form  method="post" className="Form Form-background Form--short">
-                {/*<Avatar />*/}
+                <Avatar />
 
                 <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
 
@@ -34,9 +35,9 @@ class LoginPassword extends Component{
                 />
 
                 <div className="Form-item">
-                    <input type="password"
+                    <input id="inputPassword"
+                           type="password"
                            name="password"
-                           id="inputPassword"
                            placeholder="Slaptažodis"
                            required
                            onChange={this.props.handleChange('password')}

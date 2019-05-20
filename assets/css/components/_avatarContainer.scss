@@ -4,7 +4,7 @@
   width: 200px;
   height: 200px;
   border-radius: var(--radiusFull);
-  border: solid var(--borderMedium) var(--colorGrey);
+  border: solid var(--borderSmall) var(--colorGrey);
   overflow: hidden;
   pointer-events: none;
   
@@ -17,3 +17,12 @@
 	pointer-events: none;
   }
 }
+
+.st0{fill:#FFFFFF;stroke:#353535;stroke-width:4;stroke-miterlimit:10;}
+.st1{fill:none;stroke:#353535;stroke-width:4;stroke-miterlimit:10;}
+.st2{fill:#2F2AF2;stroke:#353535;stroke-width:4;stroke-miterlimit:10;}
+.st3{fill:#BCE1EA;stroke:#353535;stroke-width:4;stroke-miterlimit:10;}
+.st4{fill:#353535;}
+.st5{fill:#FBCB99;stroke:#333333;stroke-width:4;stroke-miterlimit:10;}
+
+
