@@ -250,7 +250,11 @@ class Advert
      */
     public function getOffersCount(): int
     {
-        return count($this->offers);
+        return count($this->offers->filter(function (Offer $offer) {
+            return ($offer->isConfirmed() === true
+                && ($offer->getIsDeclined() === false || $offer->getIsDeclined() === null)
+                && ($offer->getIsRetracted() === false || $offer->getIsRetracted() ===null));
+        }));
     }
 
     /**
