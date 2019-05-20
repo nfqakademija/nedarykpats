@@ -33,11 +33,11 @@
                         <img src="/img/user1.png" alt="user-avatar" >
                     </div>
                     <div class="StarRating u-align-center">
-                        <span class="StarRating-star fa fa-star checked"></span>
-                        <span class="StarRating-star fa fa-star checked"></span>
-                        <span class="StarRating-star fa fa-star checked"></span>
-                        <span class="StarRating-star fa fa-star"></span>
-                        <span class="StarRating-star fa fa-star"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 1 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 2 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 3 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 4 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 5 ? 'checked' : '' }}"></span>
                     </div>
                 </div>
                 <div class="Column-3 Column-3--longer u-margin-left-right u-margin-top">
@@ -88,7 +88,7 @@
                                     <span class="Comments-date">{{ feedback.createdAt|date("Y-m-d") }}</span>
                                 </div>
                                 <div class="Comments-text">
-                                    <div class="Comments-author">{{ feedback.advert.user.name}} {{ feedback.advert.user.name }}</div>
+                                    <div class="Comments-author">{{ feedback.advert.user.name}}</div>
                                     <p>{{ feedback.message }}</p>
                                 </div>
                             </div>

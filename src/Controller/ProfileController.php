@@ -57,10 +57,20 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('profile', ['id' => $user->getId()]);
         }
 
+        $rateAverage = 0;
+        foreach ($this->getUser()->getFeedbacks() as $value) {
+            $rateArray[] = $value->getScore();
+        }
+
+        if ($rateArray) {
+            $rateAverage = array_sum($rateArray) / count($rateArray);
+        }
+
         return $this->render('user/profile.html.twig', [
             'profileDetailsForm' => $profileDetailsForm->createView(),
             'profilePasswordForm' => $profilePasswordForm->createView(),
-            'user' => $user
+            'user' => $user,
+            'rateAverage' => $rateAverage
         ]);
     }
 }

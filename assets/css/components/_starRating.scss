@@ -1,4 +1,12 @@
 .StarRating{
+  .fa {
+    font-weight: normal;
+    font-size: var(--fontSizeBig);
+  }
+  
+  .fa.checked {
+    font-weight: bold;
+  }
   
   &-star {
   
@@ -9,11 +17,7 @@
   
   &--small {
     .fa {
-      font-weight: normal;
-    }
-    
-    .fa.checked {
-      font-weight: bold;
+      font-size: var(--fontSize);
     }
   }
 }
