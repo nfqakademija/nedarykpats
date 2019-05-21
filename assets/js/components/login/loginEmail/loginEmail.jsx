@@ -43,15 +43,19 @@ class LoginEmail extends Component{
                        value={csrf_token}
                 />
 
-                <div className="u-margin-top-bottom u-align-center">
-                    <a className="Button Button--google"
-                       href="http://127.0.0.1:8000/connect/google">Google
-                    </a>
-                    <a className="Button Button--blue"
+                <div className="u-align-center">
+                    <a className="Button Button--blue Button--long"
                        onClick={this.saveAndContinue}
                     >Toliau </a>
                 </div>
 
+                <div className="u-margin-top-bottom u-align-center">
+                    <a className="u-not-link" href="http://127.0.0.1:8000/connect/google">
+                        <p>Arba prisijungti per:
+                            <i className="Image--icon fab fa-google-plus-g u-color-red u-margin-small-left-right"></i>
+                        </p>
+                    </a>
+                </div>
                 <p className="Header4">Dar neturi paskyros? <a id="registerLink" href="http://127.0.0.1:8000/register">Registruotis!</a></p>
 
             </div>

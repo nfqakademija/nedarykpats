@@ -71,6 +71,7 @@
 @import "components/review";
 @import "components/spinner";
 @import "components/topBar";
+@import "components/image";
 
 /*********************************************************
 * MEDIUM SCREEN (IPAD)
@@ -110,33 +111,32 @@
 * LARGE SCREEN (DESKTOP)
 **********************************************************/
 @media (min-width: 1200px) {
-/**
-* page Header
-*/
+  /**
+  * page Header
+  */
   @import "components/pageHeader/pageHeader_large";
   @import "components/pageHeader/nav_large";
   
- /**
+  /**
  * Layout
  */
   @import "layout/content_large";
   @import "layout/layoutGrid_large";
   @import "layout/layoutLine_large";
   @import "layout/column_large";
-}
-
-/**
+  
+  /**
  * Forms
  */
-  @import "components/forms/form_large";
-  
-/**
+  @import "components/forms/form_large"; /**
  * Other components
  */
   @import "components/comments_large";
   @import "components/selectedAd_large";
   @import "components/statusBlock_large";
   @import "components/sectionBlock_large";
+  
+}
 
 
 

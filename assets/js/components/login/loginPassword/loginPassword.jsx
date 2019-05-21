@@ -68,7 +68,7 @@ class LoginPassword extends Component{
                 </form>
 
                 <div className="u-margin-top-bottom u-align-center">
-                    <a className="Button Button--blue Button--long"
+                    <a className="Button Button--long"
                         onClick={this.props.sendSingleLoginLink}>
                         Prisijungimo nuoroda
                     </a>
