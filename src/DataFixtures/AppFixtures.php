@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Advert;
 use App\Entity\Category;
+use App\Entity\Feedback;
 use App\Entity\Offer;
 use App\Entity\User;
 use App\Entity\City;
@@ -71,6 +72,12 @@ class AppFixtures extends Fixture
             $offer = $this->getOffer($singleOffer, $adverts, $users);
             $this->addReference($singleOffer['reference'], $offer);
             $manager->persist($offer);
+        }
+
+
+        foreach ($this->getFeedbackData() as $singleFeedbackData) {
+            $feedback = $this->getFeedback($singleFeedbackData, $users, $adverts);
+            $manager->persist($feedback);
         }
 
         $manager->flush();
@@ -174,6 +181,26 @@ class AppFixtures extends Fixture
 
         return $city;
     }
+
+
+    /**
+     * @param array $feedback
+     * @param array $users
+     * @param array $adverts
+     */
+    private function getFeedback(array $feedbackData,array $users, array $adverts )
+    {
+        $feedback = new Feedback();
+
+        $feedback->setReceivingUser($users[$feedbackData['receivingUser']])
+            ->setScore($feedbackData['score'])
+            ->setAdvert($adverts[$feedbackData['advert']])
+            ->setMessage($feedbackData['message'])
+            ->setCreatedAt(new \DateTime('now'));
+
+        return $feedback;
+    }
+
 
     /**
      * @return array
@@ -700,6 +727,29 @@ class AppFixtures extends Fixture
             ]
         ];
 
+    }
+
+    /**
+     * @return array
+     */
+    public function getFeedbackData()
+    {
+
+        return [
+            [
+                'score' => '0',
+                'message' => 'Tobulas darbuotojas',
+                'advert' => 'ieskome-santechniko',
+                'receivingUser' => 'aurimas@uzsakovas.lt',
+            ],
+            [
+                'score' => '2',
+                'message' => 'Tobulas darbuotojas',
+                'advert' => 'silpnu-sroviu-montotuojas',
+                'receivingUser' => 'martyna@uzsakove.lt',
+            ],
+
+        ];
     }
 
 
