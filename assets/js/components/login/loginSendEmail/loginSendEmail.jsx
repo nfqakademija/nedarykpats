@@ -1,26 +1,7 @@
 import React, { Component } from 'react';
-import axios from "axios";
-import LoginWasSentImage from '../loginWasSentImage/LoginWasSentImage.jsx';
+import LoginWasSentImage from '../loginImages/loginWasSentImage.jsx';
 
 class LoginSendEmail extends Component{
-
-    // loginWithPassword = () => {
-    //     console.log('atejau');
-    //     this.setState({ loading: true }, () => {
-    //         axios
-    //             .post('http://127.0.0.1:8000//api/public/user/send_login_link', {
-    //                 email: 'martyna@uzsakove.lt'
-    //             })
-    //             .then(function(response) {
-    //                 console.log(response);
-    //                 // nextStep();
-    //             })
-    //             .catch(function(error) {
-    //                 console.log(error);
-    //                 // nextStep();
-    //             });
-    //     });
-    // };
 
     render(){
         return(

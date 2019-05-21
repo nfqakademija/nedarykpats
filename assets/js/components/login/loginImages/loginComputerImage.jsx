@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import { throws } from 'assert';
 
-class RegistrationIconComputer extends Component{
+class LoginComputerImage extends Component{
 
     render(){
 
         return(
             <div className="Form-avatar u-align-center u-margin-top-bottom">
 
-                {/*<div className="avatarContainer">*/}
                 <div className="avatarContainer">
                     <img
                         className="u-width-100 u-no-border"
@@ -21,4 +20,4 @@ class RegistrationIconComputer extends Component{
     }
 }
 
-export default RegistrationIconComputer;
+export default LoginComputerImage;

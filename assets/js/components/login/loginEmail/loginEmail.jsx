@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Avatar from '../loginAvatar/loginAvatar.jsx';
+import Avatar from '../loginImages/loginAvatar.jsx';
 
 class LoginEmail extends Component{
 
@@ -57,7 +57,6 @@ class LoginEmail extends Component{
                     </a>
                 </div>
                 <p className="Header4">Dar neturi paskyros? <a id="registerLink" href="http://127.0.0.1:8000/register">Registruotis!</a></p>
-
             </div>
         );
     }

@@ -407,6 +407,4 @@ class Advert
 
         return $this;
     }
-
-
 }

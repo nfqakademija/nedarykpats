@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import RegistrationIconComputer from '../.././components/registration/registrationIcon/registartionIconComputer.jsx';
+import LoginComputerImage from '../loginImages/loginComputerImage.jsx';
 
 
-class Registration extends Component{
+class LoginNeedRegistration extends Component{
     render(){
         return(
             <div className="Form Form-background Form--short">
-                <RegistrationIconComputer />
+                <LoginComputerImage />
 
                 <h3 className="u-text-center u-margin-bottom">Jūs neturite paskyros</h3>
 
@@ -18,4 +18,4 @@ class Registration extends Component{
     }
 }
 
-export default Registration;
+export default LoginNeedRegistration;

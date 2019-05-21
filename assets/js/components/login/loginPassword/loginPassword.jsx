@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Avatar from '../loginAvatar/loginAvatar.jsx';
-import axios from 'axios';
+import Avatar from '../loginImages/loginAvatar.jsx';
 
 class LoginPassword extends Component{
 

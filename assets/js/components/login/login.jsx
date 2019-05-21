@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-
-import Email from '../.././components/login/loginEmail/loginEmail.jsx';
-import Password from '../.././components/login/loginPassword/loginPassword.jsx';
-import Success from '../.././components/login/loginSuccess/loginSuccess.jsx';
-import SendEmail from '../.././components/login/loginSendEmail/loginSendEmail.jsx';
-import Registration from '../registration/registration.jsx';
-import Mistake from '../.././components/login/loginMistake/loginMistake.jsx';
-import LoadingSpinner from '../loadingSpinner/loadingSpinner.jsx';
-
 import axios from "axios";
+
+import Email from './loginEmail/loginEmail.jsx';
+import Password from './loginPassword/loginPassword.jsx';
+import Success from './loginSuccess/loginSuccess.jsx';
+import SendEmail from './loginSendEmail/loginSendEmail.jsx';
+import LoginNeedRegistration from './loginNeedRegistration/loginNeedRegistration.jsx';
+import Mistake from './loginMistake/loginMistake.jsx';
+import LoadingSpinner from '../loadingSpinner/loadingSpinner.jsx';
 
 class Login extends Component {
 
@@ -53,7 +52,11 @@ class Login extends Component {
         const { email, password } = this.state;
     };
 
-    // TODO: jei nieko neiveda, kas tada? t.y. kai email laukelis tuscias
+    login = () => {
+        const { nextStepValue } = this;
+        nextStepValue(1);
+    };
+
     checkEmail = () => {
         const { email } = this.state;
         const { step } = this.state;
@@ -92,6 +95,29 @@ class Login extends Component {
             axios
                 .post('http://127.0.0.1:8000/api/public/user/send_login_link', {
                     email: email,
+                })
+                .then(function(response) {
+                    console.log(response);
+                    nextStepValue(4);
+                })
+                .catch(function(error) {
+                    console.log(error);
+                    nextStepValue(6);
+                });
+        });
+    };
+
+    makeRegistration = () => {
+        const { nextStep } = this;
+        const { email, password } = this.state;
+        const { nextStepValue } = this;
+
+        console.log('makeRegistration');
+        this.setState({ loading: true }, () => {
+            axios
+                .post('http://127.0.0.1:8000/api/public/user/', {
+                    email: email,
+                    password: password
                 })
                 .then(function(response) {
                     console.log(response);
@@ -144,10 +170,9 @@ class Login extends Component {
             case 4:
                 return <SendEmail />
             case 5:
-                return <Registration />
+                return <LoginNeedRegistration />
             case 6:
                 return <Mistake />
-
         }
     }
 }
