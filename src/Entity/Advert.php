@@ -88,6 +88,10 @@ class Advert
      */
     private $feedback;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isDeleted;
 
     /**
      * Advert constructor.
@@ -381,4 +385,28 @@ class Advert
 
         return $this;
     }
+
+
+
+    /**
+     * @return mixed
+     */
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+
+    /**
+     * @param $isDeleted
+     * @return Advert
+     */
+    public function setIsDeleted($isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+
 }

@@ -25,7 +25,6 @@ class AdvertFormDTO
      */
     private $text;
 
-
     /**
      * @var City
      */
@@ -35,6 +34,11 @@ class AdvertFormDTO
      * @var ArrayCollection|Category
      */
     private $categories;
+
+    /**
+     * @var bool
+     */
+    private $isDeleted;
 
     /**
      * @return string
@@ -148,6 +152,27 @@ class AdvertFormDTO
     public function setEmail(?string $email): AdvertFormDTO
     {
         $this->email = $email;
+        return $this;
+    }
+
+
+    /**
+     * @return mixed
+     */
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+
+    /**
+     * @param $isDeleted
+     * @return AdvertFormDTO
+     */
+    public function setIsDeleted($isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
+
         return $this;
     }
 }
