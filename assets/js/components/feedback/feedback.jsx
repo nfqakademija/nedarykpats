@@ -18,7 +18,7 @@ class Feedback extends Component {
             advert: '',
             user: '',
             data: [],
-            loading: false
+            loading: false,
         };
     }
 
@@ -96,12 +96,12 @@ class Feedback extends Component {
 
     render() {
         const { step } = this.state;
-        const { rateValue, feedbackText, advert, user } = this.state;
-        const values = { rateValue, feedbackText, advert, user };
+        const { rateValue, feedbackText, advert, user, token } = this.state;
+        const values = { rateValue, feedbackText, advert, user, token };
         const { loading } = this.state;
 
-        const floatContainers = document.querySelectorAll('.feedback');
-        floatContainers.forEach(element => {
+        const onButtonClick = document.querySelectorAll('.feedback');
+        onButtonClick.forEach(element => {
             this.bindEvents(element);
         });
 

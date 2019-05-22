@@ -29,20 +29,22 @@ class FeedbackContent extends Component {
                     />
                 </div>
 
-                <div className="u-margin-top-bottom u-align-space-around">
-                    <button
-                        type="submit"
-                        className="Button"
-                        onClick={this.back}
-                    >
-                        Atgal
-                    </button>
+                <div className="u-margin-top u-align-center">
                     <button
                         type="submit"
                         className="Button Button--blue"
                         onClick={this.saveAndContinue}
                     >
                         Tęsti
+                    </button>
+                </div>
+                <div className="u-align-center">
+                    <button
+                        type="submit"
+                        className="Button Button--empty"
+                        onClick={this.back}
+                    >
+                        Atgal
                     </button>
                 </div>
             </div>

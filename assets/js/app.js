@@ -6,6 +6,7 @@ import Login from './components/login/login.jsx';
 
 require('../css/app.scss');
 
+
 const categories = document.getElementById('AdvertCategories');
 if (categories) {
     try {
@@ -23,6 +24,23 @@ if (review) {
         console.error(error);
     }
 }
+
+
+//--------------------------
+// Show feedback if is time
+//--------------------------
+const showFeedback = document.getElementById('showFeedback');
+if (showFeedback) {
+    try {
+        // ReactDOM.render(<Review {...showFeedback.dataset}/>, review);
+        // const writeReviewModal = document.getElementById('writeReviewModal');
+        // writeReviewModal.classList.add('show');
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 
 const loginForm = document.getElementById('LoginForm');
 if (loginForm) {

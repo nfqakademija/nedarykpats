@@ -11,9 +11,6 @@
   
   &--google {
     display: inline-block;
-    //background-color: var(--colorLightBlue);
-    //border: none;
-    //color: var(--colorWhite);
   }
   
   &--fb {
@@ -30,7 +27,14 @@
   &--long {
     width: 100%;
   }
-  
+  &--empty{
+    border: none;
+    font-weight: var(--bold);
+    &:hover {
+      background: transparent;
+      color: var(--colorMain)
+    }
+  }
   &--50{
     width: 48%;
     //padding-left: var(--spaceTiny);

@@ -23,6 +23,12 @@ class FeedbackRate extends Component {
         addRate(values.rateValue);
     };
 
+   closeWindows = e => {
+       e.preventDefault();
+       const writeReview = document.getElementById('writeReviewModal');
+       writeReview.classList.remove('show');
+    };
+
     render() {
         const { rating } = this.state;
 
@@ -51,6 +57,15 @@ class FeedbackRate extends Component {
                         onClick={this.saveAndContinue}
                     >
                         Vertinti
+                    </button>
+                </div>
+                <div className="u-align-center">
+                    <button
+                        type="submit"
+                        className="Button Button--empty"
+                        onClick={this.closeWindows}
+                    >
+                        Vėliau
                     </button>
                 </div>
             </div>
