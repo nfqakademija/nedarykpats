@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Constant\Pagination;
 use App\Entity\Category;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
@@ -13,8 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-
-    const ITEMS_PER_PAGE = 6;
 
     /**
      * @Route("/", name="home")
@@ -36,13 +35,13 @@ class HomeController extends AbstractController
 
         $filters->setKeywords($selectedCategories);
 
-        $filteredAdverts = $advertRepository->findByCategories($filters, $page, self::ITEMS_PER_PAGE);
+        $filteredAdverts = $advertRepository->findByCategories($filters, $page, Pagination::ITEMS_PER_PAGE);
 
-        $paginationPages = ceil($filteredAdverts->count() / self::ITEMS_PER_PAGE);
+        $paginationPages = ceil($filteredAdverts->count() / Pagination::ITEMS_PER_PAGE);
 
         if ($page > $paginationPages) {
             $page = $paginationPages;
-            $filteredAdverts = $advertRepository->findByCategories($filters, $page, self::ITEMS_PER_PAGE);
+            $filteredAdverts = $advertRepository->findByCategories($filters, $page, Pagination::ITEMS_PER_PAGE);
         }
 
         $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
@@ -86,14 +85,19 @@ class HomeController extends AbstractController
         }
 
         $filters->setKeywords($selectedCategories);
-        $filteredAdverts = $advertRepository->findMyAdvertsByCategories($user, $filters, $page, self::ITEMS_PER_PAGE);
+        $filteredAdverts = $advertRepository->findMyAdvertsByCategories(
+            $user,
+            $filters,
+            $page,
+            Pagination::ITEMS_PER_PAGE
+        );
 
-        $paginationPages = ceil($filteredAdverts->count() / self::ITEMS_PER_PAGE);
+        $paginationPages = ceil($filteredAdverts->count() / Pagination::ITEMS_PER_PAGE);
 
         if ($paginationPages > 0 && $page > $paginationPages) {
             $page = $paginationPages;
             $filteredAdverts = $advertRepository
-                ->findMyAdvertsByCategories($user, $filters, $page, self::ITEMS_PER_PAGE);
+                ->findMyAdvertsByCategories($user, $filters, $page, Pagination::ITEMS_PER_PAGE);
         }
 
         $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
