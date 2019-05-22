@@ -5,7 +5,7 @@ import axios from 'axios';
 import Rate from './feedbackRate/feedbackRate.jsx';
 import Content from './feedbackContent/feedbackContent.jsx';
 import Success from './feedbackSuccess/feedbackSuccess.jsx';
-import LoadingSpinner from '../loadingSpinner/loadingSpinner.jsx';
+import FeedbackSpinner from './feedbackSpinner/feedbackSpinner.jsx';
 
 class Feedback extends Component {
     constructor() {
@@ -52,7 +52,7 @@ class Feedback extends Component {
 
         this.setState({ loading: true }, () => {
             axios
-                .post('/api/feedback', {
+                .post('http://127.0.0.1:8000/api/feedback', {
                     score: rateValue,
                     message: feedbackText,
                     advert,
@@ -118,7 +118,7 @@ class Feedback extends Component {
                 return (
                     <div>
                         {loading ? (
-                            <LoadingSpinner />
+                            <FeedbackSpinner />
                         ) : (
                             <Content
                                 nextStep={this.addFeedback}

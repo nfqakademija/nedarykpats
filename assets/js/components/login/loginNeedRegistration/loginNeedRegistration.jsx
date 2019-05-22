@@ -5,7 +5,7 @@ import LoginComputerImage from '../loginImages/loginComputerImage.jsx';
 class LoginNeedRegistration extends Component{
     render(){
         return(
-            <div className="Form Form-background Form--short">
+            <div>
                 <LoginComputerImage />
 
                 <h3 className="u-text-center u-margin-bottom">Jūs neturite paskyros</h3>

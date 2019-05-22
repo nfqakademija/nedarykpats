@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class LoginSuccess extends Component{
     render(){
         return(
-            <div className="Form Form-background Form--short">
+            <div>
                 <h1>Pavyko</h1>
 
                 <div className="u-margin-top-bottom u-align-center">
