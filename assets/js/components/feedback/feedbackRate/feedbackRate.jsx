@@ -50,7 +50,7 @@ class FeedbackRate extends Component {
                         className="Button Button--blue"
                         onClick={this.saveAndContinue}
                     >
-                        Vertinti{' '}
+                        Vertinti
                     </button>
                 </div>
             </div>

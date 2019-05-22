@@ -9,6 +9,7 @@ import SendEmail from './loginSendEmail/loginSendEmail.jsx';
 import LoginNeedRegistration from './loginNeedRegistration/loginNeedRegistration.jsx';
 import Mistake from './loginMistake/loginMistake.jsx';
 import LoadingSpinner from '../loadingSpinner/loadingSpinner.jsx';
+import LoginSpinner from './loginSpinner/loginSpinner';
 
 class Login extends Component {
 
@@ -66,17 +67,20 @@ class Login extends Component {
             this.setState({ loading: true }, () => {
                 axios.get('http://127.0.0.1:8000/api/public/user?email=' + email)
                     .then( response =>  {
-                        console.log(response);
-                        this.setState({
-                            loading: false,
-                            data: response.data
-                        });
-                        if (response.data.authenticateUsingPassword) {
-                            nextStepValue(2);
-                        }
-                        else {
-                            this.sendSingleLoginLink();
-                        }
+                        // setTimeout(function(){
+                            console.log(response);
+                            this.setState({
+                                loading: false,
+                                data: response.data
+                            });
+                            if (response.data.authenticateUsingPassword) {
+                                nextStepValue(2);
+                            }
+                            else {
+                                this.sendSingleLoginLink();
+                            }
+                        // }, 2000);
+
                     })
                     .catch(function (error) {
                         console.log(error);
@@ -141,7 +145,7 @@ class Login extends Component {
             case 1:
                 return (
                     <div>
-                        {loading ? <LoadingSpinner/> :
+                        {loading ? <LoginSpinner/> :
                             <Email
                                 nextStep={this.checkEmail}
                                 handleChange={this.handleChange}
@@ -154,7 +158,7 @@ class Login extends Component {
             case 2:
                 return (
                     <div>
-                        {loading ? <LoadingSpinner/> :
+                        {loading ? <LoginSpinner/> :
                             <Password
                                 prevStep={this.prevStep}
                                 handleChange={this.handleChange}

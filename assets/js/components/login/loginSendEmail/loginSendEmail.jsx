@@ -5,7 +5,7 @@ class LoginSendEmail extends Component{
 
     render(){
         return(
-            <div className="Form Form-background Form--short">
+            <div>
                 <LoginWasSentImage />
 
                 <h3 className="u-text-center u-margin-bottom">Išsiuntėme  prisijungimo nuorodą el. paštu</h3>

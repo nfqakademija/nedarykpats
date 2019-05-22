@@ -19,8 +19,7 @@ class LoginEmail extends Component{
         const csrf_token = document.getElementById('csrf_token').value;
 
         return(
-            <div className="Form Form-background Form--short">
-
+            <div>
                 <Avatar />
 
                 <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
@@ -52,7 +51,7 @@ class LoginEmail extends Component{
                 <div className="u-margin-top-bottom u-align-center">
                     <a className="u-not-link" href="http://127.0.0.1:8000/connect/google">
                         <p>Arba prisijungti per:
-                            <i className="Image--icon fab fa-google-plus-g u-color-red u-margin-small-left-right"></i>
+                            <i className="Image--icon fab fa-google u-color-red u-margin-small-left-right"></i>
                         </p>
                     </a>
                 </div>

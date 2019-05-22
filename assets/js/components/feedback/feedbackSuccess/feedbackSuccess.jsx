@@ -9,15 +9,17 @@ class FeedbackSuccess extends Component {
 
     render() {
         const {
-            values: { rateValue, feedbackText }
+            values: { rateValue, feedbackText, advert, user }
         } = this.props;
 
         return (
             <div className="Review">
                 <h1>Ačiū už atsiliepimą!</h1>
 
-                <div>{feedbackText}</div>
-                <div>{rateValue}</div>
+                <div>TEKSTAS: {feedbackText}</div>
+                <div>RATE VALUE: {rateValue}</div>
+                <div>ADVERT ID: {advert}</div>
+                <div>USER: {user}</div>
 
                 <div className="u-margin-top-bottom u-align-center">
                     <button

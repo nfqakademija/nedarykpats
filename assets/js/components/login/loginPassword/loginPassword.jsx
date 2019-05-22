@@ -23,7 +23,7 @@ class LoginPassword extends Component{
         const csrf_token = document.getElementById('csrf_token').value;
 
         return(
-            <div className="Form Form-background Form--short">
+            <div>
                 <form method="post">
                     <Avatar />
 

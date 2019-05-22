@@ -19,6 +19,8 @@
   }
   
   & > div {
+	width: 400px;
+	min-height: 450px;
 	border-radius: var(--radiusSmall);
 	position: absolute;
 	top: 50%;
