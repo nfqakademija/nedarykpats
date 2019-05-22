@@ -2,10 +2,13 @@
 
 namespace App\Controller;
 
+use App\Constant\Pagination;
 use App\Entity\Offer;
 use App\Handler\OfferStatusHandler;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -16,7 +19,7 @@ class OfferController extends AbstractController
      * @ParamConverter("offer", class="App:Offer")
      * @param Offer $offer
      * @param OfferStatusHandler $offerStatusHandler
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function confirmOffer(Offer $offer, OfferStatusHandler $offerStatusHandler)
     {
@@ -41,7 +44,7 @@ class OfferController extends AbstractController
      * @ParamConverter("offer", class="App:Offer")
      * @param Offer $offer
      * @param OfferStatusHandler $offerStatusHandler
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function declineOffer(Offer $offer, OfferStatusHandler $offerStatusHandler)
     {
@@ -55,7 +58,7 @@ class OfferController extends AbstractController
                 $this->addFlash('fail', 'Skelbimas neturi patvirtinto pasiūlymo');
             }
         } elseif ($offer->getUser() === $this->getUser()) {
-            if ($advert->getAcceptedOffer() && !$advert->getFeedback()) {
+            if (!$advert->getFeedback()) {
                 $offerStatusHandler->handleRetract($advert, $offer);
                 $this->addFlash('success', 'Jūsų pasiūlymas atšauktas');
             } else {
@@ -70,10 +73,39 @@ class OfferController extends AbstractController
 
     /**
      * @Route("/my-offers/", name="my_offers")
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    public function myOffer()
+    public function myOffer(Request $request)
     {
-        return $this->render('offer/my_offers.html.twig', []);
+        $page = $this->getPageInput($request);
+        $offersRepository = $this->getDoctrine()->getRepository(Offer::class);
+
+        $offers = $offersRepository->findByUser($this->getUser(), $page, Pagination::ITEMS_PER_PAGE);
+
+        $paginationPages = ceil($offers->count() / Pagination::ITEMS_PER_PAGE);
+
+        if ($paginationPages > 0 && $page > $paginationPages) {
+            $page = $paginationPages;
+            $offers = $offersRepository->findByUser($this->getUser(), $page, Pagination::ITEMS_PER_PAGE);
+        }
+
+        return $this->render('offer/my_offers.html.twig', [
+            'offers' => $offers,
+            'page' => $page,
+            'paginationPages' => $paginationPages,
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return int
+     */
+    private function getPageInput(Request $request)
+    {
+        $pageInput = $request->query->get('page') ? $request->query->get('page') : 1;
+        $pageCastToInt =  ctype_digit($pageInput)  ? $pageInput : 1;
+        $page = $pageCastToInt > 0 ? $pageCastToInt : 1;
+
+        return $page;
     }
 }

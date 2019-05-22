@@ -10,18 +10,24 @@
 <div class="Content Content--GreyBg">
     <div class="Content-Block u-padding-top">
 
+        {% if offers|length < 1 %}
+            <div class="Message Message--empty">
+                <img class="Message-img" src="/img/worker-empty.png" alt="" />
+                <p class="Message-text">Jūs pasiūlymų neturite!</p>
+            </div>
+        {% endif %}
         <section id="myOffers" class="LayoutLine">
-
             {#----- start item block --------#}
+            {% for offer in offers %}
             <section class="LayoutLine-item LayoutLine-item--link">
                 <div class="LayoutLine-col-3">
                     <p class="Header5">Skelbimas</p>
-                    <h3 class="Header1">Baldų surinkimas</h3>
+                    <h3 class="Header1">{{ offer.advert.title }}</h3>
                 </div>
 
                 <div class="LayoutLine-col-6">
                     <p class="Header5">Mano pasiūlymas</p>
-                    <p class="Paragraph Paragraph--lineLimit-4">Specialistai, turintys ilgametę patirtį elektros instaliacijos srityje, atlieka lauko ir vidaus elektros instaliaciją, konsultuoja, pataria, padeda išsirinkti optimalų sprendimą, paruošia dokumentus ESO.</p>
+                    <p class="Paragraph Paragraph--lineLimit-4">{{ offer.text }}</p>
                 </div>
 
                 <div class="LayoutLine-col-3">
@@ -31,48 +37,23 @@
                 </div>
             </section>
             {#----- end item block --------#}
-
-            {#----- start item block --------#}
-            <section class="LayoutLine-item LayoutLine-item--link">
-                <div class="LayoutLine-col-3">
-                    <p class="Header5">Skelbimas</p>
-                    <h3 class="Header1">Baldų surinkimas</h3>
-                </div>
-
-                <div class="LayoutLine-col-6">
-                    <p class="Header5">Mano pasiūlymas</p>
-                    <p class="Paragraph Paragraph--lineLimit-4">Specialistai, turintys ilgametę patirtį elektros instaliacijos srityje, atlieka lauko ir vidaus elektros instaliaciją, konsultuoja, pataria, padeda išsirinkti optimalų sprendimą, paruošia dokumentus ESO.</p>
-                </div>
-
-                <div class="LayoutLine-col-3">
-                    <div class="u-margin-top-bottom u-align-space-around">
-                        <p class="Header2 u-align-middle u-color-green"><i class="far fa-check-circle"></i><span>Priimtas</span></p>
-                    </div>
-                </div>
-            </section>
-            {#----- end item block --------#}
-
-            {#----- start item block --------#}
-            <section class="LayoutLine-item LayoutLine-item--link">
-                <div class="LayoutLine-col-3">
-                    <p class="Header5">Skelbimas</p>
-                    <h3 class="Header1">Baldų surinkimas</h3>
-                </div>
-
-                <div class="LayoutLine-col-6">
-                    <p class="Header5">Mano pasiūlymas</p>
-                    <p class="Paragraph Paragraph--lineLimit-4">Specialistai, turintys ilgametę patirtį elektros instaliacijos srityje, atlieka lauko ir vidaus elektros instaliaciją, konsultuoja, pataria, padeda išsirinkti optimalų sprendimą, paruošia dokumentus ESO.</p>
-                </div>
-
-                <div class="LayoutLine-col-3">
-                    <div class="u-margin-top-bottom u-align-space-around">
-                        <p class="Header2 u-align-middle u-color-red"><i class="far fa-times-circle"></i><span>Atmestas</span></p>
-                    </div>
-                </div>
-            </section>
-            {#----- end item block --------#}
-
+            {% endfor %}
         </section>
+
+        {% if paginationPages > 1 %}
+            <section>
+                <ul class="Pagination u-align-center">
+
+                    <li><a href="?page={{ page - 1 }}" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
+
+                    {% for i in 1..paginationPages %}
+                        <li><a href="?page={{ i }}" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
+                    {% endfor %}
+
+                    <li><a href="?page={{ page + 1 }}" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>
+                </ul>
+            </section>
+        {% endif %}
 
     </div>
 </div>
