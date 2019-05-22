@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import AddCategories from './components/createForm/AddCategories.jsx';
 import Review from './components/feedback/feedback.jsx';
 import Login from './components/login/login.jsx';
-import LoadingSpinner from './components/loadingSpinner/loadingSpinner';
 
 require('../css/app.scss');
 

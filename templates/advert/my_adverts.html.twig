@@ -55,6 +55,7 @@
                                     {% if not advert.feedback %}
                                         {#TODO: ne visada reactas pasiima reiksmes,jei per greitai pasirenki "vertinti"#}
                                         <div class="Button Button--default Button--yellow u-margin-around feedback"
+                                             data-feedback-token={{ csrf_token("feedback-token") }}
                                              data-feedback-user={{ advert.acceptedOffer.user.id }}
                                              data-feedback-advert={{ advert.id }}
                                         ><i class="fas fa-star"></i> Vertinti</div>

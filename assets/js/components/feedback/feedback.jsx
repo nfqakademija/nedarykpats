@@ -14,6 +14,7 @@ class Feedback extends Component {
             step: 1,
             rateValue: 1,
             feedbackText: '',
+            token: '',
             advert: '',
             user: '',
             data: [],
@@ -48,13 +49,14 @@ class Feedback extends Component {
         const { feedbackText } = this.state;
         const { nextStep } = this;
         const { advert } = this.state;
-        const { user } = this.state;
+        const { token } = this.state;
 
         this.setState({ loading: true }, () => {
             axios
                 .post('http://127.0.0.1:8000/api/feedback', {
                     score: rateValue,
                     message: feedbackText,
+                    _token: token,
                     advert,
                 })
                 .then(function(response) {
@@ -81,6 +83,7 @@ class Feedback extends Component {
         const { target } = e;
         this.setState({
             advert: target.dataset.feedbackAdvert,
+            token: target.dataset.feedbackToken,
             user: target.dataset.feedbackUser
         });
         const writeReview = document.getElementById('writeReviewModal');
