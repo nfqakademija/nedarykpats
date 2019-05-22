@@ -68,10 +68,19 @@
             </div>
         </div>
 
-        {% block body %}{% endblock %}
+        {% block body %} {% endblock %}
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+             {% if is_granted('IS_AUTHENTICATED_FULLY') and isFeedbackAvailable(app.request) %}
+                 {% set dataForFeedback = getDataForFeedback() %}
+                 <ul>
+                     <li>{{ dataForFeedback[0] }} {{ dataForFeedback[1] }}</li>
+                 </ul>
+                 <script>
+                     document.cookie = 'FeedbackDisplayed=true';
+                 </script>
+            {% endif %}
         {% endblock %}
     </body>
 </html>
