@@ -31,7 +31,7 @@ class AdvertRemovalHandler
      */
     public function handle(Advert $advert)
     {
-        $advert->setIsConfirmed(false);
+        $advert->setIsDeleted(true);
         $this->entityManager->flush();
     }
 }

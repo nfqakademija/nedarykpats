@@ -32,7 +32,8 @@ class AdvertRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('a')
             ->addSelect('a')
-            ->where('a.isConfirmed = 1');
+            ->where('a.isConfirmed = 1')
+            ->andWhere('a.isDeleted = 0');
         if ($filters->getKeywords()) {
             $query
                 ->innerJoin('a.categories', 'c')
@@ -60,6 +61,7 @@ class AdvertRepository extends ServiceEntityRepository
             ->innerJoin('a.user', 'u')
             ->where('u.id = :userId')
             ->andWhere('a.isConfirmed = 1')
+            ->andWhere('a.isDeleted = 0')
             ->setParameter(':userId', $user->getId());
 
         if ($filters->getKeywords()) {
