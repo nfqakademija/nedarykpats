@@ -8,7 +8,6 @@ import Success from './loginSuccess/loginSuccess.jsx';
 import SendEmail from './loginSendEmail/loginSendEmail.jsx';
 import LoginNeedRegistration from './loginNeedRegistration/loginNeedRegistration.jsx';
 import Mistake from './loginMistake/loginMistake.jsx';
-import LoadingSpinner from '../loadingSpinner/loadingSpinner.jsx';
 import LoginSpinner from './loginSpinner/loginSpinner';
 
 class Login extends Component {
@@ -67,7 +66,7 @@ class Login extends Component {
             this.setState({ loading: true }, () => {
                 axios.get('http://127.0.0.1:8000/api/public/user?email=' + email)
                     .then( response =>  {
-                        // setTimeout(function(){
+                        setTimeout(function(){
                             console.log(response);
                             this.setState({
                                 loading: false,
@@ -79,7 +78,7 @@ class Login extends Component {
                             else {
                                 this.sendSingleLoginLink();
                             }
-                        // }, 2000);
+                        }.bind(this), 2000);
 
                     })
                     .catch(function (error) {
@@ -101,8 +100,10 @@ class Login extends Component {
                     email: email,
                 })
                 .then(function(response) {
-                    console.log(response);
-                    nextStepValue(4);
+                    setTimeout(function(){
+                        console.log(response);
+                        nextStepValue(4);
+                    }.bind(this), 2000);
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -124,8 +125,10 @@ class Login extends Component {
                     password: password
                 })
                 .then(function(response) {
-                    console.log(response);
-                    nextStepValue(4);
+                    setTimeout(function(){
+                        console.log(response);
+                        nextStepValue(4);
+                    }.bind(this), 2000);
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -172,7 +175,9 @@ class Login extends Component {
             case 3:
                 return <Success />
             case 4:
-                return <SendEmail />
+                return <SendEmail
+                    values={values}
+                />
             case 5:
                 return <LoginNeedRegistration />
             case 6:

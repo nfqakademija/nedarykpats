@@ -53,23 +53,26 @@ class LoginPassword extends Component{
                         />
                     </div>
 
-                    <div className="u-margin-top-bottom u-align-center">
-                        <a className="Button Button--blue"
-                           onClick={this.back}>
-                            Atgal
-                        </a>
+                    <div className="u-margin-top u-align-center">
                         <button
                             className="Button Button--blue "
                             type="submit">
                             Prisijungti
                         </button>
                     </div>
+                    <div className="u-align-center">
+                        <a className="Button Button--empty"
+                           onClick={this.back}>
+                            Atgal
+                        </a>
+                    </div>
                 </form>
 
-                <div className="u-margin-top-bottom u-align-center">
-                    <a className="Button Button--long"
-                        onClick={this.props.sendSingleLoginLink}>
-                        Prisijungimo nuoroda
+                <div className="u-align-center">
+                    <a className="Button Button--empty"
+                        onClick={this.props.sendSingleLoginLink}
+                    >
+                        Prisijunk be slaptažodžio!
                     </a>
                 </div>
             </div>
