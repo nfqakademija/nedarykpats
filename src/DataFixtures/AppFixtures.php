@@ -136,7 +136,8 @@ class AppFixtures extends Fixture
             ->setCreatedAt(new \DateTime($date))
             ->setCity($cities[$advert['city']])
             ->setUser($users[$advert['email']])
-            ->setIsConfirmed($advert['is_confirmed']);
+            ->setIsConfirmed($advert['is_confirmed'])
+            ->setIsDeleted(false);
 
         $collection = new ArrayCollection();
 
