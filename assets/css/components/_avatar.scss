@@ -1,0 +1,9 @@
+.Avatar {
+
+  &--square {
+    height: 200px;
+    img {
+      height: inherit;
+    }
+  }
+}

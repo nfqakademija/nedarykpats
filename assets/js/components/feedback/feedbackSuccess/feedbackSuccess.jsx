@@ -14,12 +14,14 @@ class FeedbackSuccess extends Component {
 
         return (
             <div className="Review">
-                <h1>Ačiū už atsiliepimą!</h1>
 
-                <div>TEKSTAS: {feedbackText}</div>
-                <div>RATE VALUE: {rateValue}</div>
-                <div>ADVERT ID: {advert}</div>
-                <div>USER: {user}</div>
+                <div className="Avatar--square u-align-center">
+                    <img src="/img/thank-you.jpg" alt="user-avatar" />
+                </div>
+
+                <h3 className="u-margin-top">
+                    Ačiū už įvertinimą!
+                </h3>
 
                 <div className="u-margin-top-bottom u-align-center">
                     <button

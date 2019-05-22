@@ -1,7 +1,12 @@
 .StarRating{
-  .fa {
+  .fa,
+  i {
     font-weight: normal;
     font-size: var(--fontSizeBig);
+  }
+  
+  i {
+    padding-left: var(--spaceTiny);
   }
   
   .fa.checked {

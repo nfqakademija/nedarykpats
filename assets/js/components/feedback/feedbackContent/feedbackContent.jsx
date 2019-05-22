@@ -18,10 +18,9 @@ class FeedbackContent extends Component {
 
         return (
             <div className="Review">
-                <p>
-                    Parašykite trumpą atslipeimą ir taip padėkite kitiems jį
-                    pasamdyti!
-                </p>
+                <h3>
+                    Parašykite trumpą atsiliepimą!
+                </h3>
                 <div className="Form-item">
                     <textarea
                         rows="5"
@@ -30,17 +29,17 @@ class FeedbackContent extends Component {
                     />
                 </div>
 
-                <div className="u-margin-top-bottom u-align-center">
+                <div className="u-margin-top-bottom u-align-space-around">
                     <button
                         type="submit"
-                        className="Button Button--long"
+                        className="Button"
                         onClick={this.back}
                     >
                         Atgal
                     </button>
                     <button
                         type="submit"
-                        className="Button Button--blue Button--long"
+                        className="Button Button--blue"
                         onClick={this.saveAndContinue}
                     >
                         Tęsti
