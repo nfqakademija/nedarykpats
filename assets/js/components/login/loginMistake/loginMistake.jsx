@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
+import LoginAvatarMistake from '../loginImages/loginAvatarMistake.jsx';
 
 class LoginMistake extends Component{
     render(){
         return(
             <div>
-                <h3>Atsiprašome,įvyko klaida</h3>
+                <LoginAvatarMistake />
 
-                <p>Pabandykite prisijungti dar kartą</p>
+                <h3 className="u-text-center">Atsiprašome, kažkas negerai</h3>
+                <p className="u-text-center">Pabandykite dar kartą</p>
+
+                <div className="u-margin-top u-align-center">
+                    <a
+                        className="Button Button--blue"
+                        href="/login"
+                    >
+                        Grįžti
+                    </a>
+                </div>
+
+                <div className="u-align-center">
+                    <a href="/"
+                       className="Button Button--empty"> Į pagrindinį </a>
+                </div>
             </div>
         )
     }
