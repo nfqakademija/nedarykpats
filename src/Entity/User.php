@@ -102,6 +102,11 @@ class User implements UserInterface
     private $feedbacks;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ImageGallery", mappedBy="user", orphanRemoval=true)
+     */
+    private $images;
+
+    /**
      * User constructor.
      * @throws \Exception
      */
@@ -111,6 +116,7 @@ class User implements UserInterface
         $this->createdAt = new \DateTime('now');
         $this->offers = new ArrayCollection();
         $this->feedbacks = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -458,6 +464,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($feedback->getReceivingUser() === $this) {
                 $feedback->setReceivingUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ImageGallery[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(ImageGallery $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(ImageGallery $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getUser() === $this) {
+                $image->setUser(null);
             }
         }
 

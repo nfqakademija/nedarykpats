@@ -94,6 +94,11 @@ class Advert
     private $isDeleted;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ImageGallery", mappedBy="advert")
+     */
+    private $images;
+
+    /**
      * Advert constructor.
      * @throws \Exception
      */
@@ -102,6 +107,7 @@ class Advert
         $this->categories = new ArrayCollection();
         $this->offers = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
+        $this->images = new ArrayCollection();
     }
 
     /**
@@ -404,6 +410,37 @@ class Advert
     public function setIsDeleted($isDeleted): self
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ImageGallery[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(ImageGallery $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setAdvert($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(ImageGallery $image): self
+    {
+        if ($this->images->contains($image)) {
+            $this->images->removeElement($image);
+            // set the owning side to null (unless already changed)
+            if ($image->getAdvert() === $this) {
+                $image->setAdvert(null);
+            }
+        }
 
         return $this;
     }
