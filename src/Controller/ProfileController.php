@@ -57,7 +57,8 @@ class ProfileController extends AbstractController
 
             return $this->redirectToRoute('profile', ['id' => $user->getId()]);
         }
-
+        
+        $rateArray = [];
         $rateAverage = 0;
         foreach ($this->getUser()->getFeedbacks() as $value) {
             $rateArray[] = $value->getScore();

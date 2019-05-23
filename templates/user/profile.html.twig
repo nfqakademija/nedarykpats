@@ -103,28 +103,35 @@
                 <div>
                     <a href="#" title="Close" class="Modal-close">Close</a>
 
-                    <form method="post" class="Form Form-background">
+                    <form id="formProfile" method="post" class="">
                         {{ form_start(profileDetailsForm) }}
+                        <h3 class="u-text-center">Atsinaujink!</h3>
+                        <p class="u-text-center u-margin-bottom">Leisk kitiems tave pažinti!</p>
+
                         <div class="Form-item">
-                            {{ form_label(profileDetailsForm.name, 'Vardas') }}
+                            {{ form_label(profileDetailsForm.name, 'Vardas, pavardė') }}
                             {{ form_widget(profileDetailsForm.name) }}
                         </div>
 
                         <div class="Form-item">
-                            {{ form_label(profileDetailsForm.description, 'Aprašymas apie tave') }}
+                            {{ form_label(profileDetailsForm.description, 'Trumpai papasakok apie save') }}
                             {{ form_widget(profileDetailsForm.description, {'attr': {'rows': '10'} }) }}
                         </div>
                         <div class="Form-item">
                             {{ form_label(profileDetailsForm.city, 'Miestas') }}
                             {{ form_widget(profileDetailsForm.city) }}
                         </div>
-                        {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
+                        {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top-bottom'}}) }}
+                       <div class="u-align-center">
+                           <span id="showPassword" class="Button Button--empty">Pasikeisti slaptažodį</span>
+                       </div>
                         {{ form_end(profileDetailsForm) }}
                     </form>
 
 
-                    <form method="post" class="Form Form-background">
+                    <form id="formPassword" method="post" class="u-display-none">
                         {{ form_start(profilePasswordForm) }}
+                        <h3 class="u-text-center">Slaptažodžio keitimas</h3>
                         <div class="Form-item">
                             {{ form_label(profilePasswordForm.newPassword, 'Naujas slaptažodis') }}
                             {{ form_widget(profilePasswordForm.newPassword) }}
@@ -133,6 +140,11 @@
                             </span>
                         </div>
                         {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
+
+                        <div class="u-align-center">
+                            <span id="showProfile" class="Button Button--empty">Pasikeisti profilio duomenis</span>
+                        </div>
+
                         {{ form_end(profilePasswordForm) }}
                     </form>
 
