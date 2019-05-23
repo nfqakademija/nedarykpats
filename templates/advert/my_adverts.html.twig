@@ -53,7 +53,6 @@
                                 <a href="{{ path('advert', {'id': advert.id }) }}" class="Button Button--default u-margin-around"><i class="fas fa-edit"></i> Peržiūrėti</a>
                                 {% if advert.acceptedOffer %}
                                     {% if not advert.feedback %}
-                                        {#TODO: ne visada reactas pasiima reiksmes,jei per greitai pasirenki "vertinti"#}
                                         <div class="Button Button--default Button--yellow u-margin-around feedback"
                                              data-feedback-token={{ csrf_token("feedback-token") }}
                                              data-feedback-user={{ advert.acceptedOffer.user.id }}

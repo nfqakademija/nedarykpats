@@ -19,7 +19,8 @@
         <section id="myOffers" class="LayoutLine">
             {#----- start item block --------#}
             {% for offer in offers %}
-            <section class="LayoutLine-item LayoutLine-item--link">
+            <section class="LayoutLine-item LayoutLine-item--link"
+                     onclick="location.href = '{{ path('advert', {'id': offer.advert.id }) }}'">
                 <div class="LayoutLine-col-3">
                     <p class="Header5">Skelbimas</p>
                     <h3 class="Header1">{{ offer.advert.title }}</h3>
