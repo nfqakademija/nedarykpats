@@ -7,7 +7,7 @@ class LoginMistake extends Component{
             <div>
                 <LoginAvatarMistake />
 
-                <h3 className="u-text-center">Atsiprašome, kažkas negerai</h3>
+                <h3 className="u-text-center">Atsiprašome, įvyko klaida</h3>
                 <p className="u-text-center">Pabandykite dar kartą</p>
 
                 <div className="u-margin-top u-align-center">
