@@ -22,11 +22,11 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Įveskite slaptažodį',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Jūsų slaptažodis turi turėti mažiausiai {{ limit }} simbolius',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
@@ -38,6 +38,9 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => RegistrationFormDTO::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'feedback-token',
         ]);
     }
 }

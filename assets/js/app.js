@@ -45,7 +45,7 @@ if (showFeedback) {
 const loginForm = document.getElementById('LoginForm');
 if (loginForm) {
     try {
-        ReactDOM.render(<Login />, loginForm);
+        ReactDOM.render(<Login {...loginForm.dataset}/>, loginForm);
     } catch (error) {
         console.error(error);
     }

@@ -7,7 +7,9 @@
         <div class="Content-Block u-align-center">
 
             <div class="Form Form-background Form--short">
-                <div id="LoginForm"></div>
+                <div id="LoginForm"
+                     data-feedback-token={{ csrf_token("feedback-token") }}
+                ></div>
             </div>
 
             {#<div class="Form Form-background Form--short">#}

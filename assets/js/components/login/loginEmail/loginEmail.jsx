@@ -16,7 +16,6 @@ class LoginEmail extends Component{
 
     render(){
         const { values } = this.props;
-        const csrf_token = document.getElementById('csrf_token').value;
 
         return(
             <div>
@@ -35,12 +34,6 @@ class LoginEmail extends Component{
                            required
                     />
                 </div>
-
-                <input id="csrf_token"
-                       type="hidden"
-                       name="_csrf_token"
-                       value={csrf_token}
-                />
 
                 <div className="u-align-center">
                     <a className="Button Button--blue Button--long"

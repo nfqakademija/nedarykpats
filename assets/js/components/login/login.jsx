@@ -57,14 +57,17 @@ class Login extends Component {
         nextStepValue(1);
     };
 
+    // TODO: success failed, kaip handlinti?
     checkEmail = () => {
         const { email } = this.state;
         const { step } = this.state;
         const { nextStepValue } = this;
 
+        const token = this.props.feedbackToken;
+
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
-                axios.get('http://127.0.0.1:8000/api/public/user?email=' + email)
+                axios.get('http://127.0.0.1:8000/api/public/user?email=' + email + '&_token=' + token)
                     .then( response =>  {
                         setTimeout(function(){
                             console.log(response);
@@ -93,11 +96,13 @@ class Login extends Component {
         const { nextStep } = this;
         const { email } = this.state;
         const { nextStepValue } = this;
+        const token = this.props.feedbackToken;
 
         this.setState({ loading: true }, () => {
             axios
                 .post('http://127.0.0.1:8000/api/public/user/send_login_link', {
                     email: email,
+                    _token: token
                 })
                 .then(function(response) {
                     setTimeout(function(){
@@ -179,7 +184,10 @@ class Login extends Component {
                     values={values}
                 />
             case 5:
-                return <LoginNeedRegistration />
+                return <LoginNeedRegistration
+                    values={values}
+                    goHomeStep={this.goHomeStep}
+                />
             case 6:
                 return <Mistake />
         }

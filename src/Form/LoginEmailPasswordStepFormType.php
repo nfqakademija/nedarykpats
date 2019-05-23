@@ -19,7 +19,10 @@ class LoginEmailPasswordStepFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => LoginFormDTO::class
+            'data_class' => LoginFormDTO::class,
+            'csrf_protection' => true,
+            'csrf_field_name' => '_token',
+            'csrf_token_id'   => 'feedback-token',
         ]);
     }
 }
