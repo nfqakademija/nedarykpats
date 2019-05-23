@@ -23,7 +23,13 @@ class ProfileDetailsType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('description', TextareaType::class)
+            ->add(
+                'description',
+                TextareaType::class,
+                [
+                    'required' => false,
+                ]
+            )
             ->add('city', EntityType::class, [
                 'class' => City::class,
                 'choice_label' => 'name'

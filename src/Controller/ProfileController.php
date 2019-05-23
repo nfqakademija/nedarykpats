@@ -18,22 +18,21 @@ class ProfileController extends AbstractController
 {
 
     /**
-     * @Route ("/profile/{id}" , name="profile", requirements={"id"="\d+"})
-     * @ParamConverter("user", class="App:User"))
-     * @param User $user
+     * @Route ("/profile" , name="profile")
      * @param Request $request
      * @param ProfileDataChangeHandler $profileHandler
      * @param ProfilePasswordChangeHandler $profilePasswordChangeHandler
+     * @param  CategoryRepository $categoryRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function index(
-        User $user,
         Request $request,
         ProfileDataChangeHandler $profileHandler,
         ProfilePasswordChangeHandler $profilePasswordChangeHandler,
         CategoryRepository $categoryRepository
     ) {
 
+        $user = $this->getUser();
         $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
         $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $profileDetailsDTO);
         $profilePasswordForm = $this->createForm(ProfilePasswordFormType::class);
@@ -47,7 +46,7 @@ class ProfileController extends AbstractController
             $profilePasswordChangeHandler->handle($profilePasswordDTO);
 
             $this->addFlash('success', 'Profilio slaptažodis sėkmingai atnaujintas');
-            return $this->redirectToRoute('profile', ['id' => $user->getId()]);
+            return $this->redirectToRoute('profile');
         }
 
         if ($profileDetailsForm->isSubmitted() && $profileDetailsForm->isValid()) {
@@ -55,9 +54,49 @@ class ProfileController extends AbstractController
             $profileHandler->handle($profileDetailsDTO);
             $this->addFlash('success', 'Profilio duomenys atnaujinti');
 
-            return $this->redirectToRoute('profile', ['id' => $user->getId()]);
+            return $this->redirectToRoute('profile');
         }
-        
+
+        $rateArray = [];
+        $rateAverage = 0;
+        foreach ($this->getUser()->getFeedbacks() as $value) {
+            $rateArray[] = $value->getScore();
+        }
+
+        if ($rateArray) {
+            $rateAverage = array_sum($rateArray) / count($rateArray);
+        }
+
+        return $this->render('user/profile.html.twig', [
+            'profileDetailsForm' => $profileDetailsForm->createView(),
+            'profilePasswordForm' => $profilePasswordForm->createView(),
+            'user' => $user,
+            'rateAverage' => $rateAverage,
+            'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
+        ]);
+    }
+
+    /**
+     * @Route ("/profile/{id}" , name="user_profile", requirements={"id"="\d+"})
+     * @ParamConverter("user", class="App:User"))
+     * @param User $user
+     * @param Request $request
+     * @param  CategoryRepository $categoryRepository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function showProfile(
+        User $user,
+        Request $request,
+        CategoryRepository $categoryRepository
+    ) {
+
+        $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
+        $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $profileDetailsDTO);
+        $profilePasswordForm = $this->createForm(ProfilePasswordFormType::class);
+
+        $profileDetailsForm->handleRequest($request);
+        $profilePasswordForm->handleRequest($request);
+
         $rateArray = [];
         $rateAverage = 0;
         foreach ($this->getUser()->getFeedbacks() as $value) {
