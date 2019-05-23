@@ -108,6 +108,7 @@ class Advert
         $this->offers = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->images = new ArrayCollection();
+        $this->isDeleted = false;
     }
 
     /**
