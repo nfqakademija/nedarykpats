@@ -68,6 +68,7 @@ class AddCategories extends React.Component {
                 options={categories}
                 isMulti
                 isSearchable
+                required
             />
         );
     }

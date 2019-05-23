@@ -63,13 +63,16 @@
 
                 <span id="CategoriesTitle" class="Form-label">Pasirinkite kategorijas</span>
 
+                {#TODO: reikalinga validacija#}
                 <div id="AdvertCategories"
                      data-original-input-id="advert_categories"
+                     aria-required="true"
                 ></div>
 
 
                 <div class="Form-item" hidden>
-                    {{ form_widget(advertForm.categories, {'attr': {'class': 'u-no-margin-top u-display-hidden', 'id': 'advert_categories'}}) }}
+                    {{ form_widget(advertForm.categories,
+                        {'attr': {'class': 'u-no-margin-top u-display-hidden', 'id': 'advert_categories'}}) }}
                 </div>
 
                 {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
