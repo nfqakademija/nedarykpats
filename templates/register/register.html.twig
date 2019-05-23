@@ -17,7 +17,7 @@
             <h3 class="u-text-center u-margin-bottom">Registruotis</h3>
 
             <div class="Form-item">
-                {{ form_label(registrationForm.email) }}
+                {{ form_label(registrationForm.email, 'El. paštas') }}
                 {{ form_widget(registrationForm.email, {'attr': {'type': 'text', 'pattern': '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'}}) }}
                 <span class="indicator"></span>
                 <span class="Form-errors">
@@ -26,7 +26,7 @@
             </div>
 
             <div class="Form-item">
-                {{ form_label(registrationForm.plainPassword) }}
+                {{ form_label(registrationForm.plainPassword, 'Slaptažodis') }}
                 {{ form_widget(registrationForm.plainPassword) }}
                 <span class="Form-errors">
                      {{ form_errors(registrationForm.plainPassword) }}
