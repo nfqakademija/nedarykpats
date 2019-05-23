@@ -25,7 +25,8 @@
         "symfony/web-profiler-bundle": "4.2.*",
         "symfony/webpack-encore-bundle": "^1.4",
         "symfony/yaml": "4.2.*",
-        "twig/extensions": "^1.5"
+        "twig/extensions": "^1.5",
+        "vich/uploader-bundle": "^1.9"
     },
     "config": {
         "preferred-install": {
