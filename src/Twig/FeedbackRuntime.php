@@ -51,14 +51,12 @@ class FeedbackRuntime implements RuntimeExtensionInterface
      * @param Advert $advert
      * @return bool
      */
-    public function UserHasNotSubmittedOffer(User $user ,Advert $advert): bool
+    public function userHasNotSubmittedOffer(User $user, Advert $advert): bool
     {
         $users = [];
-        foreach ($advert->getOffers() as $offer){
-
+        foreach ($advert->getOffers() as $offer) {
             $users[] = $offer->getUser();
         }
-
         return !in_array($user, $users);
     }
 }

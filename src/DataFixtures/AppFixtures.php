@@ -12,8 +12,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
 
     /**
@@ -40,13 +41,18 @@ class AppFixtures extends Fixture
             $categories[$singleCategory['slug']] = $category;
         }
 
+//        $cities = [];
+//        foreach ($this->getCityData() as $cityData){
+//            $city = $this->getCity($cityData);
+//            $this->addReference($cityData['name'], $city);
+//            $manager->persist($city);
+//            $cities[$cityData['name']] = $city;
+//
+//        }
+
         $cities = [];
         foreach ($this->getCityData() as $cityData){
-            $city = $this->getCity($cityData);
-            $this->addReference($cityData['name'], $city);
-            $manager->persist($city);
-            $cities[$cityData['name']] = $city;
-
+            $cities[$cityData['name']] =  $this->getReference($cityData['name']);
         }
 
 
@@ -185,9 +191,11 @@ class AppFixtures extends Fixture
 
 
     /**
-     * @param array $feedback
+     * @param array $feedbackData
      * @param array $users
      * @param array $adverts
+     * @return Feedback
+     * @throws \Exception
      */
     private function getFeedback(array $feedbackData,array $users, array $adverts )
     {
@@ -200,6 +208,14 @@ class AppFixtures extends Fixture
             ->setCreatedAt(new \DateTime('now'));
 
         return $feedback;
+    }
+
+
+    public function getDependencies()
+    {
+        return [
+            CityFixtures::class
+        ];
     }
 
 
@@ -425,6 +441,7 @@ class AppFixtures extends Fixture
                     'email' => 'martyna@rangove.lt',
                     'text' => 'KODĖL VERTA SKAMBINTI BŪTENT MAN? OPERATYVUMAS: Priklausomai nuo darbų apimties ir pobūdžio dirbu vienas, o reikalui esant – kooperuojuosi. Jūsų patogumui – paslaugas teikiu ir savaitgaliais. PARTNERIAI: Bendradarbiauju su ilgamečiais, geriausią kokybės ir kainos santykį siūlančiais medžiagų tiekėjais. Dėka gero apyvartumo, sugebu suderėti aukštas nuolaidas. Dirbu ir su šeimininko medžiagomis. KONKURENCINGUMAS: Man nereikia išlaikyti vadybininkų, buhalterių ir direktorių "ant savo sprando", todėl galiu pasiūlyti konkurencingas paslaugų kainas bei suteikti NUOLAIDAS didesnės apimties montavimo darbams. MANDAGUMAS: Bendrauju maloniai ir korektiškai. Suteikiu visapusišką informaciją, dažniausiai galite rinktis iš kelių įmanomų variantų.',
                     'is_confirmed' => true,
+
                 ],
                 [
                     'reference' => 'ieskome-santechniko-atsakymas-2',
@@ -738,13 +755,25 @@ class AppFixtures extends Fixture
 
         return [
             [
-                'score' => '0',
+                'score' => '4',
                 'message' => 'Tobulas darbuotojas',
                 'advert' => 'ieskome-santechniko',
                 'receivingUser' => 'aurimas@uzsakovas.lt',
             ],
             [
                 'score' => '2',
+                'message' => 'Tobulas darbuotojas',
+                'advert' => 'silpnu-sroviu-montotuojas',
+                'receivingUser' => 'martyna@uzsakove.lt',
+            ],
+            [
+                'score' => '4',
+                'message' => 'Tobulas darbuotojas',
+                'advert' => 'ieskome-santechniko',
+                'receivingUser' => 'aurimas@uzsakovas.lt',
+            ],
+            [
+                'score' => '5',
                 'message' => 'Tobulas darbuotojas',
                 'advert' => 'silpnu-sroviu-montotuojas',
                 'receivingUser' => 'martyna@uzsakove.lt',
