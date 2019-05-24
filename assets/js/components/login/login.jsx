@@ -60,7 +60,7 @@ class Login extends Component {
         const { email } = this.state;
         const { step } = this.state;
         const { nextStepValue } = this;
-        const token = this.props.feedbackToken;
+        const token = this.props.loginToken;
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
@@ -94,7 +94,7 @@ class Login extends Component {
         const { password } = this.state;
         const { step } = this.state;
         const { nextStepValue } = this;
-        const token = this.props.feedbackToken;
+        const token = this.props.loginToken;
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
@@ -131,7 +131,7 @@ class Login extends Component {
         const { nextStep } = this;
         const { email } = this.state;
         const { nextStepValue } = this;
-        const token = this.props.feedbackToken;
+        const token = this.props.loginToken;
 
         this.setState({ loading: true }, () => {
             axios
