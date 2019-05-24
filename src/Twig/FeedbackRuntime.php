@@ -5,6 +5,8 @@ namespace App\Twig;
 use App\Handler\FeedbackModalDisplayHandler;
 use Symfony\Component\HttpFoundation\Request;
 use Twig\Extension\RuntimeExtensionInterface;
+use App\Entity\User;
+use App\Entity\Advert;
 
 class FeedbackRuntime implements RuntimeExtensionInterface
 {
@@ -41,5 +43,22 @@ class FeedbackRuntime implements RuntimeExtensionInterface
     {
         $result = $this->feedbackModalDisplayHandler->handleDataCollection();
         return $result;
+    }
+
+
+    /**
+     * @param User $user
+     * @param Advert $advert
+     * @return bool
+     */
+    public function UserHasNotSubmittedOffer(User $user ,Advert $advert): bool
+    {
+        $users = [];
+        foreach ($advert->getOffers() as $offer){
+
+            $users[] = $offer->getUser();
+        }
+
+        return !in_array($user, $users);
     }
 }
