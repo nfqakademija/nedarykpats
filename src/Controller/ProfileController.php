@@ -22,8 +22,9 @@ class ProfileController extends AbstractController
      * @param Request $request
      * @param ProfileDataChangeHandler $profileHandler
      * @param ProfilePasswordChangeHandler $profilePasswordChangeHandler
-     * @param  CategoryRepository $categoryRepository
+     * @param CategoryRepository $categoryRepository
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @throws \Exception
      */
     public function index(
         Request $request,
@@ -77,7 +78,7 @@ class ProfileController extends AbstractController
     }
 
     /**
-     * @Route ("/profile/{id}" , name="user_profile", requirements={"id"="\d+"})
+     * @Route ("/profile/{identification}" , name="user_profile", requirements={"identification"="[\w\d]+"})
      * @ParamConverter("user", class="App:User"))
      * @param User $user
      * @param Request $request

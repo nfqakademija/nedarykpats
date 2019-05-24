@@ -107,6 +107,11 @@ class User implements UserInterface
     private $images;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $identification;
+
+    /**
      * User constructor.
      * @throws \Exception
      */
@@ -497,6 +502,18 @@ class User implements UserInterface
                 $image->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getIdentification(): ?string
+    {
+        return $this->identification;
+    }
+
+    public function setIdentification(string $identification): self
+    {
+        $this->identification = $identification;
 
         return $this;
     }
