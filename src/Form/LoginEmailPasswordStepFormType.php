@@ -22,7 +22,7 @@ class LoginEmailPasswordStepFormType extends AbstractType
             'data_class' => LoginFormDTO::class,
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
-            'csrf_token_id'   => 'feedback-token',
+            'csrf_token_id'   => 'login-token',
         ]);
     }
 }
