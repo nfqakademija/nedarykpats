@@ -22,5 +22,6 @@ class LoginEmailStepFormType extends AbstractType
             'csrf_protection' => true,
             'csrf_field_name' => '_token',
             'csrf_token_id'   => 'authenticate',
+            ]);
     }
 }

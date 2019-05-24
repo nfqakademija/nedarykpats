@@ -85,18 +85,27 @@ class Advert
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Feedback", mappedBy="advert", cascade={"persist", "remove"})
+     * @var Feedback
      */
     private $feedback;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @var bool
      */
     private $isDeleted;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\ImageGallery", mappedBy="advert")
+     * @var ArrayCollection|ImageGallery
      */
     private $images;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * Advert constructor.
@@ -396,7 +405,7 @@ class Advert
 
 
     /**
-     * @return mixed
+     * @return bool
      */
     public function getIsDeleted(): ?bool
     {
@@ -423,6 +432,10 @@ class Advert
         return $this->images;
     }
 
+    /**
+     * @param ImageGallery $image
+     * @return Advert
+     */
     public function addImage(ImageGallery $image): self
     {
         if (!$this->images->contains($image)) {
@@ -433,6 +446,10 @@ class Advert
         return $this;
     }
 
+    /**
+     * @param ImageGallery $image
+     * @return Advert
+     */
     public function removeImage(ImageGallery $image): self
     {
         if ($this->images->contains($image)) {
@@ -442,6 +459,25 @@ class Advert
                 $image->setAdvert(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface|null
+     */
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTimeInterface|null $updatedAt
+     * @return Advert
+     */
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
