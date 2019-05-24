@@ -60,11 +60,11 @@ class Login extends Component {
         const { email } = this.state;
         const { step } = this.state;
         const { nextStepValue } = this;
-        const token = this.props.loginToken;
+        const token = this.props.authenticate;
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
-                axios.get('http://127.0.0.1:8000/api/public/user?email=' + email + '&_token=' + token)
+                axios.get('http://127.0.0.1:8000/api/public/user?email=' + email + '&csrf_token=' + token)
                     .then( response =>  {
                         setTimeout(function(){
                             console.log(response);
@@ -94,7 +94,7 @@ class Login extends Component {
         const { password } = this.state;
         const { step } = this.state;
         const { nextStepValue } = this;
-        const token = this.props.loginToken;
+        const token = this.props.authenticate;
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
@@ -131,13 +131,13 @@ class Login extends Component {
         const { nextStep } = this;
         const { email } = this.state;
         const { nextStepValue } = this;
-        const token = this.props.loginToken;
+        const token = this.props.authenticate;
 
         this.setState({ loading: true }, () => {
             axios
                 .post('http://127.0.0.1:8000/api/public/user/send_login_link', {
                     email: email,
-                    _token: token
+                    csrf_token: token
                 })
                 .then(function(response) {
                     setTimeout(function(){
