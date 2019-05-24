@@ -32,6 +32,13 @@ class RegistrationController extends AbstractController
     ): Response {
 
         $form = $this->createForm(RegistrationFormType::class);
+
+        if ($request->query->get('email') != null) {
+            $registrationFormDTO = new RegistrationFormDTO();
+            $registrationFormDTO->setEmail($request->query->get('email'));
+            $form = $this->createForm(RegistrationFormType::class, $registrationFormDTO);
+        }
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

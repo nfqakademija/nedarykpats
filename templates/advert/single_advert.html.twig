@@ -129,6 +129,7 @@
                     </section>
 
 
+{#                    {% if app.user != advert.user and UserHasNotSubmittedOffer(app.user, advert) %}#}
                     {% if app.user != advert.user and app.user not in offerUsers %}
                         {{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
 
@@ -187,6 +188,13 @@
             </div>
         </div>
     </div>
+
+
+
+
+
+
+
 
     <script>
         var usingVersionedFileJs = true;
