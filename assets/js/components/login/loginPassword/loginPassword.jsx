@@ -20,26 +20,14 @@ class LoginPassword extends Component{
 
     render(){
         const { values } = this.props;
-        const csrf_token = document.getElementById('csrf_token').value;
+        // const csrf_token = this.props.feedbackToken;
 
         return(
             <div>
-                <form method="post">
+                <div>
                     <Avatar />
 
                     <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
-
-                    <input id="csrf_token"
-                           type="hidden"
-                           name="_csrf_token"
-                           value={csrf_token}
-                    />
-                    <input type="text"
-                           name="email"
-                           id="inputEmail"
-                           hidden
-                           defaultValue={values.email}
-                    />
 
                     <div className="Form-item">
                         <input id="inputPassword"
@@ -51,12 +39,17 @@ class LoginPassword extends Component{
                                onKeyDown={this._handleKeyDown}
                                defaultValue={values.password}
                         />
+                        <div id="Form-errors" className="Form-errors u-margin-bottom">
+                            <li>{this.props.values.error}</li>
+                        </div>
                     </div>
 
                     <div className="u-margin-top u-align-center">
                         <button
                             className="Button Button--blue "
-                            type="submit">
+                            type="submit"
+                            onClick={this.props.tryToLogin}
+                        >
                             Prisijungti
                         </button>
                     </div>
@@ -66,7 +59,7 @@ class LoginPassword extends Component{
                             Atgal
                         </a>
                     </div>
-                </form>
+                </div>
 
                 <div className="u-align-center">
                     <a className="Button Button--empty"

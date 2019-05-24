@@ -79,11 +79,14 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getCredentials(Request $request)
     {
+        $credential = json_decode($request->getContent(), true);
+
         $credentials = [
-            'email' => $request->request->get('email'),
-            'password' => $request->request->get('password'),
-            'csrf_token' => $request->request->get('_csrf_token'),
+            'email' => $credential['email'],
+            'password' => $credential['password'],
+            'csrf_token' => $credential['_token'],
         ];
+
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['email']
@@ -99,7 +102,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
+        $token = new CsrfToken('feedback-token', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }
@@ -133,6 +136,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
+
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
@@ -141,7 +145,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         if ($request->hasSession()) {
             $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
         }
-        return new Response(json_encode(['success' => false], Response::HTTP_UNAUTHORIZED));
+        return new Response($exception->getMessage(), Response::HTTP_UNAUTHORIZED);
     }
 
     /**

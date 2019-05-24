@@ -21,20 +21,23 @@ class Login extends Component {
             isEmail: '',
             data: [],
             loading: false,
+            error: ''
         };
     }
 
     nextStep = () => {
         const { step } = this.state
         this.setState({
-            step : step + 1
+            step : step + 1,
+            error : ''
         })
     };
 
     prevStep = () => {
         const { step } = this.state;
         this.setState({
-            step: step - 1
+            step: step - 1,
+            error : ''
         });
     };
 
@@ -48,21 +51,15 @@ class Login extends Component {
         })
     };
 
-    signIn = () => {
-        const { email, password } = this.state;
-    };
-
     login = () => {
         const { nextStepValue } = this;
         nextStepValue(1);
     };
 
-    // TODO: success failed, kaip handlinti?
     checkEmail = () => {
         const { email } = this.state;
         const { step } = this.state;
         const { nextStepValue } = this;
-
         const token = this.props.feedbackToken;
 
         this.setState({ loading: true }, () => {
@@ -82,12 +79,50 @@ class Login extends Component {
                                 this.sendSingleLoginLink();
                             }
                         }.bind(this), 2000);
-
                     })
                     .catch(function (error) {
                         console.log(error);
                         nextStepValue(5);
                     });
+            });
+        });
+    };
+
+    tryToLogin = () => {
+        const { email } = this.state;
+        const { error } = this.state;
+        const { password } = this.state;
+        const { step } = this.state;
+        const { nextStepValue } = this;
+        const token = this.props.feedbackToken;
+
+        this.setState({ loading: true }, () => {
+            this.setState({ loading: true }, () => {
+                axios.post('http://127.0.0.1:8000/login', {
+                    email: email,
+                    _token: token,
+                    password: password
+                })
+                .then( response =>  {
+                   setTimeout(function(){
+                        console.log(response);
+                        this.setState({
+                            loading: false,
+                            data: response.data,
+                            error: ''
+                        });
+                        window.location.href = '/';
+                       nextStepValue(3);
+                   }.bind(this), 2000);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    this.setState({
+                        loading: false,
+                        error: 'Jūsų slaptažodis neteisingas'
+                    });
+                    nextStepValue(2);
+                }.bind(this));
             });
         });
     };
@@ -143,10 +178,8 @@ class Login extends Component {
     };
 
     render() {
-
-        const { step, isEmail } = this.state;
-        const { email, password } = this.state;
-        const values = { email, password };
+        const { email, password, step, error } = this.state;
+        const values = { email, password, error };
         const { data, loading } = this.state;
 
         switch(step) {
@@ -172,6 +205,7 @@ class Login extends Component {
                                 handleChange={this.handleChange}
                                 values={values}
                                 results={data}
+                                tryToLogin={this.tryToLogin}
                                 sendSingleLoginLink={this.sendSingleLoginLink}
                             />
                         }
