@@ -12,11 +12,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class AppFixtures extends Fixture implements DependentFixtureInterface
+class AppFixtures extends Fixture
 {
-
     /**
      * @var UserPasswordEncoderInterface
      */
@@ -40,22 +38,13 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($category);
             $categories[$singleCategory['slug']] = $category;
         }
-
-//        $cities = [];
-//        foreach ($this->getCityData() as $cityData){
-//            $city = $this->getCity($cityData);
-//            $this->addReference($cityData['name'], $city);
-//            $manager->persist($city);
-//            $cities[$cityData['name']] = $city;
-//
-//        }
-
         $cities = [];
-        foreach ($this->getCityData() as $cityData){
-            $cities[$cityData['name']] =  $this->getReference($cityData['name']);
+        foreach ($this->getCityData() as $cityData) {
+            $city = $this->getCity($cityData);
+            $this->addReference($cityData['name'], $city);
+            $manager->persist($city);
+            $cities[$cityData['name']] = $city;
         }
-
-
         $users = [];
         foreach ($this->getUserData() as $userData) {
             $user = $this->getUser($userData, $cities);
@@ -63,7 +52,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($user);
             $users[$userData['email']] = $user;
         }
-
         $adverts = [];
         $date = new \DateTime(date('Y-m-d'));
         foreach ($this->getAdvertsData() as $singleAdvert) {
@@ -73,19 +61,15 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             $manager->persist($advert);
             $adverts[$singleAdvert['reference']] = $advert;
         }
-
         foreach ($this->getOfferData() as $singleOffer) {
             $offer = $this->getOffer($singleOffer, $adverts, $users);
             $this->addReference($singleOffer['reference'], $offer);
             $manager->persist($offer);
         }
-
-
         foreach ($this->getFeedbackData() as $singleFeedbackData) {
             $feedback = $this->getFeedback($singleFeedbackData, $users, $adverts);
             $manager->persist($feedback);
         }
-
         $manager->flush();
     }
 
@@ -100,7 +84,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             ->setSlug($category['slug'])
             ->setCssStyle($category['cssStyle']);
     }
-
 
     /**
      * @param array $userData
@@ -117,7 +100,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
             ->setCreatedAt(new \DateTime('now'))
             ->setIsConfirmed($userData['is_confirmed']);
-
         if ($userData['descriptions']) {
             $user->setDescription($userData['descriptions']);
         }
@@ -134,7 +116,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     private function getAdvert(array $advert, array $categories, string $date, array $users, array $cities)
     {
-
         $singleAdvert = new Advert();
         $singleAdvert
             ->setTitle($advert['title'])
@@ -144,15 +125,10 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             ->setUser($users[$advert['email']])
             ->setIsConfirmed($advert['is_confirmed'])
             ->setIsDeleted(false);
-
         $collection = new ArrayCollection();
-
         foreach ($advert['categories'] as $category) {
-
             $collection->add($categories[$category]);
-
             $singleAdvert->addCategory($categories[$category]);
-
         }
         return $singleAdvert;
     }
@@ -174,50 +150,33 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             ->setIsConfirmed($offer['is_confirmed']);
     }
 
-
     /**
      * @param array $cityData
      * @return City
      */
-    private function getCity( array $cityData)
+    private function getCity(array $cityData)
     {
         $city = new City();
-
         $city->setName($cityData['name'])
             ->setPosition($cityData['position']);
-
         return $city;
     }
 
-
     /**
-     * @param array $feedbackData
+     * @param array $feedback
      * @param array $users
      * @param array $adverts
-     * @return Feedback
-     * @throws \Exception
      */
-    private function getFeedback(array $feedbackData,array $users, array $adverts )
+    private function getFeedback(array $feedbackData, array $users, array $adverts)
     {
         $feedback = new Feedback();
-
         $feedback->setReceivingUser($users[$feedbackData['receivingUser']])
             ->setScore($feedbackData['score'])
             ->setAdvert($adverts[$feedbackData['advert']])
             ->setMessage($feedbackData['message'])
             ->setCreatedAt(new \DateTime('now'));
-
         return $feedback;
     }
-
-
-    public function getDependencies()
-    {
-        return [
-            CityFixtures::class
-        ];
-    }
-
 
     /**
      * @return array
@@ -441,7 +400,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
                     'email' => 'martyna@rangove.lt',
                     'text' => 'KODĖL VERTA SKAMBINTI BŪTENT MAN? OPERATYVUMAS: Priklausomai nuo darbų apimties ir pobūdžio dirbu vienas, o reikalui esant – kooperuojuosi. Jūsų patogumui – paslaugas teikiu ir savaitgaliais. PARTNERIAI: Bendradarbiauju su ilgamečiais, geriausią kokybės ir kainos santykį siūlančiais medžiagų tiekėjais. Dėka gero apyvartumo, sugebu suderėti aukštas nuolaidas. Dirbu ir su šeimininko medžiagomis. KONKURENCINGUMAS: Man nereikia išlaikyti vadybininkų, buhalterių ir direktorių "ant savo sprando", todėl galiu pasiūlyti konkurencingas paslaugų kainas bei suteikti NUOLAIDAS didesnės apimties montavimo darbams. MANDAGUMAS: Bendrauju maloniai ir korektiškai. Suteikiu visapusišką informaciją, dažniausiai galite rinktis iš kelių įmanomų variantų.',
                     'is_confirmed' => true,
-
                 ],
                 [
                     'reference' => 'ieskome-santechniko-atsakymas-2',
@@ -556,7 +514,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             ];
     }
 
-
     private function getCityData()
     {
         return [
@@ -572,17 +529,14 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
                 'name' => 'Klaipėda',
                 'position' => 'primary'
             ],
-
             [
                 'name' => 'Šiauliai',
                 'position' => 'primary'
             ],
-
             [
                 'name' => 'Panevežys',
                 'position' => 'primary'
             ],
-
             [
                 'name' => 'Alytus',
                 'position' => 'primary'
@@ -744,7 +698,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
                 'position' => 'secondary'
             ]
         ];
-
     }
 
     /**
@@ -752,10 +705,9 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     public function getFeedbackData()
     {
-
         return [
             [
-                'score' => '4',
+                'score' => '0',
                 'message' => 'Tobulas darbuotojas',
                 'advert' => 'ieskome-santechniko',
                 'receivingUser' => 'aurimas@uzsakovas.lt',
@@ -766,21 +718,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
                 'advert' => 'silpnu-sroviu-montotuojas',
                 'receivingUser' => 'martyna@uzsakove.lt',
             ],
-            [
-                'score' => '4',
-                'message' => 'Tobulas darbuotojas',
-                'advert' => 'ieskome-santechniko',
-                'receivingUser' => 'aurimas@uzsakovas.lt',
-            ],
-            [
-                'score' => '5',
-                'message' => 'Tobulas darbuotojas',
-                'advert' => 'silpnu-sroviu-montotuojas',
-                'receivingUser' => 'martyna@uzsakove.lt',
-            ],
-
         ];
     }
-
-
 }
