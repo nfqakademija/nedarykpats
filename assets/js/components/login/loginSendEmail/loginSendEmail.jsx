@@ -6,17 +6,24 @@ class LoginSendEmail extends Component{
     constructor() {
         super();
         this.state = {
-            providerLink: 'www.google.com'
+            providerLink: 'http://www.gmail.com'
         };
     }
 
     findEmailProvider = () => {
         const { email } = this.props.values;
         const domain = email.substring(email.lastIndexOf("@") +1);
-        const domainArray = ['google.com', 'yahoo.com', 'mailinator.com'];
+        const providerDomain = new Map();
 
-        if (domain in domainArray) {
-            this.state.providerLink = 'www.' + domain;
+        providerDomain.set('gmail.com', 'http://www.gmail.com');
+        providerDomain.set('yahoo.com', 'http://login.yahoo.com');
+        providerDomain.set('mailinator.com', 'http://www.mailinator.com');
+
+        for (let [key, value] of providerDomain.entries()) {
+            console.log(key + ' = ' + value);
+            if (domain === key) {
+                this.state.providerLink = value;
+            }
         }
     };
 

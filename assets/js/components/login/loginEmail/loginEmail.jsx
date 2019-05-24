@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Avatar from '../loginImages/loginAvatar.jsx';
-// import CreateFormAnimation from '../../../react';
 
 class LoginEmail extends Component{
 
