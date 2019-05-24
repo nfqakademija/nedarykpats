@@ -4,11 +4,8 @@ class LoginSuccess extends Component{
     render(){
         return(
             <div>
-                <h1>Pavyko</h1>
-
-                <div className="u-margin-top-bottom u-align-center">
-                    <a href="#" className="Button Button--blue"> Gerai </a>
-                </div>
+                <h3>Labas!</h3>
+                <p>Tuoj jus prijungsime</p>
             </div>
         )
     }

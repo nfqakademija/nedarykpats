@@ -58,30 +58,3 @@ const categoryContainer = document.getElementsByClassName(
 for (let i = 0; i < categoryContainer.length; i += 1) {
     categoryContainer[i].className += ' Form-select';
 }
-
-
-//--------------------------
-// My profile edit form
-//--------------------------
-const editProfile = document.getElementById('EditUserModal');
-if (editProfile) {
-    try {
-        const showPassword = document.getElementById('showPassword');
-        const showProfile = document.getElementById('showProfile');
-        const formPassword = document.getElementById('formPassword');
-        const formProfile = document.getElementById('formProfile');
-
-        showPassword.onclick = function() {
-            formPassword.classList.remove('u-display-none');
-            formProfile.classList.add('u-display-none');
-        };
-
-        showProfile.onclick = function() {
-            formPassword.classList.add('u-display-none');
-            formProfile.classList.remove('u-display-none');
-        }
-
-    } catch (error) {
-        console.error(error);
-    }
-}
