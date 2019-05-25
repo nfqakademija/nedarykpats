@@ -32,6 +32,15 @@
 
                     <section class="LayoutLine LayoutLine--flex">
                         <section class="LayoutLine-item--fullWidth">
+
+                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                <a href='{{ path('user_profile', {'identification': advert.user.id }) }}'>
+                                    <span class="Comments-image">
+                                        <img src="/img/user1.png" alt="user">
+                                    </span>
+                                </a>
+                                {{ advert.user.id }}
+                            {% endif %}
                             <header class="TopBar TopBar--justify">
                                 <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
                                 {% if advert.getOffersCount()  > 0 %}
