@@ -82,7 +82,8 @@ class Login extends Component {
                     })
                     .catch(function (error) {
                         console.log(error);
-                        nextStepValue(5);
+                        // nextStepValue(5);
+                        window.location.href = '/register?email=' + email;
                     });
             });
         });
