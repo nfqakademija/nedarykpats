@@ -43,6 +43,16 @@ class Feedback
      */
     private $createdAt;
 
+
+    /**
+     * Feedback constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        $this->setCreatedAt(new \DateTime('now'));
+    }
+
     /**
      * @return int|null
      */
