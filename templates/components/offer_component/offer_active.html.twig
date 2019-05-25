@@ -1,9 +1,9 @@
 <section class="Comments">
     <section class="Comments-block">
         <div class="Comments-content">
-            {#{% if offer.id == advert.acceptedOffer.id %}#}
-                {#Pasamdytas!#}
-            {#{% endif %}#}
+
+            {% include 'components/offer_component/offer_is_accepted.html.twig' %}
+
             <div class="Comments-header">
                 <a href='{{ path('user_profile', {'identification': offer.user.identification }) }}'>
                     <span class="Comments-image">

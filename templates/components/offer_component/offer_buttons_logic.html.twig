@@ -1,5 +1,8 @@
 {% if app.user == offer.user %}
-    {% include 'components/offer_component/offer_buttons/offer_button_cancel.html.twig' %}
+    {% if not advert.feedback %}
+        {% include 'components/offer_component/offer_buttons/offer_button_cancel.html.twig' %}
+    {% endif %}
+
 {% else %}
     {% if advert.acceptedOffer %}
         {% if advert.acceptedOffer.id == offer.id  and not advert.feedback %}

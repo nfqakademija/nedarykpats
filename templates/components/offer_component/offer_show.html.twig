@@ -1,7 +1,7 @@
-{% if offer.isRetracted == null %}
-    {% include 'components/offer_component/offer_active.html.twig' %}
-{% else %}
+{% if offer.isRetracted != null %}
     {% if app.user != offer.user %}
         {% include 'components/offer_component/offer_not_active.html.twig' %}
     {% endif %}
+{% else %}
+    {% include 'components/offer_component/offer_active.html.twig' %}
 {% endif %}
