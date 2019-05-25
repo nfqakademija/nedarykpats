@@ -15,6 +15,7 @@ class ImageGalleryFormType extends AbstractType
     {
         $builder
             ->add('imageFile', FileType::class)
+            ->add('mainPicture')
             ->add('submit', SubmitType::class, ['label' => 'Skelbti'])
         ;
     }

@@ -10,6 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ImageUploadHandler
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
@@ -17,7 +20,12 @@ class ImageUploadHandler
         $this->entityManager = $entityManager;
     }
 
-    public function handle(ImageGalleryFormDTO $formDTO, User $user, Advert $advert = null)
+    /**
+     * @param ImageGalleryFormDTO $formDTO
+     * @param User|null $user
+     * @param Advert|null $advert
+     */
+    public function handle(ImageGalleryFormDTO $formDTO, User $user = null, Advert $advert = null)
     {
         $userImage = new ImageGallery();
         $userImage

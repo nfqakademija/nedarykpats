@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\ImageGallery;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -17,5 +18,15 @@ class ImageGalleryRepository extends ServiceEntityRepository
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, ImageGallery::class);
+    }
+
+    public function findByUser(User $user)
+    {
+        $query = $this->createQueryBuilder('image_gallery');
+        $query->select('image_gallery')
+            ->where('image_gallery.user = :user')
+            ->setParameter('user', $user);
+
+        return $query->getQuery()->getResult();
     }
 }
