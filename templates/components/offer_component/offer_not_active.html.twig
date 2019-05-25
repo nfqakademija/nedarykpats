@@ -1,0 +1,25 @@
+<section class="Comments not-active">
+    <section class="Comments-block">
+        <div class="Comments-content">
+
+            <div class="Comments-header">
+                <a href='{{ path('user_profile', {'identification': offer.user.identification }) }}'>
+                    <span class="Comments-image">
+                        <img src="/img/user1.png" alt="user">
+                    </span>
+                </a>
+                <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+            </div>
+
+            <div class="Comments-text">
+                <div class="Comments-author">{{ offer.user.username }}</div>
+                <p class="Paragraph">{{ offer.text }}</p>
+            </div>
+
+            <div class="u-margin-top-bottom u-align-space-around">
+
+            </div>
+
+        </div>
+    </section>
+</section>

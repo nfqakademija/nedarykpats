@@ -115,7 +115,8 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             ->setRoles($userData['roles'])
             ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
             ->setCreatedAt(new \DateTime('now'))
-            ->setIsConfirmed($userData['is_confirmed']);
+            ->setIsConfirmed($userData['is_confirmed'])
+            ->setIdentification(md5(microtime()));
         if ($userData['descriptions']) {
             $user->setDescription($userData['descriptions']);
         }

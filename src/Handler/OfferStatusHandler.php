@@ -28,20 +28,26 @@ class OfferStatusHandler
     /**
      * @param Advert $advert
      * @param Offer $offer
+     * @throws \Exception
      */
     public function handleAccept(Advert $advert, Offer $offer)
     {
-        $advert->setAcceptedOffer($offer);
+        $advert
+            ->setAcceptedOffer($offer)
+            ->setUpdatedAt(new \DateTime('now'));
         $this->entityManager->flush();
     }
 
     /**
      * @param Advert $advert
      * @param Offer $offer
+     * @throws \Exception
      */
     public function handleDecline(Advert $advert, Offer $offer)
     {
-        $advert->setAcceptedOffer(null);
+        $advert
+            ->setAcceptedOffer(null)
+            ->setUpdatedAt(new \DateTime('now'));
         $offer->setIsDeclined(true);
         $this->entityManager->flush();
     }
@@ -49,10 +55,13 @@ class OfferStatusHandler
     /**
      * @param Advert $advert
      * @param Offer $offer
+     * @throws \Exception
      */
     public function handleRetract(Advert $advert, Offer $offer)
     {
-        $advert->setAcceptedOffer(null);
+        $advert
+            ->setAcceptedOffer(null)
+            ->setUpdatedAt(new \DateTime('now'));
         $offer->setIsRetracted(true);
         $this->entityManager->flush();
     }

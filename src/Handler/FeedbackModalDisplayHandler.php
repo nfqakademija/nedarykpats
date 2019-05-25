@@ -31,18 +31,22 @@ class FeedbackModalDisplayHandler
 
     /**
      * @return bool
+     * @throws \Exception
      */
     public function handleDataCheck()
     {
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
+        $date = new \DateTime('now');
+        $interval = new \DateInterval('PT15S');
+
         if ($user instanceof User) {
             $advert = $user->getAdverts();
 
             foreach ($advert as $item) {
                 if ($item->getAcceptedOffer()) {
-                    if (!$item->getFeedback()) {
+                    if (!$item->getFeedback() && date_add($item->getUpdatedAt(), $interval) < $date) {
                         return true;
                     }
                 }
