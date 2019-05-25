@@ -2,16 +2,24 @@
 
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class LoginFormDTO
 {
 
     /**
      * @var string|null
+     * @Assert\Email(message="Pateiktas neteisingas el. paštas", mode="loose")
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @var string|null
+     * @Assert\Length(
+     *     max="4096",
+     *     min="6",
+     * )
      */
     private $password;
 

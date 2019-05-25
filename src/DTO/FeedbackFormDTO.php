@@ -3,18 +3,19 @@
 
 namespace App\DTO;
 
-use App\Entity\Advert;
-use App\Entity\User;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class FeedbackFormDTO
 {
     /**
      * @var int|null
+     * @Assert\NotBlank
      */
     private $advert;
 
     /**
      * @var int|null
+     * @Assert\NotBlank
      */
     private $score;
 
