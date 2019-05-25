@@ -93,7 +93,7 @@ class ProfileController extends AbstractController
         return $this->render('user/profile.html.twig', [
             'profileDetailsForm' => $profileDetailsForm->createView(),
             'profilePasswordForm' => $profilePasswordForm->createView(),
-            'user' => $user,
+            'profilesOwner' => $user,
             'rateAverage' => $rateAverage,
             'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
             'imageUploadForm' => $imageUploadForm->createView(),
@@ -150,7 +150,7 @@ class ProfileController extends AbstractController
         return $this->render('user/profile.html.twig', [
             'profileDetailsForm' => $profileDetailsForm->createView(),
             'profilePasswordForm' => $profilePasswordForm->createView(),
-            'user' => $user,
+            'profilesOwner' => $user,
             'rateAverage' => $rateAverage,
             'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
         ]);

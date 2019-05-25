@@ -21,7 +21,9 @@
                 </div>
             {% endif %}
 
-            {% if app.user.id == user.id %}
+
+
+            {% if profileIsAppUsers(app.user, profilesOwner) %}
                 <div class="u-display-right">
                     <a href="#EditUserModal" class="Button">Redaguoti profilį<i class="fas fa-user-edit"></i> </a>
                 </div>
@@ -46,22 +48,22 @@
                     </div>
                 </div>
                 <div class="Column-3 Column-3--longer u-margin-left-right u-margin-top">
-                    {% if user.name %}
-                        <h3>{{ user.name }}</h3>
+                    {% if profilesOwner.name %}
+                        <h3>{{ profilesOwner.name }}</h3>
                     {% else %}
-                        <h3>{{ user.email }}</h3>
+                        <h3>{{ profilesOwner.email }}</h3>
                     {% endif %}
-                    <p class="u-margin-top">{{ user.description }}</p>
+                    <p class="u-margin-top">{{ profilesOwner.description }}</p>
                 </div>
                 <div class="Column-3 u-margin-top">
                     <div>
                         <h4>Kontaktai</h4>
-                        {% if user.city %}
-                            <p>{{ user.city.name }}</p>
+                        {% if profilesOwner.city %}
+                            <p>{{ profilesOwner.city.name }}</p>
                         {% else %}
                             <p>Nenurodytas miestas</p>
                         {% endif %}
-                        <p>{{ user.email }}</p>
+                        <p>{{ profilesOwner.email }}</p>
                     </div>
                     <div>
                         <h4 class="u-margin-top">Dirbu srityse</h4>
@@ -74,20 +76,24 @@
 
                 </div>
             </section>
-            
+
+
+            {% if profileIsAppUsers(app.user, profilesOwner) %}
             <section>
                 {{ form(imageUploadForm) }}
-                
+
                 {% for image in imageGallery %}
                     <a href="{{ path('profile_image_remove', {'id': image.id}) }}">
                     <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
                     </a>
                 {% endfor %}
             </section>
+            {%  endif %}
+
             
             <section class="LayoutGrid">
 
-            {% for feedback in user.feedbacks %}
+            {% for feedback in profilesOwner.feedbacks %}
                     <section class="Comments">
                         <section class="Comments-block">
                             <div class="Comments-content">

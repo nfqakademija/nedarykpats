@@ -36,4 +36,15 @@ class UserRuntime implements RuntimeExtensionInterface
         }
         return true;
     }
+
+
+    /**
+     * @param User|null $user
+     * @param User $profileOwner
+     * @return bool
+     */
+    public function profileIsAppUsers(?User $user, User $profileOwner): bool
+    {
+        return ($user === $profileOwner) ? true : false;
+    }
 }
