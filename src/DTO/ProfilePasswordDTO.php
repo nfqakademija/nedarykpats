@@ -14,7 +14,7 @@ class ProfilePasswordDTO
      * @Assert\Length(
      *     max="4096",
      *     min="6",
-     *     minMessage = "Your password should be at least {{ limit }} characters",
+     *     minMessage = "Jūsų slaptažodis turi turėti mažiausiai {{ limit }} simbolius",
      * )
      */
     private $newPassword;

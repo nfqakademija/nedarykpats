@@ -1,9 +1,10 @@
 <?php
+
 namespace App\DTO;
 
 use App\Entity\Category;
 use App\Entity\City;
-use App\Repository\CategoryRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
@@ -12,26 +13,44 @@ class AdvertFormDTO
 
     /**
      * @var string
+     * @Assert\Email(message="Pateiktas neteisingas el. paštas", mode="loose")
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @var string
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max="150",
+     *     min="5",
+     *     maxMessage="Viršytas maksimalus kiekis",
+     *     minMessage="Pavadinime per mažai simbolių"
+     * )
      */
     private $title;
 
     /**
      * @var string
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *     max="2000",
+     *     min="10",
+     *     maxMessage="Viršytas maksimalus kiekis",
+     *     minMessage="Žinutėje per mažai simbolių"
+     * )
      */
     private $text;
 
     /**
      * @var City
+     * @Assert\NotBlank()
      */
     private $city;
 
     /**
      * @var ArrayCollection|Category
+     * @Assert\NotBlank()
      */
     private $categories;
 
@@ -154,7 +173,6 @@ class AdvertFormDTO
         $this->email = $email;
         return $this;
     }
-
 
     /**
      * @return mixed

@@ -17,7 +17,6 @@ class OfferFormDTO
     /**
      * @var string
      * @Assert\Email(message="Pateiktas neteisingas el. paštas", mode="loose")
-     * @Assert\NotBlank
      */
     private $email;
 
@@ -31,7 +30,7 @@ class OfferFormDTO
      * @Assert\NotBlank
      * @Assert\Length(
      *     max="2000",
-     *     min="30",
+     *     min="10",
      *     maxMessage="Viršytas maksimalus kiekis",
      *     minMessage="Žinutėje per mažai simbolių"
      * )

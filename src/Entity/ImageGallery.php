@@ -21,7 +21,6 @@ class ImageGallery
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="images")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $user;
 
@@ -56,16 +55,26 @@ class ImageGallery
      */
     private $dimensions = [];
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUser(): ?User
     {
         return $this->user;
     }
 
+    /**
+     * @param User|null $user
+     * @return ImageGallery
+     */
     public function setUser(?User $user): self
     {
         $this->user = $user;
@@ -73,11 +82,18 @@ class ImageGallery
         return $this;
     }
 
+    /**
+     * @return Advert|null
+     */
     public function getAdvert(): ?Advert
     {
         return $this->advert;
     }
 
+    /**
+     * @param Advert|null $advert
+     * @return ImageGallery
+     */
     public function setAdvert(?Advert $advert): self
     {
         $this->advert = $advert;
@@ -85,11 +101,18 @@ class ImageGallery
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getMainPicture(): ?bool
     {
         return $this->mainPicture;
     }
 
+    /**
+     * @param bool $mainPicture
+     * @return ImageGallery
+     */
     public function setMainPicture(bool $mainPicture): self
     {
         $this->mainPicture = $mainPicture;
@@ -97,11 +120,18 @@ class ImageGallery
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFileName(): ?string
     {
         return $this->fileName;
     }
 
+    /**
+     * @param string $fileName
+     * @return ImageGallery
+     */
     public function setFileName(string $fileName): self
     {
         $this->fileName = $fileName;
@@ -109,11 +139,18 @@ class ImageGallery
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getSize(): ?string
     {
         return $this->size;
     }
 
+    /**
+     * @param string $size
+     * @return ImageGallery
+     */
     public function setSize(string $size): self
     {
         $this->size = $size;
@@ -121,11 +158,18 @@ class ImageGallery
         return $this;
     }
 
+    /**
+     * @return array|null
+     */
     public function getDimensions(): ?array
     {
         return $this->dimensions;
     }
 
+    /**
+     * @param array $dimensions
+     * @return ImageGallery
+     */
     public function setDimensions(array $dimensions): self
     {
         $this->dimensions = $dimensions;
@@ -143,11 +187,20 @@ class ImageGallery
 
     /**
      * @param File $imageFile
-     * @return UserImageGallery
+     * @return ImageGallery
      */
     public function setImageFile(File $imageFile): self
     {
         $this->imageFile = $imageFile;
         return $this;
+    }
+
+    /**
+     * @return \DateTimeInterface
+     * @throws \Exception
+     */
+    public function getUploadTimestamp(): \DateTimeInterface
+    {
+        return new \DateTime('now');
     }
 }
