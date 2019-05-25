@@ -65,8 +65,7 @@ class AdvertController extends AbstractController
     public function advert(
         Advert $advert,
         Request $request,
-        OfferCreationHandler $offerCreationHandler,
-        AdvertRepository $advertRepository
+        OfferCreationHandler $offerCreationHandler
     ) {
         $offerForm = $this->createForm(OfferType::class);
 
@@ -89,8 +88,7 @@ class AdvertController extends AbstractController
 
         return $this->render('advert/single_advert.html.twig', [
             'advert' => $advert,
-            'offerForm' => $offerForm->createView(),
-            'offerUsers' => $advertRepository->findAdvertOffersUsers($advert)
+            'offerForm' => $offerForm->createView()
         ]);
     }
 
