@@ -1,0 +1,26 @@
+<section class="Comments">
+    <section class="Comments-block">
+        <div class="Comments-content">
+            {#{% if offer.id == advert.acceptedOffer.id %}#}
+                {#Pasamdytas!#}
+            {#{% endif %}#}
+            <div class="Comments-header">
+                <a href='{{ path('user_profile', {'identification': offer.user.identification }) }}'>
+                    <span class="Comments-image">
+                        <img src="/img/user1.png" alt="user">
+                    </span>
+                </a>
+                <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+            </div>
+
+            <div class="Comments-text">
+                <div class="Comments-author">{{ offer.user.username }}</div>
+                <p class="Paragraph">{{ offer.text }}</p>
+            </div>
+
+            <div class="u-margin-top-bottom u-align-space-around">
+                {% include 'components/offer_component/offer_buttons_logic.html.twig' %}
+            </div>
+        </div>
+    </section>
+</section>

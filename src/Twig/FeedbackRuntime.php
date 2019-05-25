@@ -46,6 +46,7 @@ class FeedbackRuntime implements RuntimeExtensionInterface
     }
 
 
+//    TODO: gal iskelti?
     /**
      * @param User $user
      * @param Advert $advert
