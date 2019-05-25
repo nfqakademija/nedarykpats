@@ -9,7 +9,9 @@ class LoginPassword extends Component{
     };
 
     _handleKeyDown = e => {
-        if (e.key === 'Enter') {}
+        if (e.key === 'Enter') {
+            this.props.tryToLogin();
+        }
     };
 
     back = e => {
@@ -20,7 +22,6 @@ class LoginPassword extends Component{
 
     render(){
         const { values } = this.props;
-        // const csrf_token = this.props.feedbackToken;
         const css = "Form-errors u-margin-bottom " + this.props.values.errorStyle;
         return(
             <div>

@@ -14,7 +14,15 @@
                 {% include 'components/avatar.html.twig' %}
             </div>
 
-            <h3 class="u-text-center u-margin-bottom">Registruotis</h3>
+
+            {% if app.request.query.get('email') %}
+                <h3 class="u-text-center u-margin-bottom">Jūs neturite paskyros!</h3>
+            {% else %}
+                <h3 class="u-text-center u-margin-bottom">Registruotis</h3>
+            {% endif %}
+
+
+
 
             <div class="Form-item">
                 {{ form_label(registrationForm.email, 'El. paštas') }}
