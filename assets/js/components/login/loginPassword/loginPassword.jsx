@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import Avatar from '../loginImages/loginAvatar.jsx';
 
-class LoginPassword extends Component{
+class LoginPassword extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            classLabel: "Form-item"
+        };
+    }
 
     saveAndContinue = e => {
         e.preventDefault();
@@ -20,9 +27,20 @@ class LoginPassword extends Component{
         prevStep();
     };
 
+    inputFocusAnimation = ()  => {
+        this.state.classLabel = "Form-item active focusWithText ";
+
+    };
+
     render(){
         const { values } = this.props;
+        const { classLabel } = this.state;
         const css = "Form-errors u-margin-bottom " + this.props.values.errorStyle;
+
+        if (values.password) {
+            this.inputFocusAnimation();
+        }
+
         return(
             <div>
                 <div>
@@ -30,15 +48,19 @@ class LoginPassword extends Component{
 
                     <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
 
-                    <div className="Form-item">
+                    <div className={classLabel}>
+                        <label
+                            htmlFor="floatField">
+                            Slaptažodis
+                        </label>
                         <input id="inputPassword"
                                type="password"
                                name="password"
-                               placeholder="Slaptažodis"
                                required
                                onChange={this.props.handleChange('password')}
                                onKeyDown={this._handleKeyDown}
                                defaultValue={values.password}
+                               onFocus={this.inputFocusAnimation}
                         />
                         <div id="Form-errors"
                              className={css}>
@@ -61,7 +83,6 @@ class LoginPassword extends Component{
                         >
                             Prisijunk be slaptažodžio!
                         </a>
-
                     </div>
                 </div>
 

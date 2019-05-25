@@ -210,10 +210,10 @@ class Login extends Component {
                             <Password
                                 prevStep={this.prevStep}
                                 handleChange={this.handleChange}
-                                values={values}
-                                results={data}
                                 tryToLogin={this.tryToLogin}
                                 sendSingleLoginLink={this.sendSingleLoginLink}
+                                values={values}
+                                results={data}
                             />
                         }
                     </div>
