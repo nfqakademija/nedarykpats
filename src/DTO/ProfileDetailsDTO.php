@@ -9,6 +9,7 @@ class ProfileDetailsDTO
 
     /**
      * @var string
+     * @Assert\NotBlank
      */
     private $name;
 

@@ -29,3 +29,7 @@ yarn-error.log
 ###> Mac file ###
 .DS_Store
 ###< Mac file ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

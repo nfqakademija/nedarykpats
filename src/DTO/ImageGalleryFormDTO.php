@@ -3,6 +3,7 @@
 namespace App\DTO;
 
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ImageGalleryFormDTO
 {
@@ -10,6 +11,10 @@ class ImageGalleryFormDTO
     /**
      *
      * @var File|null
+     * @Assert\File(
+     *     maxSize="1536k",
+     *     maxSizeMessage="Keliamas failas yra per didelis - ({{ size }} {{ suffix }}).",
+     *     mimeTypes={"jpeg", "png"})
      */
     private $imageFile;
 

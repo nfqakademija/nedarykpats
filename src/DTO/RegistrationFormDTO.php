@@ -2,15 +2,23 @@
 
 namespace App\DTO;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class RegistrationFormDTO
 {
     /**
      * @var string|null
+     * @Assert\NotBlank
      */
     private $email;
 
     /**
      * @var string|null
+     * @Assert\Length(
+     *     max="4096",
+     *     min="6",
+     *     minMessage = "Jūsų slaptažodis turi turėti mažiausiai {{ limit }} simbolius",
+     * )
      */
     private $plainPassword;
 
