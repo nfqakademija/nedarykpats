@@ -28,13 +28,13 @@ class FeedbackRuntime implements RuntimeExtensionInterface
     /**
      * @param Request $request
      * @return bool
+     * @throws \Exception
      */
     public function isFeedbackAvailable(Request $request)
     {
         $result = false;
         if (!$request->cookies->get('FeedbackDisplayed')) {
             $result = $this->feedbackModalDisplayHandler->handleDataCheck();
-            var_dump($result);
         }
         return $result;
     }
@@ -46,6 +46,7 @@ class FeedbackRuntime implements RuntimeExtensionInterface
     }
 
 
+//    TODO: gal iskelti?
     /**
      * @param User $user
      * @param Advert $advert

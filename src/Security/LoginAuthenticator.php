@@ -84,7 +84,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         $credentials = [
             'email' => $credential['email'],
             'password' => $credential['password'],
-            'csrf_token' => $credential['_token'],
+            'csrf_token' => $credential['csrf_token'],
         ];
 
         $request->getSession()->set(
@@ -102,7 +102,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $token = new CsrfToken('feedback-token', $credentials['csrf_token']);
+        $token = new CsrfToken('authenticate', $credentials['csrf_token']);
         if (!$this->csrfTokenManager->isTokenValid($token)) {
             throw new InvalidCsrfTokenException();
         }

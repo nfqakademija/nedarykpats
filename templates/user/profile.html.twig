@@ -23,8 +23,13 @@
 
             {% if app.user.id == user.id %}
                 <div class="u-display-right">
-                    <a href="#EditUserModal" class="Button">Redaguoti <i class="fas fa-user-edit"></i> </a>
+                    <a href="#EditUserModal" class="Button">Redaguoti profilį<i class="fas fa-user-edit"></i> </a>
                 </div>
+
+                <div class="u-display-right">
+                    <a href="#EditUserPasswordModal" class="Button">Redaguoti slaptažodį<i class="fas fa-user-edit"></i> </a>
+                </div>
+
             {% endif %}
 
             <section class="Form Form--column u-align-top u-padding-top">
@@ -122,9 +127,7 @@
                             {{ form_widget(profileDetailsForm.city) }}
                         </div>
                         {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top-bottom'}}) }}
-                       <div class="u-align-center">
-                           <span id="showPassword" class="Button Button--empty">Pasikeisti slaptažodį</span>
-                       </div>
+
                         {{ form_end(profileDetailsForm) }}
                     </form>
 
@@ -140,10 +143,6 @@
                             </span>
                         </div>
                         {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
-
-                        <div class="u-align-center">
-                            <span id="showProfile" class="Button Button--empty">Pasikeisti profilio duomenis</span>
-                        </div>
 
                         {{ form_end(profilePasswordForm) }}
                     </form>
