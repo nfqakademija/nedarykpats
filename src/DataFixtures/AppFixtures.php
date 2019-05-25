@@ -3,28 +3,15 @@
 namespace App\DataFixtures;
 
 use App\Entity\Advert;
-use App\Entity\Category;
 use App\Entity\Feedback;
 use App\Entity\Offer;
-use App\Entity\User;
-use App\Entity\City;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class AppFixtures extends Fixture implements DependentFixtureInterface
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $passwordEncoder;
-
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
-    {
-        $this->passwordEncoder = $passwordEncoder;
-    }
 
     /**
      * @param ObjectManager $manager
@@ -32,48 +19,17 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
      */
     public function load(ObjectManager $manager)
     {
-        $categories = [];
-        foreach ($this->getCategoryData() as $singleCategory) {
-            $category = $this->getCategory($singleCategory);
-            $this->addReference($singleCategory['slug'], $category);
-            $manager->persist($category);
-            $categories[$singleCategory['slug']] = $category;
-        }
-        $cities = [];
-//        foreach ($this->getCityData() as $cityData) {
-//            $city = $this->getCity($cityData);
-//            $this->addReference($cityData['name'], $city);
-//            $manager->persist($city);
-//            $cities[$cityData['name']] = $city;
-//        }
 
 
-
-        $users = [];
-        foreach ($this->getUserData() as $userData) {
-            $user = $this->getUser($userData, $this->getReference('Vilnius'));
-            $this->addReference($userData['email'], $user);
-            $manager->persist($user);
-            $users[$userData['email']] = $user;
-        }
-        $adverts = [];
-        $date = new \DateTime(date('Y-m-d'));
-        foreach ($this->getAdvertsData() as $singleAdvert) {
-            $date->modify('-1 day');
-            $advert = $this->getAdvert($singleAdvert, $categories, $date->format('Y-m-d H:i:s'), $users);
-            $this->addReference($singleAdvert['reference'], $advert);
-            $manager->persist($advert);
-            $adverts[$singleAdvert['reference']] = $advert;
-        }
         foreach ($this->getOfferData() as $singleOffer) {
-            $offer = $this->getOffer($singleOffer, $adverts, $users);
+            $offer = $this->getOffer($singleOffer);
             $this->addReference($singleOffer['reference'], $offer);
             $manager->persist($offer);
         }
-        foreach ($this->getFeedbackData() as $singleFeedbackData) {
-            $feedback = $this->getFeedback($singleFeedbackData, $users, $adverts);
-            $manager->persist($feedback);
-        }
+//        foreach ($this->getFeedbackData() as $singleFeedbackData) {
+//            $feedback = $this->getFeedback($singleFeedbackData, $users, $adverts);
+//            $manager->persist($feedback);
+//        }
         $manager->flush();
     }
 
@@ -84,105 +40,62 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            CityFixtures::class
+            CategoryFixtures::class,
+            CityFixtures::class,
+            UserFixtures::class,
+            AdvertFixtures::class
         ];
     }
 
 
     /**
-     * @param array $category
-     * @return Category
-     */
-    private function getCategory(array $category)
-    {
-        return (new Category())
-            ->setTitle($category['name'])
-            ->setSlug($category['slug'])
-            ->setCssStyle($category['cssStyle']);
-    }
-
-    /**
-     * @param array $userData
-     * @return User
-     * @throws \Exception
-     */
-    private function getUser(array $userData, $city)
-    {
-        $user = new User();
-        $user->setEmail($userData['email'])
-            ->setName($userData['name'])
-            ->setCity($city)
-            ->setRoles($userData['roles'])
-            ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
-            ->setCreatedAt(new \DateTime('now'))
-            ->setIsConfirmed($userData['is_confirmed'])
-            ->setIdentification(md5(microtime()));
-        if ($userData['descriptions']) {
-            $user->setDescription($userData['descriptions']);
-        }
-        return $user;
-    }
-
-    /**
      * @param array $advert
-     * @param array $categories
      * @param string $date
      * @param array $users
      * @return Advert
      * @throws \Exception
      */
-    private function getAdvert(array $advert, array $categories, string $date, array $users)
+    private function getAdvert(array $advert, string $date)
     {
         $singleAdvert = new Advert();
         $singleAdvert
             ->setTitle($advert['title'])
             ->setText($advert['text'])
             ->setCreatedAt(new \DateTime($date))
-            ->setCity( $this->getReference('Vilnius'))
-            ->setUser($users[$advert['email']])
+            ->setCity($this->getReference($advert['city']))
+            ->setUser($this->getReference($advert['email']))
             ->setIsConfirmed($advert['is_confirmed'])
             ->setIsDeleted(false);
         $collection = new ArrayCollection();
         foreach ($advert['categories'] as $category) {
-            $collection->add($categories[$category]);
-            $singleAdvert->addCategory($categories[$category]);
+            $collection->add($this->getReference($category));
+            $singleAdvert->addCategory($this->getReference($category));
         }
         return $singleAdvert;
     }
 
     /**
      * @param array $offer
-     * @param array $adverts
-     * @param array $users
      * @return Offer
      * @throws \Exception
      */
-    private function getOffer(array $offer, array $adverts, array $users)
+    private function getOffer(array $offer)
     {
         return (new Offer())
-            ->setUser($users[$offer['email']])
+            ->setUser($this->getReference($offer['email']))
             ->setText($offer['text'])
-            ->setAdvert($adverts[$offer['advert']])
+            ->setAdvert($this->getReference($offer['advert']))
             ->setCreatedAt(new \DateTime('now'))
             ->setIsConfirmed($offer['is_confirmed']);
     }
 
-    /**
-     * @param array $cityData
-     * @return City
-     */
-    private function getCity(array $cityData)
-    {
-        $city = new City();
-        $city->setName($cityData['name'])
-            ->setPosition($cityData['position']);
-        return $city;
-    }
 
     /**
-     * @param array $feedback
+     * @param array $feedbackData
      * @param array $users
      * @param array $adverts
+     * @return Feedback
+     * @throws \Exception
      */
     private function getFeedback(array $feedbackData, array $users, array $adverts)
     {
@@ -195,65 +108,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
         return $feedback;
     }
 
-    /**
-     * @return array
-     */
-    private function getCategoryData()
-    {
-        return
-            [
-                [
-                    'name' => 'Statybos',
-                    'slug' => 'statybos',
-                    'cssStyle' => 'Category--orange',
-                ],
-                [
-                    'name' => 'Remontas',
-                    'slug' => 'remontas',
-                    'cssStyle' => 'Category--lightGreen',
-                ],
-                [
-                    'name' => 'Apdailos darbai',
-                    'slug' => 'apdailos-darbai',
-                    'cssStyle' => 'Category--lightBlue',
-                ],
-                [
-                    'name' => 'Lauko darbai',
-                    'slug' => 'lauko-darbai',
-                    'cssStyle' => 'Category--purple',
-                ],
-                [
-                    'name' => 'Santechnika',
-                    'slug' => 'santechnika',
-                    'cssStyle' => 'Category--green',
-                ],
-                [
-                    'name' => 'Elektra',
-                    'slug' => 'elektra',
-                    'cssStyle' => 'Category--blue',
-                ],
-                [
-                    'name' => 'Buitinės technikos pajungimas',
-                    'slug' => 'buitines-technikos-pajungimas',
-                    'cssStyle' => 'Category--yellow',
-                ],
-                [
-                    'name' => 'Baldai',
-                    'slug' => 'baldai',
-                    'cssStyle' => 'Category--red',
-                ],
-                [
-                    'name' => 'Kita',
-                    'slug' => 'kita',
-                    'cssStyle' => 'Category--brown',
-                ],
-                [
-                    'name' => 'Interjero dizainas',
-                    'slug' => 'interjero-dizainas',
-                    'cssStyle' => 'Category--red',
-                ],
-            ];
-    }
 
     /**
      * @return array
@@ -449,273 +303,6 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             ];
     }
 
-    /**
-     * @return array
-     */
-    private function getUserData()
-    {
-        return
-            [
-                [
-                    'email' => 'aurimas@uzsakovas.lt',
-                    'password' => 'aurimas',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => false,
-                    'name' => 'Aurimas Vilys',
-                    'descriptions' => '',
-                    'city' => 'Vilnius',
-                ],
-                [
-                    'email' => 'martyna@uzsakove.lt',
-                    'password' => 'martyna',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
-                    'name' => 'Martyna B',
-                    'descriptions' => '',
-                    'city' => 'Vilnius',
-                ],
-                [
-                    'email' => 'vilius@uzsakovas.lt',
-                    'password' => 'vilius',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
-                    'name' => 'Vilius Gumonis',
-                    'descriptions' => '',
-                    'city' => 'Vilnius',
-                ],
-                [
-                    'email' => 'laurynas@uzsakovas.lt',
-                    'password' => 'laurynas',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
-                    'name' => 'Laurynas Valenta',
-                    'descriptions' => '',
-                    'city' => 'Vilnius',
-                ],
-                [
-                    'email' => 'aurimas@rangovas.lt',
-                    'password' => 'aurimas',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
-                    'name' => 'Aurimas Vilys',
-                    'descriptions' => 'Profesionalus sienų dažytojas',
-                    'city' => 'Vilnius',
-                ],
-                [
-                    'email' => 'martyna@rangove.lt',
-                    'password' => 'martyna',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
-                    'name' => 'Martyna B',
-                    'descriptions' => 'Profesionali interjero dizainerė',
-                    'city' => 'Vilnius',
-                ],
-                [
-                    'email' => 'vilius@rangovas.lt',
-                    'password' => 'vilius',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
-                    'name' => 'Vilius Gumonis',
-                    'descriptions' => 'Profesionalus  santechnikas',
-                    'city' => 'Vilnius',
-                ],
-                [
-                    'email' => 'laurynas@rangovas.lt',
-                    'password' => 'laurynas',
-                    'roles' => ['ROLE_USER'],
-                    'is_confirmed' => true,
-                    'name' => 'Laurynas Valenta',
-                    'descriptions' => 'Profesionalus darbų vykdytojas',
-                    'city' => 'Vilnius',
-                ],
-            ];
-    }
-
-    private function getCityData()
-    {
-        return [
-            [
-                'name' => 'Vilnius',
-                'position' => 'primary'
-            ],
-            [
-                'name' => 'Kaunas',
-                'position' => 'primary'
-            ],
-            [
-                'name' => 'Klaipėda',
-                'position' => 'primary'
-            ],
-            [
-                'name' => 'Šiauliai',
-                'position' => 'primary'
-            ],
-            [
-                'name' => 'Panevežys',
-                'position' => 'primary'
-            ],
-            [
-                'name' => 'Alytus',
-                'position' => 'primary'
-            ],
-            [
-                'name' => 'Marijampolė',
-                'position' => 'primary'
-            ],
-            [
-                'name' => 'Akmenė',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Anykščiai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Birštonas',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Druskininkai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Elektrėnai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Ignalina',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Jonava',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Joniškis',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Jurbankas',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Kaišiadoriai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Kalvarijai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Kazlų Ruda',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Kėdainiai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Kelmė',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Kretinga',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Kupiškis',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Lazdijai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Mažeikiai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Molėtai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Neringa',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Paktruoniis',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Plungė',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Prienai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Radviliškis',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Raseiniai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Rietavas',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Šakiai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Šalčinikai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Šilalė',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Širvintai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Tauragė',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Telšiai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Trakai',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Ukmergė',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Varėna',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Vilkaviškis',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Visaginas',
-                'position' => 'secondary'
-            ],
-            [
-                'name' => 'Zarasai',
-                'position' => 'secondary'
-            ]
-        ];
-    }
 
     /**
      * @return array

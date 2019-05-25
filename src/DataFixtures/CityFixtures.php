@@ -19,7 +19,6 @@ class CityFixtures extends AbstractFixture implements ORMFixtureInterface
             $city = $this->createCity($cityData);
             $manager->persist($city);
         }
-
         $manager->flush();
     }
 
@@ -28,7 +27,7 @@ class CityFixtures extends AbstractFixture implements ORMFixtureInterface
      * @param array $cityData
      * @return City
      */
-    public function createCity(array $cityData)
+    private function createCity(array $cityData)
     {
         $city = new City();
 
@@ -46,7 +45,7 @@ class CityFixtures extends AbstractFixture implements ORMFixtureInterface
     /**
      * @return array
      */
-    public function getCityData()
+    private function getCityData()
     {
         return [
             [
