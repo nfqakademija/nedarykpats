@@ -21,7 +21,7 @@ class LoginPassword extends Component{
     render(){
         const { values } = this.props;
         // const csrf_token = this.props.feedbackToken;
-
+        const css = "Form-errors u-margin-bottom " + this.props.values.errorStyle;
         return(
             <div>
                 <div>
@@ -39,33 +39,35 @@ class LoginPassword extends Component{
                                onKeyDown={this._handleKeyDown}
                                defaultValue={values.password}
                         />
-                        <div id="Form-errors" className="Form-errors u-margin-bottom">
+                        <div id="Form-errors"
+                             className={css}>
                             <li>{this.props.values.error}</li>
                         </div>
                     </div>
 
-                    <div className="u-margin-top u-align-center">
+                    <div className="u-margin-top-small u-align-center">
                         <button
-                            className="Button Button--blue "
+                            className="Button Button--blue Button--long"
                             type="submit"
                             onClick={this.props.tryToLogin}
                         >
                             Prisijungti
                         </button>
                     </div>
-                    <div className="u-align-center">
-                        <a className="Button Button--empty"
-                           onClick={this.back}>
-                            Atgal
+                    <div className="u-margin-top-small u-align-center">
+                        <a className="Button Button--long"
+                           onClick={this.props.sendSingleLoginLink}
+                        >
+                            Prisijunk be slaptažodžio!
                         </a>
+
                     </div>
                 </div>
 
-                <div className="u-align-center">
+                <div className="u-margin-top u-align-center">
                     <a className="Button Button--empty"
-                        onClick={this.props.sendSingleLoginLink}
-                    >
-                        Prisijunk be slaptažodžio!
+                       onClick={this.back}>
+                        Atgal
                     </a>
                 </div>
             </div>
