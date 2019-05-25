@@ -84,9 +84,10 @@ class Login extends Component {
                         }.bind(this), 2000);
                     })
                     .catch(function (error) {
-                        console.log(error);
-                        // nextStepValue(5);
-                        window.location.href = '/register?email=' + email;
+                        setTimeout(function(){
+                            console.log(error);
+                            window.location.href = '/register?email=' + email;
+                        }.bind(this), 2000);
                     });
             });
         });
