@@ -7,6 +7,7 @@ class LoginEmail extends Component{
         super();
         this.state = {
             errors: {},
+            classLabel: "Form-item"
         };
     }
 
@@ -42,8 +43,13 @@ class LoginEmail extends Component{
         }
     };
 
+    inputFocusAnimation = ()  => {
+        this.state.classLabel = "Form-item active focusWithText ";
+    };
+
     render(){
         const { values } = this.props;
+        const { classLabel } = this.state;
 
         return(
             <div>
@@ -51,14 +57,18 @@ class LoginEmail extends Component{
 
                 <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
 
-                <div className="Form-item">
-                    <label htmlFor="floatField">El. paštas</label>
+                <div className={classLabel}>
+                    <label
+                        htmlFor="floatField">
+                        El. paštas
+                    </label>
                     <input id="inputEmail"
                            type="email"
                            name="email"
                            defaultValue={values.firstName}
                            onChange={this.props.handleChange('email')}
                            onKeyDown={this._handleKeyDown}
+                           onFocus={this.inputFocusAnimation}
                            required
                     />
                     <div id="Form-errors" className="Form-errors u-margin-bottom u-display-none">

@@ -18,6 +18,7 @@ class LoginSendEmail extends Component{
         providerDomain.set('gmail.com', 'http://www.gmail.com');
         providerDomain.set('yahoo.com', 'http://login.yahoo.com');
         providerDomain.set('mailinator.com', 'http://www.mailinator.com');
+        providerDomain.set('nfq.lt', 'http://www.nfq.lt');
 
         for (let [key, value] of providerDomain.entries()) {
             console.log(key + ' = ' + value);

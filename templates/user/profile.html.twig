@@ -74,6 +74,17 @@
 
                 </div>
             </section>
+            
+            <section>
+                {{ form(imageUploadForm) }}
+                
+                {% for image in imageGallery %}
+                    <a href="{{ path('profile_image_remove', {'id': image.id}) }}">
+                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
+                    </a>
+                {% endfor %}
+            </section>
+            
             <section class="LayoutGrid">
 
             {% for feedback in user.feedbacks %}

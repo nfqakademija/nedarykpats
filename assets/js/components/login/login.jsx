@@ -21,7 +21,8 @@ class Login extends Component {
             isEmail: '',
             data: [],
             loading: false,
-            error: ''
+            error: '',
+            errorStyle: 'u-display-none'
         };
     }
 
@@ -29,7 +30,8 @@ class Login extends Component {
         const { step } = this.state
         this.setState({
             step : step + 1,
-            error : ''
+            error : '',
+            errorStyle: 'u-display-none'
         })
     };
 
@@ -37,7 +39,8 @@ class Login extends Component {
         const { step } = this.state;
         this.setState({
             step: step - 1,
-            error : ''
+            error : '',
+            errorStyle: 'u-display-none'
         });
     };
 
@@ -81,8 +84,10 @@ class Login extends Component {
                         }.bind(this), 2000);
                     })
                     .catch(function (error) {
-                        console.log(error);
-                        nextStepValue(5);
+                        setTimeout(function(){
+                            console.log(error);
+                            window.location.href = '/register?email=' + email;
+                        }.bind(this), 2000);
                     });
             });
         });
@@ -90,7 +95,7 @@ class Login extends Component {
 
     tryToLogin = () => {
         const { email } = this.state;
-        const { error } = this.state;
+        const { error, errorStyle } = this.state;
         const { password } = this.state;
         const { step } = this.state;
         const { nextStepValue } = this;
@@ -109,7 +114,8 @@ class Login extends Component {
                         this.setState({
                             loading: false,
                             data: response.data,
-                            error: ''
+                            error: '',
+                            errorStyle: 'u-display-none'
                         });
                         window.location.href = '/';
                        nextStepValue(3);
@@ -119,7 +125,8 @@ class Login extends Component {
                     console.log(error);
                     this.setState({
                         loading: false,
-                        error: 'Jūsų slaptažodis neteisingas'
+                        error: 'Jūsų slaptažodis neteisingas',
+                        errorStyle: ''
                     });
                     nextStepValue(2);
                 }.bind(this));
@@ -178,8 +185,8 @@ class Login extends Component {
     };
 
     render() {
-        const { email, password, step, error } = this.state;
-        const values = { email, password, error };
+        const { email, password, step, error, errorStyle } = this.state;
+        const values = { email, password, error, errorStyle };
         const { data, loading } = this.state;
 
         switch(step) {
@@ -203,10 +210,10 @@ class Login extends Component {
                             <Password
                                 prevStep={this.prevStep}
                                 handleChange={this.handleChange}
-                                values={values}
-                                results={data}
                                 tryToLogin={this.tryToLogin}
                                 sendSingleLoginLink={this.sendSingleLoginLink}
+                                values={values}
+                                results={data}
                             />
                         }
                     </div>

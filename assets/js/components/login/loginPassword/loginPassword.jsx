@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import Avatar from '../loginImages/loginAvatar.jsx';
 
-class LoginPassword extends Component{
+class LoginPassword extends Component {
+
+    constructor() {
+        super();
+        this.state = {
+            classLabel: "Form-item"
+        };
+    }
 
     saveAndContinue = e => {
         e.preventDefault();
@@ -9,7 +16,9 @@ class LoginPassword extends Component{
     };
 
     _handleKeyDown = e => {
-        if (e.key === 'Enter') {}
+        if (e.key === 'Enter') {
+            this.props.tryToLogin();
+        }
     };
 
     back = e => {
@@ -18,9 +27,19 @@ class LoginPassword extends Component{
         prevStep();
     };
 
+    inputFocusAnimation = ()  => {
+        this.state.classLabel = "Form-item active focusWithText ";
+
+    };
+
     render(){
         const { values } = this.props;
-        // const csrf_token = this.props.feedbackToken;
+        const { classLabel } = this.state;
+        const css = "Form-errors u-margin-bottom " + this.props.values.errorStyle;
+
+        if (values.password) {
+            this.inputFocusAnimation();
+        }
 
         return(
             <div>
@@ -29,43 +48,48 @@ class LoginPassword extends Component{
 
                     <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
 
-                    <div className="Form-item">
+                    <div className={classLabel}>
+                        <label
+                            htmlFor="floatField">
+                            Slaptažodis
+                        </label>
                         <input id="inputPassword"
                                type="password"
                                name="password"
-                               placeholder="Slaptažodis"
                                required
                                onChange={this.props.handleChange('password')}
                                onKeyDown={this._handleKeyDown}
                                defaultValue={values.password}
+                               onFocus={this.inputFocusAnimation}
                         />
-                        <div id="Form-errors" className="Form-errors u-margin-bottom">
+                        <div id="Form-errors"
+                             className={css}>
                             <li>{this.props.values.error}</li>
                         </div>
                     </div>
 
-                    <div className="u-margin-top u-align-center">
+                    <div className="u-margin-top-small u-align-center">
                         <button
-                            className="Button Button--blue "
+                            className="Button Button--blue Button--long"
                             type="submit"
                             onClick={this.props.tryToLogin}
                         >
                             Prisijungti
                         </button>
                     </div>
-                    <div className="u-align-center">
-                        <a className="Button Button--empty"
-                           onClick={this.back}>
-                            Atgal
+                    <div className="u-margin-top-small u-align-center">
+                        <a className="Button Button--long"
+                           onClick={this.props.sendSingleLoginLink}
+                        >
+                            Prisijunk be slaptažodžio!
                         </a>
                     </div>
                 </div>
 
-                <div className="u-align-center">
+                <div className="u-margin-top u-align-center">
                     <a className="Button Button--empty"
-                        onClick={this.props.sendSingleLoginLink}
-                    >
-                        Prisijunk be slaptažodžio!
+                       onClick={this.back}>
+                        Atgal
                     </a>
                 </div>
             </div>
