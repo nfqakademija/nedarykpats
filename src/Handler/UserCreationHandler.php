@@ -39,7 +39,8 @@ class UserCreationHandler
             ->setName($name)
             ->setRoles(['ROLE_USER'])
             ->setIsConfirmed(false)
-            ->setCreatedAt(new \DateTime('now'));
+            ->setCreatedAt(new \DateTime('now'))
+            ->setIdentification(substr(md5(microtime()), 0, 7));
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
