@@ -12,8 +12,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class AppFixtures extends Fixture
+class AppFixtures extends Fixture implements DependentFixtureInterface
 {
     /**
      * @var UserPasswordEncoderInterface
@@ -39,15 +40,18 @@ class AppFixtures extends Fixture
             $categories[$singleCategory['slug']] = $category;
         }
         $cities = [];
-        foreach ($this->getCityData() as $cityData) {
-            $city = $this->getCity($cityData);
-            $this->addReference($cityData['name'], $city);
-            $manager->persist($city);
-            $cities[$cityData['name']] = $city;
-        }
+//        foreach ($this->getCityData() as $cityData) {
+//            $city = $this->getCity($cityData);
+//            $this->addReference($cityData['name'], $city);
+//            $manager->persist($city);
+//            $cities[$cityData['name']] = $city;
+//        }
+
+
+
         $users = [];
         foreach ($this->getUserData() as $userData) {
-            $user = $this->getUser($userData, $cities);
+            $user = $this->getUser($userData, $this->getReference('Vilnius'));
             $this->addReference($userData['email'], $user);
             $manager->persist($user);
             $users[$userData['email']] = $user;
@@ -56,7 +60,7 @@ class AppFixtures extends Fixture
         $date = new \DateTime(date('Y-m-d'));
         foreach ($this->getAdvertsData() as $singleAdvert) {
             $date->modify('-1 day');
-            $advert = $this->getAdvert($singleAdvert, $categories, $date->format('Y-m-d H:i:s'), $users, $cities);
+            $advert = $this->getAdvert($singleAdvert, $categories, $date->format('Y-m-d H:i:s'), $users);
             $this->addReference($singleAdvert['reference'], $advert);
             $manager->persist($advert);
             $adverts[$singleAdvert['reference']] = $advert;
@@ -72,6 +76,18 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
     }
+
+
+    /**
+     * @return array
+     */
+    public function getDependencies()
+    {
+        return [
+            CityFixtures::class
+        ];
+    }
+
 
     /**
      * @param array $category
@@ -90,12 +106,12 @@ class AppFixtures extends Fixture
      * @return User
      * @throws \Exception
      */
-    private function getUser(array $userData, array $cities)
+    private function getUser(array $userData, $city)
     {
         $user = new User();
         $user->setEmail($userData['email'])
             ->setName($userData['name'])
-            ->setCity($cities[$userData['city']])
+            ->setCity($city)
             ->setRoles($userData['roles'])
             ->setPassword($this->passwordEncoder->encodePassword($user, $userData['password']))
             ->setCreatedAt(new \DateTime('now'))
@@ -114,14 +130,14 @@ class AppFixtures extends Fixture
      * @return Advert
      * @throws \Exception
      */
-    private function getAdvert(array $advert, array $categories, string $date, array $users, array $cities)
+    private function getAdvert(array $advert, array $categories, string $date, array $users)
     {
         $singleAdvert = new Advert();
         $singleAdvert
             ->setTitle($advert['title'])
             ->setText($advert['text'])
             ->setCreatedAt(new \DateTime($date))
-            ->setCity($cities[$advert['city']])
+            ->setCity( $this->getReference('Vilnius'))
             ->setUser($users[$advert['email']])
             ->setIsConfirmed($advert['is_confirmed'])
             ->setIsDeleted(false);
