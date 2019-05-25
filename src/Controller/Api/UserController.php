@@ -22,7 +22,6 @@ class UserController extends AbstractController
      * @Route("api/public/user", name="api_get_user", methods={"GET"})
      * @param Request $request
      * @return Response
-     * @throws NonUniqueResultException
      */
     public function checkUser(Request $request): Response
     {
@@ -38,7 +37,9 @@ class UserController extends AbstractController
 
                 if ($user instanceof User) {
                     $authenticateUsingPassword = false;
-                    if ($user->getPassword() !== null && strlen($user->getPassword()) > 0) {
+                    if (!$user->isConfirmed()) {
+                        $authenticateUsingPassword = false;
+                    } elseif ($user->getPassword() !== null && strlen($user->getPassword()) > 0) {
                         $authenticateUsingPassword = true;
                     }
                     return new Response(json_encode(['authenticateUsingPassword' => $authenticateUsingPassword,]));
