@@ -1,11 +1,10 @@
-{% if app.user == offer.user %}
-    {% if not advert.feedback %}
+{% if cancelingOfferIsAvailable(app.user, offer, advert) %}
         {% include 'components/offer_component/offer_buttons/offer_button_cancel.html.twig' %}
-    {% endif %}
-
 {% else %}
+
+{#{% if leavingFeedbackIsAvailable(advert, offer) %}#}
     {% if advert.acceptedOffer %}
-        {% if advert.acceptedOffer.id == offer.id  and not advert.feedback %}
+        {% if advert.acceptedOffer.id == offer.id and advert.feedback %}
             {% include 'components/offer_component/offer_buttons/offer_button_cancel.html.twig' %}
             {% include 'components/offer_component/offer_buttons/offer_button_feedback.html.twig' %}
         {% endif %}
@@ -13,3 +12,4 @@
         {% include 'components/offer_component/offer_buttons/offer_button_approve.html.twig' %}
     {% endif %}
 {% endif %}
+

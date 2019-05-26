@@ -3,6 +3,7 @@
 namespace App\Twig;
 
 use App\Entity\Advert;
+use App\Entity\Offer;
 use App\Entity\User;
 use Twig\Extension\RuntimeExtensionInterface;
 
@@ -24,7 +25,7 @@ class UserRuntime implements RuntimeExtensionInterface
      * @param Advert $advert
      * @return bool
      */
-    public function showOfferForm(?User $user, Advert $advert): bool
+    public function offerFormIsAvailable(?User $user, Advert $advert): bool
     {
         if ($advert->getUser() === $user) {
             return false;
@@ -34,6 +35,26 @@ class UserRuntime implements RuntimeExtensionInterface
             if ($offer->getUser() === $user) {
                 return false;
             }
+        }
+
+        return true;
+    }
+
+
+    /**
+     * @param User|null $user
+     * @param Offer $offer
+     * @param Advert $advert
+     * @return bool
+     */
+    public function cancelingOfferIsAvailable(?User $user, Offer $offer, Advert $advert): bool
+    {
+        if ($offer->getUser() !== $user) {
+            return false;
+        }
+
+        if ($advert->getFeedback()) {
+            return false;
         }
 
         return true;
