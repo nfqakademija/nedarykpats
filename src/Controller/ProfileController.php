@@ -130,16 +130,9 @@ class ProfileController extends AbstractController
         CategoryRepository $categoryRepository
     ) {
 
-        $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
-        $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $profileDetailsDTO);
-        $profilePasswordForm = $this->createForm(ProfilePasswordFormType::class);
-
-        $profileDetailsForm->handleRequest($request);
-        $profilePasswordForm->handleRequest($request);
-
         $rateArray = [];
         $rateAverage = 0;
-        foreach ($this->getUser()->getFeedbacks() as $value) {
+        foreach ($user->getFeedbacks() as $value) {
             $rateArray[] = $value->getScore();
         }
 
@@ -147,12 +140,14 @@ class ProfileController extends AbstractController
             $rateAverage = array_sum($rateArray) / count($rateArray);
         }
 
+        /** @var ImageGallery[] $imageGallery */
+        $imageGallery = $this->getDoctrine()->getRepository(ImageGallery::class)->findByUser($this->getUser());
+
         return $this->render('user/profile.html.twig', [
-            'profileDetailsForm' => $profileDetailsForm->createView(),
-            'profilePasswordForm' => $profilePasswordForm->createView(),
             'profilesOwner' => $user,
             'rateAverage' => $rateAverage,
             'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
+            'imageGallery' => $imageGallery,
         ]);
     }
 }

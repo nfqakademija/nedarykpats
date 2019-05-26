@@ -79,14 +79,14 @@
             {% if profileIsAppUsers(app.user, profilesOwner) %}
             <section>
                 {{ form(imageUploadForm) }}
-
-                {% for image in imageGallery %}
-                    <a href="{{ path('profile_image_remove', {'id': image.id}) }}">
-                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
-                    </a>
-                {% endfor %}
             </section>
             {%  endif %}
+
+            {% for image in imageGallery %}
+                <a href="{{ path('profile_image_remove', {'id': image.id}) }}">
+                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
+                </a>
+            {% endfor %}
 
 
             <section class="LayoutGrid">
@@ -117,6 +117,7 @@
                     </section>
             {% endfor %}
             </section>
+            {% if profileIsAppUsers(app.user, profilesOwner) %}
             <section id="EditUserModal" class="Modal">
 
                 <div>
@@ -163,7 +164,7 @@
 
                 </div>
             </section>
-
+            {% endif %}
         </div>
     </div>
 
