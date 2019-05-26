@@ -55,7 +55,7 @@
                                     {% if not advert.feedback %}
                                         <div class="Button Button--default Button--yellow u-margin-around feedback"
                                              data-feedback-token={{ csrf_token("feedback-token") }}
-                                             data-feedback-user={{ advert.acceptedOffer.user.id }}
+                                             data-feedback-user={{ advert.acceptedOffer.user.name }}
                                              data-feedback-advert={{ advert.id }}
                                         ><i class="fas fa-star"></i> Vertinti</div>
                                     {% endif %}
@@ -94,4 +94,7 @@
 
     {{ parent() }}
 
+{% endblock %}
+
+{% block showFeedback %}
 {% endblock %}

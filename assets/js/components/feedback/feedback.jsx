@@ -8,8 +8,8 @@ import Success from './feedbackSuccess/feedbackSuccess.jsx';
 import FeedbackSpinner from './feedbackSpinner/feedbackSpinner.jsx';
 
 class Feedback extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             step: 1,
             rateValue: 1,
@@ -20,6 +20,16 @@ class Feedback extends Component {
             data: [],
             loading: false,
         };
+    }
+
+    getFeedbackInformation() {
+        if (this.props.feedbackAdvert) {
+            this.state.user = this.props.feedbackUser;
+            this.state.advert = this.props.feedbackAdvert;
+            this.state.token = this.props.feedbackToken;
+            const writeReview = document.getElementById('writeReviewModal');
+            writeReview.classList.add('show');
+        }
     }
 
     nextStep = () => {
@@ -107,6 +117,8 @@ class Feedback extends Component {
 
         this.hideFeedback();
 
+        this.getFeedbackInformation();
+
         switch (step) {
             case 1:
                 return (
@@ -115,6 +127,7 @@ class Feedback extends Component {
                         addRate={this.addRate}
                         handleValue={this.handleValue}
                         values={values}
+                        user={this.state.user}
                     />
                 );
             case 2:

@@ -22,12 +22,13 @@ class Login extends Component {
             data: [],
             loading: false,
             error: '',
-            errorStyle: 'u-display-none'
+            errorStyle: 'u-display-none',
+            DELAY_TIME: '1250'
         };
     }
 
     nextStep = () => {
-        const { step } = this.state
+        const { step } = this.state;
         this.setState({
             step : step + 1,
             error : '',
@@ -60,44 +61,43 @@ class Login extends Component {
     };
 
     checkEmail = () => {
-        const { email } = this.state;
-        const { step } = this.state;
+        const { email, step } = this.state;
+        const { DELAY_TIME } = this.state;
         const { nextStepValue } = this;
         const token = this.props.authenticate;
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
                 axios.get('http://127.0.0.1:8000/api/public/user?email=' + email + '&csrf_token=' + token)
-                    .then( response =>  {
-                        setTimeout(function(){
-                            console.log(response);
-                            this.setState({
-                                loading: false,
-                                data: response.data
-                            });
-                            if (response.data.authenticateUsingPassword) {
-                                nextStepValue(2);
-                            }
-                            else {
-                                this.sendSingleLoginLink();
-                            }
-                        }.bind(this), 2000);
-                    })
-                    .catch(function (error) {
-                        setTimeout(function(){
-                            console.log(error);
-                            window.location.href = '/register?email=' + email;
-                        }.bind(this), 2000);
-                    });
+                .then( response =>  {
+                    setTimeout(function(){
+                        console.log(response);
+                        this.setState({
+                            loading: false,
+                            data: response.data
+                        });
+                        if (response.data.authenticateUsingPassword) {
+                            nextStepValue(2);
+                        }
+                        else {
+                            this.sendSingleLoginLink();
+                        }
+                    }.bind(this), DELAY_TIME);
+                })
+                .catch(function (error) {
+                    setTimeout(function(){
+                        console.log(error);
+                        window.location.href = '/register?email=' + email;
+                    }.bind(this), DELAY_TIME);
+                });
             });
         });
     };
 
     tryToLogin = () => {
-        const { email } = this.state;
+        const { email, password, step } = this.state;
         const { error, errorStyle } = this.state;
-        const { password } = this.state;
-        const { step } = this.state;
+        const { DELAY_TIME } = this.state;
         const { nextStepValue } = this;
         const token = this.props.authenticate;
 
@@ -119,7 +119,7 @@ class Login extends Component {
                         });
                         window.location.href = '/';
                        nextStepValue(3);
-                   }.bind(this), 2000);
+                   }.bind(this), DELAY_TIME);
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -137,6 +137,7 @@ class Login extends Component {
     sendSingleLoginLink = () => {
         const { nextStep } = this;
         const { email } = this.state;
+        const { DELAY_TIME } = this.state;
         const { nextStepValue } = this;
         const token = this.props.authenticate;
 
@@ -150,7 +151,7 @@ class Login extends Component {
                     setTimeout(function(){
                         console.log(response);
                         nextStepValue(4);
-                    }.bind(this), 2000);
+                    }.bind(this), DELAY_TIME);
                 })
                 .catch(function(error) {
                     console.log(error);
@@ -160,8 +161,8 @@ class Login extends Component {
     };
 
     makeRegistration = () => {
-        const { nextStep } = this;
-        const { email, password } = this.state;
+        const { email, password, nextStep } = this.state;
+        const { DELAY_TIME } = this;
         const { nextStepValue } = this;
 
         console.log('makeRegistration');
@@ -175,7 +176,7 @@ class Login extends Component {
                     setTimeout(function(){
                         console.log(response);
                         nextStepValue(4);
-                    }.bind(this), 2000);
+                    }.bind(this), DELAY_TIME);
                 })
                 .catch(function(error) {
                     console.log(error);

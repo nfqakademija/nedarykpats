@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { throws } from 'assert';
 
 class LoginAvatar extends Component{
 
@@ -66,12 +65,10 @@ class LoginAvatar extends Component{
                                 <path id="XMLID_86_" className="st0" d="M507.8,237.2c-10.6,24.1-25.4,47.1-43.2,67.7l-89.1-17.3l18-73.1L507.8,237.2z"/>
                             </g>
                         </g>
-
-
                     </svg>
                 </div>
             </div>
-        )
+        );
     }
 }
 

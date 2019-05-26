@@ -32,9 +32,7 @@ if (review) {
 const showFeedback = document.getElementById('showFeedback');
 if (showFeedback) {
     try {
-        // ReactDOM.render(<Review {...showFeedback.dataset}/>, review);
-        // const writeReviewModal = document.getElementById('writeReviewModal');
-        // writeReviewModal.classList.add('show');
+        ReactDOM.render(<Review {...showFeedback.dataset}/>, review);
 
     } catch (error) {
         console.error(error);

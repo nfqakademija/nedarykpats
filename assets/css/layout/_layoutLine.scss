@@ -1,5 +1,6 @@
 .LayoutLine {
   
+  text-align: center;
   &-item {
     @include shadowBlockForm();
     @include transitionAll();

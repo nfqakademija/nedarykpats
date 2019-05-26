@@ -31,6 +31,7 @@ class FeedbackRate extends Component {
 
     render() {
         const { rating } = this.state;
+        const { user } = this.props;
 
         return (
             <div className="Review">
@@ -38,8 +39,8 @@ class FeedbackRate extends Component {
                     <img src="/img/rate-meistriukas.jpg" alt="user-avatar" />
                 </div>
 
-                <h3> Vardenis pavardenis</h3>
-                <p>Įvertink ir leisk kitiems sužinoti, ar darbas kokybiškas!</p>
+                <h3> { user } </h3>
+                <p>Įvertink ir leisk kitiems sužinoti, ar šio meistro darbas kokybiškas!</p>
 
                 <span className="StarRating u-align-center u-margin-top">
                     <StarRatingComponent

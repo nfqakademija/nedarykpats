@@ -1,5 +1,5 @@
 import React from 'react';
-import Spinner from '../../loadingSpinner/loadingSpinner.jsx'
+import Spinner from '../../loadingSpinner/loadingSpinner.jsx';
 
 const LoginSpinner = () => (
     <div>
