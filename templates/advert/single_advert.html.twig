@@ -88,7 +88,7 @@
                     </section>
                     {#----Offerių bloko pabaiga------#}
 
-                    {% if advertIsNotUsers(app.user, advert) and userHasNotSubmittedOffer(app.user, advert) %}
+                    {% if showOfferForm(app.user, advert) %}
                         {{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
 
                         <h3 class="Header1">Parašyk savo pasiūlymą!</h3>
