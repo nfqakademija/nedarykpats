@@ -12,12 +12,12 @@
                    href="?filter={{ toggleQueryStrings[category.slug] }}#FilterBar">
                     <span class="Filter-title">{{ category.title }}</span>
                     <span class="Filter-icon">
-                    {% if category.slug not in selectedCategorySlugs %}
-                        <i class="fas fa-check"></i>
-                    {% else %}
-                        <i class="fas fa-times"></i>
-                    {% endif %}
-                </span>
+                        {% if category.slug not in selectedCategorySlugs %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                    </span>
                 </a>
             </li>
         {% endfor %}
