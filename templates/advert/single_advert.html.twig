@@ -64,6 +64,12 @@
                                     <p>{{ advert.text }}</p>
                                 </div>
 
+                                <div>
+                                    {% for image in advert.images %}
+                                        <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
+                                    {% endfor %}
+                                </div>
+
                                 <footer class="u-margin-top">
                                     <ul class="u-no-padding">
                                         {% for advertCategory in advert.categories %}

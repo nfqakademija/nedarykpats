@@ -75,6 +75,13 @@
                         {'attr': {'class': 'u-no-margin-top u-display-hidden', 'id': 'advert_categories'}}) }}
                 </div>
 
+                <div class="Form-item">
+                    {{ form_widget(advertForm.imageGallery, {'attr': {'rows': '10'} }) }}
+                    <span class="Form-errors">
+                         {{ form_errors(advertForm.imageGallery) }}
+                    </span>
+                </div>
+
                 {{ form_row(advertForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
             </div>
             {{ form_end(advertForm) }}
