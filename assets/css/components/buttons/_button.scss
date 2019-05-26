@@ -27,6 +27,10 @@
   &--long {
     width: 100%;
   }
+  &--smallPadding {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
   &--empty{
     border: none;
     font-weight: var(--bold);

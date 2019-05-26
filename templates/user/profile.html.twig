@@ -21,8 +21,6 @@
                 </div>
             {% endif %}
 
-
-
             {% if profileIsAppUsers(app.user, profilesOwner) %}
                 <div class="u-display-right">
                     <a href="#EditUserModal" class="Button">Redaguoti profilį<i class="fas fa-user-edit"></i> </a>
@@ -66,8 +64,8 @@
                         <p>{{ profilesOwner.email }}</p>
                     </div>
                     <div>
-                        <h4 class="u-margin-top">Dirbu srityse</h4>
-                        {% if topCategories is not null %}
+                        {% if topCategories is not empty %}
+                            <h4 class="u-margin-top">Dirbu srityse</h4>
                             {% for category in topCategories %}
                                 <li class="Category {{ category.cssStyle }}"> {{ category.title }}</li>
                             {% endfor %}
@@ -90,7 +88,7 @@
             </section>
             {%  endif %}
 
-            
+
             <section class="LayoutGrid">
 
             {% for feedback in profilesOwner.feedbacks %}
@@ -117,7 +115,6 @@
                             </div>
                         </section>
                     </section>
-
             {% endfor %}
             </section>
             <section id="EditUserModal" class="Modal">
