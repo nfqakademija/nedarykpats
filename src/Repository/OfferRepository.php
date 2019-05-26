@@ -36,7 +36,7 @@ class OfferRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery(
             'SELECT o 
             FROM App\Entity\Offer o
-            WHERE o.user = :user'
+            WHERE o.user = :user AND (o.isRetracted = 0 OR o.isRetracted IS NULL)'
         )->setParameter('user', $user);
 
         $paginator = $this->paginate($query, $page, $itemsPerPage);

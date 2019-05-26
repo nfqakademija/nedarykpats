@@ -17,6 +17,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('profileIsAppUsers', [UserRuntime::class, 'profileIsAppUsers']),
             new TwigFunction('cancelingOfferIsAvailable', [UserRuntime::class, 'cancelingOfferIsAvailable']),
             new TwigFunction('leavingFeedbackIsAvailable', [AdvertRuntime::class, 'leavingFeedbackIsAvailable']),
+            new TwigFunction('getOfferStatus', [OfferRuntime::class, 'getOfferStatus']),
         ];
     }
 }

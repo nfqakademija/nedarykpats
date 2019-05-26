@@ -20,6 +20,7 @@ class OfferController extends AbstractController
      * @param Offer $offer
      * @param OfferStatusHandler $offerStatusHandler
      * @return RedirectResponse
+     * @throws \Exception
      */
     public function confirmOffer(Offer $offer, OfferStatusHandler $offerStatusHandler)
     {
@@ -45,6 +46,7 @@ class OfferController extends AbstractController
      * @param Offer $offer
      * @param OfferStatusHandler $offerStatusHandler
      * @return RedirectResponse
+     * @throws \Exception
      */
     public function declineOffer(Offer $offer, OfferStatusHandler $offerStatusHandler)
     {

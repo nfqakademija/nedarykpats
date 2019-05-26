@@ -99,7 +99,6 @@ class AdvertController extends AbstractController
      * @Route("/my-adverts", name="my_adverts")
      * @param Request $request
      * @param AdvertRepository $advertRepository
-     * @param CategoryRepository $categoryRepository
      * @return Response
      */
     public function myAdvert(
