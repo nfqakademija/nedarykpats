@@ -30,6 +30,10 @@ yarn-error.log
 .DS_Store
 ###< Mac file ###
 
+###> Package-lock file ###
+package-lock.json
+###< Mac file ###
+
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
