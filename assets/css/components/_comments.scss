@@ -21,6 +21,15 @@
     }
   }
   
+  &-name {
+    @include hyphens();
+    overflow: hidden;
+    text-decoration:none;
+    color: var(--colorBlack);
+    font-size: var(--fontSizeSmall);
+    text-transform: uppercase;
+  }
+  
   &-author {
     font-weight: var(--bold);
     margin-bottom: var(--spaceTopBotTextSmall);

@@ -69,23 +69,27 @@
 
         {% block body %} {% endblock %}
 
-        {% block javascripts %}
-
-             {% if is_granted('IS_AUTHENTICATED_FULLY') and isFeedbackAvailable(app.request) %}
-                 {% set dataForFeedback = getDataForFeedback() %}
-                    <section id="writeReviewModal" class="Modal">
-                        <div id="writeReview"></div>
-                    </section>
-                    <button id="showFeedback"
-                         data-feedback-token={{ csrf_token("feedback-token") }}
-                         data-feedback-user={{ dataForFeedback[1] }}
-                         data-feedback-advert={{ dataForFeedback[0] }}
-                    >
-                    </button>
-                 <script>
-                     document.cookie = 'FeedbackDisplayed=true';
-                 </script>
+        {% block showFeedback %}
+            {% if is_granted('IS_AUTHENTICATED_FULLY')
+                and isFeedbackAvailable(app.request)
+            %}
+                {% set dataForFeedback = getDataForFeedback() %}
+                <section id="writeReviewModal" class="Modal">
+                    <div id="writeReview"></div>
+                </section>
+                <button id="showFeedback"
+                        data-feedback-token={{ csrf_token("feedback-token") }}
+                        data-feedback-user={{ dataForFeedback[1] }}
+                        data-feedback-advert={{ dataForFeedback[0] }}
+                >
+                </button>
+                <script>
+                    document.cookie = 'FeedbackDisplayed=true';
+                </script>
             {% endif %}
+        {% endblock %}
+
+        {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>

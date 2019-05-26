@@ -30,45 +30,44 @@
                         </div>
                     {% endif %}
 
-                    <section class="LayoutLine LayoutLine--flex">
-                        <section class="LayoutLine-item--fullWidth">
+                    <section class="LayoutLine">
+                        <section class="LayoutLine-item">
 
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <a href='{{ path('user_profile', {'identification': advert.user.id }) }}'>
-                                    <span class="Comments-image">
-                                        <img src="/img/user1.png" alt="user">
-                                    </span>
-                                </a>
-                                {{ advert.user.id }}
-                            {% endif %}
-                            <header class="TopBar TopBar--justify">
-                                <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
-                                {% if advert.getOffersCount()  > 0 %}
-                                    <div class="Bid">
-                                        <span class="Bid-header">Aplikavo</span>
-                                        <span class="Bid-count">{{ advert.getOffersCount() }}</span>
-                                    </div>
+                            <div class="LayoutLine-col-1 u-align-center">
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <a href='{{ path('user_profile', {'identification': advert.user.id }) }}'>
+                                        <span class="Comments-image u-align-center">
+                                            <img src="/img/user1.png" alt="user">
+                                        </span>
+                                    </a>
                                 {% endif %}
-                            </header>
-
-                            <h3 class="Header1">{{ advert.title }}</h3>
-
-                            <div class="Paragraph">
-                                <p>{{ advert.text }}</p>
+                                {#{% if advert.getOffersCount()  > 0 %}#}
+                                    {#<div class="Bid">#}
+                                        {#<span class="Bid-header">Aplikavo</span>#}
+                                        {#<span class="Bid-count">{{ advert.getOffersCount() }}</span>#}
+                                    {#</div>#}
+                                {#{% endif %}#}
                             </div>
+                            <div class="LayoutLine-col-11">
+                                <header class="TopBar TopBar--justify">
+                                    <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
 
-                            <footer class="u-margin-top">
-                                <ul class="u-no-padding">
-                                    {% for advertCategory in advert.categories %}
-                                        <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
-                                    {% endfor %}
-                                </ul>
-                            </footer>
-                        </section>
+                                </header>
 
-                        <section class="StatusBlock StatusBlock--hired">
-                            <img class="StatusBlock-icon" src="/img/status-hired.svg" alt="Status hired">
-                            <p class="StatusBlock-title">Pasamdytas!</p>
+                                <h3 class="Header1">{{ advert.title }}</h3>
+
+                                <div class="Paragraph">
+                                    <p>{{ advert.text }}</p>
+                                </div>
+
+                                <footer class="u-margin-top">
+                                    <ul class="u-no-padding">
+                                        {% for advertCategory in advert.categories %}
+                                            <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                </footer>
+                            </div>
                         </section>
                     </section>
 
@@ -147,17 +146,13 @@
         </div>
     </div>
 
-
-
-
-
-
-
-
     <script>
         var usingVersionedFileJs = true;
         var usingReactApp = true;
     </script>
     {{ parent() }}
 
+{% endblock %}
+
+{% block showFeedback %}
 {% endblock %}
