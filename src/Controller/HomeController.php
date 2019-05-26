@@ -66,25 +66,20 @@ class HomeController extends AbstractController
      */
     public function myAdvert(
         Request $request,
-        AdvertRepository $advertRepository,
-        CategoryRepository $categoryRepository
+        AdvertRepository $advertRepository
     ): Response {
         $page = $this->getPageInput($request);
         $user = $this->getUser();
 
         $filters = new Filters();
-        $selectedCategories = [];
+        $statuses = [];
 
-        if ($request->query->get('filter') != null) {
-            $selectedCategories = explode(',', $request->query->get('filter'));
-        }
-        if ($request->query->get('advertsStatus') !== null) {
-            $filters->setAdvertStatus(intval($request->query->get('advertsStatus')));
-        } else {
-            $filters->setAdvertStatus(1);
+        if ($request->query->get('status') != null) {
+            $statuses = explode(',', $request->query->get('status'));
         }
 
-        $filters->setKeywords($selectedCategories);
+        $filters->setAdvertStatuses($statuses);
+
         $filteredAdverts = $advertRepository->findMyAdvertsByCategories(
             $user,
             $filters,
@@ -100,16 +95,40 @@ class HomeController extends AbstractController
                 ->findMyAdvertsByCategories($user, $filters, $page, Pagination::ITEMS_PER_PAGE);
         }
 
-        $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
-
         return $this->render('advert/my_adverts.html.twig', [
-            'selectedCategorySlugs' => $selectedCategories,
-            'availableCategories' => $availableCategories,
             'paginationPages' => $paginationPages,
             'filteredAdverts' => $filteredAdverts->getIterator(),
             'page' => $page,
-            'toggleQueryStrings' => $this->buildToggleQueryStrings($availableCategories, $selectedCategories)
+            'toggleStatus' => $this->buildStatusToggle($statuses),
+            "status" => $statuses
         ]);
+    }
+
+
+    /**
+     * @param array $selectedStatuses
+     * @return array
+     */
+    private function buildStatusToggle(array $selectedStatuses): array
+    {
+        $status = [
+            AdvertRepository::ADVERT_STATE_CURRENT,
+            AdvertRepository::ADVERT_STATE_WITHOUT_FEEDBACK,
+            AdvertRepository::ADVERT_STATE_HAS_FEEDBACK
+        ];
+
+        $statusToggle = [];
+        foreach ($status as $state) {
+            if (in_array($state, $selectedStatuses)) {
+                $statusToggle[$state] = strtr(implode(',', $selectedStatuses), [$state => '']);
+            } else {
+                $statusToggle[$state] = implode(',', $selectedStatuses) . ',' . $state;
+            }
+
+            $statusToggle[$state] = trim($statusToggle[$state], ', ');
+            $statusToggle[$state] = strtr($statusToggle[$state], [",," => ',']);
+        }
+        return $statusToggle;
     }
 
     /**

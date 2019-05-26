@@ -2,19 +2,20 @@
 
     <ul class="FilterBar">
         <li>
-            <a class="Category Category--filter" href="{{ path('my_adverts', { 'advertsStatus': 1}) }}">
-                <span class="Filter-title">Aktyvūs</span>
+            <a class="Category Category--filter Category--blue {% if 'current' not in status %}not-active{% endif %}" href="?status={{ toggleStatus['current'] }}">
+                <span class="Filter-title">Šiuo metu rodomi</span>
             </a>
         </li>
         <li>
-            <a class="Category Category--filter" href="{{ path('my_adverts', { 'advertsStatus': 2}) }}">
-                <span class="Filter-title">Neįvertinti</span>
+            <a class="Category Category--filter Category--blue {% if 'no-feedback' not in status %}not-active{% endif %}" href="?status={{ toggleStatus['no-feedback'] }}">
+                <span class="Filter-title">Laukiantys įvertinimų</span>
             </a>
         </li>
         <li>
-            <a class="Category Category--filter" href="{{ path('my_adverts', { 'advertsStatus': 3}) }}">
-                <span class="Filter-title">Buvę</span>
+            <a class="Category Category--filter Category--blue {% if 'has-feedback' not in status %}not-active{% endif %}" href="?status={{ toggleStatus['has-feedback'] }}">
+                <span class="Filter-title">Atlikti ir įvertinti</span>
             </a>
         </li>
     </ul>
+
 </section>

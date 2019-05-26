@@ -17,6 +17,13 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class AdvertRepository extends ServiceEntityRepository
 {
+    public const ADVERT_STATE_CURRENT = 'current';
+
+    public const ADVERT_STATE_WITHOUT_FEEDBACK = 'no-feedback';
+
+    public const ADVERT_STATE_HAS_FEEDBACK = 'has-feedback';
+
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Advert::class);
@@ -59,37 +66,17 @@ class AdvertRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('a')
             ->innerJoin('a.user', 'u')
+            ->leftJoin('a.feedback', 'f')
             ->where('u.id = :userId')
             ->andWhere('a.isConfirmed = 1')
             ->andWhere('a.isDeleted = 0')
             ->setParameter(':userId', $user->getId());
 
-        if ($filters->getKeywords()) {
-            $query
-                ->innerJoin('a.categories', 'c')
-                ->andWhere($query->expr()->in('c.slug', $filters->getKeywords()));
+        $statuses= $filters->getAdvertStatuses();
+
+        if (!empty($statuses)) {
+            $query->andWhere($this->getStatusesQuery($statuses));
         }
-        if ($filters->getAdvertStatus()) {
-            switch ($filters->getAdvertStatus()) {
-                case 1:
-                    $query->andWhere('a.acceptedOffer is null');
-                    break;
-                case 2:
-                    $query
-                        ->leftJoin('a.feedback', 'f')
-                        ->andWhere('a.acceptedOffer is not null')
-                        ->andWhere('f.id is null');
-                    break;
-                case 3:
-                    $query
-                        ->innerJoin('a.feedback', 'f')
-                        ->andWhere('a.acceptedOffer is not null');
-                    break;
-                default:
-                    break;
-            }
-        }
-        $query->orderBy('a.createdAt', 'DESC');
 
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
 
@@ -130,5 +117,29 @@ class AdvertRepository extends ServiceEntityRepository
             ->setMaxResults($limit);
 
         return $paginator;
+    }
+
+
+    /**
+     * @param array $statuses
+     * @return string
+     */
+    private function getStatusesQuery(array $statuses): string
+    {
+        $innerQuery = [];
+
+        if (in_array(self::ADVERT_STATE_CURRENT, $statuses)) {
+            $innerQuery[] = '(a.acceptedOffer is null)';
+        }
+
+        if (in_array(self::ADVERT_STATE_WITHOUT_FEEDBACK, $statuses)) {
+            $innerQuery[] = '(a.acceptedOffer is not null and f.id is null)';
+        }
+
+        if (in_array(self::ADVERT_STATE_HAS_FEEDBACK, $statuses)) {
+            $innerQuery[] = '(a.acceptedOffer is not null and f.id is not null)';
+        }
+
+        return implode('or', $innerQuery);
     }
 }
