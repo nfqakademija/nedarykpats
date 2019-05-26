@@ -56,68 +56,12 @@ class HomeController extends AbstractController
         ]);
     }
 
-    //TODO: iskelti į AdvertController
-    /**
-     * @Route("/my-adverts", name="my_adverts")
-     * @param Request $request
-     * @param AdvertRepository $advertRepository
-     * @param CategoryRepository $categoryRepository
-     * @return Response
-     */
-    public function myAdvert(
-        Request $request,
-        AdvertRepository $advertRepository,
-        CategoryRepository $categoryRepository
-    ): Response {
-        $page = $this->getPageInput($request);
-        $user = $this->getUser();
-
-        $filters = new Filters();
-        $selectedCategories = [];
-
-        if ($request->query->get('filter') != null) {
-            $selectedCategories = explode(',', $request->query->get('filter'));
-        }
-        if ($request->query->get('advertsStatus') !== null) {
-            $filters->setAdvertStatus(intval($request->query->get('advertsStatus')));
-        } else {
-            $filters->setAdvertStatus(1);
-        }
-
-        $filters->setKeywords($selectedCategories);
-        $filteredAdverts = $advertRepository->findMyAdvertsByCategories(
-            $user,
-            $filters,
-            $page,
-            Pagination::ITEMS_PER_PAGE
-        );
-
-        $paginationPages = ceil($filteredAdverts->count() / Pagination::ITEMS_PER_PAGE);
-
-        if ($paginationPages > 0 && $page > $paginationPages) {
-            $page = $paginationPages;
-            $filteredAdverts = $advertRepository
-                ->findMyAdvertsByCategories($user, $filters, $page, Pagination::ITEMS_PER_PAGE);
-        }
-
-        $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
-
-        return $this->render('advert/my_adverts.html.twig', [
-            'selectedCategorySlugs' => $selectedCategories,
-            'availableCategories' => $availableCategories,
-            'paginationPages' => $paginationPages,
-            'filteredAdverts' => $filteredAdverts->getIterator(),
-            'page' => $page,
-            'toggleQueryStrings' => $this->buildToggleQueryStrings($availableCategories, $selectedCategories)
-        ]);
-    }
-
     /**
      * @param array|Category[] $availableCategories
      * @param array|string[] $selectedCategorySlugs
      * @return array
      */
-    private function buildToggleQueryStrings(array $availableCategories, array $selectedCategorySlugs) : array
+    private function buildToggleQueryStrings(array $availableCategories, array $selectedCategorySlugs): array
     {
         $toggleQueryStrings = [];
         foreach ($availableCategories as $availableCategory) {
@@ -144,7 +88,7 @@ class HomeController extends AbstractController
     private function getPageInput(Request $request)
     {
         $pageInput = $request->query->get('page') ? $request->query->get('page') : 1;
-        $pageCastToInt =  ctype_digit($pageInput)  ? $pageInput : 1;
+        $pageCastToInt = ctype_digit($pageInput) ? $pageInput : 1;
         $page = $pageCastToInt > 0 ? $pageCastToInt : 1;
 
         return $page;

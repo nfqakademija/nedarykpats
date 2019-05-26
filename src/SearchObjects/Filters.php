@@ -10,9 +10,9 @@ class Filters
     private $keywords;
 
     /**
-     * @var int
+     * @var string[]
      */
-    private $advertStatus;
+    private $advertStatuses;
 
     /**
      * @return array
@@ -33,20 +33,21 @@ class Filters
     }
 
     /**
-     * @return int
+     * @return string[]
      */
-    public function getAdvertStatus(): ?int
+    public function getAdvertStatuses()
     {
-        return $this->advertStatus;
+        return $this->advertStatuses;
     }
 
     /**
-     * @param int $advertStatus
+     * @param array $advertStatuses
      * @return Filters
      */
-    public function setAdvertStatus(int $advertStatus): Filters
+    public function setAdvertStatuses(array $advertStatuses): Filters
     {
-        $this->advertStatus = $advertStatus;
+        $this->advertStatuses = $advertStatuses;
+
         return $this;
     }
 }
