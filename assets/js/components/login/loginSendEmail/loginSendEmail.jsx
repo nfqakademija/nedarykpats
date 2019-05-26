@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import LoginWasSentImage from '../loginImages/loginWasSentImage.jsx';
 
-class LoginSendEmail extends Component{
-
+class LoginSendEmail extends Component {
     constructor() {
         super();
         this.state = {
@@ -12,7 +11,7 @@ class LoginSendEmail extends Component{
 
     findEmailProvider = () => {
         const { email } = this.props.values;
-        const domain = email.substring(email.lastIndexOf("@") +1);
+        const domain = email.substring(email.lastIndexOf('@') + 1);
         const providerDomain = new Map();
 
         providerDomain.set('gmail.com', 'http://www.gmail.com');
@@ -31,35 +30,38 @@ class LoginSendEmail extends Component{
     onSubmit = e => {
         e.preventDefault();
         window.location.href = this.state.providerLink;
-    }
+    };
 
-    render(){
+    render() {
         const { email } = this.props.values;
 
         this.findEmailProvider();
 
-        return(
+        return (
             <div>
                 <LoginWasSentImage />
 
-                <h3 className="u-text-center u-margin-bottom">Išsiuntėme  prisijungimo nuorodą el. paštu </h3>
+                <h3 className="u-text-center u-margin-bottom">
+                    Išsiuntėme prisijungimo nuorodą el. paštu
+                </h3>
                 <p className="u-text-center">{email}</p>
 
                 <div className="u-margin-top u-align-center">
                     <button
-                       className="Button Button--blue"
-                       onClick={this.onSubmit}
+                        type="submit"
+                        className="Button Button--blue"
+                        onClick={this.onSubmit}
                     >
                         Eiti į el. paštą
                     </button>
                 </div>
-
                 <div className="u-align-center">
-                    <a href="/"
-                       className="Button Button--empty"> Pagrindinis </a>
+                    <a href="/" className="Button Button--empty">
+                        Pagrindinis
+                    </a>
                 </div>
             </div>
-        )
+        );
     }
 }
 

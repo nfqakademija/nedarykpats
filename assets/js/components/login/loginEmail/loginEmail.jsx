@@ -1,40 +1,21 @@
 import React, { Component } from 'react';
 import Avatar from '../loginImages/loginAvatar.jsx';
 
-class LoginEmail extends Component{
+class LoginEmail extends Component {
 
     constructor() {
         super();
         this.state = {
             errors: {},
-            classLabel: "Form-item"
+            classLabel: ''
         };
-    }
-
-    validateForm() {
-        let errors = {};
-        let formIsValid = true;
-        const { email } = this.props.values;
-        const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
-        let errorField = document.getElementById('Form-errors');
-
-        if (!pattern.test(email)) {
-            formIsValid = false;
-            errors["emailid"] = "Įveskite el. pašto adresą";
-            errorField.classList.remove('u-display-none');
-        }
-
-        this.setState({
-            errors: errors
-        });
-        return formIsValid;
     }
 
     saveAndContinue = e => {
         if (this.validateForm()) {
             e.preventDefault();
             this.props.nextStep();
-        };
+        }
     };
 
     _handleKeyDown = e => {
@@ -43,53 +24,87 @@ class LoginEmail extends Component{
         }
     };
 
-    inputFocusAnimation = ()  => {
-        this.state.classLabel = "Form-item active focusWithText ";
+    inputFocusAnimation = () => {
+        this.state.classLabel = 'active focusWithText';
     };
 
-    render(){
+    validateForm() {
+        const errors = {};
+        let formIsValid = true;
+        const { email } = this.props.values;
+        const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+        const errorField = document.getElementById('Form-errors');
+
+        if (!pattern.test(email)) {
+            formIsValid = false;
+            errors.emailid = 'Įveskite el. pašto adresą';
+            errorField.classList.remove('u-display-none');
+        }
+
+        this.setState({
+            errors
+        });
+        return formIsValid;
+    }
+
+    render() {
         const { values } = this.props;
         const { classLabel } = this.state;
+        const { emailid } = this.state.errors;
 
-        return(
+        return (
             <div>
                 <Avatar />
 
                 <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
 
-                <div className={classLabel}>
-                    <label
-                        htmlFor="floatField">
-                        El. paštas
-                    </label>
-                    <input id="inputEmail"
-                           type="email"
-                           name="email"
-                           defaultValue={values.firstName}
-                           onChange={this.props.handleChange('email')}
-                           onKeyDown={this._handleKeyDown}
-                           onFocus={this.inputFocusAnimation}
-                           required
+                <div className={'Form-item ' + classLabel}>
+                    <label htmlFor="floatField"> El. paštas </label>
+                    <input
+                        id="inputEmail"
+                        type="email"
+                        name="email"
+                        defaultValue={values.firstName}
+                        onChange={this.props.handleChange('email')}
+                        onKeyDown={this._handleKeyDown}
+                        onFocus={this.inputFocusAnimation}
+                        required
                     />
-                    <div id="Form-errors" className="Form-errors u-margin-bottom u-display-none">
-                        <li>{this.state.errors.emailid}</li>
+                    <div
+                        id="Form-errors"
+                        className="Form-errors u-margin-bottom u-display-none"
+                    >
+                        <li>{emailid}</li>
                     </div>
                 </div>
 
                 <div className="u-align-center">
-                    <a className="Button Button--blue Button--long"
-                       onClick={this.saveAndContinue}
-                    >Toliau </a>
+                    <button
+                        className="Button Button--blue Button--long"
+                        onClick={this.saveAndContinue}
+                        type="submit"
+                    >
+                        Toliau
+                    </button>
                 </div>
 
                 <div className="u-margin-top-bottom u-align-center">
-                    <a className="u-not-link" href="http://127.0.0.1:8000/connect/google">
-                        <p>Arba prisijungti per:
-                            <i className="Image--icon fab fa-google u-color-red u-margin-small-left-right"></i>
+                    <a
+                        className="u-not-link"
+                        href="http://127.0.0.1:8000/connect/google"
+                    >
+                        <p>
+                            Arba prisijungti per:
+                            <i className="Image--icon fab fa-google u-color-red u-margin-small-left-right" />
                         </p>
                     </a>
                 </div>
-                <p className="Header4">Dar neturi paskyros? <a id="registerLink" href="http://127.0.0.1:8000/register">Registruotis!</a></p>
+                <p className="Header4">
+                    Dar neturi paskyros?
+                    <a id="registerLink" href="http://127.0.0.1:8000/register">
+                        Registruotis!
+                    </a>
+                </p>
             </div>
         );
     }

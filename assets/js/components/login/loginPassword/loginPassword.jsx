@@ -6,7 +6,7 @@ class LoginPassword extends Component {
     constructor() {
         super();
         this.state = {
-            classLabel: "Form-item"
+            classLabel: ''
         };
     }
 
@@ -28,14 +28,14 @@ class LoginPassword extends Component {
     };
 
     inputFocusAnimation = ()  => {
-        this.state.classLabel = "Form-item active focusWithText ";
+        this.state.classLabel = 'active focusWithTex';
 
     };
 
     render(){
         const { values } = this.props;
         const { classLabel } = this.state;
-        const css = "Form-errors u-margin-bottom " + this.props.values.errorStyle;
+        const css = this.props.values.errorStyle;
 
         if (values.password) {
             this.inputFocusAnimation();
@@ -48,7 +48,7 @@ class LoginPassword extends Component {
 
                     <h3 className="u-text-center u-margin-bottom">Prisijungti</h3>
 
-                    <div className={classLabel}>
+                    <div className={'Form-item ' + classLabel}>
                         <label
                             htmlFor="floatField">
                             Slaptažodis
@@ -63,7 +63,7 @@ class LoginPassword extends Component {
                                onFocus={this.inputFocusAnimation}
                         />
                         <div id="Form-errors"
-                             className={css}>
+                             className={'Form-errors u-margin-bottom ' + css}>
                             <li>{this.props.values.error}</li>
                         </div>
                     </div>

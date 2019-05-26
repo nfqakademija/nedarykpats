@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import { throws } from 'assert';
 
-class LoginAvatarMistake extends Component{
-
-    render(){
-
-        return(
+class LoginAvatarMistake extends Component {
+    render() {
+        return (
             <div className="Form-avatar u-align-center u-margin-top-bottom">
-
                 <div className="avatarContainer">
                     <img
                         className="u-width-100 u-no-border"
@@ -16,7 +12,7 @@ class LoginAvatarMistake extends Component{
                     />
                 </div>
             </div>
-        )
+        );
     }
 }
 
