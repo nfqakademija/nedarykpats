@@ -35,11 +35,15 @@
 
                             <div class="LayoutLine-col-1 u-align-center">
                                 {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                    <a href='{{ path('user_profile', {'identification': advert.user.id }) }}'>
-                                        <span class="Comments-image u-align-center">
-                                            <img src="/img/user1.png" alt="user">
-                                        </span>
-                                    </a>
+                                    {% if advert.user.id == app.user.id %}
+                                        <a href='{{ path('profile')}}'>
+                                    {% else %}
+                                        <a href='{{ path('user_profile', {'identification': advert.user.identification }) }}'>
+                                    {% endif %}
+                                            <span class="Comments-image u-align-center">
+                                                <img src="/img/user1.png" alt="user">
+                                            </span>
+                                        </a>
                                 {% endif %}
                                 {#{% if advert.getOffersCount()  > 0 %}#}
                                     {#<div class="Bid">#}

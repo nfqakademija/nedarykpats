@@ -78,7 +78,7 @@ class LoginEmail extends Component {
                     </div>
                 </div>
 
-                <div className="u-align-center">
+                <div className="u-align-center u-margin-bottom">
                     <button
                         className="Button Button--blue Button--long"
                         onClick={this.saveAndContinue}
@@ -88,15 +88,13 @@ class LoginEmail extends Component {
                     </button>
                 </div>
 
-                <div className="u-margin-top-bottom u-align-center">
+                <div className="u-margin-bottom u-align-center">
                     <a
-                        className="u-not-link"
+                        className="Button Button--smallPadding u-align-middle u-not-link"
                         href="http://127.0.0.1:8000/connect/google"
                     >
-                        <p>
-                            Arba prisijungti per:
-                            <i className="Image--icon fab fa-google u-color-red u-margin-small-left-right" />
-                        </p>
+                        <i className="Image--icon fab fa-google u-color-red u-margin-small-left-right" />
+                        <span>Prisijunk su Google</span>
                     </a>
                 </div>
                 <p className="Header4">
