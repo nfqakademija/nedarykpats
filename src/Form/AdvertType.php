@@ -3,11 +3,14 @@
 namespace App\Form;
 
 use App\DTO\AdvertFormDTO;
+use App\DTO\ImageGalleryFormDTO;
 use App\Entity\Category;
 use App\Entity\City;
+use App\Entity\ImageGallery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -40,6 +43,7 @@ class AdvertType extends AbstractType
                 'class' => City::class,
                 'choice_label' => 'name'
             ])
+            ->add('imageGallery', FileType::class, ['multiple'=>true])
             ->add('save', SubmitType::class, ['label' => 'Skelbti'])
         ;
     }

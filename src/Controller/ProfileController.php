@@ -42,7 +42,7 @@ class ProfileController extends AbstractController
         CategoryRepository $categoryRepository,
         ImageUploadHandler $imageUploadHandler
     ) {
-
+        /** @var User $user */
         $user = $this->getUser();
         $profileDetailsDTO = (new UserToProfileDetailsDTO)->transform($this->getUser());
         $profileDetailsForm = $this->createForm(ProfileDetailsType::class, $profileDetailsDTO);

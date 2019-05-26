@@ -12,6 +12,7 @@ use App\Handler\AdvertRemovalHandler;
 use App\Handler\OfferCreationHandler;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\ImageGalleryRepository;
 use App\SearchObjects\Filters;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;

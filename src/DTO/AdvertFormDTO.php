@@ -4,9 +4,9 @@ namespace App\DTO;
 
 use App\Entity\Category;
 use App\Entity\City;
-use Symfony\Component\Validator\Constraints as Assert;
-
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class AdvertFormDTO
 {
@@ -43,6 +43,11 @@ class AdvertFormDTO
     private $text;
 
     /**
+     * @var File[]
+     */
+    private $imageGallery;
+
+    /**
      * @var City
      * @Assert\NotBlank()
      */
@@ -60,19 +65,19 @@ class AdvertFormDTO
     private $isDeleted;
 
     /**
-     * @return string
-     */
-    public function getTitle(): ?string
-    {
-        return $this->title;
-    }
-
-    /**
      * AdvertFormDTO constructor.
      */
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
     }
 
     /**
@@ -187,10 +192,28 @@ class AdvertFormDTO
      * @param $isDeleted
      * @return AdvertFormDTO
      */
-    public function setIsDeleted($isDeleted): self
+    public function setIsDeleted($isDeleted): AdvertFormDTO
     {
         $this->isDeleted = $isDeleted;
 
+        return $this;
+    }
+
+    /**
+     * @return File[]
+     */
+    public function getImageGallery(): ?array
+    {
+        return $this->imageGallery;
+    }
+
+    /**
+     * @param File[] $imageGallery
+     * @return AdvertFormDTO
+     */
+    public function setImageGallery(?array $imageGallery): AdvertFormDTO
+    {
+        $this->imageGallery = $imageGallery;
         return $this;
     }
 }
