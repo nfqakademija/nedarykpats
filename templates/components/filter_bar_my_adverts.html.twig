@@ -2,18 +2,48 @@
 
     <ul class="FilterBar">
         <li>
-            <a class="Category Category--filter Category--blue {% if 'current' not in status %}not-active{% endif %}" href="?status={{ toggleStatus['current'] }}">
-                <span class="Filter-title">Šiuo metu rodomi</span>
+            <a class="Category Category--filter Category--grey
+                {% if 'current' not in status %}not-active{% endif %}"
+               href="?status={{ toggleStatus['current'] }}">
+                <span class="Filter-title">Šiuo metu rodomi
+                    <span class="Filter-icon">
+                        {% if 'current' not in status %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                    </span>
+                </span>
             </a>
         </li>
         <li>
-            <a class="Category Category--filter Category--blue {% if 'no-feedback' not in status %}not-active{% endif %}" href="?status={{ toggleStatus['no-feedback'] }}">
-                <span class="Filter-title">Laukiantys įvertinimų</span>
+            <a class="Category Category--filter Category--grey
+                {% if 'no-feedback' not in status %}not-active{% endif %}"
+               href="?status={{ toggleStatus['no-feedback'] }}">
+                <span class="Filter-title">Laukiantys įvertinimų
+                     <span class="Filter-icon">
+                        {% if 'no-feedback' not in status %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                    </span>
+                </span>
             </a>
         </li>
         <li>
-            <a class="Category Category--filter Category--blue {% if 'has-feedback' not in status %}not-active{% endif %}" href="?status={{ toggleStatus['has-feedback'] }}">
-                <span class="Filter-title">Atlikti ir įvertinti</span>
+            <a class="Category Category--filter Category--grey
+                {% if 'has-feedback' not in status %}not-active{% endif %}"
+               href="?status={{ toggleStatus['has-feedback'] }}">
+                <span class="Filter-title">Atlikti ir įvertinti
+                     <span class="Filter-icon">
+                        {% if 'has-feedback' not in status %}
+                            <i class="fas fa-check"></i>
+                        {% else %}
+                            <i class="fas fa-times"></i>
+                        {% endif %}
+                    </span>
+                </span>
             </a>
         </li>
     </ul>

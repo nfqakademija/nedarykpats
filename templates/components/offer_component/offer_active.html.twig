@@ -1,9 +1,6 @@
-<section class="Comments">
+<section class="Comments  {% include 'components/offer_component/offer_is_accepted_class.html.twig' %}" >
     <section class="Comments-block">
         <div class="Comments-content">
-
-            {% include 'components/offer_component/offer_is_accepted.html.twig' %}
-
             <div class="Comments-header">
                 <a href='{{ path('user_profile', {'identification': offer.user.identification }) }}'>
                     <span class="Comments-image">
@@ -17,7 +14,9 @@
                 <div class="Comments-author">{{ offer.user.username }}</div>
                 <p class="Paragraph">{{ offer.text }}</p>
             </div>
-
+            <div class="u-margin-top-bottom u-align-space-around">
+                {% include 'components/offer_component/offer_is_accepted.html.twig' %}
+            </div>
             <div class="u-margin-top-bottom u-align-space-around">
                 {% include 'components/offer_component/offer_buttons_logic.html.twig' %}
             </div>

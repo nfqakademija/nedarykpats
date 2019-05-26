@@ -60,4 +60,8 @@
   &.not-active {
     opacity: 0.3;
   }
+  
+  &--bgDarker {
+    background-color: var(--colorGray);
+  }
 }

@@ -63,6 +63,9 @@
   &--black {
 	@include categoryColor(var(--colorBlack));
   }
+  &--grey {
+	@include categoryColor(var(--colorGrey));
+  }
 }
 
 .not-active {
