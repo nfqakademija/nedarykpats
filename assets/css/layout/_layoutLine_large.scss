@@ -37,17 +37,11 @@
   &-col-9 {
     flex: 9;
   }
-  &-col-10 {
-    flex: 9;
-  }
-  &-col-11 {
-    flex: 9;
-  }
   
   &--columns {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     text-align: left;
   }
 }

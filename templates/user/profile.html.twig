@@ -49,12 +49,17 @@
             </section>
 
             {#----Profile contacts Block-----#}
-            <section class="LayoutLine LayoutLine--columns u-align-top u-padding-top">
-                <div class="LayoutLine-col-4 u-margin-bottom">
+            <section class="LayoutLine LayoutLine--columns u-align-top u-padding-top u-margin-left-right">
+                <div class="LayoutLine-col-1 u-margin-bottom"></div>
+                <div class="LayoutLine-col-2 u-margin-bottom">
                     <p class="Header5">Aprašas apie mane</p>
-                    <p>{{ profilesOwner.description }}</p>
+                    {% if profilesOwner.description is not empty %}
+                        <p class="Paragraph">{{ profilesOwner.description }}</p>
+                     {% else %}
+                         <p class="Paragraph">Čia būti aprašas apie mane</p>
+                    {% endif %}
                 </div>
-                <div class="LayoutLine-col-4 u-margin-bottom">
+                <div class="LayoutLine-col-2 u-margin-bottom">
                     <p class="Header5">Kontaktai</p>
                     {% if profilesOwner.city %}
                         <p>{{ profilesOwner.city.name }}</p>
@@ -63,14 +68,15 @@
                     {% endif %}
                     <p>{{ profilesOwner.email }}</p>
                 </div>
-                <div class="LayoutLine-col-4 u-margin-bottom">
-                    {% if topCategories is not empty %}
+                {% if topCategories is not empty %}
+                    <div class="LayoutLine-col-2 u-margin-bottom">
                         <p class="Header5">Dirbu srityse</p>
                         {% for category in topCategories %}
                             <li class="Category not-active {{ category.cssStyle }}"> {{ category.title }}</li>
                         {% endfor %}
-                    {% endif %}
-                </div>
+                    </div>
+                {% endif %}
+                <div class="LayoutLine-col-1 u-margin-bottom"></div>
             </section>
 
             {#----Profile Feedbacks Block-----#}

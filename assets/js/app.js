@@ -4,7 +4,7 @@ import AddCategories from './components/createForm/AddCategories.jsx';
 import Review from './components/feedback/feedback.jsx';
 import Login from './components/login/login.jsx';
 import AdvertImageGallery from './components/advertImages/advertImages'
-import Gallery from './components/displayImages/displayImagesProfile/displayImagesProfile';
+import DisplayImagesProfile from './components/displayImages/displayImagesProfile/displayImagesProfile';
 
 require('../css/app.scss');
 
@@ -80,14 +80,12 @@ if (singleAdvertImages) {
 const displayImagesProfile = document.getElementById('displayImagesProfile');
 if (displayImagesProfile) {
     try {
-        ReactDOM.render(<Gallery/>, displayImagesProfile);
+        ReactDOM.render(<DisplayImagesProfile/>, displayImagesProfile);
 
     } catch (error) {
         console.error(error);
     }
 }
-
-
 
 //--------------------------
 // Edit user Profile
