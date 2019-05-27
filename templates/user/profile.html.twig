@@ -37,7 +37,7 @@
                     <div class="Form-avatar u-align-center u-margin-bottom u-col-3">
                         <img src="/img/user1.png" alt="user-avatar" >
                     </div>
-                    {% if  rateAverage is empty %}
+                    {% if  rateAverage is not empty %}
                         <div class="StarRating u-align-center">
                             <span class="StarRating-star fa fa-star {{ rateAverage >= 1 ? 'checked' : '' }}"></span>
                             <span class="StarRating-star fa fa-star {{ rateAverage >= 2 ? 'checked' : '' }}"></span>
