@@ -31,6 +31,10 @@ class RegistrationController extends AbstractController
         RegistrationHandler $registrationHandler
     ): Response {
 
+        if ($this->isGranted('ROLE_USER')) {
+            return new RedirectResponse($this->generateUrl('home'));
+        }
+
         $form = $this->createForm(RegistrationFormType::class);
 
         if ($request->query->get('email') != null) {

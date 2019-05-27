@@ -103,7 +103,7 @@ class Login extends Component {
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
-                axios.post('http://127.0.0.1:8000/login', {
+                axios.post('http://127.0.0.1:8000/api/public/user/login', {
                     email: email,
                     csrf_token: token,
                     password: password
