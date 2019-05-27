@@ -2,8 +2,11 @@
 
 namespace App\Entity;
 
+use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreFlushEventArgs;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -526,7 +529,21 @@ class User implements UserInterface
     public function preUpdate(PreUpdateEventArgs $event)
     {
         if ($event->hasChangedField('name')) {
-            $this->identification = strtr($this->name, [' ' => '_']). '_' . substr(md5(microtime()), 0, 4);
+            $slugify = new Slugify();
+            $slugify->activateRuleSet('lithuanian');
+            $this->identification = $slugify->slugify($this->name). '-' . rand(10000, 99999);
+        }
+    }
+
+    /** @ORM\PrePersist()
+     * @param LifecycleEventArgs $event
+     */
+    public function prePersist(LifecycleEventArgs $event)
+    {
+        if ($this->name) {
+            $slugify = new Slugify();
+            $slugify->activateRuleSet('lithuanian');
+            $this->identification = $slugify->slugify($this->name). '-' . rand(10000, 99999);
         }
     }
 }
