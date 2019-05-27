@@ -8,5 +8,10 @@ vich_uploader:
             directory_namer:
                 service: Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer
                 options:
-                    date_time_format: 'Y/m' # will create directory "2018/23/09" for curent date "2018-09-23"
+                    date_time_format: 'Y/m' # will create directory "2019/05/"
                     date_time_property: uploadTimestamp # see above example
+            namer:
+                service: Vich\UploaderBundle\Naming\Base64Namer
+            inject_on_load: false #default value
+            delete_on_update: true #default value
+            delete_on_remove: true #default value

@@ -132,7 +132,7 @@ class ImageGallery
      * @param string $fileName
      * @return ImageGallery
      */
-    public function setFileName(string $fileName): self
+    public function setFileName(?string $fileName): self
     {
         $this->fileName = $fileName;
 
@@ -151,7 +151,7 @@ class ImageGallery
      * @param string $size
      * @return ImageGallery
      */
-    public function setSize(string $size): self
+    public function setSize(?string $size): self
     {
         $this->size = $size;
 
@@ -170,7 +170,7 @@ class ImageGallery
      * @param array $dimensions
      * @return ImageGallery
      */
-    public function setDimensions(array $dimensions): self
+    public function setDimensions(?array $dimensions): self
     {
         $this->dimensions = $dimensions;
 
