@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import AddCategories from './components/createForm/AddCategories.jsx';
 import Review from './components/feedback/feedback.jsx';
 import Login from './components/login/login.jsx';
+import AdvertImageGallery from './components/advertImages/advertImages'
 
 require('../css/app.scss');
 
@@ -49,10 +50,25 @@ if (loginForm) {
     }
 }
 
+//--------------------------
 // --Add style to component
+//--------------------------
 const categoryContainer = document.getElementsByClassName(
     'css-1pcexqc-container'
 );
 for (let i = 0; i < categoryContainer.length; i += 1) {
     categoryContainer[i].className += ' Form-select';
+}
+
+//--------------------------
+// Add Advert Image Gallery
+//--------------------------
+const singleAdvertImages = document.getElementById('advertImageGallery');
+if (singleAdvertImages) {
+    try {
+        ReactDOM.render(<AdvertImageGallery/>, singleAdvertImages);
+
+    } catch (error) {
+        console.error(error);
+    }
 }

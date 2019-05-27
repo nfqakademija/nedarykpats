@@ -45,12 +45,6 @@
                                             </span>
                                         </a>
                                 {% endif %}
-                                {#{% if advert.getOffersCount()  > 0 %}#}
-                                    {#<div class="Bid">#}
-                                        {#<span class="Bid-header">Aplikavo</span>#}
-                                        {#<span class="Bid-count">{{ advert.getOffersCount() }}</span>#}
-                                    {#</div>#}
-                                {#{% endif %}#}
                             </div>
                             <div class="LayoutLine-col-11">
                                 <header class="TopBar TopBar--justify">
@@ -64,12 +58,6 @@
                                     <p>{{ advert.text }}</p>
                                 </div>
 
-                                <div>
-                                    {% for image in advert.images %}
-                                        <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
-                                    {% endfor %}
-                                </div>
-
                                 <footer class="u-margin-top">
                                     <ul class="u-no-padding">
                                         {% for advertCategory in advert.categories %}
@@ -78,6 +66,17 @@
                                     </ul>
                                 </footer>
                             </div>
+
+                            <div class="LayoutLine-imageGallery">
+                                <div id="advertImageGallery"></div>
+                            </div>
+
+                            <div>
+                                {% for image in advert.images %}
+                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
+                                {% endfor %}
+                            </div>
+
                         </section>
                     </section>
 
