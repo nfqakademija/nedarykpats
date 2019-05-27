@@ -31,4 +31,13 @@
     flex: 1;
     flex-wrap: wrap;
   }
+  
+  &--columns {
+    display: block;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    margin: 0;
+    margin-bottom: var(--spaceMedium);
+  }
 }
