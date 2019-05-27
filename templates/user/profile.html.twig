@@ -21,78 +21,60 @@
                 </div>
             {% endif %}
 
-            {% if profileIsAppUsers(app.user, profilesOwner) %}
-                <div class="u-display-right">
-                    <a href="#EditUserModal" class="Button">Redaguoti profilį<i class="fas fa-user-edit"></i> </a>
+            {#----Profile Name, Star rates, buttons Block-----#}
+            <section class="LayoutLine u-align-top u-padding-top u-margin-bottom">
+                <div class="Form-avatar u-align-center u-margin-bottom u-col-3">
+                    <img src="/img/user1.png" alt="user-avatar" >
                 </div>
-
-                <div class="u-display-right">
-                    <a href="#EditUserPasswordModal" class="Button">Redaguoti slaptažodį<i class="fas fa-user-edit"></i> </a>
-                </div>
-
-            {% endif %}
-
-            <section class="Form Form--column u-align-top u-padding-top">
-                <div class="Column-3">
-                    <div class="Form-avatar u-align-center u-margin-bottom u-col-3">
-                        <img src="/img/user1.png" alt="user-avatar" >
+                {% if profilesOwner.name %}
+                    <h3>{{ profilesOwner.name }}</h3>
+                {% else %}
+                    <h3>{{ profilesOwner.email }}</h3>
+                {% endif %}
+                {% if rateAverage > 0 and rateAverage <= 5 %}
+                    <div class="StarRating u-align-center u-margin-top-small">
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 1 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 2 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 3 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 4 ? 'checked' : '' }}"></span>
+                        <span class="StarRating-star fa fa-star {{ rateAverage >= 5 ? 'checked' : '' }}"></span>
                     </div>
-                    {% if  rateAverage > 0 and rateAverage <= 5 %}
-                        <div class="StarRating u-align-center">
-                            <span class="StarRating-star fa fa-star {{ rateAverage >= 1 ? 'checked' : '' }}"></span>
-                            <span class="StarRating-star fa fa-star {{ rateAverage >= 2 ? 'checked' : '' }}"></span>
-                            <span class="StarRating-star fa fa-star {{ rateAverage >= 3 ? 'checked' : '' }}"></span>
-                            <span class="StarRating-star fa fa-star {{ rateAverage >= 4 ? 'checked' : '' }}"></span>
-                            <span class="StarRating-star fa fa-star {{ rateAverage >= 5 ? 'checked' : '' }}"></span>
-                        </div>
-                    {% endif %}
+                {% endif %}
+                {% if profileIsAppUsers(app.user, profilesOwner) %}
+                    <div class="u-align-center u-margin-top">
+                        <button id="EditUserModalButton" class="Button u-margin-left-right u-margin-bottom">Redaguoti profilį</button>
+                        <button id="EditUserPasswordModalButton" class="Button u-margin-left-right u-margin-bottom">Keisti slaptažodį</button>
+                    </div>
+                {% endif %}
+            </section>
+
+            {#----Profile contacts Block-----#}
+            <section class="LayoutLine LayoutLine--columns u-align-top u-padding-top">
+                <div class="LayoutLine-col-4 u-margin-bottom">
+                    <p class="Header5">Aprašas apie mane</p>
+                    <p>{{ profilesOwner.description }}</p>
                 </div>
-                <div class="Column-3 Column-3--longer u-margin-left-right u-margin-top">
-                    {% if profilesOwner.name %}
-                        <h3>{{ profilesOwner.name }}</h3>
+                <div class="LayoutLine-col-4 u-margin-bottom">
+                    <p class="Header5">Kontaktai</p>
+                    {% if profilesOwner.city %}
+                        <p>{{ profilesOwner.city.name }}</p>
                     {% else %}
-                        <h3>{{ profilesOwner.email }}</h3>
+                        <p>Nenurodytas miestas</p>
                     {% endif %}
-                    <p class="u-margin-top">{{ profilesOwner.description }}</p>
+                    <p>{{ profilesOwner.email }}</p>
                 </div>
-                <div class="Column-3 u-margin-top">
-                    <div>
-                        <h4>Kontaktai</h4>
-                        {% if profilesOwner.city %}
-                            <p>{{ profilesOwner.city.name }}</p>
-                        {% else %}
-                            <p>Nenurodytas miestas</p>
-                        {% endif %}
-                        <p>{{ profilesOwner.email }}</p>
-                    </div>
-                    <div>
-                        {% if topCategories is not empty %}
-                            <h4 class="u-margin-top">Dirbu srityse</h4>
-                            {% for category in topCategories %}
-                                <li class="Category {{ category.cssStyle }}"> {{ category.title }}</li>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-
+                <div class="LayoutLine-col-4 u-margin-bottom">
+                    {% if topCategories is not empty %}
+                        <p class="Header5">Dirbu srityse</p>
+                        {% for category in topCategories %}
+                            <li class="Category not-active {{ category.cssStyle }}"> {{ category.title }}</li>
+                        {% endfor %}
+                    {% endif %}
                 </div>
             </section>
 
-
-            {% if profileIsAppUsers(app.user, profilesOwner) %}
-            <section>
-                {{ form(imageUploadForm) }}
-            </section>
-            {%  endif %}
-
-            {% for image in imageGallery %}
-                <a href="{{ path('profile_image_remove', {'id': image.id}) }}">
-                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
-                </a>
-            {% endfor %}
-
-
+            {#----Profile Feedbacks Block-----#}
             <section class="LayoutGrid">
-
             {% for feedback in profilesOwner.feedbacks %}
                     <section class="Comments">
                         <section class="Comments-block">
@@ -119,53 +101,74 @@
                     </section>
             {% endfor %}
             </section>
+
+            {#----Edit Profile-----#}
             {% if profileIsAppUsers(app.user, profilesOwner) %}
             <section id="EditUserModal" class="Modal">
+                <form id="formProfile" method="post" class="Modal-item">
+                    <span class="Modal-close"><i class="fas fa-times u-color-red"></i></span>
+                    {{ form_start(profileDetailsForm) }}
+                    <h3 class="u-text-center">Atsinaujink!</h3>
+                    <p class="u-text-center u-margin-bottom">Leisk kitiems tave pažinti!</p>
 
-                <div>
-                    <a href="#" title="Close" class="Modal-close">Close</a>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.name, 'Vardas, pavardė') }}
+                        {{ form_widget(profileDetailsForm.name) }}
+                    </div>
 
-                    <form id="formProfile" method="post" class="">
-                        {{ form_start(profileDetailsForm) }}
-                        <h3 class="u-text-center">Atsinaujink!</h3>
-                        <p class="u-text-center u-margin-bottom">Leisk kitiems tave pažinti!</p>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.description, 'Trumpai papasakok apie save') }}
+                        {{ form_widget(profileDetailsForm.description, {'attr': {'rows': '10'} }) }}
+                    </div>
+                    <div class="Form-item">
+                        {{ form_label(profileDetailsForm.city, 'Miestas') }}
+                        {{ form_widget(profileDetailsForm.city) }}
+                    </div>
+                    {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top-bottom'}}) }}
 
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.name, 'Vardas, pavardė') }}
-                            {{ form_widget(profileDetailsForm.name) }}
-                        </div>
-
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.description, 'Trumpai papasakok apie save') }}
-                            {{ form_widget(profileDetailsForm.description, {'attr': {'rows': '10'} }) }}
-                        </div>
-                        <div class="Form-item">
-                            {{ form_label(profileDetailsForm.city, 'Miestas') }}
-                            {{ form_widget(profileDetailsForm.city) }}
-                        </div>
-                        {{ form_row(profileDetailsForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top-bottom'}}) }}
-
-                        {{ form_end(profileDetailsForm) }}
-                    </form>
-
-
-                    <form id="formPassword" method="post" class="u-display-none">
-                        {{ form_start(profilePasswordForm) }}
-                        <h3 class="u-text-center">Slaptažodžio keitimas</h3>
-                        <div class="Form-item">
-                            {{ form_label(profilePasswordForm.newPassword, 'Naujas slaptažodis') }}
-                            {{ form_widget(profilePasswordForm.newPassword) }}
-                            <span class="Form-errors">
-                                {{ form_errors(profilePasswordForm.newPassword) }}
-                            </span>
-                        </div>
-                        {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
-
-                        {{ form_end(profilePasswordForm) }}
-                    </form>
-
-                </div>
+                    {{ form_end(profileDetailsForm) }}
+                </form>
             </section>
+
+            {#----Change Password-----#}
+            <section id="EditUserPasswordModal" class="Modal">
+                <form id="formPassword" method="post" class="Modal-item">
+                    <span class="Modal-close"><i class="fas fa-times u-color-red"></i></span>
+                    {{ form_start(profilePasswordForm) }}
+                    <h3 class="u-text-center">Slaptažodžio keitimas</h3>
+                    <div class="Form-item">
+                        {{ form_label(profilePasswordForm.newPassword, 'Naujas slaptažodis') }}
+                        {{ form_widget(profilePasswordForm.newPassword) }}
+                        <span class="Form-errors">
+                            {{ form_errors(profilePasswordForm.newPassword) }}
+                        </span>
+                    </div>
+                    {{ form_row(profilePasswordForm.save , {'attr' : {'class' : 'Button Button--blue Button--long u-margin-top'}}) }}
+
+                    {{ form_end(profilePasswordForm) }}
+                </form>
+            </section>
+
+            {#----Upload images-----#}
+            <section>
+                <h3 class="Header2 u-margin-top-bottom">Meistro darbų pavyzdžiai</h3>
+
+                {% if profileIsAppUsers(app.user, profilesOwner) %}
+                    <section>
+                        {{ form(imageUploadForm) }}
+                    </section>
+                {%  endif %}
+
+                {% for image in imageGallery %}
+                    <a href="{{ path('profile_image_remove', {'id': image.id}) }}">
+                        <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
+                    </a>
+                {% endfor %}
+
+
+                <div id="displayImagesProfile"></div>
+            </section>
+
             {% endif %}
         </div>
     </div>

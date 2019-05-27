@@ -18,7 +18,8 @@
 	pointer-events: auto;
   }
   
-  & > div {
+  & > div,
+  &-item {
 	width: 400px;
 	min-height: 450px;
 	border-radius: var(--radiusSmall);
@@ -29,15 +30,15 @@
 	padding: 2em;
 	background: var(--colorWhite);
   }
+  
   &-close {
-	color: #aaa;
-	line-height: 50px;
-	font-size: 80%;
+	font-size: var(--fontSizeBig);
+	color: var(--colorRed);
 	position: absolute;
-	right: 0;
+	margin: var(--spaceMedium);
 	text-align: center;
 	top: 0;
-	width: 70px;
+	right: 0;
 	text-decoration: none;
 	&:hover {
 	  color: var(--colorBlack);

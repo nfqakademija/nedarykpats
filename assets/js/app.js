@@ -4,6 +4,7 @@ import AddCategories from './components/createForm/AddCategories.jsx';
 import Review from './components/feedback/feedback.jsx';
 import Login from './components/login/login.jsx';
 import AdvertImageGallery from './components/advertImages/advertImages'
+import Gallery from './components/displayImages/displayImagesProfile/displayImagesProfile';
 
 require('../css/app.scss');
 
@@ -71,4 +72,61 @@ if (singleAdvertImages) {
     } catch (error) {
         console.error(error);
     }
+}
+
+//--------------------------
+// Add Images in Profile
+//--------------------------
+const displayImagesProfile = document.getElementById('displayImagesProfile');
+if (displayImagesProfile) {
+    try {
+        ReactDOM.render(<Gallery/>, displayImagesProfile);
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+//--------------------------
+// Edit user Profile
+//--------------------------
+const editUser = document.getElementById('EditUserModal');
+const editUserBtn = document.getElementById('EditUserModalButton');
+
+const editUserPassword = document.getElementById('EditUserPasswordModal');
+const editUserPasswordBtn = document.getElementById('EditUserPasswordModalButton');
+
+
+if (editUser) {
+    editUserBtn.onclick = function() {
+        editUser.classList.add('show');
+    }
+    editUserPasswordBtn.onclick = function() {
+        editUserPassword.classList.add('show');
+    }
+
+    const closeModalWindow = (el) => {
+        if (el.classList.contains('show')) {
+            el.classList.remove('show');
+        }
+    }
+
+    const modalClose = document.querySelectorAll('.Modal-close');
+    modalClose.forEach(element => {
+        element.addEventListener("click", function(event) {
+            closeModalWindow(editUser);
+            closeModalWindow(editUserPassword);
+        });
+    });
+
+    window.addEventListener("click", function(event) {
+        if (event.target == editUserPassword) {
+            closeModalWindow(editUserPassword);
+        }
+        if (event.target == editUser) {
+            closeModalWindow(editUser);
+        }
+    });
 }
