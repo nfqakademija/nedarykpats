@@ -19,7 +19,6 @@
 
             <div class="Form-content">
                 <h3 class="u-margin-top">Įkelti naują skelbimą</h3>
-                {#TODO: kai userio nera, erroras#}
                 {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
                     <div class="Form-item">
                         {{ form_label(advertForm.email,'El. paštas') }}
@@ -41,7 +40,6 @@
                          {{ form_errors(advertForm.title) }}
                     </span>
                 </div>
-
 
                 <div class="Form-item">
                     {{ form_label(advertForm.title,'Miestas') }}

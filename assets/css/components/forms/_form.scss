@@ -91,11 +91,13 @@
 	label {
 	  position: absolute;
 	  transform-origin: top left;
-	  transition: all .05s ease-in-out;
+	  transition: all .01s ease-in-out;
 	  pointer-events: none;
+	  color: var(--colorLightGray);
 	}
   }
   &-item.active label {
+	color: var(--colorBlack);
 	transform: translate(0px, var(--fontSizeLargeMinus)) scale(.75);
   }
   
