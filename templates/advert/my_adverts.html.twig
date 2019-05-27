@@ -3,6 +3,7 @@
 {% block title %}Mano skelbimai{% endblock %}
 
 {% block body %}
+    {#TODO: nerodyti filter juostos,jei nera skelbimu#}
     {% include 'components/flash_bag.html.twig' %}
     <div class="Content Content--top">
         <div class="Content-Block">
@@ -28,8 +29,9 @@
                     </section>
 
                     {% for advert in filteredAdverts %}
-                        <section class="LayoutLine-item LayoutLine-item--link">
 
+                        {#<h3 class="Header2">Šiuo metu rodomi skelbimai</h3>#}
+                        <section class="LayoutLine-item LayoutLine-item--link">
                             <div class="LayoutLine-col-1" onclick="location.href = '{{ path('advert', {'id': advert.id }) }}'">
                                 {#TODO: prideti stausa#}
                                 <div class="Bid Bid--center">

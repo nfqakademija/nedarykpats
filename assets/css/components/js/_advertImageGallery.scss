@@ -19,14 +19,14 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   -webkit-tap-highlight-color: $ig-transparent;
   
   &.fullscreen-modal {
-	background: $ig-black;
+	//background: $ig-black;
 	bottom: 0;
-	height: 100%;
+	//height: 100%;
 	left: 0;
 	position: fixed;
 	right: 0;
 	top: 0;
-	width: 100%;
+	//width: 100%;
 	z-index: 5;
 	
 	.image-gallery-content {
@@ -43,7 +43,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   top: 0;
   
   &.fullscreen {
-	background: $ig-black;
+	//background: $ig-black;
 	
 	.image-gallery-slide {
 	  background: $ig-black;
@@ -184,7 +184,8 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   left: 0;
   
   &::before {
-	content: $ionicon-var-ios-arrow-left;
+	//content: $ionicon-var-ios-arrow-left;
+	content: '';
   }
 }
 
@@ -192,7 +193,8 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   right: 0;
   
   &::before {
-	content: $ionicon-var-ios-arrow-right;
+	content: '';
+	//content: $ionicon-var-ios-arrow-right;
   }
 }
 

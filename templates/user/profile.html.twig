@@ -37,13 +37,15 @@
                     <div class="Form-avatar u-align-center u-margin-bottom u-col-3">
                         <img src="/img/user1.png" alt="user-avatar" >
                     </div>
-                    <div class="StarRating u-align-center">
-                        <span class="StarRating-star fa fa-star {{ rateAverage >= 1 ? 'checked' : '' }}"></span>
-                        <span class="StarRating-star fa fa-star {{ rateAverage >= 2 ? 'checked' : '' }}"></span>
-                        <span class="StarRating-star fa fa-star {{ rateAverage >= 3 ? 'checked' : '' }}"></span>
-                        <span class="StarRating-star fa fa-star {{ rateAverage >= 4 ? 'checked' : '' }}"></span>
-                        <span class="StarRating-star fa fa-star {{ rateAverage >= 5 ? 'checked' : '' }}"></span>
-                    </div>
+                    {% if  rateAverage is empty %}
+                        <div class="StarRating u-align-center">
+                            <span class="StarRating-star fa fa-star {{ rateAverage >= 1 ? 'checked' : '' }}"></span>
+                            <span class="StarRating-star fa fa-star {{ rateAverage >= 2 ? 'checked' : '' }}"></span>
+                            <span class="StarRating-star fa fa-star {{ rateAverage >= 3 ? 'checked' : '' }}"></span>
+                            <span class="StarRating-star fa fa-star {{ rateAverage >= 4 ? 'checked' : '' }}"></span>
+                            <span class="StarRating-star fa fa-star {{ rateAverage >= 5 ? 'checked' : '' }}"></span>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="Column-3 Column-3--longer u-margin-left-right u-margin-top">
                     {% if profilesOwner.name %}
