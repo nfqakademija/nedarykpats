@@ -1,7 +1,27 @@
-{% if offer.isRetracted != null %}
-    {% if app.user != offer.user %}
-        {% include 'components/offer_component/offer_not_active.html.twig' %}
-    {% endif %}
-{% else %}
-    {% include 'components/offer_component/offer_active.html.twig' %}
-{% endif %}
+<section class="Item{% if isOfferDeclined(offer, advert) %} Item--inactive{% endif %}" >
+    <section class="Item-block">
+        <div class="Item-content">
+            <div class="Item-header">
+                <a href='{{ path('user_profile', {'identification': offer.user.identification }) }}'>
+                    <span class="Item-image">
+                        <img src="/img/user1.png" alt="user">
+                    </span>
+                </a>
+                <span class="Item-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+            </div>
+
+            <div class="Item-text">
+                <div class="Item-author">{{ offer.user.username }}</div>
+                <p class="Paragraph">{{ offer.text }}</p>
+            </div>
+            {% if isOfferAccepted(offer, advert) %}
+                <div class="u-margin-top-bottom u-align-space-around">
+                    <h4 class="Header2">Pasamdytas!</h4>
+                </div>
+            {% endif %}
+            <div class="u-margin-top-bottom u-align-space-around">
+                {% include 'components/offer_component/offer_buttons_logic.html.twig' %}
+            </div>
+        </div>
+    </section>
+</section>

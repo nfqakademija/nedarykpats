@@ -71,4 +71,32 @@ class AdvertRuntime implements RuntimeExtensionInterface
 
         return true;
     }
+
+    /**
+     * @param Offer $offer
+     * @param Advert $advert
+     * @return bool
+     */
+    public function isOfferAccepted(Offer $offer, Advert $advert): bool
+    {
+        return $advert->getAcceptedOffer() === $offer;
+    }
+
+    /**
+     * @param Offer $offer
+     * @param Advert $advert
+     * @return bool
+     */
+    public function isOfferDeclined(Offer $offer, Advert $advert): bool
+    {
+        if ($advert->getAcceptedOffer() === null) {
+            return false;
+        }
+
+        if ($this->isOfferAccepted($offer, $advert)) {
+            return false;
+        }
+
+        return true;
+    }
 }
