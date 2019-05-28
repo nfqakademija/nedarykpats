@@ -93,6 +93,7 @@ class ProfileController extends AbstractController
             /** @var ImageGalleryFormDTO $imageDTO */
             $imageDTO = $imageUploadForm->getData();
             $imageUploadHandler->handle($imageDTO, $this->getUser());
+            return $this->redirectToRoute('profile');
         }
 
         /** @var ImageGallery[] $imageGallery */
