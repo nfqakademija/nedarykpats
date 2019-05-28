@@ -17,13 +17,26 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class AdvertRepository extends ServiceEntityRepository
 {
+    /**
+     * @var string
+     */
     public const ADVERT_STATE_CURRENT = 'current';
 
+    /**
+     * @var string
+     */
     public const ADVERT_STATE_WITHOUT_FEEDBACK = 'no-feedback';
 
+    /**
+     * @var string
+     */
     public const ADVERT_STATE_HAS_FEEDBACK = 'has-feedback';
 
 
+    /**
+     * AdvertRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Advert::class);

@@ -21,9 +21,13 @@ class EmailHandler
         $this->twigTemplating = $twigTemplating;
     }
 
+
     /**
      * @param string $recipient
-     * @throws \Exception
+     * @param string $hash
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function sendSingleLoginEmail(string $recipient, string $hash)
     {
@@ -43,9 +47,13 @@ class EmailHandler
         $this->switfMailer->send($message);
     }
 
+
     /**
      * @param string $recipient
-     * @throws \Exception
+     * @param string $hash
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function sendRegistrationConfirmation(string $recipient, string $hash)
     {
