@@ -99,4 +99,15 @@ class AdvertRuntime implements RuntimeExtensionInterface
 
         return true;
     }
+
+    /**
+     * @param User|null $loggedUser
+     * @param Offer $offer
+     * @param Advert $advert
+     * @return bool
+     */
+    public function displayOffer(?User $loggedUser, Offer $offer, Advert $advert): bool
+    {
+        return $advert->getUser() === $loggedUser ||  $offer->getUser() === $loggedUser;
+    }
 }
