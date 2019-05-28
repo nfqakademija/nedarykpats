@@ -165,6 +165,9 @@
                             <span class="Form-label u-align-left">Įkelti nuotrauką</span>
                             <div class="Form-item">
                                 {{ form_widget(imageUploadForm.imageFile, {'attr' : {'class' : 'u-no-margin-top'}}) }}
+                                <span class="Form-errors">
+                                     {{ form_errors(imageUploadForm.imageFile) }}
+                                </span>
                             </div>
                             <div class="Form-item" hidden>
                                 {{ form_widget(imageUploadForm.mainPicture) }}

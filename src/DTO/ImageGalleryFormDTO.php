@@ -11,9 +11,11 @@ class ImageGalleryFormDTO
     /**
      *
      * @var File|null
-     * @Assert\File(
-     *     maxSize="1536k",
-     *     maxSizeMessage="Keliamas failas yra per didelis - ({{ size }} {{ suffix }}).")
+     * @Assert\Image(
+     *     maxSize="1024k",
+     *     maxSizeMessage="Keliamas failas yra per didelis - ({{ size }} {{ suffix }}).",
+     *     mimeTypes="image/*",
+     *     mimeTypesMessage="Galima įkelti tik nuotraukas")
      */
     private $imageFile;
 
