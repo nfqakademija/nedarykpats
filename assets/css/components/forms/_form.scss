@@ -103,6 +103,7 @@
 	  color: var(--colorLightGray);
 	}
   }
+  
   &-item.active label {
 	color: var(--colorBlack);
 	transform: translate(0px, var(--fontSizeLargeMinus)) scale(.75);
@@ -125,5 +126,9 @@
 	border-width: var(--borderxSmall);
 	border-style: solid;
 	border-color: var(--colorBlack);
+  }
+  
+  &--uploadImages {
+	width: 400px;
   }
 }

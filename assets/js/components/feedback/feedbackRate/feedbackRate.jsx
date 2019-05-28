@@ -6,7 +6,7 @@ class FeedbackRate extends Component {
         super(props);
 
         this.state = {
-            rating: 1
+            rating: 5
         };
     }
 
@@ -32,6 +32,8 @@ class FeedbackRate extends Component {
     render() {
         const { rating } = this.state;
         const { user } = this.props;
+
+        console.log(rating);
 
         return (
             <div className="Review">
