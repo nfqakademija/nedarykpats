@@ -32,7 +32,7 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
         $manager->persist($linas);
 
         $egle = new User();
-        $egle->setName("Egle G.")
+        $egle->setName("Eglė G.")
             ->setCreatedAt(new \DateTime())
             ->setEmail("egle@stalker.lt")
             ->setCity($this->getReference('Vilnius'))
