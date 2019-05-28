@@ -71,7 +71,6 @@ class OfferCreationHandler
 
     /**
      * @param OfferFormDTO $offerFormDTO
-     * @param Advert $advert
      * @return Offer
      * @throws \Exception
      */

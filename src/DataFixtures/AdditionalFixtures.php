@@ -6,7 +6,6 @@ use App\Entity\Advert;
 use App\Entity\Offer;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\ORMFixtureInterface;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -23,7 +22,7 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
         $linas = new User();
         $linas->setName("Linas L.")
             ->setCreatedAt(new \DateTime())
-            ->setEmail("linas@ngf.lt")
+            ->setEmail("linas.linartas@nfq.lt")
             ->setCity($this->getReference('Vilnius'))
             ->setIsConfirmed(true)
             ->setRoles(['ROLE_USER'])
@@ -34,7 +33,7 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
         $egle = new User();
         $egle->setName("Eglė G.")
             ->setCreatedAt(new \DateTime())
-            ->setEmail("egle@stalker.lt")
+            ->setEmail("egle@mailinator.lt")
             ->setCity($this->getReference('Vilnius'))
             ->setIsConfirmed(true)
             ->setRoles(['ROLE_USER'])
@@ -50,13 +49,13 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
             ->setUser($linas)
             ->setIsConfirmed(true)
             ->setIsDeleted(false)
-            ->addCategory($this->getReference('kita'));
+            ->addCategory($this->getReference('kasdieniai-darbai'));
 
         $manager->persist($advert);
 
         $offer = new Offer();
         $offer->setUser($egle)
-            ->setText('in progress...')
+            ->setText('Nieko keisto, kad žmona atsisakė. Galiu atvažiuot šeštadienį.')
             ->setAdvert($advert)
             ->setCreatedAt(new \DateTime())
             ->setIsConfirmed(true);

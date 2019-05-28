@@ -79,8 +79,8 @@ class CategoryFixtures extends AbstractFixture implements ORMFixtureInterface
                     'cssStyle' => 'Category--blue',
                 ],
                 [
-                    'name' => 'Buitinės technikos pajungimas',
-                    'slug' => 'buitines-technikos-pajungimas',
+                    'name' => 'Kasdieniai darbai',
+                    'slug' => 'kasdieniai-darbai',
                     'cssStyle' => 'Category--yellow',
                 ],
                 [
