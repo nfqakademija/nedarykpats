@@ -154,28 +154,36 @@
                     {{ form_end(profilePasswordForm) }}
                 </form>
             </section>
-
+            {% endif %}
             {#----Upload images-----#}
             <section>
                 <h3 class="Header2 u-margin-top-bottom">Meistro darbų pavyzdžiai</h3>
 
                 {% if profileIsAppUsers(app.user, profilesOwner) %}
-                    <section>
-                        {{ form(imageUploadForm) }}
+                    <section class="Form--uploadImages u-margin-bottom">
+                        {{ form_start(imageUploadForm) }}
+                            <span class="Form-label u-align-left">Įkelti nuotrauką</span>
+                            <div class="Form-item">
+                                {{ form_widget(imageUploadForm.imageFile, {'attr' : {'class' : 'u-no-margin-top'}}) }}
+                            </div>
+                            <div class="Form-item" hidden>
+                                {{ form_widget(imageUploadForm.mainPicture) }}
+                            </div>
+                            {{ form_widget(imageUploadForm.submit, {'attr' : {'class' : 'Button Button--blue'}}) }}
+                        {{ form_end(imageUploadForm) }}
                     </section>
                 {%  endif %}
-
-                {% for image in imageGallery %}
-                    <a href="{{ path('profile_image_remove', {'id': image.id}) }}">
-                        <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
-                    </a>
-                {% endfor %}
-
-
-                <div id="displayImagesProfile"></div>
+                {#TODO: netrinti#}
+                {#{% for image in imageGallery %}#}
+                    {#<a href="{{ path('profile_image_remove', {'id': image.id}) }}">#}
+                        {#<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>#}
+                    {#</a>#}
+                {#{% endfor %}#}
+                <div id="displayImagesProfile"
+                     data-user-id={{ profilesOwner.identification }}
+                >
+                </div>
             </section>
-
-            {% endif %}
         </div>
     </div>
 

@@ -41,7 +41,7 @@ class LoginPassword extends Component {
         }
     };
 
-    componentWillMount() {
+    componenDidMount() {
         if (this.props.values.password) {
             this.inputFocusAnimation();
         }
@@ -68,6 +68,7 @@ class LoginPassword extends Component {
                                type="password"
                                name="password"
                                required
+                               autoFocus
                                onChange={this.props.handleChange('password')}
                                onKeyDown={this._handleKeyDown}
                                defaultValue={values.password}

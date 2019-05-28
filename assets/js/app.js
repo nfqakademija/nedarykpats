@@ -90,7 +90,7 @@ if (singleAdvertImages) {
 const displayImagesProfile = document.getElementById('displayImagesProfile');
 if (displayImagesProfile) {
     try {
-        ReactDOM.render(<DisplayImagesProfile/>, displayImagesProfile);
+        ReactDOM.render(<DisplayImagesProfile{...displayImagesProfile.dataset}/>, displayImagesProfile);
 
     } catch (error) {
         console.error(error);
