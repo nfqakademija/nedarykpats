@@ -1,0 +1,49 @@
+{{ form_start(offerForm, {'attr': {'class' : 'Form Form-background'}}) }}
+
+    <h3 class="Header1">Parašyk savo pasiūlymą!</h3>
+
+    {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
+
+        <div class="Form-item">
+            {{ form_label(offerForm.email,'Elektroninis paštas') }}
+            {{ form_widget(offerForm.email) }}
+        <span class="Form-errors">
+            {{ form_errors(offerForm.email) }}
+        </span>
+        </div>
+
+        <div class="Form-item">
+            {{ form_label(offerForm.name,'Tavo vardas') }}
+            {{ form_widget(offerForm.name) }}
+        <span class="Form-errors">
+            {{ form_errors(offerForm.name) }}
+        </span>
+        </div>
+
+    {% else %}
+        <div class="Form-item" hidden>
+            {{ form_widget(offerForm.email, {'value' : app.user.email}) }}
+        </div>
+
+        {% if app.user.name is not empty %}
+            <div class="Form-item" hidden>
+                {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
+            </div>
+
+        {% else %}
+            <div class="Form-item" hidden>
+                {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
+            </div>
+         {% endif %}
+
+    {% endif %}
+
+    <div class="Form-item">
+        {{ form_label(offerForm.text, 'Žinutė skelbimo autoriui') }}
+        {{ form_widget(offerForm.text, {'attr': {'rows': '10'} }) }}
+    <span class="Form-errors">
+        {{ form_errors(offerForm.text) }}
+    </span>
+    </div>
+    {{ form_row(offerForm.save , {'attr' : {'class' : 'Button Button--blue'}}) }}
+{{ form_end(offerForm) }}
