@@ -179,8 +179,9 @@ class AdvertFormDTO
         return $this;
     }
 
+
     /**
-     * @return mixed
+     * @return bool|null
      */
     public function getIsDeleted(): ?bool
     {
@@ -189,10 +190,10 @@ class AdvertFormDTO
 
 
     /**
-     * @param $isDeleted
+     * @param bool $isDeleted
      * @return AdvertFormDTO
      */
-    public function setIsDeleted($isDeleted): AdvertFormDTO
+    public function setIsDeleted(bool $isDeleted): AdvertFormDTO
     {
         $this->isDeleted = $isDeleted;
 

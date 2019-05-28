@@ -101,7 +101,7 @@ class AdvertRepository extends ServiceEntityRepository
 
     /**
      * @param Advert $advert
-     * @return mixed
+     * @return array|null
      */
     public function findAdvertOffersUsers(Advert $advert): ?array
     {

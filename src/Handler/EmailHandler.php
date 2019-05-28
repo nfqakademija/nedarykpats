@@ -8,12 +8,16 @@ class EmailHandler
      */
     private $switfMailer;
 
+    /**
+     * @var \Twig\Environment
+     */
     private $twigTemplating;
 
+
     /**
-     * EmailService constructor.
+     * EmailHandler constructor.
      * @param \Swift_Mailer $swiftMailer
-     * @param \Twig\Environment $templating
+     * @param \Twig\Environment $twigTemplating
      */
     public function __construct(\Swift_Mailer $swiftMailer, \Twig\Environment $twigTemplating)
     {
@@ -73,9 +77,13 @@ class EmailHandler
         $this->switfMailer->send($message);
     }
 
+
     /**
      * @param string $recipient
-     * @throws \Exception
+     * @param string $hash
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function sendAdvertConfirmationWithSingleLoginUrl(string $recipient, string $hash)
     {
@@ -95,9 +103,13 @@ class EmailHandler
         $this->switfMailer->send($message);
     }
 
+
     /**
      * @param string $recipient
-     * @throws \Exception
+     * @param string $hash
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function sendOfferConfirmationWithSingleLoginUrl(string $recipient, string $hash)
     {
