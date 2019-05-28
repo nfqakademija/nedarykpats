@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Offer;
 use App\Helpers\PaginationHelper;
 use App\Entity\Advert;
 use App\Entity\User;
@@ -13,6 +14,7 @@ use App\Handler\OfferCreationHandler;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ImageGalleryRepository;
+use App\Repository\OfferRepository;
 use App\SearchObjects\Filters;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
@@ -75,6 +77,11 @@ class AdvertController extends AbstractController
 
         $offerForm->handleRequest($request);
 
+        /** @var OfferRepository $offer */
+        $offerRepository = $this->getDoctrine()->getRepository(Offer::class);
+
+        $offers = $offerRepository->findByAdvert($advert);
+
         if ($offerForm->isSubmitted() && $offerForm->isValid()) {
             $offerFormDTO = $offerForm->getData();
             $offerFormDTO->setAdvert($advert);
@@ -92,6 +99,7 @@ class AdvertController extends AbstractController
 
         return $this->render('advert/single_advert.html.twig', [
             'advert' => $advert,
+            'offers' => $offers,
             'offerForm' => $offerForm->createView()
         ]);
     }

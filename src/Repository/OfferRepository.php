@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Advert;
 use App\Entity\Offer;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -62,5 +63,29 @@ class OfferRepository extends ServiceEntityRepository
             ->setMaxResults($limit);
 
         return $paginator;
+    }
+
+    /**
+     * @param Advert $advert
+     * @return mixed
+     */
+    public function findByAdvert(Advert $advert)
+    {
+        $query = $this->createQueryBuilder('offer');
+
+        $query->select(
+            'offer,
+             CASE WHEN advert.acceptedOffer IS NOT NULL AND advert.acceptedOffer = offer.id 
+                THEN 1 
+                ELSE 0 
+            END AS HIDDEN Flag'
+        )
+            ->join('offer.advert', 'advert')
+            ->where('offer.advert = :advert')
+            ->setParameter('advert', $advert)
+            ->orderBy('Flag', 'DESC')
+            ->addOrderBy('offer.id', 'DESC');
+
+        return $query->getQuery()->getResult();
     }
 }

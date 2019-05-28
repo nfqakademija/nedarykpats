@@ -92,7 +92,7 @@
                     {#----Offerių bloko pradžia------#}
                     {#<h3 class="Header2 u-margin-top-large">Į skelbimą atsiliepę pasiūlymai</h3>#}
                     <section class="LayoutGrid LayoutGrid--col2">
-                        {% for offer in advert.offers %}
+                        {% for offer in offers %}
                             {% if displayOffer(app.user, offer, advert) %}
                                 {% include 'components/offer_component/offer_show.html.twig' %}
                             {% endif %}
