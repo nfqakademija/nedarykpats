@@ -1,15 +1,11 @@
 {% if cancelingOfferIsAvailable(app.user, offer, advert) %}
         {% include 'components/offer_component/offer_buttons/offer_button_cancel.html.twig' %}
-{% else %}
+{% endif%}
 
-{#{% if leavingFeedbackIsAvailable(advert, offer) %}#}
-    {% if advert.acceptedOffer %}
-        {% if advert.acceptedOffer.id == offer.id and not advert.feedback %}
-            {% include 'components/offer_component/offer_buttons/offer_button_cancel.html.twig' %}
-            {% include 'components/offer_component/offer_buttons/offer_button_feedback.html.twig' %}
-        {% endif %}
-    {% else %}
-        {% include 'components/offer_component/offer_buttons/offer_button_approve.html.twig' %}
-    {% endif %}
+{% if leavingFeedbackIsAvailable(app.user, offer, advert) %}
+    {% include 'components/offer_component/offer_buttons/offer_button_feedback.html.twig' %}
+{% endif%}
+
+{% if approvingOfferIsAvailable(app.user, advert) %}
+    {% include 'components/offer_component/offer_buttons/offer_button_approve.html.twig' %}
 {% endif %}
-
