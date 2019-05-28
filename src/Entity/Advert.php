@@ -415,10 +415,10 @@ class Advert
 
 
     /**
-     * @param $isDeleted
+     * @param bool $isDeleted
      * @return Advert
      */
-    public function setIsDeleted($isDeleted): self
+    public function setIsDeleted(bool $isDeleted): self
     {
         $this->isDeleted = $isDeleted;
 

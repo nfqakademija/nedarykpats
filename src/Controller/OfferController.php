@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Helpers\Pagination;
 use App\Entity\Offer;
 use App\Handler\OfferStatusHandler;
 use App\Helpers\PaginationHelper;

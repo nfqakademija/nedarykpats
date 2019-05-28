@@ -50,10 +50,14 @@ class SingleUseLoginHandler
         $this->emailHandler = $emailHandler;
     }
 
+
     /**
      * @param string $email
      * @return bool
-     * @throws \Exception
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Twig\Error\LoaderError
+     * @throws \Twig\Error\RuntimeError
+     * @throws \Twig\Error\SyntaxError
      */
     public function handle(string $email): bool
     {

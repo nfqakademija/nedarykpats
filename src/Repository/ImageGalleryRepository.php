@@ -15,11 +15,19 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ImageGalleryRepository extends ServiceEntityRepository
 {
+    /**
+     * ImageGalleryRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, ImageGallery::class);
     }
 
+    /**
+     * @param User $user
+     * @return mixed
+     */
     public function findByUser(User $user)
     {
         $query = $this->createQueryBuilder('image_gallery');
@@ -30,6 +38,11 @@ class ImageGalleryRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    /**
+     * @param string|null $userIdentification
+     * @param int|null $advertId
+     * @return mixed
+     */
     public function findByUserHashOrAdvertID(?string $userIdentification, ?int $advertId)
     {
         $query = $this->createQueryBuilder('image_gallery');

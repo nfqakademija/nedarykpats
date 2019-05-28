@@ -8,6 +8,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserChecker implements UserCheckerInterface
 {
+    /**
+     * @param UserInterface $user
+     */
     public function checkPreAuth(UserInterface $user)
     {
         if (!$user instanceof User) {
@@ -19,6 +22,9 @@ class UserChecker implements UserCheckerInterface
         }
     }
 
+    /**
+     * @param UserInterface $user
+     */
     public function checkPostAuth(UserInterface $user)
     {
     }

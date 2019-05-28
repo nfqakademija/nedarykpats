@@ -199,6 +199,7 @@ class Token
         return $this->expired;
     }
 
+
     /**
      * @param bool $expired
      * @return Token

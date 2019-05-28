@@ -138,6 +138,11 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
 
+    /**
+     * @param Request $request
+     * @param AuthenticationException $exception
+     * @return RedirectResponse|Response
+     */
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         if ($request->hasSession()) {

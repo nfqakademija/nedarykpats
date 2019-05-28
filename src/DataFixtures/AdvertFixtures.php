@@ -137,7 +137,7 @@ class AdvertFixtures extends AbstractFixture implements ORMFixtureInterface, Dep
                     'email' => 'aurimas@uzsakovas.lt',
                     'city' => 'Šalčinikai',
                     'title' => 'Buitinės technikos pajungimas',
-                    'categories' => ['buitines-technikos-pajungimas'],
+                    'categories' => ['kasdieniai-darbai'],
                     'text' => 'Reikia pajungti visą buitinę techniką (indaplovę, kaitlentę, skalbimo mašiną, šaldytuvą, gartraukį) naujoje virtuvėje. Vilnius (Pašilaičiai).',
                 ],
                 [

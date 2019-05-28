@@ -15,9 +15,12 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class FeedbackRepository extends ServiceEntityRepository
 {
-
     const MAX_FEEDBACK_RESULTS = 6;
 
+    /**
+     * FeedbackRepository constructor.
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, Feedback::class);

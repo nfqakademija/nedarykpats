@@ -6,7 +6,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PaginationHelper
 {
-
+    /**
+     * @var int
+     */
     public const ITEMS_PER_PAGE = 6;
 
     /**

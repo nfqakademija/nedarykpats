@@ -156,8 +156,9 @@ class User implements UserInterface
         return $this;
     }
 
+
     /**
-     * @return mixed
+     * @return string|null
      */
     public function getName(): ?string
     {

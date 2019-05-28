@@ -129,13 +129,11 @@ class ProfileController extends AbstractController
      * @Route ("/profile/{identification}" , name="user_profile", requirements={"identification"="[\w\-\d]+"})
      * @ParamConverter("user", class="App:User"))
      * @param User $user
-     * @param Request $request
      * @param CategoryRepository $categoryRepository
      * @return RedirectResponse|Response
      */
     public function showProfile(
         User $user,
-        Request $request,
         CategoryRepository $categoryRepository
     ) {
 
