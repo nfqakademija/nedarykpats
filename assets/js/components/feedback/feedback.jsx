@@ -63,7 +63,7 @@ class Feedback extends Component {
 
         this.setState({ loading: true }, () => {
             axios
-                .post('http://127.0.0.1:8000/api/feedback', {
+                .post('/api/feedback', {
                     score: rateValue,
                     message: feedbackText,
                     _token: token,
@@ -71,6 +71,9 @@ class Feedback extends Component {
                 })
                 .then(function(response) {
                     console.log(response);
+                    setTimeout(function(){
+                        window.location.reload(1);
+                    }, 1000);
                     nextStep();
                 })
                 .catch(function(error) {

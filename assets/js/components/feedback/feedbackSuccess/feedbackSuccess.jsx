@@ -22,12 +22,6 @@ class FeedbackSuccess extends Component {
                 <h3 className="u-margin-top">
                     Ačiū už įvertinimą!
                 </h3>
-                <p>rate {rateValue} </p>
-                <p>feedbackText {feedbackText} </p>
-                <p>advert {advert} </p>
-                <p>user {user} </p>
-
-
                 <div className="u-margin-top-bottom u-align-center">
                     <button
                         type="submit"

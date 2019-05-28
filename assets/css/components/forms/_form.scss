@@ -32,6 +32,10 @@
 	}
   }
   
+  &-help {
+	
+  }
+  
   &-image {
 	display: none;
   }
@@ -44,6 +48,9 @@
 	  }
 	}
 	
+	input[type='file'] {
+	  background-color: var(--colorWhite);
+	}
 	input,
 	label,
 	select,

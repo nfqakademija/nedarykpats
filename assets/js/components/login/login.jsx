@@ -68,7 +68,7 @@ class Login extends Component {
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
-                axios.get('http://127.0.0.1:8000/api/public/user?email=' + email + '&csrf_token=' + token)
+                axios.get('/api/public/user?email=' + email + '&csrf_token=' + token)
                 .then( response =>  {
                     setTimeout(function(){
                         console.log(response);
@@ -103,14 +103,13 @@ class Login extends Component {
 
         this.setState({ loading: true }, () => {
             this.setState({ loading: true }, () => {
-                axios.post('http://127.0.0.1:8000/api/public/user/login', {
+                axios.post('/api/public/user/login', {
                     email: email,
                     csrf_token: token,
                     password: password
                 })
                 .then( response =>  {
                    setTimeout(function(){
-                        console.log(response);
                         this.setState({
                             loading: false,
                             data: response.data,
@@ -143,7 +142,7 @@ class Login extends Component {
 
         this.setState({ loading: true }, () => {
             axios
-                .post('http://127.0.0.1:8000/api/public/user/send_login_link', {
+                .post('/api/public/user/send_login_link', {
                     email: email,
                     csrf_token: token
                 })
@@ -168,7 +167,7 @@ class Login extends Component {
         console.log('makeRegistration');
         this.setState({ loading: true }, () => {
             axios
-                .post('http://127.0.0.1:8000/api/public/user/', {
+                .post('/api/public/user/', {
                     email: email,
                     password: password
                 })
