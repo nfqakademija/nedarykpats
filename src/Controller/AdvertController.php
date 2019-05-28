@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Constant\Pagination;
+use App\Helpers\PaginationHelper;
 use App\Entity\Advert;
 use App\Entity\User;
 use App\Form\AdvertType;
@@ -100,13 +100,15 @@ class AdvertController extends AbstractController
      * @Route("/my-adverts", name="my_adverts")
      * @param Request $request
      * @param AdvertRepository $advertRepository
+     * @param PaginationHelper $paginationHelper
      * @return Response
      */
     public function myAdverts(
         Request $request,
-        AdvertRepository $advertRepository
+        AdvertRepository $advertRepository,
+        PaginationHelper $paginationHelper
     ): Response {
-        $page = $this->getPageInput($request);
+        $page = $paginationHelper->getPageInput($request);
         $user = $this->getUser();
 
         $filters = new Filters();
@@ -122,15 +124,15 @@ class AdvertController extends AbstractController
             $user,
             $filters,
             $page,
-            Pagination::ITEMS_PER_PAGE
+            PaginationHelper::ITEMS_PER_PAGE
         );
 
-        $paginationPages = ceil($filteredAdverts->count() / Pagination::ITEMS_PER_PAGE);
+        $paginationPages = ceil($filteredAdverts->count() / PaginationHelper::ITEMS_PER_PAGE);
 
         if ($paginationPages > 0 && $page > $paginationPages) {
             $page = $paginationPages;
             $filteredAdverts = $advertRepository
-                ->findMyAdvertsByCategories($user, $filters, $page, Pagination::ITEMS_PER_PAGE);
+                ->findMyAdvertsByCategories($user, $filters, $page, PaginationHelper::ITEMS_PER_PAGE);
         }
 
         return $this->render('advert/my_adverts.html.twig', [
@@ -188,18 +190,5 @@ class AdvertController extends AbstractController
             $statusToggle[$state] = strtr($statusToggle[$state], [",," => ',']);
         }
         return $statusToggle;
-    }
-
-    /**
-     * @param Request $request
-     * @return int
-     */
-    private function getPageInput(Request $request)
-    {
-        $pageInput = $request->query->get('page') ? $request->query->get('page') : 1;
-        $pageCastToInt = ctype_digit($pageInput) ? $pageInput : 1;
-        $page = $pageCastToInt > 0 ? $pageCastToInt : 1;
-
-        return $page;
     }
 }

@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use App\Constant\Pagination;
+use App\Helpers\Pagination;
 use App\Entity\Offer;
 use App\Handler\OfferStatusHandler;
+use App\Helpers\PaginationHelper;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -73,22 +74,25 @@ class OfferController extends AbstractController
         return $this->redirectToRoute('advert', ['id' => $advert->getId()]);
     }
 
+
     /**
-     * @Route("/my-offers/", name="my_offers")
+     *  @Route("/my-offers/", name="my_offers")
+     * @param Request $request
+     * @param PaginationHelper $paginationHelper
      * @return Response
      */
-    public function myOffer(Request $request)
+    public function myOffer(Request $request, PaginationHelper $paginationHelper)
     {
-        $page = $this->getPageInput($request);
+        $page = $paginationHelper->getPageInput($request);
         $offersRepository = $this->getDoctrine()->getRepository(Offer::class);
 
-        $offers = $offersRepository->findByUser($this->getUser(), $page, Pagination::ITEMS_PER_PAGE);
+        $offers = $offersRepository->findByUser($this->getUser(), $page, PaginationHelper::ITEMS_PER_PAGE);
 
-        $paginationPages = ceil($offers->count() / Pagination::ITEMS_PER_PAGE);
+        $paginationPages = ceil($offers->count() / PaginationHelper::ITEMS_PER_PAGE);
 
         if ($paginationPages > 0 && $page > $paginationPages) {
             $page = $paginationPages;
-            $offers = $offersRepository->findByUser($this->getUser(), $page, Pagination::ITEMS_PER_PAGE);
+            $offers = $offersRepository->findByUser($this->getUser(), $page, PaginationHelper::ITEMS_PER_PAGE);
         }
 
         return $this->render('offer/my_offers.html.twig', [
@@ -98,16 +102,4 @@ class OfferController extends AbstractController
         ]);
     }
 
-    /**
-     * @param Request $request
-     * @return int
-     */
-    private function getPageInput(Request $request)
-    {
-        $pageInput = $request->query->get('page') ? $request->query->get('page') : 1;
-        $pageCastToInt =  ctype_digit($pageInput)  ? $pageInput : 1;
-        $page = $pageCastToInt > 0 ? $pageCastToInt : 1;
-
-        return $page;
-    }
 }

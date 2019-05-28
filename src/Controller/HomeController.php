@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Constant\Pagination;
+use App\Helpers\Pagination;
 use App\Entity\Category;
+use App\Helpers\PaginationHelper;
 use App\Repository\AdvertRepository;
 use App\Repository\CategoryRepository;
 use App\SearchObjects\Filters;
@@ -20,11 +21,16 @@ class HomeController extends AbstractController
      * @param Request $request
      * @param AdvertRepository $advertRepository
      * @param CategoryRepository $categoryRepository
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @param PaginationHelper $paginationHelper
+     * @return Response
      */
-    public function index(Request $request, AdvertRepository $advertRepository, CategoryRepository $categoryRepository)
-    {
-        $page = $this->getPageInput($request);
+    public function index(
+        Request $request,
+        AdvertRepository $advertRepository,
+        CategoryRepository $categoryRepository,
+        PaginationHelper $paginationHelper
+    ) {
+        $page = $paginationHelper->getPageInput($request);
 
         $filters = new Filters();
         $selectedCategories = [];
@@ -35,13 +41,13 @@ class HomeController extends AbstractController
 
         $filters->setKeywords($selectedCategories);
 
-        $filteredAdverts = $advertRepository->findByCategories($filters, $page, Pagination::ITEMS_PER_PAGE);
+        $filteredAdverts = $advertRepository->findByCategories($filters, $page, PaginationHelper::ITEMS_PER_PAGE);
 
-        $paginationPages = ceil($filteredAdverts->count() / Pagination::ITEMS_PER_PAGE);
+        $paginationPages = ceil($filteredAdverts->count() / PaginationHelper::ITEMS_PER_PAGE);
 
         if ($page > $paginationPages) {
             $page = $paginationPages;
-            $filteredAdverts = $advertRepository->findByCategories($filters, $page, Pagination::ITEMS_PER_PAGE);
+            $filteredAdverts = $advertRepository->findByCategories($filters, $page, PaginationHelper::ITEMS_PER_PAGE);
         }
 
         $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
@@ -80,19 +86,6 @@ class HomeController extends AbstractController
         return $toggleQueryStrings;
     }
 
-
-    /**
-     * @param Request $request
-     * @return int
-     */
-    private function getPageInput(Request $request)
-    {
-        $pageInput = $request->query->get('page') ? $request->query->get('page') : 1;
-        $pageCastToInt = ctype_digit($pageInput) ? $pageInput : 1;
-        $page = $pageCastToInt > 0 ? $pageCastToInt : 1;
-
-        return $page;
-    }
 
     /**
      * @Route("/template", name="template")
