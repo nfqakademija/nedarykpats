@@ -136,6 +136,9 @@ class ProfileController extends AbstractController
         User $user,
         CategoryRepository $categoryRepository
     ) {
+        if ($this->getUser() === $user) {
+            return $this->redirectToRoute('profile');
+        }
 
         $rateArray = [];
         $rateAverage = 0;
