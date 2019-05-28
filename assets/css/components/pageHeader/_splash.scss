@@ -7,16 +7,16 @@
   z-index: 1;
   
   &::after {
-	content:"";
-	display:block;
-	position:absolute;
-	border-radius:50%;
-	background-color:var(--colorMain);
+	content: "";
+	display: block;
+	position: absolute;
+	border-radius: 50%;
+	background-color: var(--colorMain);
 	
-	width:284vmax;
-	height:284vmax;
-	top:-142vmax;
-	left:-142vmax;
+	width: 284vmax;
+	height: 284vmax;
+	top: -142vmax;
+	left: -142vmax;
 	
 	transform: scale(0);
 	transform-origin:50% 50%;

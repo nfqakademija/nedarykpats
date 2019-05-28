@@ -82,11 +82,11 @@
             {#----Profile Feedbacks Block-----#}
             <section class="LayoutGrid">
             {% for feedback in profilesOwner.feedbacks %}
-                    <section class="Comments">
-                        <section class="Comments-block">
-                            <div class="Comments-content">
-                                <div class="Comments-header Comments-header--center">
-                                    <span class="Comments-image">
+                    <section class="Item">
+                        <section class="Item-block">
+                            <div class="Item-content">
+                                <div class="Item-header Item-header--center">
+                                    <span class="Item-image">
                                         <img src="/img/user1.png" alt="user">
                                     </span>
                                     <span class="StarRating StarRating--small u-align-center">
@@ -96,10 +96,10 @@
                                         <span class="StarRating-star fa fa-star {{ feedback.score >= 4 ? 'checked' : '' }}"></span>
                                         <span class="StarRating-star fa fa-star {{ feedback.score >= 5 ? 'checked' : '' }}"></span>
                                     </span>
-                                    <span class="Comments-date">{{ feedback.createdAt|date("Y-m-d") }}</span>
+                                    <span class="Item-date">{{ feedback.createdAt|date("Y-m-d") }}</span>
                                 </div>
-                                <div class="Comments-text">
-                                    <div class="Comments-author">{{ feedback.advert.user.name}}</div>
+                                <div class="Item-text">
+                                    <div class="Item-author">{{ feedback.advert.user.name}}</div>
                                     <p>{{ feedback.message }}</p>
                                 </div>
                             </div>

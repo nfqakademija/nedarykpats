@@ -55,17 +55,16 @@
 @import "components/bid";
 @import "components/category";
 @import "components/pagination";
-@import "components/comments";
-@import "components/selectedAd";
-@import "components/statusBlock";
-@import "components/replayBlock";
+@import "components/item";
+@import "components/_draft/selectedAd";
+@import "components/_draft/statusBlock";
+@import "components/_draft/replayBlock";
 @import "components/sectionBlock";
 @import "components/alert";
 @import "components/forms/form";
 @import "components/message";
 @import "components/avatarContainer";
-@import "components/statusBar";
-@import "components/switch";
+@import "components/_draft/switch";
 @import "components/starRating";
 @import "components/modal";
 @import "components/review";
@@ -78,7 +77,7 @@
  * React components
  */
 @import "~react-image-gallery/styles/scss/image-gallery.scss";
-@import "components/js/advertImageGallery";
+@import "components/externalStyle/advertImageGallery";
 
 /*********************************************************
 * MEDIUM SCREEN (IPAD)
@@ -87,7 +86,7 @@
 /**
  * Page Header
  */
-  @import "components/pageHeader/pageHeader_medium";
+  @import "components/_draft/pageHeader_medium";
   
 /**
  * Layout
@@ -106,9 +105,8 @@
  * Other components
  */
   @import "components/pagination_medium";
-  @import "components/comments_medium";
-  @import "components/selectedAd_medium";
-  @import "components/statusBlock_medium";
+  @import "components/_draft/selectedAd_medium";
+  @import "components/_draft/statusBlock_medium";
   @import "components/sectionBlock_medium";
   
 }
@@ -118,13 +116,14 @@
 * LARGE SCREEN (DESKTOP)
 **********************************************************/
 @media (min-width: 1200px) {
+
   /**
   * page Header
   */
   @import "components/pageHeader/pageHeader_large";
   @import "components/pageHeader/nav_large";
   
-  /**
+/**
  * Layout
  */
   @import "layout/content_large";
@@ -132,25 +131,20 @@
   @import "layout/layoutLine_large";
   @import "layout/column_large";
   
-  /**
+/**
  * Typography
  */
   @import "components/typography/header1_large";
-  //@import "components/typography/header2";
-  //@import "components/typography/header3";
-  //@import "components/typography/header4";
-  //@import "components/typography/header5";
-  //@import "components/typography/paragraph";
   
-  /**
+/**
  * Forms
  */
-  @import "components/forms/form_large"; /**
+  @import "components/forms/form_large";
+  
+/**
  * Other components
  */
-  @import "components/comments_large";
-  @import "components/selectedAd_large";
-  @import "components/statusBlock_large";
+  @import "components/_draft/statusBlock_large";
   @import "components/sectionBlock_large";
   
 }

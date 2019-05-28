@@ -1,17 +1,17 @@
-<section class="Comments  {% include 'components/offer_component/offer_is_accepted_class.html.twig' %}" >
-    <section class="Comments-block">
-        <div class="Comments-content">
-            <div class="Comments-header">
+<section class="Item  {% include 'components/offer_component/offer_is_accepted_class.html.twig' %}" >
+    <section class="Item-block">
+        <div class="Item-content">
+            <div class="Item-header">
                 <a href='{{ path('user_profile', {'identification': offer.user.identification }) }}'>
-                    <span class="Comments-image">
+                    <span class="Item-image">
                         <img src="/img/user1.png" alt="user">
                     </span>
                 </a>
-                <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+                <span class="Item-date">{{ offer.createdAt|date("Y-m-d") }}</span>
             </div>
 
-            <div class="Comments-text">
-                <div class="Comments-author">{{ offer.user.username }}</div>
+            <div class="Item-text">
+                <div class="Item-author">{{ offer.user.username }}</div>
                 <p class="Paragraph">{{ offer.text }}</p>
             </div>
             <div class="u-margin-top-bottom u-align-space-around">

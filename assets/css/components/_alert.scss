@@ -1,6 +1,6 @@
 .Alert {
   @include shadowBlockForm();
-  width: 100%;
+  width: var(--full-size);
   margin: var(--spaceSmall) 0;
   background-color: var(--colorWhite);
   box-shadow: none;

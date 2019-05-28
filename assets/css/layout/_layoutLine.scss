@@ -12,7 +12,7 @@
   
     &--fullWidth {
       @include shadowBlockForm();
-      width: 100%;
+      width: var(--full-size);
     }
     
     &--link {
@@ -35,7 +35,7 @@
   &--columns {
     display: block;
     align-items: center;
-    width: 100%;
+    width: var(--full-size);
     flex-direction: column;
     margin: 0;
     margin-bottom: var(--spaceMedium);

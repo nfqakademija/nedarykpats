@@ -1,18 +1,18 @@
-<section class="Comments not-active">
-    <section class="Comments-block">
-        <div class="Comments-content">
+<section class="Item not-active">
+    <section class="Item-block">
+        <div class="Item-content">
 
-            <div class="Comments-header">
+            <div class="Item-header">
                 <a href='{{ path('user_profile', {'identification': offer.user.identification }) }}'>
-                    <span class="Comments-image">
+                    <span class="Item-image">
                         <img src="/img/user1.png" alt="user">
                     </span>
                 </a>
-                <span class="Comments-date">{{ offer.createdAt|date("Y-m-d") }}</span>
+                <span class="Item-date">{{ offer.createdAt|date("Y-m-d") }}</span>
             </div>
 
-            <div class="Comments-text">
-                <div class="Comments-author">{{ offer.user.username }}</div>
+            <div class="Item-text">
+                <div class="Item-author">{{ offer.user.username }}</div>
                 <p class="Paragraph">{{ offer.text }}</p>
             </div>
 

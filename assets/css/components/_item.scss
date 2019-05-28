@@ -1,4 +1,4 @@
-.Comments {
+.Item {
   @include shadowBlockForm();
   display: block;
   margin: var(--spaceSmall) 0;
@@ -35,7 +35,7 @@
     margin-bottom: var(--spaceTopBotTextSmall);
   }
   &-content{
-	width: 100%;
+    width: var(--full-size);
   }
   
   &-header {
@@ -61,7 +61,12 @@
     opacity: 0.3;
   }
   
-  &--bgDarker {
-    background-color: var(--colorGray);
+  &--inactive {
+    * {
+      color: var(--colorLightGray);
+    }
+    img {
+      opacity: 0.5;
+    }
   }
 }

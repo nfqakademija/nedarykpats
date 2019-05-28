@@ -1,9 +1,0 @@
-.SelectedAd {
-  display: block;
-  
-  &-content {
-	@include shadowBlockForm;
-	margin-left: 0;
-	margin-right: 0;
-  }
-}
