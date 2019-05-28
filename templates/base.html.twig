@@ -42,13 +42,10 @@
                                     </ul>
 
                                 </li>
-
-
                             {% else %}
                                 <li class="Nav-item"><a class="Nav-link Nav-link--login" href="{{ path('login') }}">Prisijungti</a></li>
                             {% endif %}
                         </ul>
-
                         <a href="#nav" class="Nav-toggle" role="button" aria-expanded="false" aria-controls="menu">
                             <svg class="menuicon" xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 50 50">
                                 <g>
@@ -59,9 +56,7 @@
                                 </g>
                             </svg>
                         </a>
-
                         <div class="Splash"></div>
-
                     </nav>
                 </header>
             </div>
@@ -84,7 +79,10 @@
                 >
                 </button>
                 <script>
-                    document.cookie = 'FeedbackDisplayed=true';
+                    const d = new Date();
+                    d.setTime(d.getTime() + 20*60*10); //add 20s
+                    const expires = "expires="+ d.toUTCString();
+                    document.cookie = 'FeedbackDisplayed=true;' + expires + ';path=/';
                 </script>
             {% endif %}
         {% endblock %}

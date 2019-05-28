@@ -138,7 +138,7 @@ class AdvertController extends AbstractController
             'filteredAdverts' => $filteredAdverts->getIterator(),
             'page' => $page,
             'toggleStatus' => $this->buildStatusToggle($statuses),
-            "status" => $statuses
+            'status' => $statuses
         ]);
     }
 

@@ -16,6 +16,7 @@
                 <p class="Message-text">Jūs pasiūlymų neturite!</p>
             </div>
         {% endif %}
+
         <section id="myOffers" class="LayoutLine">
             {#----- start item block --------#}
             {% for offer in offers %}
@@ -26,15 +27,14 @@
                     <h3 class="Header1">{{ offer.advert.title }}</h3>
                 </div>
 
-                <div class="LayoutLine-col-6">
+                <div class="LayoutLine-col-6 u-margin-left-right">
                     <p class="Header5">Mano pasiūlymas</p>
                     <p class="Paragraph Paragraph--lineLimit-4">{{ offer.text }}</p>
                 </div>
 
                 <div class="LayoutLine-col-3">
                     <div class="u-margin-top-bottom u-align-space-around">
-                        {#TODO: turi keistis statusas priklausomai nuo to, ar pasamdytas#}
-                        <div class="Header2 u-align-middle"><i class="far fa-clock"></i> <span> {{ getOfferStatus(offer, offer.advert) }}</span></div>
+                        <div class="Header2 u-align-middle"><span> {{ getOfferStatus(offer, offer.advert) }}</span></div>
                     </div>
                 </div>
             </section>

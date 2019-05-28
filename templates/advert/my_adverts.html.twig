@@ -3,8 +3,9 @@
 {% block title %}Mano skelbimai{% endblock %}
 
 {% block body %}
-    {#TODO: nerodyti filter juostos,jei nera skelbimu#}
+
     {% include 'components/flash_bag.html.twig' %}
+
     <div class="Content Content--top">
         <div class="Content-Block">
             {% include 'components/filter_bar_my_adverts.html.twig' with {'header' : ''} %}
