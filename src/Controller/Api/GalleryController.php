@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\ImageGallery;
+use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,10 @@ class GalleryController extends AbstractController
      * @Route("api/public/gallery", name="api_get_gallery", methods={"GET"})
      * @param Request $request
      * @param UploaderHelper $uploaderHelper
+     * @param CacheManager $cacheManager
      * @return Response
      */
-    public function getImagesJson(Request $request, UploaderHelper $uploaderHelper)
+    public function getImagesJson(Request $request, UploaderHelper $uploaderHelper, CacheManager $cacheManager)
     {
         $user = $request->query->get('user');
         $advert = $request->query->get('advert');
@@ -32,6 +34,7 @@ class GalleryController extends AbstractController
         /** @var ImageGallery $image */
         foreach ($images as $image) {
             $path = $uploaderHelper->asset($image, 'imageFile');
+            $path = $cacheManager->getBrowserPath($path, 'advert');
             array_push($return_array, ['src' => $path, 'width' => 4, 'height' => 3]);
         }
 
