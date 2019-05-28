@@ -24,15 +24,17 @@
         <div class="Form-item" hidden>
             {{ form_widget(offerForm.email, {'value' : app.user.email}) }}
         </div>
-
         {% if app.user.name is not empty %}
             <div class="Form-item" hidden>
                 {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
             </div>
-
         {% else %}
-            <div class="Form-item" hidden>
-                {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
+            <div class="Form-item">
+                {{ form_label(offerForm.name,'Tavo vardas') }}
+                {{ form_widget(offerForm.name) }}
+                <span class="Form-errors">
+                    {{ form_errors(offerForm.name) }}
+                </span>
             </div>
          {% endif %}
 
