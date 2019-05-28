@@ -102,7 +102,7 @@ class AdvertController extends AbstractController
      * @param AdvertRepository $advertRepository
      * @return Response
      */
-    public function myAdvert(
+    public function myAdverts(
         Request $request,
         AdvertRepository $advertRepository
     ): Response {
