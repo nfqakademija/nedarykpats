@@ -1,6 +1,7 @@
 .LayoutLine {
   
   text-align: center;
+  
   &-item {
     @include shadowBlockForm();
     @include transitionAll();
@@ -9,7 +10,7 @@
     width: 100%;
     flex-direction: column;
     margin-bottom: var(--spaceMedium);
-  
+    
     &--fullWidth {
       @include shadowBlockForm();
       width: var(--full-size);
@@ -23,6 +24,16 @@
       }
     }
   }
+  
+  &-itemNoBg {
+    position: relative;
+    margin: 0;
+    display: flex;
+    width: var(--full-size);
+    flex-direction: column;
+    margin-bottom: var(--spaceMedium);
+  }
+  
   &-imageGallery {
     width: 100%;
   }

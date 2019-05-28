@@ -63,7 +63,7 @@
 
 @mixin button() {
   border-radius: var(--radiusMedium);
-  padding: var(--spaceTopBotTextMedium) var(--spaceLeftRightTexBig);;
+  padding: var(--spaceTopBotTextMedium) var(--spaceLeftRightTexBig);
   text-transform: uppercase;
   font-size: var(--fontSizeMedium);
   font-weight: var(--bold);

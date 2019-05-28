@@ -27,6 +27,16 @@ if (review) {
     }
 }
 
+//--------------------------
+// Go Back button
+//--------------------------
+const backButton = document.getElementById('backButton');
+if (backButton) {
+    console.log('button');
+    backButton.onclick = () => {
+        window.history.back();
+    };
+}
 
 //--------------------------
 // Show feedback if is time

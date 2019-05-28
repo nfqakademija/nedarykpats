@@ -50,16 +50,16 @@
 
             {#----Profile contacts Block-----#}
             <section class="LayoutLine LayoutLine--columns u-align-top u-padding-top u-margin-left-right">
-                <div class="LayoutLine-col-1 u-margin-bottom"></div>
-                <div class="LayoutLine-col-2 u-margin-bottom">
+                <div class="LayoutLine-col-2 u-margin-bottom"></div>
+                <div class="LayoutLine-col-3 u-margin-bottom u-margin-left-right">
                     <p class="Header5">Aprašas apie mane</p>
                     {% if profilesOwner.description is not empty %}
                         <p class="Paragraph">{{ profilesOwner.description }}</p>
                      {% else %}
-                         <p class="Paragraph">Čia būti aprašas apie mane</p>
+                         <p class="Paragraph">Čia turi būti aprašas apie mane</p>
                     {% endif %}
                 </div>
-                <div class="LayoutLine-col-2 u-margin-bottom">
+                <div class="LayoutLine-col-3 u-margin-bottom">
                     <p class="Header5">Kontaktai</p>
                     {% if profilesOwner.city %}
                         <p>{{ profilesOwner.city.name }}</p>
@@ -69,7 +69,7 @@
                     <p>{{ profilesOwner.email }}</p>
                 </div>
                 {% if topCategories is not empty %}
-                    <div class="LayoutLine-col-2 u-margin-bottom">
+                    <div class="LayoutLine-col-3 u-margin-bottom">
                         <p class="Header5">Dirbu srityse</p>
                         {% for category in topCategories %}
                             <li class="Category not-active {{ category.cssStyle }}"> {{ category.title }}</li>

@@ -6,8 +6,14 @@
     text-align: left;
   }
   
+  &-itemNoBg {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  
   &-imageGallery {
-    width: 400px;
+    width: 350px;
   }
   
   &-col-1 {
@@ -36,6 +42,12 @@
   }
   &-col-9 {
     flex: 9;
+  }
+  &-col-10 {
+    flex: 10;
+  }
+  &-col-11 {
+    flex: 11;
   }
   
   &--columns {

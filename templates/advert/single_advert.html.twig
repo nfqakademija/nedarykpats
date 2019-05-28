@@ -13,12 +13,6 @@
         <div class="Content-Block">
             <div class="Content Content--GreyBg ">
                 <section class="Content-Block">
-
-                    <div class="u-display-right">
-                        <a class="Button" href="/#FilterBar">Atgal</a>
-                    </div>
-
-                    {#TODO: neskeminga zinute#}
                     {% if app.session.flashBag.has('success') %}
                         <div class="Alert Alert-success">
                         <span class="Alert-icon">
@@ -30,38 +24,48 @@
                         </div>
                     {% endif %}
 
-                    <section class="LayoutLine">
-                        <section class="LayoutLine-item">
+                    <div class="">
+                        <button id="backButton" class="Button Button--empty u-no-padding u-margin-top">
+                            <i class="fas fa-chevron-left"></i> Atgal
+                        </button>
+                    </div>
 
-                            <div class="LayoutLine-col-1 u-align-center">
-                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                    {% if advert.user.id == app.user.id %}
-                                        <a href='{{ path('profile')}}'>
-                                    {% else %}
-                                        <a href='{{ path('user_profile', {'identification': advert.user.identification }) }}'>
-                                    {% endif %}
-                                            <span class="Item-image u-align-center">
-                                                <img src="/img/user1.png" alt="user">
-                                            </span>
-                                        </a>
-                                {% endif %}
-                            </div>
+                    <section class="LayoutLine u-margin-top-bottom">
+                        <section class="LayoutLine-itemNoBg">
                             <div class="LayoutLine-col-11">
-                                <header class="TopBar TopBar--justify">
-                                    <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
-
-                                </header>
-
                                 <h3 class="Header1">{{ advert.title }}</h3>
+                                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                                    <div>
+                                        <span class="Header5">Paskelbta:</span>
+                                        <span class="Date"> {{ advert.createdAt|date("Y-m-d") }}</span>
+                                    </div>
+                                    <div>
+                                        <span class="Header5">Paskelbė:</span>
+                                        <a class="u-link-text"
+                                           href='{{ path('user_profile', {'identification': advert.user.identification }) }}'>
+                                            {% if advert.user.name %}
+                                                {{ advert.user.name }}
+                                            {% else %}
+                                                {{ advert.user.email }}
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <span class="Header5">Miestas:</span>
+                                        <span>{{ advert.city.name }}</span>
+                                    </div>
+                                {% else %}
+                                    <div class="Date"> {{ advert.createdAt|date("Y-m-d") }}</div>
+                                {% endif %}
 
-                                <div class="Paragraph">
+                                <div class="Paragraph u-margin-top">
                                     <p>{{ advert.text }}</p>
                                 </div>
 
                                 <footer class="u-margin-top">
                                     <ul class="u-no-padding">
                                         {% for advertCategory in advert.categories %}
-                                            <li class="Category {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
+                                            <li class="Category not-active {{ advertCategory.cssStyle }}">{{ advertCategory.title }}</li>
                                         {% endfor %}
                                     </ul>
                                 </footer>
@@ -85,6 +89,8 @@
                     </section>
 
                     {#----Offerių bloko pradžia------#}
+                    {#TODO: jei daugiau negu vienas skelbimas#}
+                    {#<h3 class="Header2 u-margin-top-large">Į skelbimą atsiliepę pasiūlymai</h3>#}
                     <section class="LayoutGrid LayoutGrid--col2">
                         {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
                             {% for offer in advert.offers %}
