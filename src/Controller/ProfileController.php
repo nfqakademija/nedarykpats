@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\DataTransformer\UserToProfileDetailsDTO;
 use App\DTO\ImageGalleryFormDTO;
+use App\Entity\Feedback;
 use App\Entity\ImageGallery;
 use App\Entity\User;
 use App\Form\ImageGalleryFormType;
@@ -14,6 +15,7 @@ use App\Handler\ImageUploadHandler;
 use App\Handler\ProfileDataChangeHandler;
 use App\Handler\ProfilePasswordChangeHandler;
 use App\Repository\CategoryRepository;
+use App\Repository\FeedbackRepository;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -81,6 +83,12 @@ class ProfileController extends AbstractController
         $imageUploadForm = $this->createForm(ImageGalleryFormType::class);
         $imageUploadForm->handleRequest($request);
 
+        /** @var FeedbackRepository $feedbackRepository */
+        $feedbackRepository = $this->getDoctrine()->getRepository(Feedback::class);
+
+        /** @var Feedback[] $feedbacks */
+        $feedbacks = $feedbackRepository->findByUser($user);
+
         if ($imageUploadForm->isSubmitted() && $imageUploadForm->isValid()) {
             /** @var ImageGalleryFormDTO $imageDTO */
             $imageDTO = $imageUploadForm->getData();
@@ -94,6 +102,7 @@ class ProfileController extends AbstractController
             'profileDetailsForm' => $profileDetailsForm->createView(),
             'profilePasswordForm' => $profilePasswordForm->createView(),
             'profilesOwner' => $user,
+            'feedbacks' => $feedbacks,
             'rateAverage' => $rateAverage,
             'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
             'imageUploadForm' => $imageUploadForm->createView(),
@@ -143,8 +152,15 @@ class ProfileController extends AbstractController
         /** @var ImageGallery[] $imageGallery */
         $imageGallery = $this->getDoctrine()->getRepository(ImageGallery::class)->findByUser($this->getUser());
 
+        /** @var FeedbackRepository $feedbackRepository */
+        $feedbackRepository = $this->getDoctrine()->getRepository(Feedback::class);
+
+        /** @var Feedback[] $feedbacks */
+        $feedbacks = $feedbackRepository->findByUser($user);
+
         return $this->render('user/profile.html.twig', [
             'profilesOwner' => $user,
+            'feedbacks' => $feedbacks,
             'rateAverage' => $rateAverage,
             'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
             'imageGallery' => $imageGallery,
