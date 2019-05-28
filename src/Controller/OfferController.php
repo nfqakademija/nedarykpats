@@ -101,5 +101,4 @@ class OfferController extends AbstractController
             'paginationPages' => $paginationPages,
         ]);
     }
-
 }
