@@ -5,6 +5,7 @@ namespace App\Twig;
 use App\Entity\Advert;
 use App\Entity\Feedback;
 use App\Entity\Offer;
+use App\Entity\User;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class OfferRuntime implements RuntimeExtensionInterface
@@ -30,5 +31,25 @@ class OfferRuntime implements RuntimeExtensionInterface
         } else {
             return 'Laukiama';
         }
+    }
+
+    /**
+     * @param User|null $user
+     * @param Advert $advert
+     * @return bool
+     */
+    public function offerFormIsAvailable(?User $user, Advert $advert): bool
+    {
+        if ($advert->getUser() === $user) {
+            return false;
+        }
+
+        foreach ($advert->getOffers() as $offer) {
+            if ($offer->getUser() === $user) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

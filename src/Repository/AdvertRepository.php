@@ -78,6 +78,8 @@ class AdvertRepository extends ServiceEntityRepository
             $query->andWhere($this->getStatusesQuery($statuses));
         }
 
+        $query->orderBy('a.createdAt', 'DESC');
+
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
 
         return $paginator;

@@ -77,7 +77,8 @@
 
                             <div>
                                 {% for image in advert.images %}
-                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>
+                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}"
+                                         width="200"/>
                                 {% endfor %}
                             </div>
 
@@ -89,16 +90,13 @@
                     </section>
 
                     {#----Offerių bloko pradžia------#}
-                    {#TODO: jei daugiau negu vienas skelbimas#}
                     {#<h3 class="Header2 u-margin-top-large">Į skelbimą atsiliepę pasiūlymai</h3>#}
                     <section class="LayoutGrid LayoutGrid--col2">
-                        {% if(advert.offers is not empty and is_granted('IS_AUTHENTICATED_FULLY') ) %}
-                            {% for offer in advert.offers %}
-                                {% if (app.user == offer.user or app.user == advert.user ) %}
-                                    {% include 'components/offer_component/offer_show.html.twig' %}
-                                {% endif %}
-                            {% endfor %}
-                        {% endif %}
+                        {% for offer in advert.offers %}
+                            {% if displayOffer(app.user, offer, advert) %}
+                                {% include 'components/offer_component/offer_show.html.twig' %}
+                            {% endif %}
+                        {% endfor %}
                     </section>
                     {#----Offerių bloko pabaiga------#}
 
