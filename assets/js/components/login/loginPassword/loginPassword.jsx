@@ -28,18 +28,29 @@ class LoginPassword extends Component {
     };
 
     inputFocusAnimation = ()  => {
-        this.state.classLabel = 'active focusWithTex';
-
+        this.setState({
+            classLabel: 'active focusWithTex',
+        });
     };
+
+    inputFocusAnimationRemove = () => {
+        if (this.props.values.password === '') {
+            this.setState({
+                classLabel: '',
+            });
+        }
+    };
+
+    componentWillMount() {
+        if (this.props.values.password) {
+            this.inputFocusAnimation();
+        }
+    }
 
     render(){
         const { values } = this.props;
         const { classLabel } = this.state;
         const css = this.props.values.errorStyle;
-
-        if (values.password) {
-            this.inputFocusAnimation();
-        }
 
         return(
             <div>
@@ -61,6 +72,7 @@ class LoginPassword extends Component {
                                onKeyDown={this._handleKeyDown}
                                defaultValue={values.password}
                                onFocus={this.inputFocusAnimation}
+                               onBlur={this.inputFocusAnimationRemove}
                         />
                         <div id="Form-errors"
                              className={'Form-errors u-margin-bottom ' + css}>

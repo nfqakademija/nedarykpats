@@ -25,7 +25,17 @@ class LoginEmail extends Component {
     };
 
     inputFocusAnimation = () => {
-        this.state.classLabel = 'active focusWithText';
+        this.setState({
+            classLabel: 'active focusWithTex',
+        });
+    };
+
+    inputFocusAnimationRemove = () => {
+        if (this.props.values.email === '') {
+            this.setState({
+                classLabel: '',
+            });
+        }
     };
 
     validateForm() {
@@ -68,6 +78,7 @@ class LoginEmail extends Component {
                         onChange={this.props.handleChange('email')}
                         onKeyDown={this._handleKeyDown}
                         onFocus={this.inputFocusAnimation}
+                        onBlur={this.inputFocusAnimationRemove}
                         required
                     />
                     <div
