@@ -29,4 +29,18 @@ class ImageGalleryRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    public function findByUserHashOrAdvertID(?string $userIdentification, ?int $advertId)
+    {
+        $query = $this->createQueryBuilder('image_gallery');
+        $query->select('image_gallery')
+            ->leftJoin('image_gallery.user', 'user')
+            ->leftJoin('image_gallery.advert', 'advert')
+            ->where('user.identification = :userIdentification AND advert.id IS NULL')
+            ->orWhere('advert.id = :advertId AND user.id IS NULL')
+            ->setParameter(':userIdentification', $userIdentification)
+            ->setParameter(':advertId', $advertId);
+
+        return $query->getQuery()->getResult();
+    }
 }
