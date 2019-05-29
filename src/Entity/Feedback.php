@@ -23,7 +23,7 @@ class Feedback
     private $advert;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feedback")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="feedbacks")
      * @ORM\JoinColumn(nullable=false)
      */
     private $receivingUser;

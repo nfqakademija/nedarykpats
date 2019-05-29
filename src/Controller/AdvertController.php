@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Offer;
+use App\Handler\UserRetrieveHandler;
 use App\Helpers\PaginationHelper;
 use App\Entity\Advert;
 use App\Entity\User;
@@ -71,7 +72,8 @@ class AdvertController extends AbstractController
     public function advert(
         Advert $advert,
         Request $request,
-        OfferCreationHandler $offerCreationHandler
+        OfferCreationHandler $offerCreationHandler,
+        UserRetrieveHandler $userRetrieveHandler
     ) {
         $offerForm = $this->createForm(OfferType::class);
 
@@ -82,18 +84,24 @@ class AdvertController extends AbstractController
 
         $offers = $offerRepository->findByAdvert($advert);
 
-        if ($offerForm->isSubmitted() && $offerForm->isValid()) {
-            $offerFormDTO = $offerForm->getData();
-            $offerFormDTO->setAdvert($advert);
-            $offer = $offerCreationHandler->handle($offerFormDTO);
-            $email = $offerFormDTO->getEmail();
+        if ($offerForm->isSubmitted()
+            && $offerForm->isValid()
+            && $this->offerFormIsAvailable($this->getUser(), $advert)
+        ) {
+            try {
+                $offerFormDTO = $offerForm->getData();
+                $offerFormDTO->setAdvert($advert);
+                $offer = $offerCreationHandler->handle($offerFormDTO);
+                $email = $offerFormDTO->getEmail();
 
-            if ($offer->isConfirmed()) {
-                $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
-            } else {
-                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas šiuo el. paštu ' . $email);
+                if ($offer->isConfirmed()) {
+                    $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
+                } else {
+                    $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas šiuo el. paštu ' . $email);
+                }
+            } catch (Exception $exception) {
+                $this->addFlash('fail', 'Įvyko klaida. Siūlymo patalpinti nepavyko.');
             }
-
             return $this->redirect($request->getUri());
         }
 
@@ -198,5 +206,21 @@ class AdvertController extends AbstractController
             $statusToggle[$state] = strtr($statusToggle[$state], [",," => ',']);
         }
         return $statusToggle;
+    }
+
+
+    private function offerFormIsAvailable(?User $user, Advert $advert): bool
+    {
+        if ($advert->getUser() === $user) {
+            return false;
+        }
+
+        foreach ($advert->getOffers() as $offer) {
+            if ($offer->getUser() === $user) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

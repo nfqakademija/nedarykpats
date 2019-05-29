@@ -49,6 +49,11 @@ class AdvertCreationHandler
     private $userUpdateHandler;
 
     /**
+     * @var UserRetrieveHandler
+     */
+    private $userRetrieveHandler;
+
+    /**
      * AdvertCreationHandler constructor.
      * @param EntityManagerInterface $entityManager
      * @param TokenStorageInterface $tokenStorage
@@ -65,7 +70,8 @@ class AdvertCreationHandler
         EmailHandler $emailHandler,
         TokenGeneratorService $tokenGeneratorService,
         ImageUploadHandler $imageUploadHandler,
-        UserUpdateHandler $userUpdateHandler
+        UserUpdateHandler $userUpdateHandler,
+        UserRetrieveHandler $userRetrieveHandler
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
@@ -74,6 +80,7 @@ class AdvertCreationHandler
         $this->tokenGeneratorService = $tokenGeneratorService;
         $this->imageUploadHandler = $imageUploadHandler;
         $this->userUpdateHandler = $userUpdateHandler;
+        $this->userRetrieveHandler = $userRetrieveHandler;
     }
 
     /**
@@ -88,7 +95,7 @@ class AdvertCreationHandler
 
 
         if (!$user instanceof User) {
-            $user = $this->userCreationHandler->getUser($advertFormDTO->getEmail());
+            $user = $this->userRetrieveHandler->getUser($advertFormDTO->getEmail());
             $advertConfirmed = false;
         }
         if (!$user instanceof User) {
