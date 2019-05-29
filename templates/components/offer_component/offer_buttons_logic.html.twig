@@ -6,6 +6,6 @@
     {% include 'components/offer_component/offer_buttons/offer_button_feedback.html.twig' %}
 {% endif%}
 
-{% if approvingOfferIsAvailable(app.user, advert) %}
+{% if approvingOfferIsAvailable(app.user,offer, advert) %}
     {% include 'components/offer_component/offer_buttons/offer_button_approve.html.twig' %}
 {% endif %}

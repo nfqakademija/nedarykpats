@@ -53,7 +53,8 @@ class AdvertRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('a')
             ->addSelect('a')
             ->where('a.isConfirmed = 1')
-            ->andWhere('a.isDeleted = 0');
+            ->andWhere('a.isDeleted = 0')
+            ->andWhere('a.acceptedOffer is null');
         if ($filters->getKeywords()) {
             $query
                 ->innerJoin('a.categories', 'c')

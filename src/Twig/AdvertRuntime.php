@@ -48,19 +48,29 @@ class AdvertRuntime implements RuntimeExtensionInterface
             return false;
         }
 
+        if ($offer->getIsRetracted()) {
+            return false;
+        }
+
         $availableForOfferAuthor = $offer->getUser() === $loggedUser;
         $availableForAdvertAuthor = $advert->getUser() === $loggedUser && $advert->getAcceptedOffer() === $offer;
 
         return $availableForAdvertAuthor || $availableForOfferAuthor;
     }
 
+
     /**
      * @param User|null $loggedUser
+     * @param Offer $offer
      * @param Advert $advert
      * @return bool
      */
-    public function approvingOfferIsAvailable(?User $loggedUser, Advert $advert): bool
+    public function approvingOfferIsAvailable(?User $loggedUser, Offer $offer, Advert $advert): bool
     {
+        if ($offer->getIsRetracted()) {
+            return false;
+        }
+
         if ($advert->getUser() !== $loggedUser) {
             return false;
         }
@@ -79,6 +89,10 @@ class AdvertRuntime implements RuntimeExtensionInterface
      */
     public function isOfferAccepted(Offer $offer, Advert $advert): bool
     {
+        if ($offer->getIsRetracted()) {
+            return false;
+        }
+
         return $advert->getAcceptedOffer() === $offer;
     }
 
