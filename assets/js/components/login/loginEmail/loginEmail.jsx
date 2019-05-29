@@ -102,7 +102,7 @@ class LoginEmail extends Component {
                 <div className="u-margin-bottom u-align-center">
                     <a
                         className="Button Button--smallPadding u-align-middle u-not-link"
-                        href="http://127.0.0.1:8000/connect/google"
+                        href="/connect/google"
                     >
                         <i className="Image--icon fab fa-google u-color-red u-margin-small-left-right" />
                         <span>Prisijunk su Google</span>
@@ -110,7 +110,7 @@ class LoginEmail extends Component {
                 </div>
                 <p className="Header4">
                     Dar neturi paskyros?
-                    <a id="registerLink" href="http://127.0.0.1:8000/register">
+                    <a id="registerLink" href="/register">
                         Registruotis!
                     </a>
                 </p>
