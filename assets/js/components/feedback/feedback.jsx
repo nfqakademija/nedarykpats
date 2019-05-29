@@ -12,7 +12,7 @@ class Feedback extends Component {
         super(props);
         this.state = {
             step: 1,
-            rateValue: 1,
+            rateValue: 5,
             feedbackText: '',
             token: '',
             advert: '',
@@ -131,6 +131,7 @@ class Feedback extends Component {
                         handleValue={this.handleValue}
                         values={values}
                         user={this.state.user}
+                        rate={this.state.rateValue}
                     />
                 );
             case 2:
