@@ -28,7 +28,7 @@ class Advert
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="text")
      * @var string
      */
     private $text;
