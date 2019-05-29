@@ -35,8 +35,7 @@ class ImageUploadHandler
         $userImage
             ->setImageFile($formDTO->getImageFile())
             ->setUser($user)
-            ->setAdvert($advert)
-            ->setMainPicture(false);
+            ->setAdvert($advert);
         $this->entityManager->persist($userImage);
         $this->entityManager->flush();
     }

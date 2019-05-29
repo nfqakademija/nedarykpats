@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OfferRepository")
@@ -29,13 +28,6 @@ class Offer
     /**
      * @ORM\Column(type="text")
      * @var string
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *     max="2000",
-     *     min="30",
-     *     maxMessage="Viršytas maksimalus kiekis",
-     *     minMessage="Žinutėje per mažai simbolių"
-     * )
      */
     private $text;
 
@@ -65,12 +57,12 @@ class Offer
     private $user;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $isRetracted;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $isDeclined;
     
@@ -83,6 +75,8 @@ class Offer
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
+        $this->isDeclined = false;
+        $this->isRetracted = false;
     }
 
     /**
@@ -214,18 +208,18 @@ class Offer
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getIsRetracted(): ?bool
+    public function getIsRetracted(): bool
     {
         return $this->isRetracted;
     }
 
     /**
-     * @param bool|null $isRetracted
+     * @param bool $isRetracted
      * @return Offer
      */
-    public function setIsRetracted(?bool $isRetracted): self
+    public function setIsRetracted(bool $isRetracted): self
     {
         $this->isRetracted = $isRetracted;
 
@@ -233,18 +227,18 @@ class Offer
     }
 
     /**
-     * @return bool|null
+     * @return bool
      */
-    public function getIsDeclined(): ?bool
+    public function getIsDeclined(): bool
     {
         return $this->isDeclined;
     }
 
     /**
-     * @param bool|null $isDeclined
+     * @param bool $isDeclined
      * @return Offer
      */
-    public function setIsDeclined(?bool $isDeclined): self
+    public function setIsDeclined(bool $isDeclined): self
     {
         $this->isDeclined = $isDeclined;
 

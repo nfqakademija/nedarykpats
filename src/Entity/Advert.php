@@ -28,7 +28,7 @@ class Advert
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=1000)
+     * @ORM\Column(type="text")
      * @var string
      */
     private $text;
@@ -90,7 +90,7 @@ class Advert
     private $feedback;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      * @var bool
      */
     private $isDeleted;
@@ -117,8 +117,8 @@ class Advert
         $this->offers = new ArrayCollection();
         $this->createdAt = new \DateTime('now');
         $this->images = new ArrayCollection();
-        $this->isDeleted = false;
         $this->updatedAt = new \DateTime('now');
+        $this->isDeleted = false;
     }
 
     /**
@@ -403,16 +403,13 @@ class Advert
         return $this;
     }
 
-
-
     /**
      * @return bool
      */
-    public function getIsDeleted(): ?bool
+    public function getIsDeleted(): bool
     {
         return $this->isDeleted;
     }
-
 
     /**
      * @param bool $isDeleted

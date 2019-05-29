@@ -36,11 +36,6 @@ class ImageGallery
     private $advert;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $mainPicture;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $fileName;
@@ -51,9 +46,19 @@ class ImageGallery
     private $size;
 
     /**
-     * @ORM\Column(type="array")
+     * @ORM\Column(type="datetime")
      */
-    private $dimensions = [];
+    private $uploadedAt;
+
+
+    /**
+     * ImageGallery constructor.
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+        $this->uploadedAt = new \DateTime('now');
+    }
 
     /**
      * @return int|null
@@ -102,25 +107,6 @@ class ImageGallery
     }
 
     /**
-     * @return bool|null
-     */
-    public function getMainPicture(): ?bool
-    {
-        return $this->mainPicture;
-    }
-
-    /**
-     * @param bool $mainPicture
-     * @return ImageGallery
-     */
-    public function setMainPicture(bool $mainPicture): self
-    {
-        $this->mainPicture = $mainPicture;
-
-        return $this;
-    }
-
-    /**
      * @return string|null
      */
     public function getFileName(): ?string
@@ -159,25 +145,6 @@ class ImageGallery
     }
 
     /**
-     * @return array|null
-     */
-    public function getDimensions(): ?array
-    {
-        return $this->dimensions;
-    }
-
-    /**
-     * @param array $dimensions
-     * @return ImageGallery
-     */
-    public function setDimensions(?array $dimensions): self
-    {
-        $this->dimensions = $dimensions;
-
-        return $this;
-    }
-
-    /**
      * @return File
      */
     public function getImageFile(): File
@@ -196,11 +163,21 @@ class ImageGallery
     }
 
     /**
-     * @return \DateTimeInterface
-     * @throws \Exception
+     * @return \DateTimeInterface|null
      */
-    public function getUploadTimestamp(): \DateTimeInterface
+    public function getUploadedAt(): ?\DateTimeInterface
     {
-        return new \DateTime('now');
+        return $this->uploadedAt;
+    }
+
+    /**
+     * @param \DateTimeInterface $uploadedAt
+     * @return ImageGallery
+     */
+    public function setUploadedAt(\DateTimeInterface $uploadedAt): self
+    {
+        $this->uploadedAt = $uploadedAt;
+
+        return $this;
     }
 }
