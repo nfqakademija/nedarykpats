@@ -57,8 +57,8 @@ class AdvertRepository extends ServiceEntityRepository
         if ($filters->getKeywords()) {
             $query
                 ->innerJoin('a.categories', 'c')
-                ->andWhere($query->expr()->in('c.slug', $filters->getKeywords()));
-            ;
+                ->andWhere($query->expr()->in('c.slug', ':filterKeyword'))
+                ->setParameter(':filterKeyword', $filters->getKeywords());
         }
 
         $query
