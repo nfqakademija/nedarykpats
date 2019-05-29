@@ -45,6 +45,11 @@ class OfferCreationHandler
     private $userUpdateHandler;
 
     /**
+     * @var UserRetrieveHandler
+     */
+    private $userRetrieveHandler;
+
+    /**
      * AdvertCreationHandler constructor.
      * @param EntityManagerInterface $entityManager
      * @param TokenStorageInterface $tokenStorage
@@ -52,6 +57,7 @@ class OfferCreationHandler
      * @param EmailHandler $emailHandler
      * @param TokenGeneratorService $tokenGeneratorService
      * @param UserUpdateHandler $userUpdateHandler
+     * @param UserRetrieveHandler $userRetrieveHandler
      */
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -59,7 +65,8 @@ class OfferCreationHandler
         UserCreationHandler $userCreationHandler,
         EmailHandler $emailHandler,
         TokenGeneratorService $tokenGeneratorService,
-        UserUpdateHandler $userUpdateHandler
+        UserUpdateHandler $userUpdateHandler,
+        UserRetrieveHandler $userRetrieveHandler
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
@@ -67,6 +74,7 @@ class OfferCreationHandler
         $this->emailHandler = $emailHandler;
         $this->tokenGeneratorService = $tokenGeneratorService;
         $this->userUpdateHandler = $userUpdateHandler;
+        $this->userRetrieveHandler = $userRetrieveHandler;
     }
 
     /**
@@ -79,9 +87,8 @@ class OfferCreationHandler
         $user = $this->tokenStorage->getToken()->getUser();
         $offerConfirmed = true;
 
-
         if (!$user instanceof User) {
-            $user = $this->userCreationHandler->getUser($offerFormDTO->getEmail());
+            $user = $this->userRetrieveHandler->getUser($offerFormDTO->getEmail());
             $offerConfirmed = false;
         }
         if (!$user instanceof User) {
@@ -89,7 +96,13 @@ class OfferCreationHandler
                 $offerFormDTO->getEmail(),
                 $offerFormDTO->getName()
             );
-        } elseif ($user->getName() !== $offerFormDTO->getName()) {
+        }
+
+        if ($offerFormDTO->getAdvert()->getUser() === $user) {
+            throw new \Exception();
+        }
+
+        if ($user->getName() == null  && $offerFormDTO->getName()) {
             $user = $this->userUpdateHandler->handle(
                 $user,
                 $offerFormDTO->getName()

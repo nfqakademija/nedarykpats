@@ -53,7 +53,7 @@ class OfferController extends AbstractController
         $advert = $offer->getAdvert();
 
         if ($advert->getUser() === $this->getUser()) {
-            if ($advert->getAcceptedOffer() && !$advert->getFeedback()) {
+            if ($advert->getAcceptedOffer() === $offer && !$advert->getFeedback()) {
                 $offerStatusHandler->handleDecline($advert, $offer);
                 $this->addFlash('success', 'Pasiūlymas atšauktas');
             } else {
@@ -63,8 +63,6 @@ class OfferController extends AbstractController
             if (!$advert->getFeedback()) {
                 $offerStatusHandler->handleRetract($advert, $offer);
                 $this->addFlash('success', 'Jūsų pasiūlymas atšauktas');
-            } else {
-                $this->addFlash('fail', 'Skelbimas neturi patvirtinto pasiūlymo');
             }
         } else {
             $this->addFlash('fail', 'Atmetimą gali atlikti tik skelbimo arba pasiūlymo sąvininkas');

@@ -51,10 +51,8 @@ class FeedbackModalDisplayHandler
                     }
                 }
             }
-            return false;
-        } else {
-            return false;
         }
+        return false;
     }
 
     /**
@@ -65,9 +63,10 @@ class FeedbackModalDisplayHandler
         /** @var User $user */
         $user = $this->tokenStorage->getToken()->getUser();
 
+        $advertForFeedback = [];
+
         if ($user instanceof User) {
             $advert = $user->getAdverts();
-            $advertForFeedback = [];
 
             foreach ($advert as $item) {
                 if ($item->getAcceptedOffer()) {
@@ -81,8 +80,7 @@ class FeedbackModalDisplayHandler
             }
             ksort($advertForFeedback);
             return $advertForFeedback[0];
-        } else {
-            return [];
         }
+        return $advertForFeedback;
     }
 }

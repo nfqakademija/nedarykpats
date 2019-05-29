@@ -17,9 +17,9 @@ class SingleUseLoginHandler
     private $entityManager;
 
     /**
-     * @var UserCreationHandler
+     * @var UserRetrieveHandler
      */
-    private $userCreationHandler;
+    private $userRetrieveHandler;
 
     /**
      * @var TokenGeneratorService
@@ -34,18 +34,18 @@ class SingleUseLoginHandler
     /**
      * SingleUseLoginHandler constructor.
      * @param EntityManagerInterface $entityManager
-     * @param UserCreationHandler $userCreationHandler
+     * @param UserRetrieveHandler $userRetrieveHandler
      * @param TokenGeneratorService $tokenGeneratorService
      * @param EmailHandler $emailHandler
      */
     public function __construct(
         EntityManagerInterface $entityManager,
-        UserCreationHandler $userCreationHandler,
+        UserRetrieveHandler $userRetrieveHandler,
         TokenGeneratorService $tokenGeneratorService,
         EmailHandler $emailHandler
     ) {
         $this->entityManager = $entityManager;
-        $this->userCreationHandler = $userCreationHandler;
+        $this->userRetrieveHandler = $userRetrieveHandler;
         $this->tokenGeneratorService = $tokenGeneratorService;
         $this->emailHandler = $emailHandler;
     }
@@ -58,10 +58,11 @@ class SingleUseLoginHandler
      * @throws \Twig\Error\LoaderError
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
+     * @throws \Exception
      */
     public function handle(string $email): bool
     {
-        $user = $this->userCreationHandler->getUser($email);
+        $user = $this->userRetrieveHandler->getUser($email);
         if ($user instanceof User) {
             $hash = $this->tokenGeneratorService->generate($user, null, null);
             $this->emailHandler->sendSingleLoginEmail($email, $hash->getHash());
