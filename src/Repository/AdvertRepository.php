@@ -81,8 +81,8 @@ class AdvertRepository extends ServiceEntityRepository
     public function findMyAdvertsByCategories(User $user, Filters $filters, int $page, int $itemsPerPage)
     {
         $query = $this->createQueryBuilder('a')
-            ->select(
-                'a, CASE WHEN a.acceptedOffer IS NULL
+            ->addSelect(
+                'CASE WHEN a.acceptedOffer IS NULL
                     THEN 1 
                     ELSE 0 
                 END AS HIDDEN Flag'

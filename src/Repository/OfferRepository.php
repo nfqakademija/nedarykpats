@@ -38,10 +38,23 @@ class OfferRepository extends ServiceEntityRepository
     {
         $query = $this->createQueryBuilder('offer');
 
-        $query->innerJoin('offer.advert', 'advert')
+        $query->addSelect(
+            'CASE
+                WHEN advert.acceptedOffer = offer AND feedback.id IS NOT NULL THEN 5
+                WHEN advert.acceptedOffer = offer THEN 4
+                WHEN advert.acceptedOffer <> offer THEN 2
+                WHEN offer.isRetracted = 1 THEN 1
+                WHEN offer.isDeclined = 1 THEN 0
+                ELSE 3
+                END AS HIDDEN SortOrder'
+        )
+            ->innerJoin('offer.advert', 'advert')
+            ->leftJoin('advert.feedback', 'feedback')
             ->where('offer.user = :user')
             ->andWhere('advert.isDeleted = 0')
-            ->setParameter('user', $user);
+            ->setParameter('user', $user)
+            ->orderBy('SortOrder', 'DESC')
+            ->addOrderBy('offer.id', 'DESC');
 
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
         return $paginator;
