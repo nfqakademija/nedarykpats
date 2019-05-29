@@ -81,20 +81,26 @@ class AdvertRepository extends ServiceEntityRepository
     public function findMyAdvertsByCategories(User $user, Filters $filters, int $page, int $itemsPerPage)
     {
         $query = $this->createQueryBuilder('a')
+            ->select(
+                'a, CASE WHEN a.acceptedOffer IS NULL
+                    THEN 1 
+                    ELSE 0 
+                END AS HIDDEN Flag'
+            )
             ->innerJoin('a.user', 'u')
             ->leftJoin('a.feedback', 'f')
             ->where('u.id = :userId')
             ->andWhere('a.isConfirmed = 1')
             ->andWhere('a.isDeleted = 0')
-            ->setParameter(':userId', $user->getId());
+            ->setParameter(':userId', $user->getId())
+            ->orderBy('Flag', 'DESC')
+            ->addOrderBy('a.id', 'ASC');
 
         $statuses= $filters->getAdvertStatuses();
 
         if (!empty($statuses)) {
             $query->andWhere($this->getStatusesQuery($statuses));
         }
-
-        $query->orderBy('a.createdAt', 'DESC');
 
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
 
