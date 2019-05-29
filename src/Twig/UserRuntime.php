@@ -31,7 +31,6 @@ class UserRuntime implements RuntimeExtensionInterface
         if ($user->getName() === null) {
             return false;
         }
-
         return true;
     }
 }
