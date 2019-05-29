@@ -11,6 +11,7 @@ class OfferFormDTO
 
     /**
      * @var string
+     * @Assert\NotBlank
      */
     private $name;
 

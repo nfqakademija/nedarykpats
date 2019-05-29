@@ -89,7 +89,7 @@ class OfferCreationHandler
                 $offerFormDTO->getEmail(),
                 $offerFormDTO->getName()
             );
-        } else {
+        } elseif ($user->getName() !== $offerFormDTO->getName()) {
             $user = $this->userUpdateHandler->handle(
                 $user,
                 $offerFormDTO->getName()

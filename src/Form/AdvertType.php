@@ -26,6 +26,7 @@ class AdvertType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('name', TextType::class)
             ->add('email', EmailType::class)
             ->add('title', TextType::class)
             ->add('text', TextareaType::class)
@@ -43,7 +44,7 @@ class AdvertType extends AbstractType
                 'class' => City::class,
                 'choice_label' => 'name'
             ])
-            ->add('imageGallery', FileType::class, ['multiple'=>true])
+            ->add('imageGallery', FileType::class, ['multiple'=>true, 'required' => false])
             ->add('save', SubmitType::class, ['label' => 'Skelbti'])
         ;
     }

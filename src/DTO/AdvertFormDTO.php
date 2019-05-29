@@ -13,6 +13,12 @@ class AdvertFormDTO
 
     /**
      * @var string
+     * @Assert\NotBlank
+     */
+    private $name;
+
+    /**
+     * @var string
      * @Assert\Email(message="Pateiktas neteisingas el. paštas", mode="loose")
      * @Assert\NotBlank
      */
@@ -215,6 +221,24 @@ class AdvertFormDTO
     public function setImageGallery(?array $imageGallery): AdvertFormDTO
     {
         $this->imageGallery = $imageGallery;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return AdvertFormDTO
+     */
+    public function setName(string $name): AdvertFormDTO
+    {
+        $this->name = $name;
         return $this;
     }
 }
