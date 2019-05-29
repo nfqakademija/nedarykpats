@@ -36,15 +36,14 @@ class OfferRepository extends ServiceEntityRepository
      */
     public function findByUser(User $user, int $page, int $itemsPerPage)
     {
-        $entityManager = $this->getEntityManager();
+        $query = $this->createQueryBuilder('offer');
 
-        $query = $entityManager->createQuery(
-            'SELECT o 
-            FROM App\Entity\Offer o
-            WHERE o.user = :user AND (o.isRetracted = 0 OR o.isRetracted IS NULL)'
-        )->setParameter('user', $user);
+        $query->innerJoin('offer.advert', 'advert')
+            ->where('offer.user = :user')
+            ->andWhere('advert.isDeleted = 0')
+            ->setParameter('user', $user);
 
-        $paginator = $this->paginate($query, $page, $itemsPerPage);
+        $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
         return $paginator;
     }
 
@@ -82,6 +81,7 @@ class OfferRepository extends ServiceEntityRepository
         )
             ->join('offer.advert', 'advert')
             ->where('offer.advert = :advert')
+            ->andWhere('offer.isConfirmed = 1')
             ->setParameter('advert', $advert)
             ->orderBy('Flag', 'DESC')
             ->addOrderBy('offer.id', 'DESC');
