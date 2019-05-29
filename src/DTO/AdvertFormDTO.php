@@ -60,8 +60,8 @@ class AdvertFormDTO
     private $city;
 
     /**
-     * @var ArrayCollection|Category
-     * @Assert\NotBlank()
+     * @var ArrayCollection|Category[]
+     * @Assert\Count(min="1", minMessage="Būtina pasirinkti kategoriją")
      */
     private $categories;
 

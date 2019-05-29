@@ -70,3 +70,15 @@
             release: "{{ deploy_helper.new_release }}"
             state: finalize
             keep_releases: 2
+
+      - name: "Drop existing database"
+        shell: bin/console doctrine:data:drop --force
+
+      - name: "Create database"
+        shell: bin/console doctrine:data:create
+
+      - name: "Create schema"
+        shell: bin/console doctrine:schema:create
+
+      - name: "Load fixtures"
+        shell: bin/console doctrine:fixtures:load -q
