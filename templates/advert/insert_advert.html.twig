@@ -27,10 +27,30 @@
                          {{ form_errors(advertForm.email) }}
                         </span>
                     </div>
+                    <div class="Form-item">
+                        {{ form_label(advertForm.name,'Tavo vardas') }}
+                        {{ form_widget(advertForm.name) }}
+                        <span class="Form-errors">
+                            {{ form_errors(advertForm.name) }}
+                        </span>
+                    </div>
                  {% else %}
                      <div class="Form-item" hidden>
                          {{ form_widget(advertForm.email, {'value' : app.user.email}) }}
                      </div>
+                     {% if app.user.name is not empty %}
+                         <div class="Form-item" hidden>
+                             {{ form_widget(advertForm.name, {'value' : app.user.name}) }}
+                         </div>
+                     {% else %}
+                         <div class="Form-item">
+                             {{ form_label(advertForm.name,'Tavo vardas') }}
+                             {{ form_widget(advertForm.name) }}
+                             <span class="Form-errors">
+                                {{ form_errors(advertForm.name) }}
+                            </span>
+                         </div>
+                     {% endif %}
                 {% endif %}
 
                 <div class="Form-item">

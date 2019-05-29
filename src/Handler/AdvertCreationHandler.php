@@ -44,6 +44,11 @@ class AdvertCreationHandler
     private $imageUploadHandler;
 
     /**
+     * @var UserUpdateHandler
+     */
+    private $userUpdateHandler;
+
+    /**
      * AdvertCreationHandler constructor.
      * @param EntityManagerInterface $entityManager
      * @param TokenStorageInterface $tokenStorage
@@ -51,6 +56,7 @@ class AdvertCreationHandler
      * @param EmailHandler $emailHandler
      * @param TokenGeneratorService $tokenGeneratorService
      * @param ImageUploadHandler $imageUploadHandler
+     * @param UserUpdateHandler $userUpdateHandler
      */
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -58,7 +64,8 @@ class AdvertCreationHandler
         UserCreationHandler $userCreationHandler,
         EmailHandler $emailHandler,
         TokenGeneratorService $tokenGeneratorService,
-        ImageUploadHandler $imageUploadHandler
+        ImageUploadHandler $imageUploadHandler,
+        UserUpdateHandler $userUpdateHandler
     ) {
         $this->entityManager = $entityManager;
         $this->tokenStorage = $tokenStorage;
@@ -66,6 +73,7 @@ class AdvertCreationHandler
         $this->emailHandler = $emailHandler;
         $this->tokenGeneratorService = $tokenGeneratorService;
         $this->imageUploadHandler = $imageUploadHandler;
+        $this->userUpdateHandler = $userUpdateHandler;
     }
 
     /**
@@ -84,7 +92,12 @@ class AdvertCreationHandler
             $advertConfirmed = false;
         }
         if (!$user instanceof User) {
-            $user = $this->userCreationHandler->createUser($advertFormDTO->getEmail());
+            $user = $this->userCreationHandler->createUser($advertFormDTO->getEmail(), $advertFormDTO->getName());
+        } elseif ($user->getName() !== $advertFormDTO->getName()) {
+            $user = $this->userUpdateHandler->handle(
+                $user,
+                $advertFormDTO->getName()
+            );
         }
 
         $advert = new Advert();
