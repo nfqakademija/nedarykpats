@@ -1,11 +1,11 @@
 .LayoutGrid {
-  //padding-top: var(--spaceLarge);
   display: block;
   
   &-item {
     @include shadowBlockForm();
-      flex-direction: column;
-      flex: 1;
+	width: var(--full-size);
+	flex-direction: column;
+	flex: 1;
     
     &--link {
       @include transitionAll();

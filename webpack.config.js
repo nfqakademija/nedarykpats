@@ -20,9 +20,9 @@ Encore
     .addEntry('app', [
         './assets/js/app.js',
         './assets/js/react.jsx',
-        './assets/js/components/animations/avatar.js',
-        './assets/js/components/animations/menu.js',
-        './assets/js/components/animations/login.js',
+        './assets/js/animations/avatar.js',
+        './assets/js/animations/menu.js',
+        './assets/js/animations/login.js',
     ])
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')

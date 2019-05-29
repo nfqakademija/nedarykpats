@@ -32,8 +32,17 @@
 	}
   }
   
-  &-help {
-	
+  &-tooltip {
+	@include drop-shadow();
+	position: absolute;
+	width: 200px;
+	background-color: var(--colorWhite);
+	padding: var(--spaceLeftRightTextSmall) var(--spaceTopBotTextSmall);
+	visibility: hidden;
+  }
+  
+  &-help:hover + .Form-tooltip {
+	visibility: visible;
   }
   
   &-image {
@@ -41,7 +50,7 @@
   }
   
   &-item {
-  
+	
 	&.is-error {
 	  input {
 		border-color: var(--colorRed) !important;
@@ -51,6 +60,7 @@
 	input[type='file'] {
 	  background-color: var(--colorWhite);
 	}
+	
 	input,
 	label,
 	select,
@@ -114,6 +124,7 @@
 	text-transform: uppercase;
 	font-weight: var(--bold);
   }
+  
   &-label {
 	font-size: var(--fontSizeMedium);
 	padding-left: var(--spaceSmall);
