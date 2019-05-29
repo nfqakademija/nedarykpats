@@ -41,8 +41,8 @@
 	visibility: hidden;
   }
   
-  &-help:hover + .Form-tooltip {
-	visibility: visible;
+  &-help {
+	visibility: hidden;
   }
   
   &-image {
@@ -50,6 +50,8 @@
   }
   
   &-item {
+  
+	position: relative;
 	
 	&.is-error {
 	  input {

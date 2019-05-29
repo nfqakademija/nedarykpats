@@ -60,20 +60,20 @@
                 {{ form_widget(advertForm.text, {'attr': {'class': 'u-no-margin-top'}}) }}
 
                 <span id="CategoriesTitle" class="Form-label">Pasirinkite kategorijas</span>
-
-                {#TODO: reikalinga validacija#}
                 <div id="AdvertCategories"
                      data-original-input-id="advert_categories"
                      aria-required="true"
                 ></div>
-
+                <span id="Form-category-errors" class="Form-errors u-margin-bottom u-display-none">
+                    <span>Pasirinkite bent vieną kategoriją</span>
+                </span>
 
                 <div class="Form-item" hidden>
                     {{ form_widget(advertForm.categories,
-                        {'attr': {'class': 'u-no-margin-top u-display-hidden', 'id': 'advert_categories'}}) }}
+                        {'attr': {'class': 'u-no-margin-top u-display-none', 'id': 'advert_categories'}}) }}
                 </div>
 
-                <div class="Form-item">
+                <div class="Form-item u-margin-top">
                     <span id="CategoriesTitle" class="Form-label">Įkelkite nuotraukas <i class="Form-help fas fa-info-circle"></i>
                         <span class="Form-tooltip">Kelių failų įkėlimui naudokite shift klavišą</span>
                     </span>

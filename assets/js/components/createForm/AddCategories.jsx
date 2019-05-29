@@ -8,6 +8,7 @@ class AddCategories extends React.Component {
         this.state = {
             selectedOption: null,
             categories: [],
+            errors: {},
             dom: document.getElementById(this.props.originalInputId)
         };
 
@@ -56,9 +57,27 @@ class AddCategories extends React.Component {
         }
     };
 
+    categoryFieldValidation = () => {
+        const errorField = document.getElementById('Form-category-errors');
+        const { selectedOption } = this.state;
+        if ((selectedOption === null || selectedOption.length === 0)) {
+            errorField.classList.remove('u-display-none');
+            console.log('error');
+        }
+        else {
+            errorField.classList.add('u-display-none');
+        }
+    }
+
+    componentDidMount() {
+        const submitButton = document.getElementById('advert_save');
+        submitButton.addEventListener("click", this.categoryFieldValidation);
+    }
+
     render() {
         const { selectedOption, categories } = this.state;
         const { handleChange } = this;
+
         this.updateSelectedValues();
 
         return (

@@ -11,6 +11,36 @@
     }
   }
   
+  &-help {
+    visibility: visible;
+  }
+  
+  &-tooltip {
+    @include drop-shadow();
+    position: absolute;
+    width: 200px;
+    background-color: var(--colorWhite);
+    padding: var(--spaceLeftRightTextSmall) var(--spaceTopBotTextSmall);
+    visibility: hidden;
+    top: -15px;
+    
+    &:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent var(--colorWhite) transparent transparent;
+      
+    }
+  }
+  
+  &-help:hover + .Form-tooltip {
+    visibility: visible;
+  }
+  
   &-content {
     float: right;
     width: 60%;
