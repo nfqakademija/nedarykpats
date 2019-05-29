@@ -93,6 +93,9 @@
     <script>
         var usingVersionedFileJs = true;
         var usingReactApp = true;
+        if (window.performance.navigation.type === 2) {
+            window.location.reload(1);
+        }
     </script>
 
     {{ parent() }}
