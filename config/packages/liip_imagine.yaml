@@ -6,14 +6,14 @@ liip_imagine:
                 data_root: "%kernel.root_dir%/../var"
     driver: "gd"
     resolvers:
-        advert:
+        default:
             web_path:
                 web_root: "%kernel.root_dir%/../public"
 
     # Filtrai
     filter_sets:
-        #advert_gallery
-        advert:
+        #resize_standart
+        resize_standard:
             quality: 80
             filters:
                 relative_resize:

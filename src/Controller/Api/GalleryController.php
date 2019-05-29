@@ -34,7 +34,7 @@ class GalleryController extends AbstractController
         /** @var ImageGallery $image */
         foreach ($images as $image) {
             $path = $uploaderHelper->asset($image, 'imageFile');
-            $path = $cacheManager->getBrowserPath($path, 'advert');
+            $path = $cacheManager->getBrowserPath($path, 'resize_standard');
             array_push($return_array, ['src' => $path, 'width' => 4, 'height' => 3]);
         }
 
