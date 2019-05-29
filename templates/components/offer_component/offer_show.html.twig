@@ -19,7 +19,11 @@
                     <h4 class="Header2">Pasamdytas!</h4>
                 </div>
                 <div class="u-margin-bottom u-align-space-around">
-                    <p>Susisiek: {{ offer.user.email }}</p>
+                    {% if app.user.id == advert.user.id %}
+                        <p>Susisiek: {{ offer.user.email }}</p>
+                    {% else %}
+                        <p>Susisiek: {{ advert.user.email }}</p>
+                    {% endif %}
                 </div>
             {% endif %}
             <div class="u-margin-top-bottom u-align-space-around">
