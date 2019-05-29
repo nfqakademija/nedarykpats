@@ -24,7 +24,7 @@
         <div class="Form-item" hidden>
             {{ form_widget(offerForm.email, {'value' : app.user.email}) }}
         </div>
-        {% if app.user.name is not empty %}
+        {% if userHasDefinedName(app.user) %}
             <div class="Form-item" hidden>
                 {{ form_widget(offerForm.name, {'value' : app.user.name}) }}
             </div>
@@ -37,7 +37,6 @@
                 </span>
             </div>
          {% endif %}
-
     {% endif %}
 
     <div class="Form-item">

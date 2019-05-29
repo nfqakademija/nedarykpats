@@ -16,4 +16,22 @@ class UserRuntime implements RuntimeExtensionInterface
     {
         return ($user === $profileOwner) ? true : false;
     }
+
+
+    /**
+     * @param User|null $user
+     * @return bool
+     */
+    public function userHasDefinedName(?User $user): bool
+    {
+        if ($user === null) {
+            return false;
+        }
+
+       if ($user->getName() === null){
+           return false;
+       }
+
+       return true;
+    }
 }
