@@ -126,6 +126,7 @@ class AdvertController extends AbstractController
     ): Response {
         $page = $paginationHelper->getPageInput($request);
         $user = $this->getUser();
+        $advertCount = count($user->getAdverts());
 
         $filters = new Filters();
         $statuses = [];
@@ -156,7 +157,8 @@ class AdvertController extends AbstractController
             'filteredAdverts' => $filteredAdverts->getIterator(),
             'page' => $page,
             'toggleStatus' => $this->buildStatusToggle($statuses),
-            'statuses' => $statuses
+            'statuses' => $statuses,
+            'advertCount' => $advertCount
         ]);
     }
 

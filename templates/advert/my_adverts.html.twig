@@ -8,7 +8,9 @@
 
     <div class="Content Content--top">
         <div class="Content-Block">
-            {% include 'components/filter_bar_my_adverts.html.twig' with {'header' : ''} %}
+            {% if advertCount > 0 %}
+                {% include 'components/filter_bar_my_adverts.html.twig' with {'header' : ''} %}
+            {% endif %}
         </div>
     </div>
 
