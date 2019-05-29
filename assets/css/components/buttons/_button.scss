@@ -3,6 +3,13 @@
   @include button();
   box-sizing: padding-box;
   
+  &:disabled,
+  &[disabled]{
+    border-color: var(--colorLightGray);
+    background-color: var(--colorLightGray);
+    cursor: not-allowed;
+  }
+  
   &--blue {
     background-color: var(--colorMain);
     border: none;

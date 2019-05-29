@@ -24,6 +24,7 @@ class FeedbackContent extends Component {
                 <div className="Form-item">
                     <textarea
                         rows="5"
+                        autoFocus
                         onChange={handleChange('feedbackText')}
                         defaultValue={values.feedbackText}
                     />
