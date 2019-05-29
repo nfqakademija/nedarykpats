@@ -65,12 +65,12 @@ class Offer
     private $user;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $isRetracted;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $isDeclined;
     
@@ -83,6 +83,8 @@ class Offer
     public function __construct()
     {
         $this->createdAt = new \DateTime('now');
+        $this->isDeclined = false;
+        $this->isRetracted = false;
     }
 
     /**
