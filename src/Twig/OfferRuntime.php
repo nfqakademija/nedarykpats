@@ -23,7 +23,7 @@ class OfferRuntime implements RuntimeExtensionInterface
         } elseif ($advert->getAcceptedOffer() === $offer) {
             return 'Pasamdytas';
         } elseif ($advert->getAcceptedOffer() instanceof Offer) {
-            return 'Atmestas';
+            return 'Nelaimėtas';
         } elseif ($offer->getIsDeclined()) {
             return 'Atmestas';
         } elseif ($offer->getIsRetracted()) {
