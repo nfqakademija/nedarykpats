@@ -16,7 +16,7 @@
                     {% if app.session.flashBag.has('success') %}
                         <div class="Alert Alert-success">
                         <span class="Alert-icon">
-                            <img src="/img/success.svg" alt="success">
+                            <img src="/img/success.svg" alt="success" />
                                {% for msg in app.session.flashBag.get('success') %}
                                    {{ msg }}
                                {% endfor %}
@@ -72,14 +72,16 @@
                             </div>
 
                             <div class="LayoutLine-imageGallery">
-                                <div id="advertImageGallery"></div>
+                                <div id="advertImageGallery"
+                                     data-advert-id={{ advert.id }}
+                                ></div>
                             </div>
 
                             <div>
-                                {% for image in advert.images %}
-                                    <img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}"
-                                         width="200"/>
-                                {% endfor %}
+                                {#{% for image in advert.images %}#}
+                                    {#<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}"#}
+                                         {#width="200"/>#}
+                                {#{% endfor %}#}
                             </div>
 
                         </section>

@@ -11,12 +11,15 @@
             </div>
 
             <div class="Item-text">
-                <div class="Item-author">{{ offer.user.username }}</div>
+                <div class="Item-author">{{ offer.user.name }}</div>
                 <p class="Paragraph">{{ offer.text }}</p>
             </div>
             {% if isOfferAccepted(offer, advert) %}
-                <div class="u-margin-top-bottom u-align-space-around">
+                <div class="u-margin-top u-align-space-around">
                     <h4 class="Header2">Pasamdytas!</h4>
+                </div>
+                <div class="u-margin-bottom u-align-space-around">
+                    <p>Susisiek: {{ offer.user.email }}</p>
                 </div>
             {% endif %}
             <div class="u-margin-top-bottom u-align-space-around">

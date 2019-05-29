@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import AddCategories from './components/createForm/AddCategories.jsx';
 import Review from './components/feedback/feedback.jsx';
 import Login from './components/login/login.jsx';
-import AdvertImageGallery from './components/advertImages/advertImages'
-import DisplayImagesProfile from './components/displayImages/displayImagesProfile/displayImagesProfile';
+import ImageGalleryAdvert2 from './components/imageGallery/imageGalleryAdvert/imageGalleryAdvert.jsx'
+import ImageGalleryProfile from './components/imageGallery/imageGalleryProfile/imageGalleryProfile.jsx';
 
 require('../css/app.scss');
 
@@ -32,7 +32,6 @@ if (review) {
 //--------------------------
 const backButton = document.getElementById('backButton');
 if (backButton) {
-    console.log('button');
     backButton.onclick = () => {
         window.history.back();
     };
@@ -72,12 +71,12 @@ for (let i = 0; i < categoryContainer.length; i += 1) {
 }
 
 //--------------------------
-// Add Advert Image Gallery
+// Add Images in Advert
 //--------------------------
 const singleAdvertImages = document.getElementById('advertImageGallery');
 if (singleAdvertImages) {
     try {
-        ReactDOM.render(<AdvertImageGallery/>, singleAdvertImages);
+        ReactDOM.render(<ImageGalleryAdvert2 {...singleAdvertImages.dataset}/>, singleAdvertImages);
 
     } catch (error) {
         console.error(error);
@@ -90,7 +89,7 @@ if (singleAdvertImages) {
 const displayImagesProfile = document.getElementById('displayImagesProfile');
 if (displayImagesProfile) {
     try {
-        ReactDOM.render(<DisplayImagesProfile{...displayImagesProfile.dataset}/>, displayImagesProfile);
+        ReactDOM.render(<ImageGalleryProfile {...displayImagesProfile.dataset}/>, displayImagesProfile);
 
     } catch (error) {
         console.error(error);
