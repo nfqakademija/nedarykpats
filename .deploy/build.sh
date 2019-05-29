@@ -9,6 +9,7 @@ set -x # Show commands being executed
 # Downloading dependencies and building frontend
 APP_ENV=prod composer install --no-dev --no-scripts --no-interaction --optimize-autoloader
 yarn
+npm install
 yarn run encore production
 
 # <-- This is a good place to add custom commands for your project
