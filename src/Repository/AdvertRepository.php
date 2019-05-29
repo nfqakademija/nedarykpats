@@ -61,7 +61,9 @@ class AdvertRepository extends ServiceEntityRepository
             ;
         }
 
-        $query->orderBy('a.createdAt', 'DESC');
+        $query
+            ->orderBy('a.createdAt', 'DESC')
+            ->setCacheable(false);
 
         $paginator = $this->paginate($query->getQuery(), $page, $itemsPerPage);
 
