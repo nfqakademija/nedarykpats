@@ -64,21 +64,29 @@
         args:
             chdir: "{{ deploy_helper.new_release_path }}"
 
+      - name: "Drop existing database"
+        shell: bin/console doctrine:data:drop --force
+        args:
+          chdir: "{{ deploy_helper.new_release_path }}"
+
+      - name: "Create database"
+        shell: bin/console doctrine:data:create
+        args:
+          chdir: "{{ deploy_helper.new_release_path }}"
+
+      - name: "Create schema"
+        shell: bin/console doctrine:schema:create
+        args:
+          chdir: "{{ deploy_helper.new_release_path }}"
+
+      - name: "Load fixtures"
+        shell: bin/console doctrine:fixtures:load -q
+        args:
+          chdir: "{{ deploy_helper.new_release_path }}"
+
       - name: Finalize the deploy, removing the unfinished file and switching the symlink
         deploy_helper:
             path: "{{ deployment.deploy_path }}"
             release: "{{ deploy_helper.new_release }}"
             state: finalize
             keep_releases: 2
-
-      - name: "Drop existing database"
-        shell: bin/console doctrine:data:drop --force
-
-      - name: "Create database"
-        shell: bin/console doctrine:data:create
-
-      - name: "Create schema"
-        shell: bin/console doctrine:schema:create
-
-      - name: "Load fixtures"
-        shell: bin/console doctrine:fixtures:load -q
