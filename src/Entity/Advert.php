@@ -273,8 +273,8 @@ class Advert
     {
         return count($this->offers->filter(function (Offer $offer) {
             return ($offer->isConfirmed() === true
-                && ($offer->getIsDeclined() === false || $offer->getIsDeclined() === null)
-                && ($offer->getIsRetracted() === false || $offer->getIsRetracted() ===null));
+                && $offer->getIsDeclined() === false
+                && $offer->getIsRetracted() === false);
         }));
     }
 
