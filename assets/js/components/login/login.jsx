@@ -4,7 +4,6 @@ import axios from "axios";
 
 import Email from './loginEmail/loginEmail.jsx';
 import Password from './loginPassword/loginPassword.jsx';
-import Success from './loginSuccess/loginSuccess.jsx';
 import SendEmail from './loginSendEmail/loginSendEmail.jsx';
 import LoginNeedRegistration from './loginNeedRegistration/loginNeedRegistration.jsx';
 import Mistake from './loginMistake/loginMistake.jsx';
@@ -219,7 +218,7 @@ class Login extends Component {
                     </div>
                     )
             case 3:
-                return <Success />
+                return <LoginSpinner />
             case 4:
                 return <SendEmail
                     values={values}

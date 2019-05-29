@@ -19,12 +19,6 @@ const toogle = (firstItem, secondItem) => {
     secondItem.classList.remove('u-display-none');
 };
 
-// validation, netrinti
-// const validateEmail = (email) => {
-//     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     return re.test(email);
-// };
-
 const form = document.getElementById('LoginRegister');
 if (form) {
     const registerLink = document.getElementById('registerLink');
