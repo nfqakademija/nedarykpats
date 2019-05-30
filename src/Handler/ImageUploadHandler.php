@@ -28,6 +28,7 @@ class ImageUploadHandler
      * @param ImageGalleryFormDTO $formDTO
      * @param User|null $user
      * @param Advert|null $advert
+     * @throws \Exception
      */
     public function handle(ImageGalleryFormDTO $formDTO, User $user = null, Advert $advert = null)
     {

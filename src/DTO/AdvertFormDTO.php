@@ -5,7 +5,6 @@ namespace App\DTO;
 use App\Entity\Category;
 use App\Entity\City;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
