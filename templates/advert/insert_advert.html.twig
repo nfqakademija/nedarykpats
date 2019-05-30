@@ -95,10 +95,13 @@
                 </div>
 
                 <div class="Form-item u-margin-top">
-                    <span id="CategoriesTitle" class="Form-label">Įkelkite nuotraukas <i class="Form-help fas fa-info-circle"></i>
-                        <span class="Form-tooltip">Kelių failų įkėlimui naudokite shift klavišą</span>
-                    </span>
-                    {{ form_widget(advertForm.imageGallery, {'attr' : {'class': 'u-no-margin-top','title': 'Norėdami įkelti kelis failus, naudokite shift klavišą'}}) }}
+                    <span id="CategoriesTitle" class="Form-label">Įkelkite nuotraukas <i class="Form-help fas fa-info-circle"></i></span>
+
+                    <div hidden>
+                        {{ form_widget(advertForm.imageGallery, {'attr' : {'class': 'u-no-margin-top'}}) }}
+                    </div>
+
+                    <div id="uploadImagesAdvert"></div>
                     <span class="Form-errors">
                          {{ form_errors(advertForm.imageGallery) }}
                     </span>
