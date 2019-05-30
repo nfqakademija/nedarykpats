@@ -39,6 +39,26 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
 
         $manager->persist($egle);
 
+        $ivona = new User();
+        $ivona->setName("Ivona")
+            ->setCreatedAt(new \DateTime())
+            ->setEmail("ivona@mailinator.com")
+            ->setCity($this->getReference('Vilnius'))
+            ->setIsConfirmed(true)
+            ->setRoles(['ROLE_USER']);
+
+        $manager->persist($ivona);
+
+        $toma = new User();
+        $toma->setName("Toma")
+            ->setCreatedAt(new \DateTime())
+            ->setEmail("toma@mailinator.com")
+            ->setCity($this->getReference('Vilnius'))
+            ->setIsConfirmed(true)
+            ->setRoles(['ROLE_USER']);
+
+        $manager->persist($toma);
+
         $advert = new Advert();
         $advert->setTitle('Išskalbti rūbus')
             ->setText("Žmona atsisakė")
@@ -51,14 +71,32 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
 
         $manager->persist($advert);
 
-        $offer = new Offer();
-        $offer->setUser($egle)
+        $offer1 = new Offer();
+        $offer1->setUser($egle)
             ->setText('Nieko keisto, kad žmona atsisakė. Galiu atvažiuot šeštadienį.')
             ->setAdvert($advert)
             ->setCreatedAt(new \DateTime())
             ->setIsConfirmed(true);
 
-        $manager->persist($offer);
+        $manager->persist($offer1);
+
+        $offer2 = new Offer();
+        $offer2->setUser($ivona)
+            ->setText('Labas, dirbu skalbykloje, turiu ilgametę patirtį drabužių valyme. Kilogramo kaina - 15 Eur. Užsakymą atlikčiau per dvi darbo dienas.')
+            ->setAdvert($advert)
+            ->setCreatedAt(new \DateTime())
+            ->setIsConfirmed(true);
+
+        $manager->persist($offer2);
+
+        $offer3 = new Offer();
+        $offer3->setUser($toma)
+            ->setText('Sveiki, namų tvarkytoja dirbu jau dešimt metų. Šiuo metu ieškausi papildomo darbo, galiu kiekvieną šeštadienį surinkti iš jūsų skalbinius, o sekmadienį po pietų pristatyti išplautus.')
+            ->setAdvert($advert)
+            ->setCreatedAt(new \DateTime())
+            ->setIsConfirmed(true);
+
+        $manager->persist($offer3);
 
         $manager->flush();
     }
