@@ -11,7 +11,14 @@ class ImageGalleryFormDTO
     /**
      *
      * @var UploadedFile[]
-     * @Assert\Count(min="1", minMessage="Būtina pasirinkti bent vieną failą")
+     * @Assert\All(
+     *     @Assert\Image(
+     *     maxSize="1024k",
+     *     maxSizeMessage="Keliamas failas yra per didelis - ({{ size }} {{ suffix }}).",
+     *     mimeTypes="image/*",
+     *     mimeTypesMessage="Galima įkelti tik nuotraukas")
+     *     )
+     * )
      */
     private $imageFile;
 

@@ -54,6 +54,14 @@ class AdvertFormDTO
 
     /**
      * @var UploadedFile[]
+     * @Assert\All(
+     *     @Assert\Image(
+     *     maxSize="1024k",
+     *     maxSizeMessage="Keliamas failas yra per didelis - ({{ size }} {{ suffix }}).",
+     *     mimeTypes="image/*",
+     *     mimeTypesMessage="Galima įkelti tik nuotraukas")
+     *     )
+     * )
      */
     private $imageGallery;
 
