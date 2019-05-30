@@ -40,6 +40,10 @@ class OfferRuntime implements RuntimeExtensionInterface
      */
     public function offerFormIsAvailable(?User $user, Advert $advert): bool
     {
+        if (!$advert->isConfirmed()) {
+            return false;
+        }
+
         if ($advert->getUser() === $user) {
             return false;
         }
