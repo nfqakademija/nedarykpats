@@ -18,7 +18,7 @@ class AppExtension extends AbstractExtension
             new TwigFunction('leavingFeedbackIsAvailable', [AdvertRuntime::class, 'leavingFeedbackIsAvailable']),
             new TwigFunction('approvingOfferIsAvailable', [AdvertRuntime::class, 'approvingOfferIsAvailable']),
             new TwigFunction('isOfferAccepted', [AdvertRuntime::class, 'isOfferAccepted']),
-            new TwigFunction('isOfferDeclined', [AdvertRuntime::class, 'isOfferDeclined']),
+            new TwigFunction('isOfferInactive', [AdvertRuntime::class, 'isOfferInactive']),
             new TwigFunction('displayOffer', [AdvertRuntime::class, 'displayOffer']),
             new TwigFunction('getOfferStatus', [OfferRuntime::class, 'getOfferStatus']),
             new TwigFunction('offerFormIsAvailable', [OfferRuntime::class, 'offerFormIsAvailable']),

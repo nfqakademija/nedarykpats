@@ -80,7 +80,19 @@
                             <li><a href="?status={{ statuses|join(',') }}&page={{ page - 1 }}#FilterBar" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
 
                             {% for i in 1..paginationPages %}
+
+                                {% if i == 2 and page > 5 %}
+                                    <li><span>...</span></li>
+                                {% endif %}
+
+                                {% if page < i+4 and page > i-4 or i == 1 or i == paginationPages  %}
+
+                                    {% if i ==  paginationPages and page < paginationPages -4    %}
+                                         <li><span>...</span></li>
+                                    {% endif %}
+
                                 <li><a href="?status={{ statuses|join(',') }}&page={{ i }}#FilterBar" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
+                                {% endif %}
                             {% endfor %}
 
                             <li><a href="?status={{ statuses|join(',') }}&page={{ page + 1 }}#FilterBar" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>

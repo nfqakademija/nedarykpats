@@ -49,7 +49,20 @@
                     <li><a href="?page={{ page - 1 }}" class="Pagination-item Pagination-prev{{ (page == 1) ? ' is-unavailable' : '' }}">&laquo</a></li>
 
                     {% for i in 1..paginationPages %}
-                        <li><a href="?page={{ i }}" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
+
+                        {% if i == 2 and page > 5 %}
+                            <li><span>...</span></li>
+                        {% endif %}
+
+                            {% if page < i+4 and page > i-4 or i == 1 or i == paginationPages  %}
+
+                            {% if i ==  paginationPages and page < paginationPages -4   %}
+                                <li><span>...</span></li>
+                            {% endif %}
+
+                            <li><a href="?page={{ i }}" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>
+
+                        {% endif %}
                     {% endfor %}
 
                     <li><a href="?page={{ page + 1 }}" class="Pagination-item Pagination-next {{ (paginationPages == page) ? ' is-unavailable' : '' }}">&raquo;</a></li>

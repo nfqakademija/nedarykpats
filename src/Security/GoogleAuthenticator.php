@@ -4,6 +4,7 @@
 namespace App\Security;
 
 use App\Entity\User;
+use App\Handler\UserCreationHandler;
 use bar\foo\baz\ClassConstBowOutTest;
 use Doctrine\ORM\EntityManagerInterface;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
@@ -30,16 +31,27 @@ class GoogleAuthenticator extends SocialAuthenticator
     private $router;
 
     /**
+     * @var UserCreationHandler
+     */
+    private $userCreationHandler;
+
+    /**
      * GoogleAuthenticator constructor.
      * @param ClientRegistry $clientRegistry
      * @param EntityManagerInterface $em
      * @param RouterInterface $router
+     * @param UserCreationHandler $userCreationHandler
      */
-    public function __construct(ClientRegistry $clientRegistry, EntityManagerInterface $em, RouterInterface $router)
-    {
+    public function __construct(
+        ClientRegistry $clientRegistry,
+        EntityManagerInterface $em,
+        RouterInterface $router,
+        UserCreationHandler $userCreationHandler
+    ) {
         $this->clientRegistry = $clientRegistry;
         $this->em = $em;
         $this->router = $router;
+        $this->userCreationHandler = $userCreationHandler;
     }
 
     /**
@@ -75,18 +87,15 @@ class GoogleAuthenticator extends SocialAuthenticator
         $email = $googleUser->getEmail();
 
         $user = $this->em->getRepository(User::class)
-            ->findOneBy(['email' => $email]);
+            ->findUserByEmail($email);
 
         if (!$user) {
-            $user = new User();
-            $user->setEmail($googleUser->getEmail())
-                ->setName($googleUser->getName())
-                ->setGoogleID(intval($googleUser->getId()))
-                ->setRoles(['ROLE_USER'])
-                ->setIsConfirmed(true)
-                ->setCreatedAt(new \DateTime('now'));
-            $this->em->persist($user);
-            $this->em->flush();
+            $user = $this->userCreationHandler->createUser(
+                $googleUser->getEmail(),
+                $googleUser->getName(),
+                intval($googleUser->getId()),
+                true
+            );
         }
 
         return $user;

@@ -39,7 +39,7 @@
  
 	& > .dropdown {
 	  @include transitionAll();
-	  @include drop-shadow();
+	  @include drop-shadow-none();
 	  display: none;
 	  margin-top: 20px;
 	  position: absolute;
@@ -70,6 +70,7 @@
  
 	& > .dropdown.is-visible {
 	  @include transitionAll();
+	  @include drop-shadow();
 	  display: block;
 	}
   }

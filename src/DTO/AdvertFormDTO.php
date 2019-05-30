@@ -5,7 +5,7 @@ namespace App\DTO;
 use App\Entity\Category;
 use App\Entity\City;
 use Doctrine\Common\Collections\ArrayCollection;
-use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class AdvertFormDTO
@@ -14,6 +14,10 @@ class AdvertFormDTO
     /**
      * @var string
      * @Assert\NotBlank
+     * @Assert\Length(
+     *     max="100",
+     *     maxMessage="Viršytas maksimalus raidžių kiekis"
+     * )
      */
     private $name;
 
@@ -49,7 +53,15 @@ class AdvertFormDTO
     private $text;
 
     /**
-     * @var File[]
+     * @var UploadedFile[]
+     * @Assert\All(
+     *     @Assert\Image(
+     *     maxSize="1024k",
+     *     maxSizeMessage="Keliamas failas yra per didelis - ({{ size }} {{ suffix }}).",
+     *     mimeTypes="image/*",
+     *     mimeTypesMessage="Galima įkelti tik nuotraukas")
+     *     )
+     * )
      */
     private $imageGallery;
 
@@ -207,7 +219,7 @@ class AdvertFormDTO
     }
 
     /**
-     * @return File[]
+     * @return UploadedFile[]
      */
     public function getImageGallery(): ?array
     {
@@ -215,7 +227,7 @@ class AdvertFormDTO
     }
 
     /**
-     * @param File[] $imageGallery
+     * @param UploadedFile[] $imageGallery
      * @return AdvertFormDTO
      */
     public function setImageGallery(?array $imageGallery): AdvertFormDTO

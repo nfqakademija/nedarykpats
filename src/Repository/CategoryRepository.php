@@ -50,7 +50,7 @@ class CategoryRepository extends ServiceEntityRepository
        JOIN c.adverts a
        JOIN a.offers o
        JOIN o.user u
-       WHERE u.id = ?1
+       WHERE u.id = ?1 AND a.isDeleted = 0 AND a.isConfirmed = 1
        GROUP BY c.id
        ORDER BY Count DESC'
         )->setParameter(1, $user->getId())

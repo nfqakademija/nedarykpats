@@ -62,6 +62,7 @@ class AdvertCreationHandler
      * @param TokenGeneratorService $tokenGeneratorService
      * @param ImageUploadHandler $imageUploadHandler
      * @param UserUpdateHandler $userUpdateHandler
+     * @param UserRetrieveHandler $userRetrieveHandler
      */
     public function __construct(
         EntityManagerInterface $entityManager,
@@ -118,12 +119,10 @@ class AdvertCreationHandler
         $this->entityManager->persist($advert);
         $this->entityManager->flush();
 
-        /** @var UploadedFile $item */
-        foreach ($advertFormDTO->getImageGallery() as $item) {
-            $imageGalleryFormDTO = new ImageGalleryFormDTO();
-            $imageGalleryFormDTO->setImageFile($item);
-            $this->imageUploadHandler->handle($imageGalleryFormDTO, null, $advert);
-        }
+        $imageGalleryFormDTO = new ImageGalleryFormDTO();
+        $imageGalleryFormDTO->setImageFile($advertFormDTO->getImageGallery());
+        $this->imageUploadHandler->handle($imageGalleryFormDTO, null, $advert);
+
 
         if (!$advertConfirmed) {
             $hash = $this->tokenGeneratorService->generate(

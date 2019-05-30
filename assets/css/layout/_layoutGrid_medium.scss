@@ -8,4 +8,8 @@
   &--col2 {
     grid-template-columns: repeat(1, 1fr);
   }
+  
+  &-footer {
+    visibility: visible;
+  }
 }

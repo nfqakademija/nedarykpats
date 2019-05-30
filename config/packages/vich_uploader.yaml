@@ -3,13 +3,8 @@ vich_uploader:
 
     mappings:
         user_gallery:
-            uri_prefix: /images/user_gallery
-            upload_destination: '%kernel.project_dir%/var/images/user_gallery'
-            directory_namer:
-                service: Vich\UploaderBundle\Naming\CurrentDateTimeDirectoryNamer
-                options:
-                    date_time_format: 'Y/m' # will create directory "2019/05/"
-                    date_time_property: uploadTimestamp # see above example
+            uri_prefix: /images/user_gallery/uploads
+            upload_destination: '%kernel.project_dir%/var/images/user_gallery/uploads'
             namer:
                 service: Vich\UploaderBundle\Naming\Base64Namer
             inject_on_load: false #default value

@@ -10,8 +10,6 @@ class AddCategories extends React.Component {
             categories: [],
             errors: {},
             dom: document.getElementById(this.props.originalInputId),
-            titleField: '',
-            textField: ''
         };
 
         this.getValuesFromFile();
@@ -59,40 +57,10 @@ class AddCategories extends React.Component {
         }
     };
 
-    formFieldValidation = () => {
-        const errorField = document.getElementById('Form-category-errors');
-        const { selectedOption, titleField, textField} = this.state;
-        const submitButton = document.getElementById('advert_save');
-
-        this.state.titleField = document.getElementById('advert_title').value;
-        this.state.textField = document.getElementById('advert_text').value;
-
-        const isDisabled = (selectedOption === null || selectedOption.length === 0)
-            && (titleField === '')
-            && (textField === '');
-
-        if (isDisabled) {
-            submitButton.setAttribute('disabled', true);
-            // errorField.classList.remove('u-display-none');
-        }
-        else {
-            submitButton.disabled = false;
-            // errorField.classList.add('u-display-none');
-        }
-
-        console.log('enter');
-    }
-
-    componentDidMount() {
-        const submitButton = document.getElementById('advert_save');
-        submitButton.addEventListener("click", this.formFieldValidation);
-    }
-
     render() {
         const { selectedOption, categories } = this.state;
         const { handleChange } = this;
 
-        this.formFieldValidation();
         this.updateSelectedValues();
 
         return (

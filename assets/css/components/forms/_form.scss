@@ -17,14 +17,26 @@
 	}
   }
   
+  &-uploadImagesArea {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	align-content: center;
+	padding-top: 50px;
+	min-height: 200px;
+	background-color: var(--colorWhite);
+	border-radius: var(--radiusSmall);
+	text-align: center;
+  }
+  
   &-errors {
+
 	ul {
 	  padding: 0;
 	  margin: 0;
 	}
 	
-	li,
-	span {
+	li {
 	  padding-left: var(--spaceSmall);
 	  list-style: none;
 	  font-size: var(--fontSizeMedium);

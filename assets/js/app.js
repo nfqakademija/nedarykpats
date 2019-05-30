@@ -5,6 +5,8 @@ import Review from './components/feedback/feedback.jsx';
 import Login from './components/login/login.jsx';
 import ImageGalleryAdvert2 from './components/imageGallery/imageGalleryAdvert/imageGalleryAdvert.jsx'
 import ImageGalleryProfile from './components/imageGallery/imageGalleryProfile/imageGalleryProfile.jsx';
+import ImageGalleryUploader from './components/imageGallery/imageGalleryUpload/imageGalleryUpload.jsx';
+import ImageGalleryUploaderAdvert from './components/imageGallery/imageGalleryUpload/imageGalleryUploadAdvert.jsx';
 
 require('../css/app.scss');
 
@@ -90,6 +92,32 @@ const displayImagesProfile = document.getElementById('displayImagesProfile');
 if (displayImagesProfile) {
     try {
         ReactDOM.render(<ImageGalleryProfile {...displayImagesProfile.dataset}/>, displayImagesProfile);
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//--------------------------
+// Add Image Uploader in Profile
+//--------------------------
+const uploadImages = document.getElementById('uploadImages');
+if (uploadImages) {
+    try {
+        ReactDOM.render(<ImageGalleryUploader/>, uploadImages);
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+//--------------------------
+// Add Image Uploader in Advert insert form
+//--------------------------
+const uploadImagesAdvert = document.getElementById('uploadImagesAdvert');
+if (uploadImagesAdvert) {
+    try {
+        ReactDOM.render(<ImageGalleryUploaderAdvert/>, uploadImagesAdvert);
 
     } catch (error) {
         console.error(error);

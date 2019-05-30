@@ -34,10 +34,12 @@ class GalleryController extends AbstractController
         /** @var ImageGallery $image */
         foreach ($images as $image) {
             $path = $uploaderHelper->asset($image, 'imageFile');
-            $path = $cacheManager->getBrowserPath($path, 'advert');
+            $path = $cacheManager->getBrowserPath($path, 'resize_standard');
             array_push($return_array, ['src' => $path, 'width' => 4, 'height' => 3]);
         }
 
-        return new Response(json_encode($return_array), Response::HTTP_OK);
+        $response = new Response(json_encode($return_array), Response::HTTP_OK);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }
