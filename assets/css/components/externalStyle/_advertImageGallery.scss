@@ -127,6 +127,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
 
 .image-gallery-fullscreen-button {
   right: 0;
+  display: none;
   
   &::before {
 	content: $ionicon-var-android-expand;
@@ -248,7 +249,7 @@ $ig-transparent: rgba(0, 0, 0, 0) !default;
   position: absolute;
   right: 0;
   width: 80%;
-  z-index: 4;
+  z-index: 0;
   
   .image-gallery-bullets-container {
 	margin: 0;

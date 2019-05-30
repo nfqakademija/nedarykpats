@@ -59,7 +59,7 @@ class AdvertImages extends React.Component {
 
     openLightbox(event, obj) {
         this.setState({
-            currentImage:  1,
+            currentImage:  0,
             lightboxIsOpen: true,
         });
     }
