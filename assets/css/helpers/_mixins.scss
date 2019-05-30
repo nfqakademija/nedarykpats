@@ -17,9 +17,8 @@
   -webkit-filter: drop-shadow(0 2px 20px rgba(209,209,209, 0.7));
 }
 @mixin drop-shadow-none() {
-  //filter: none;
-  //-webkit-filter: none;
 }
+
 @mixin translate-50() {
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);

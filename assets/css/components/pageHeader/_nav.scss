@@ -103,12 +103,10 @@
 .Nav:target,
 .Nav--open {
   
-  //scale the background circle to full size
   > .Splash::after {
 	transform:scale(1);
   }
   
-  //animate the menu icon
   .menuicon {
 	color: var(--colorWhite);
 	transform:rotate(180deg);
@@ -128,7 +126,6 @@
 	}
   }
   
-  //show the nav items
   .Nav {
 	&-menu {
 	  visibility:visible;
