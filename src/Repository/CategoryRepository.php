@@ -33,6 +33,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->select('category')
             ->innerJoin('category.adverts', 'adverts')
             ->where('adverts.acceptedOffer IS NULL')
+            ->andWhere('adverts.isConfirmed = 1')
             ->getQuery()
             ->getResult();
     }
