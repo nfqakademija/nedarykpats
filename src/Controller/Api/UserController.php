@@ -42,7 +42,9 @@ class UserController extends AbstractController
                     } elseif ($user->getPassword() !== null && strlen($user->getPassword()) > 0) {
                         $authenticateUsingPassword = true;
                     }
-                    return new Response(json_encode(['authenticateUsingPassword' => $authenticateUsingPassword,]));
+                    $response = new Response(json_encode(['authenticateUsingPassword' => $authenticateUsingPassword,]));
+                    $response->headers->set('Content-Type', 'application/json');
+                    return $response;
                 } else {
                     return new Response('', Response::HTTP_NOT_FOUND);
                 }
@@ -82,68 +84,27 @@ class UserController extends AbstractController
             try {
                 $result = $singleUseLoginHandler->handle($loginDTO->getEmail());
                 if ($result) {
-                    return new Response(
+                    $response = new Response(
                         json_encode(['loginLinkSent' => true, 'email' => $loginDTO->getEmail()]),
                         Response::HTTP_OK
                     );
+                    $response->headers->set('Content-Type', 'application/json');
+                    return $response;
                 }
             } catch (Exception $e) {
-                return new Response(
+                $response = new Response(
                     json_encode(['loginLinkSent' => false,]),
                     Response::HTTP_BAD_REQUEST
                 );
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
             }
         }
-        return new Response(
+        $response = new Response(
             json_encode(['loginLinkSent' => false,]),
             Response::HTTP_BAD_REQUEST
         );
-    }
-
-    /**
-     * @Route("api/public/user", name="api_register", methods={"POST"})
-     * @param Request $request
-     * @param RegistrationHandler $registrationHandler
-     * @return Response
-     * @throws \Exception
-     */
-    public function register(
-        Request $request,
-        RegistrationHandler $registrationHandler
-    ): Response {
-        $registrationDTOData = json_decode($request->getContent(), true);
-
-        $form = $this->createForm(RegistrationFormType::class);
-        $form->submit($registrationDTOData);
-
-        $user = $this
-            ->getDoctrine()
-            ->getRepository(User::class)
-            ->findUserByEmail($registrationDTOData['email']);
-
-        if ($user instanceof User) {
-            return new Response(
-                json_encode(['userCreated' => false, 'email' => $registrationDTOData['email']]),
-                Response::HTTP_UNAUTHORIZED
-            );
-        }
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $registrationFormDTO = $form->getData();
-                $user = $registrationHandler->handle($registrationFormDTO);
-                $email = $user->getEmail();
-                return new Response(
-                    json_encode(['userCreated' => true, 'email' => $email]),
-                    Response::HTTP_UNAUTHORIZED
-                );
-            } catch (Exception $e) {
-                return new Response(
-                    json_encode(['userCreated' => false,]),
-                    Response::HTTP_BAD_REQUEST
-                );
-            }
-        }
-        return new Response(json_encode(['userCreated' => false,], Response::HTTP_BAD_REQUEST));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }
