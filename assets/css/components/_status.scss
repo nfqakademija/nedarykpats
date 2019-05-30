@@ -1,0 +1,31 @@
+.Status {
+  
+  &-acceptedFeedback:after {
+	content: "Pasamdytas ir įvertintas";
+	color: var(--colorLightGreen);
+  }
+  
+  &-accepted:after {
+	content: "Pasamdytas";
+	color: var(--colorLightGreen);
+  }
+  
+  &-loose:after {
+	content: "Nelaimėtas";
+	color: var(--colorRed);
+  }
+  
+  &-declined:after {
+	content: "Atmestas";
+	color: var(--colorRed);
+  }
+  
+  &-retracted:after {
+	content: "Atšauktas";
+	color: var(--colorRed);
+  }
+  
+  &-pending:after {
+	content: "Laukiama";
+  }
+}

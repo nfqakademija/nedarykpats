@@ -19,17 +19,17 @@ class OfferRuntime implements RuntimeExtensionInterface
     public function getOfferStatus(Offer $offer, Advert $advert): string
     {
         if ($advert->getAcceptedOffer() === $offer && $advert->getFeedback() instanceof Feedback) {
-            return 'Status-acceptedFeedback'; //Pasamdytas ir įvertintas
+            return 'Status-acceptedFeedback';
         } elseif ($advert->getAcceptedOffer() === $offer) {
-            return 'Status-accepted'; //Pasamdytas
+            return 'Status-accepted';
         } elseif ($advert->getAcceptedOffer() instanceof Offer) {
-            return 'Status-loose'; //Nelaimėtas
+            return 'Status-loose';
         } elseif ($offer->getIsDeclined()) {
-            return 'Status-declined'; //Atmestas
+            return 'Status-declined';
         } elseif ($offer->getIsRetracted()) {
-            return 'Status-retracted'; //Atšauktas
+            return 'Status-retracted';
         } else {
-            return 'Status-pending'; //Laukiama
+            return 'Status-pending';
         }
     }
 
