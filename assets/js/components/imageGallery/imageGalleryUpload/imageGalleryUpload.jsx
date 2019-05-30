@@ -30,7 +30,7 @@ class ImageGalleryUpload extends React.Component {
                                        {...getInputProps()}
                                 />
 
-                                {!isDragActive && 'Paspauskite arba įtemkite failą!'}
+                                {!isDragActive && 'Paspauskite arba įtempkite failą!'}
                                 {isDragActive && !isDragReject && "Paleiskite failą!"}
                                 {isDragReject && "Atsiprašome, įkeliamo failo tipas nėra tinkamas!"}
                                 {isFileTooLarge && (

@@ -16,7 +16,6 @@ if (categories) {
     try {
         ReactDOM.render(<AddCategories {...categories.dataset} />, categories);
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -25,7 +24,6 @@ if (review) {
     try {
         ReactDOM.render(<Review  {...review.dataset}/>, review);
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -48,7 +46,6 @@ if (showFeedback) {
         ReactDOM.render(<Review {...showFeedback.dataset}/>, review);
 
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -58,7 +55,6 @@ if (loginForm) {
     try {
         ReactDOM.render(<Login {...loginForm.dataset}/>, loginForm);
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -81,7 +77,6 @@ if (singleAdvertImages) {
         ReactDOM.render(<ImageGalleryAdvert2 {...singleAdvertImages.dataset}/>, singleAdvertImages);
 
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -94,7 +89,6 @@ if (displayImagesProfile) {
         ReactDOM.render(<ImageGalleryProfile {...displayImagesProfile.dataset}/>, displayImagesProfile);
 
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -107,7 +101,6 @@ if (uploadImages) {
         ReactDOM.render(<ImageGalleryUploader/>, uploadImages);
 
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -120,7 +113,6 @@ if (uploadImagesAdvert) {
         ReactDOM.render(<ImageGalleryUploaderAdvert/>, uploadImagesAdvert);
 
     } catch (error) {
-        console.error(error);
     }
 }
 

@@ -23,13 +23,11 @@ class ImageGalleryProfile extends React.Component {
         this.setState( () => {
             axios.get('/api/public/gallery?user=' + user)
             .then( response =>  {
-                console.log(response);
                 this.setState({
                     photos: response.data
                 });
             })
             .catch(function (error) {
-                console.log(error);
             });
         });
     };

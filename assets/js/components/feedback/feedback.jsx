@@ -70,14 +70,12 @@ class Feedback extends Component {
                     advert,
                 })
                 .then(function(response) {
-                    console.log(response);
                     setTimeout(function(){
                         window.location.reload(1);
                     }, 1000);
                     nextStep();
                 })
                 .catch(function(error) {
-                    console.log(error);
                     nextStep();
                 });
         });

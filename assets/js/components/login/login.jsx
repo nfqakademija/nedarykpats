@@ -70,7 +70,6 @@ class Login extends Component {
                 axios.get('/api/public/user?email=' + email + '&csrf_token=' + token)
                 .then( response =>  {
                     setTimeout(function(){
-                        console.log(response);
                         this.setState({
                             loading: false,
                             data: response.data
@@ -85,7 +84,6 @@ class Login extends Component {
                 })
                 .catch(function (error) {
                     setTimeout(function(){
-                        console.log(error);
                         window.location.href = '/register?email=' + email;
                     }.bind(this), DELAY_TIME);
                 });
@@ -120,7 +118,6 @@ class Login extends Component {
                    }.bind(this), DELAY_TIME);
                 })
                 .catch(function (error) {
-                    console.log(error);
                     this.setState({
                         loading: false,
                         error: 'Jūsų slaptažodis neteisingas',
@@ -147,12 +144,10 @@ class Login extends Component {
                 })
                 .then(function(response) {
                     setTimeout(function(){
-                        console.log(response);
                         nextStepValue(4);
                     }.bind(this), DELAY_TIME);
                 })
                 .catch(function(error) {
-                    console.log(error);
                     nextStepValue(6);
                 });
         });
@@ -163,7 +158,6 @@ class Login extends Component {
         const { DELAY_TIME } = this;
         const { nextStepValue } = this;
 
-        console.log('makeRegistration');
         this.setState({ loading: true }, () => {
             axios
                 .post('/api/public/user/', {
@@ -172,12 +166,10 @@ class Login extends Component {
                 })
                 .then(function(response) {
                     setTimeout(function(){
-                        console.log(response);
                         nextStepValue(4);
                     }.bind(this), DELAY_TIME);
                 })
                 .catch(function(error) {
-                    console.log(error);
                     nextStepValue(6);
                 });
         });
