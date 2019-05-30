@@ -111,7 +111,7 @@ class LoginEmail extends Component {
                 <p className="Header4">
                     Dar neturi paskyros?
                     <a id="registerLink" href="/register">
-                        Registruotis!
+                        &nbsp;Registruotis!
                     </a>
                 </p>
             </div>

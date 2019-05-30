@@ -25,8 +25,7 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
             ->setEmail("linas.linartas@nfq.lt")
             ->setCity($this->getReference('Vilnius'))
             ->setIsConfirmed(true)
-            ->setRoles(['ROLE_USER'])
-            ->setIdentification(md5(microtime()));
+            ->setRoles(['ROLE_USER']);
 
         $manager->persist($linas);
 
@@ -36,8 +35,7 @@ class AdditionalFixtures extends AbstractFixture implements ORMFixtureInterface,
             ->setEmail("egle@mailinator.com")
             ->setCity($this->getReference('Vilnius'))
             ->setIsConfirmed(true)
-            ->setRoles(['ROLE_USER'])
-            ->setIdentification(md5(microtime()));
+            ->setRoles(['ROLE_USER']);
 
         $manager->persist($egle);
 
