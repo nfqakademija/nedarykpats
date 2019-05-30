@@ -147,6 +147,20 @@ class AdvertFixtures extends AbstractFixture implements ORMFixtureInterface, Dep
                     'categories' => ['remontas', 'baldai', 'kita'],
                     'text' => 'Kraustomės, reikia išrinkti visus baldus, o naujame bute surinkti. Vėliau būtų daugiau baldų, kuriuos reiktų surinkti',
                 ],
+                [
+                    'email' => 'martyna@uzsakove.lt',
+                    'city' => 'Vilnius',
+                    'title' => 'Šviestuvo instaliacija',
+                    'categories' => ['remontas', 'elektra'],
+                    'text' => 'Sveiki ieškau pagalbos, kas galėtu padėti instaliuoti naujai nupirktą šviestuvą',
+                ],
+                [
+                    'email' => 'martyna@uzsakove.lt',
+                    'city' => 'Vilnius',
+                    'title' => 'Elektros rozetčių pocizių pakeitimas',
+                    'categories' => ['remontas', 'santechnika', 'apdailos-darbai'],
+                    'text' => 'Ieškau žmogaus kuris galėtų sename monolito daugiabutuje perkelti rocetčių pozicijas ir atlikti apdailos darbus',
+                ],
             ];
     }
 }

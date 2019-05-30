@@ -112,7 +112,7 @@ class CityFixtures extends AbstractFixture implements ORMFixtureInterface
                 'position' => 'secondary'
             ],
             [
-                'name' => 'Jurbankas',
+                'name' => 'Jurbarkas',
                 'position' => 'secondary'
             ],
             [
