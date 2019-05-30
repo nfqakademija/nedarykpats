@@ -60,4 +60,8 @@
     justify-content: center;
     text-align: left;
   }
+  
+  &-col--left {
+    margin-right: var(--spaceMedium);
+  }
 }
