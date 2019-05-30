@@ -2,27 +2,15 @@ import React, {useCallback} from 'react'
 import Dropzone from 'react-dropzone'
 
 class ImageGalleryUpload extends React.Component {
-    onDrop = (acceptedFiles) => {
-        console.log(acceptedFiles);
-    };
-
-    uploadImageToServer = () => {
-        const uploadInputDom = document.getElementById('image_gallery_form_imageFile');
-        uploadInputDom.addEventListener("click", function() {
-            Dropzone.processQueue();
-        });
-    }
 
     render() {
         const maxSize = 1048576;
-        this.uploadImageToServer();
 
         Dropzone.autoDiscover = false;
 
         return (
-            <div className="u-margin-bottom">
+            <div className="u-margin-bottom u-text-center">
                 <Dropzone
-                    onDrop={this.onDrop}
                     accept="image/png, image/gif"
                     minSize={0}
                     maxSize={maxSize}
@@ -36,7 +24,8 @@ class ImageGalleryUpload extends React.Component {
                                  {...getRootProps()}
                             >
                                 <img width="50" src="img/upload.png" alt="upload image"/>
-                                <input id="image_gallery_form_imageFile"
+                                <input id="image_gallery_form_imageFile1"
+                                       name="image_gallery_form[imageFile][]"
                                        type="file"
                                        {...getInputProps()}
                                 />
@@ -45,13 +34,13 @@ class ImageGalleryUpload extends React.Component {
                                 {isDragActive && !isDragReject && "Paleiskite failą!"}
                                 {isDragReject && "Atsiprašome, įkeliamo failo tipas nėra tinkamas!"}
                                 {isFileTooLarge && (
-                                    <div className="text-danger mt-2">
-                                        Filas per didelis.
+                                    <div className="u-color-red">
+                                        Failas per didelis (iki 1MB).
                                     </div>
                                 )}
                                 <ul className="list-group mt-2">
                                     {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile => (
-                                        <li key={acceptedFiles.name + acceptedFiles.size} className="list-group-item list-group-item-success">
+                                        <li key={acceptedFiles.name + acceptedFiles.size} className="">
                                             {acceptedFile.name}
                                         </li>
                                     ))}
@@ -60,6 +49,7 @@ class ImageGalleryUpload extends React.Component {
                         )}
                     }
                 </Dropzone>
+                <input type="submit" className="Button Button--blue u-margin-top" value="Įkelti"/>
             </div>
         );
     }
