@@ -88,8 +88,7 @@ class OfferController extends AbstractController
         $paginationPages = ceil($offers->count() / PaginationHelper::ITEMS_PER_PAGE);
 
         if ($paginationPages > 0 && $page > $paginationPages) {
-            $page = $paginationPages;
-            $offers = $offersRepository->findByUser($this->getUser(), $page, PaginationHelper::ITEMS_PER_PAGE);
+            $this->redirect('/my-offers');
         }
 
         return $this->render('offer/my_offers.html.twig', [

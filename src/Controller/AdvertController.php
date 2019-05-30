@@ -147,9 +147,7 @@ class AdvertController extends AbstractController
         $paginationPages = ceil($filteredAdverts->count() / PaginationHelper::ITEMS_PER_PAGE);
 
         if ($paginationPages > 0 && $page > $paginationPages) {
-            $page = $paginationPages;
-            $filteredAdverts = $advertRepository
-                ->findMyAdvertsByCategories($user, $filters, $page, PaginationHelper::ITEMS_PER_PAGE);
+            $this->redirect('/my-adverts');
         }
 
         return $this->render('advert/my_adverts.html.twig', [
@@ -211,6 +209,11 @@ class AdvertController extends AbstractController
     }
 
 
+    /**
+     * @param User|null $user
+     * @param Advert $advert
+     * @return bool
+     */
     private function offerFormIsAvailable(?User $user, Advert $advert): bool
     {
         if ($advert->getUser() === $user) {
