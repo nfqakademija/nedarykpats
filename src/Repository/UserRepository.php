@@ -23,7 +23,6 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-
     /**
      * @param string $email
      * @return mixed
@@ -37,5 +36,35 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter(':email', $email)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    /**
+     * @param string $email
+     * @return int
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function getRecentOffersAndAdvertsCount(string $email)
+    {
+        $query = $this->createQueryBuilder('user');
+        $adverts = $query->select('COUNT(adverts.id)')
+            ->innerJoin('user.adverts', 'adverts')
+            ->where('user.email = :email')
+            ->andWhere('adverts.createdAt > :date')
+            ->setParameter('email', $email)
+            ->setParameter('date', new \DateTime('-2 minute'))
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        $query = $this->createQueryBuilder('user');
+        $offers = $query->select('COUNT(offers.id)')
+            ->innerJoin('user.offers', 'offers')
+            ->where('user.email = :email')
+            ->andWhere('offers.createdAt > :date')
+            ->setParameter('email', $email)
+            ->setParameter('date', new \DateTime('-2 minute'))
+            ->getQuery()
+            ->getSingleScalarResult();
+
+        return $adverts + $offers;
     }
 }

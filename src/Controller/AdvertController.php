@@ -43,16 +43,35 @@ class AdvertController extends AbstractController
 
         if ($advertForm->isSubmitted() && $advertForm->isValid()) {
             $advertFormDTO = $advertForm->getData();
-            $advert = $advertCreationHandler->handle($advertFormDTO);
             $email = $advertFormDTO->getEmail();
-
-            if ($advert->isConfirmed()) {
-                $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
-            } else {
-                $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas šiuo el. paštu ' . $email);
+            if ($this->getUser() instanceof User) {
+                /** @var User $user */
+                $user = $this->getUser();
+                $email = $user->getEmail();
             }
 
-            return $this->redirect('/advert/' . $advert->getid());
+            $count = $this
+                ->getDoctrine()
+                ->getRepository(User::class)
+                ->getRecentOffersAndAdvertsCount($email);
+
+            if ($count < 10) {
+                $advert = $advertCreationHandler->handle($advertFormDTO);
+                if ($advert->isConfirmed()) {
+                    $this->addFlash('success', 'Pateikta užklausa sėkmingai išsaugota');
+                } else {
+                    $this->addFlash('success', 'Jums išsiųstas patvirtinimo laiškas šiuo el. paštu ' . $email);
+                }
+                return $this->redirect('/advert/' . $advert->getid());
+            } else {
+                $this->addFlash(
+                    'fail',
+                    'Pasiektas maksimalus įkėlimų skaičius nustatytam laiko intervalui.
+                    Pamėginkite iš naujo patalpinti po penkių minučių'
+                );
+
+                return $this->redirectToRoute('new_advert');
+            }
         }
 
         return $this->render('advert/insert_advert.html.twig', [
