@@ -107,24 +107,6 @@ class AdvertRepository extends ServiceEntityRepository
         return $paginator;
     }
 
-
-    /**
-     * @param Advert $advert
-     * @return array|null
-     */
-    public function findAdvertOffersUsers(Advert $advert): ?array
-    {
-        $entityManager = $this->getEntityManager();
-
-        return $query = $entityManager->createQuery(
-            'SELECT u 
-       FROM App\Entity\User u
-       JOIN u.offers o
-       JOIN o.advert a
-       WHERE a.id = ?1'
-        )->setParameter(1, $advert->getId())->getResult();
-    }
-
     /**
      * @param \Doctrine\ORM\Query $dql DQL Query Object
      * @param integer $page Current page (defaults to 1)

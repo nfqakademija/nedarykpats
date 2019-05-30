@@ -157,22 +157,28 @@
             {% endif %}
             {#----Upload images-----#}
             <section>
-                <h3 class="Header2 u-margin-top-bottom">Meistro darbų pavyzdžiai</h3>
+                <h3 class="Header2 u-align-center u-margin-top-bottom">Meistro darbų pavyzdžiai</h3>
 
                 {% if profileIsAppUsers(app.user, profilesOwner) %}
-                    <section class="Form--uploadImages u-margin-bottom">
-                        {{ form_start(imageUploadForm) }}
-                            <span class="Form-label u-align-left">Įkelti nuotrauką</span>
-                            <div class="Form-item">
-                                {{ form_widget(imageUploadForm.imageFile, {'attr' : {'class' : 'u-no-margin-top'}}) }}
-                                <span class="Form-errors">
-                                     {{ form_errors(imageUploadForm.imageFile) }}
-                                </span>
+                    <div class="LayoutLine LayoutLine--columns">
+                        <div class="LayoutLine-col-1 u-margin-bottom"></div>
+                        <div class="LayoutLine-col-2 u-margin-bottom">
+                            {{ form_start(imageUploadForm) }}
+                            <div class="Form-item" hidden>
+                                {{ form_widget(imageUploadForm.imageFile, {'attr' : {'class': 'u-no-margin-top'}}) }}
                             </div>
-                            {{ form_widget(imageUploadForm.submit, {'attr' : {'class' : 'Button Button--blue'}}) }}
-                        {{ form_end(imageUploadForm) }}
-                    </section>
+                            <div id="uploadImages"></div>
+                            <div hidden>
+                                {{ form_widget(imageUploadForm.submit, {'attr' : {'class' : 'Button Button--blue'}}) }}
+                            </div>
+                            {{ form_end(imageUploadForm) }}
+                        </div>
+                        <div class="LayoutLine-col-1 u-margin-bottom"></div>
+                    </div>
+
                 {%  endif %}
+
+
                 {#TODO: netrinti#}
                 {#{% for image in imageGallery %}#}
                     {#<a href="{{ path('profile_image_remove', {'id': image.id}) }}">#}
