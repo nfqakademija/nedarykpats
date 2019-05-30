@@ -50,6 +50,10 @@
     flex: 11;
   }
   
+  &-footer {
+    visibility: visible;
+  }
+  
   &--columns {
     display: flex;
     flex-direction: row;

@@ -21,14 +21,14 @@
                 {% if (is_granted('IS_AUTHENTICATED_FULLY') == false) %}
                     <div class="Form-item">
                         {{ form_label(advertForm.email,'El. paštas') }}
-                        {{ form_widget(advertForm.email) }}
+                        {{ form_widget(advertForm.email, { 'attr': {'maxlength': '100'}}) }}
                         <span class="Form-errors">
                          {{ form_errors(advertForm.email) }}
                         </span>
                     </div>
                     <div class="Form-item">
                         {{ form_label(advertForm.name,'Tavo vardas') }}
-                        {{ form_widget(advertForm.name) }}
+                        {{ form_widget(advertForm.name, { 'attr': {'maxlength': '100'}}) }}
                         <span class="Form-errors">
                             {{ form_errors(advertForm.name) }}
                         </span>
@@ -44,7 +44,7 @@
                      {% else %}
                          <div class="Form-item">
                              {{ form_label(advertForm.name,'Tavo vardas') }}
-                             {{ form_widget(advertForm.name) }}
+                             {{ form_widget(advertForm.name, { 'attr': {'maxlength': '100'}} )}}
                              <span class="Form-errors">
                                 {{ form_errors(advertForm.name) }}
                             </span>
@@ -54,7 +54,7 @@
 
                 <div class="Form-item">
                     {{ form_label(advertForm.title,'Antraštė') }}
-                    {{ form_widget(advertForm.title) }}
+                    {{ form_widget(advertForm.title, { 'attr': {'maxlength': '150'}}) }}
                     <span class="Form-errors">
                          {{ form_errors(advertForm.title) }}
                     </span>
@@ -70,7 +70,7 @@
 
                 <div class="Form-item">
                     {{ form_label(advertForm.text, 'Skelbimo tekstas') }}
-                    {{ form_widget(advertForm.text, {'attr': {'rows': '10'} }) }}
+                    {{ form_widget(advertForm.text, {'attr': {'rows': '10', 'maxlength': '2000'} }) }}
                     <span class="Form-errors">
                          {{ form_errors(advertForm.text) }}
                     </span>
