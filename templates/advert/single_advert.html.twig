@@ -97,6 +97,12 @@
 
                     {% if offerFormIsAvailable(app.user, advert) %}
                         {% include 'components/offer_component/offer_form.html.twig' %}
+                    {% else %}
+                        {% if advert.user == app.user %}
+                            <h4>Jūs savo skelbimui pasiūlymo patalpinti negalite</h4>
+                        {% else %}
+                            <h4>Šiam skelbimui pasiūlymo teikti negalima</h4>
+                        {% endif %}
                     {% endif %}
                 </section>
             </div>
