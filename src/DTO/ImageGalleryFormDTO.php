@@ -10,28 +10,24 @@ class ImageGalleryFormDTO
 
     /**
      *
-     * @var UploadedFile
-     * @Assert\Image(
-     *     maxSize="1024k",
-     *     maxSizeMessage="Keliamas failas yra per didelis - ({{ size }} {{ suffix }}).",
-     *     mimeTypes="image/*",
-     *     mimeTypesMessage="Galima įkelti tik nuotraukas")
+     * @var UploadedFile[]
+     * @Assert\Count(min="1", minMessage="Būtina pasirinkti bent vieną failą")
      */
     private $imageFile;
 
     /**
-     * @return UploadedFile|null
+     * @return UploadedFile[]
      */
-    public function getImageFile(): ?UploadedFile
+    public function getImageFile(): ?array
     {
         return $this->imageFile;
     }
 
     /**
-     * @param UploadedFile|null $imageFile
+     * @param UploadedFile[] $imageFile
      * @return ImageGalleryFormDTO
      */
-    public function setImageFile(UploadedFile $imageFile): ImageGalleryFormDTO
+    public function setImageFile(?array $imageFile): ImageGalleryFormDTO
     {
         $this->imageFile = $imageFile;
         return $this;
