@@ -6,6 +6,7 @@ import Login from './components/login/login.jsx';
 import ImageGalleryAdvert2 from './components/imageGallery/imageGalleryAdvert/imageGalleryAdvert.jsx'
 import ImageGalleryProfile from './components/imageGallery/imageGalleryProfile/imageGalleryProfile.jsx';
 import ImageGalleryUploader from './components/imageGallery/imageGalleryUpload/imageGalleryUpload.jsx';
+import ImageGalleryUploaderAdvert from './components/imageGallery/imageGalleryUpload/imageGalleryUploadAdvert.jsx';
 
 require('../css/app.scss');
 
@@ -15,7 +16,6 @@ if (categories) {
     try {
         ReactDOM.render(<AddCategories {...categories.dataset} />, categories);
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -24,7 +24,6 @@ if (review) {
     try {
         ReactDOM.render(<Review  {...review.dataset}/>, review);
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -47,7 +46,6 @@ if (showFeedback) {
         ReactDOM.render(<Review {...showFeedback.dataset}/>, review);
 
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -57,7 +55,6 @@ if (loginForm) {
     try {
         ReactDOM.render(<Login {...loginForm.dataset}/>, loginForm);
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -80,7 +77,6 @@ if (singleAdvertImages) {
         ReactDOM.render(<ImageGalleryAdvert2 {...singleAdvertImages.dataset}/>, singleAdvertImages);
 
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -93,7 +89,6 @@ if (displayImagesProfile) {
         ReactDOM.render(<ImageGalleryProfile {...displayImagesProfile.dataset}/>, displayImagesProfile);
 
     } catch (error) {
-        console.error(error);
     }
 }
 
@@ -106,7 +101,18 @@ if (uploadImages) {
         ReactDOM.render(<ImageGalleryUploader/>, uploadImages);
 
     } catch (error) {
-        console.error(error);
+    }
+}
+
+//--------------------------
+// Add Image Uploader in Advert insert form
+//--------------------------
+const uploadImagesAdvert = document.getElementById('uploadImagesAdvert');
+if (uploadImagesAdvert) {
+    try {
+        ReactDOM.render(<ImageGalleryUploaderAdvert/>, uploadImagesAdvert);
+
+    } catch (error) {
     }
 }
 

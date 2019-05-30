@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react'
 import Dropzone from 'react-dropzone'
 
-class ImageGalleryUpload extends React.Component {
+class ImageGalleryUploadAdvert extends React.Component {
 
     render() {
         const maxSize = 1048576;
@@ -24,8 +24,8 @@ class ImageGalleryUpload extends React.Component {
                                  {...getRootProps()}
                             >
                                 <img width="50" src="img/upload.png" alt="upload image"/>
-                                <input id="image_gallery_form_imageFile1"
-                                       name="image_gallery_form[imageFile][]"
+                                <input id="advert_imageGallery"
+                                       name="advert[imageGallery][]"
                                        type="file"
                                        {...getInputProps()}
                                 />
@@ -38,9 +38,9 @@ class ImageGalleryUpload extends React.Component {
                                         Failas per didelis (iki 1MB).
                                     </div>
                                 )}
-                                <ul className="list-group mt-2">
+                                <ul className="u-no-bullets">
                                     {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile => (
-                                        <li key={acceptedFiles.name + acceptedFiles.size} className="">
+                                        <li key={acceptedFiles.path + Math.random().toString()} className="">
                                             {acceptedFile.name}
                                         </li>
                                     ))}
@@ -49,10 +49,9 @@ class ImageGalleryUpload extends React.Component {
                         )}
                     }
                 </Dropzone>
-                <input type="submit" className="Button Button--blue u-margin-top" value="Įkelti"/>
             </div>
         );
     }
 }
 
-export default ImageGalleryUpload;
+export default ImageGalleryUploadAdvert;

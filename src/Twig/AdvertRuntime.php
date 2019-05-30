@@ -52,6 +52,10 @@ class AdvertRuntime implements RuntimeExtensionInterface
             return false;
         }
 
+        if ($offer->getIsDeclined()) {
+            return false;
+        }
+
         if (($advert->getAcceptedOffer()) && ($advert->getAcceptedOffer() !== $offer)) {
             return false;
         }

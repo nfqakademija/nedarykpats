@@ -96,9 +96,6 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('profile');
         }
 
-        /** @var ImageGallery[] $imageGallery */
-        $imageGallery = $this->getDoctrine()->getRepository(ImageGallery::class)->findByUser($this->getUser());
-
         return $this->render('user/profile.html.twig', [
             'profileDetailsForm' => $profileDetailsForm->createView(),
             'profilePasswordForm' => $profilePasswordForm->createView(),
@@ -106,8 +103,7 @@ class ProfileController extends AbstractController
             'feedbacks' => $feedbacks,
             'rateAverage' => $rateAverage,
             'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
-            'imageUploadForm' => $imageUploadForm->createView(),
-            'imageGallery' => $imageGallery
+            'imageUploadForm' => $imageUploadForm->createView()
         ]);
     }
 
@@ -151,9 +147,6 @@ class ProfileController extends AbstractController
             $rateAverage = array_sum($rateArray) / count($rateArray);
         }
 
-        /** @var ImageGallery[] $imageGallery */
-        $imageGallery = $this->getDoctrine()->getRepository(ImageGallery::class)->findByUser($this->getUser());
-
         /** @var FeedbackRepository $feedbackRepository */
         $feedbackRepository = $this->getDoctrine()->getRepository(Feedback::class);
 
@@ -165,7 +158,6 @@ class ProfileController extends AbstractController
             'feedbacks' => $feedbacks,
             'rateAverage' => $rateAverage,
             'topCategories' => $categoryRepository->findUsersTopCategoryTitles($user),
-            'imageGallery' => $imageGallery,
         ]);
     }
 }

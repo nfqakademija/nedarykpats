@@ -29,7 +29,6 @@ class AdvertImages extends React.Component {
     }
 
     _onImageClick(event) {
-        console.debug('clicked on image', event.target, 'at index', this._imageGallery.getCurrentIndex());
     }
 
     _handleInputChange(state, event) {
@@ -93,7 +92,6 @@ class AdvertImages extends React.Component {
                     });
                 })
                 .catch(function (error) {
-                    console.log(error);
                 });
         });
     };
