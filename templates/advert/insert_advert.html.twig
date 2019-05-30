@@ -83,8 +83,10 @@
                      data-original-input-id="advert_categories"
                      aria-required="true"
                 ></div>
-                <span id="Form-category-errors" class="Form-errors u-margin-bottom u-display-none">
-                    <span>Pasirinkite bent vieną kategoriją</span>
+                <span id="Form-category-errors" class="Form-errors">
+                     <span class="Form-errors">
+                            {{ form_errors(advertForm.categories) }}
+                        </span>
                 </span>
 
                 <div class="Form-item" hidden>

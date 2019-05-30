@@ -18,13 +18,13 @@
   }
   
   &-errors {
+
 	ul {
 	  padding: 0;
 	  margin: 0;
 	}
 	
-	li,
-	span {
+	li {
 	  padding-left: var(--spaceSmall);
 	  list-style: none;
 	  font-size: var(--fontSizeMedium);
