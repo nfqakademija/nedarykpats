@@ -8,11 +8,8 @@ class ImageGalleryUpload extends React.Component {
 
     uploadImageToServer = () => {
         const uploadInputDom = document.getElementById('image_gallery_form_imageFile');
-        console.log(uploadInputDom);
-        // uploadInputDom.value='test';
-
         uploadInputDom.addEventListener("click", function() {
-            Dropzone.processQueue(); // Tell Dropzone to process all queued files.
+            Dropzone.processQueue();
         });
     }
 
@@ -35,32 +32,31 @@ class ImageGalleryUpload extends React.Component {
                     {({getRootProps, getInputProps, isDragActive, isDragReject, rejectedFiles, acceptedFiles}) => {
                         const isFileTooLarge = rejectedFiles.length > 0 && rejectedFiles[0].size > maxSize;
                         return (
-                                <div className="Form-uploadImagesArea"
-                                     {...getRootProps()}
-                                >
+                            <div className="Form-uploadImagesArea"
+                                 {...getRootProps()}
+                            >
+                                <img width="50" src="img/upload.png" alt="upload image"/>
+                                <input id="image_gallery_form_imageFile"
+                                       type="file"
+                                       {...getInputProps()}
+                                />
 
-                                    <img width="50" src="img/upload.png" alt="upload image"/>
-                                    <input id="image_gallery_form_imageFile"
-                                           type="file"
-                                           {...getInputProps()}
-                                    />
-
-                                    {!isDragActive && 'Paspauskite arba įtemkite failą!'}
-                                    {isDragActive && !isDragReject && "Paleiskite failą!"}
-                                    {isDragReject && "Atsiprašome, įkeliamo failo tipas nėra tinkamas!"}
-                                    {isFileTooLarge && (
-                                        <div className="text-danger mt-2">
-                                            Filas per didelis.
-                                        </div>
-                                    )}
-                                    <ul className="list-group mt-2">
-                                        {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile => (
-                                            <li key={acceptedFiles.name + acceptedFiles.size} className="list-group-item list-group-item-success">
-                                                {acceptedFile.name}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
+                                {!isDragActive && 'Paspauskite arba įtemkite failą!'}
+                                {isDragActive && !isDragReject && "Paleiskite failą!"}
+                                {isDragReject && "Atsiprašome, įkeliamo failo tipas nėra tinkamas!"}
+                                {isFileTooLarge && (
+                                    <div className="text-danger mt-2">
+                                        Filas per didelis.
+                                    </div>
+                                )}
+                                <ul className="list-group mt-2">
+                                    {acceptedFiles.length > 0 && acceptedFiles.map(acceptedFile => (
+                                        <li key={acceptedFiles.name + acceptedFiles.size} className="list-group-item list-group-item-success">
+                                            {acceptedFile.name}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         )}
                     }
                 </Dropzone>
