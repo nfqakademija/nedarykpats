@@ -168,7 +168,11 @@
   border: none !important;
 }
 
-///////////////////////////////////
+.u-no-bullets {
+  list-style: none;
+  padding-left: 0;
+}
+
 /**
  * Line count
  */
