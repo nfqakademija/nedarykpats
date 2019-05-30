@@ -38,6 +38,8 @@ class GalleryController extends AbstractController
             array_push($return_array, ['src' => $path, 'width' => 4, 'height' => 3]);
         }
 
-        return new Response(json_encode($return_array), Response::HTTP_OK);
+        $response = new Response(json_encode($return_array), Response::HTTP_OK);
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }

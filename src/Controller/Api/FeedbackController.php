@@ -27,10 +27,12 @@ class FeedbackController extends AbstractController
         $advert = $this->getDoctrine()->getRepository(Advert::class)->find($feedbackDTOData['advert']);
 
         if ($advert->getUser() !== $this->getUser()) {
-            return new Response(
+            $response = new Response(
                 json_encode(['success' => false,]),
                 Response::HTTP_FORBIDDEN
             );
+            $response->headers->set('Content-Type', 'application/json');
+            return $response;
         }
 
         $feedbackForm = $this->createForm(FeedbackFormType::class);
@@ -42,13 +44,17 @@ class FeedbackController extends AbstractController
                 $result = $feedbackCreationHandler->handle($feedbackDTO);
                 return new Response(json_encode(['success' => $result]));
             } catch (Exception $e) {
-                return new Response(
+                $response = new Response(
                     json_encode(['success' => false,]),
                     Response::HTTP_BAD_REQUEST
                 );
+                $response->headers->set('Content-Type', 'application/json');
+                return $response;
             }
         }
 
-        return new Response(json_encode(['success' => false,]));
+        $response = Response(json_encode(['success' => false,]));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
     }
 }
