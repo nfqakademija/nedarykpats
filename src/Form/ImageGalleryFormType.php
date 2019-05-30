@@ -14,14 +14,15 @@ class ImageGalleryFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('imageFile',
+            ->add(
+                'imageFile',
                 FileType::class,
                 [
                     'multiple' => true,
                     'required' => false
-                ])
-            ->add('submit', SubmitType::class, ['label' => 'Skelbti'])
-        ;
+                ]
+            )
+            ->add('submit', SubmitType::class, ['label' => 'Skelbti']);
     }
 
     public function configureOptions(OptionsResolver $resolver)
