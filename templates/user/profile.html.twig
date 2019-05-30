@@ -157,7 +157,9 @@
             {% endif %}
             {#----Upload images-----#}
             <section>
-                <h3 class="Header2 u-align-center u-margin-top-bottom">Meistro darbų pavyzdžiai</h3>
+                {% if (profilesOwner.images|length > 0) %}
+                    <h3 class="Header2 u-align-center u-margin-top-bottom">Vartotojo darbų pavyzdžiai</h3>
+                {% endif %}
 
                 {% if profileIsAppUsers(app.user, profilesOwner) %}
                     <div class="LayoutLine LayoutLine--columns">
