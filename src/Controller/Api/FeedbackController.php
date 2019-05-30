@@ -53,7 +53,7 @@ class FeedbackController extends AbstractController
             }
         }
 
-        $response = Response(json_encode(['success' => false,]));
+        $response = new Response(json_encode(['success' => false,]));
         $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
