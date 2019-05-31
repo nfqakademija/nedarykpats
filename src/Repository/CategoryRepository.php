@@ -32,6 +32,8 @@ class CategoryRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('category')
             ->select('category')
             ->innerJoin('category.adverts', 'adverts')
+            ->where('adverts.acceptedOffer IS NULL')
+            ->andWhere('adverts.isConfirmed = 1')
             ->getQuery()
             ->getResult();
     }

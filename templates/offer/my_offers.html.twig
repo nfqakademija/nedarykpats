@@ -34,7 +34,7 @@
 
                 <div class="LayoutLine-col-3">
                     <div class="u-margin-top-bottom u-align-space-around">
-                        <div class="Header2 u-align-middle"><span> {{ getOfferStatus(offer, offer.advert) }}</span></div>
+                        <div class="Header2 u-align-middle"><span class="{{ getOfferStatus(offer, offer.advert) }}"></span></div>
                     </div>
                 </div>
             </section>
@@ -50,14 +50,14 @@
 
                     {% for i in 1..paginationPages %}
 
-                        {% if i == 2 and page > 5 %}
-                            <li><span>...</span></li>
+                        {% if i == 2 and page > 4 %}
+                            <li><span class="Pagination-item ">...</span></li>
                         {% endif %}
 
-                            {% if page < i+4 and page > i-4 or i == 1 or i == paginationPages  %}
+                            {% if page < i+3 and page > i-3 or i == 1 or i == paginationPages  %}
 
-                            {% if i ==  paginationPages and page < paginationPages -4   %}
-                                <li><span>...</span></li>
+                            {% if i ==  paginationPages and page < paginationPages -3  %}
+                                <li><span class="Pagination-item ">...</span></li>
                             {% endif %}
 
                             <li><a href="?page={{ i }}" class="Pagination-item  {{ page == i? "is-active" }} "> {{ i }}</a></li>

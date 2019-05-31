@@ -1,42 +1,31 @@
-﻿![](https://avatars0.githubusercontent.com/u/4995607?v=3&s=100)
+﻿![](https://raw.githubusercontent.com/nfqakademija/workchase/master/public/img/logo.png)
 
-NFQ Akademija
-============
+## Projekto aprašymas
 
-# Intro
+Pastebėjome, kad dažnai taip nutinka, kad reiktų, kad kas nors atliktų 
+kokį nors darbą darbą (pavyzdžiui, nupjautų žolę, perdažytų sienas ir pan.), tačiau nežinome, 
+kas galėtų tai atlikti arba kokio specialisto mums reikia. Galima praleisti ilgas valandas internete ieškant 
+kandidato, tačiau pasirinktas žmogus nebūtinai bus tinkamas. 
 
-Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony `4.2.4` minimalų projekto paketą su jau paruoštais 
-visais reikalingais failais ir įrankiais darbui:
- 
-- Lokalaus development'o aplinka (docker) (PHP 7.3, MySql DB, Nginx)
-- Paprastas pavyzdys (Conroller, Template, CSS)
-- Įdiegtas bootstrap
-- Asset'ų buildinimas (encore, yarn, sass)
-- Travis CI template
+Sukūrėme platformą [Workchase](http://workchase.projektai.nfqakademija.lt),
+kurioje užsakovas - žmogus, kuris turi darbo pasiūlymą - galėtų patalpinti savo skelbimą ir visi norintys bei gebantys
+jį atlikti atsilieptų ir pasiūlytų savo kandidatūrą. Užsakovas gali peržiūrėti pasisisiūliusius kandidatus, 
+pasirinkti labiausiai tinkantį ir jį pasamdyti. Atlikus darbą, užsakovas gali jį įvertinti
+ir tokiu būdu parekomenduoti jį kitiems. 
+
+Kviečiame prisijungti prie [Workchase](http://workchase.projektai.nfqakademija.lt) platformos ir jau šiandien susirasti asmenį, kuris jums padėtų!
 
 
-# Paleidimo instrukcija
 
-Metai iš metų studentai maldavo jog galėtų dirbti su Windows'ais akademijos metu.
- Bet nepaisant nieko, tolerancijos ir palaikymo Windows operacinei niekada nebuvo ir nebus.  
+#### Projekto komanda
 
-> Perspėjimas: Itin kieti profesionalai nenaudoja niekam tikusių operacinių sistemų. 
+- Mentorius Laurynas
+- Aurimas
+- Martyna
+- Vilius
 
-### Reikės dokerio
 
-Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualbox ar Vmware.
- Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
- Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
-
-Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/install/linux/docker-ce/ubuntu/). Iškart įdiegus reikia pasidaryti, kad `docker` būtų galima naudoti be root teisių, kaip tai padaryti rasite [čia]( https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
-
-Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
-
-Taip pat rekomenduojama įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
- Šis įrankis padės geriau organizuoti dokerio konteinerius. 
-
-#### Versijų reikalavimai
+### Reikalavimai
 * docker: `18.x-ce`
 * docker-compose: `1.23.2`
 
@@ -100,28 +89,3 @@ scripts/logs.sh
 ```bash
 scripts/clean-and-start-fresh.sh
 ```
-
-### Dažniausiai užduodami klausimai
-
-* **Kaip įkelti savo pakeitimus į LIVE?**
-Jei viskas gerai sukonfiguruota, užteks sudėti pakeitimus į `master`.
-Jei neveiks, plačiau žr. [įkėlimo į serverį dokumentacijoje](https://github.com/nfqakademija/docker/blob/master/docs/deploy-project.md)
-
-* **Kaip prisijungti prie duomenų bazės su savo mėgstamu MySql redagtoriumi?**
-Trumpai: `scripts/mysql.sh` atspausdina visus prisijungimus.
-Plačiau žr. [MySql GUI dokumentacijoje](https://github.com/nfqakademija/docker/blob/master/docs/use-mysql-with-gui.md)
-
-* **Kaip pasileisti xDebug?**
-Trumpai: `./scripts/backend.sh /enable_xdebug.sh <TAVO_KOMPO_IP_ADRESAS>`
-Plačiau žr. [xDebug dokumentacijoje](https://github.com/nfqakademija/docker/blob/master/docs/setup-xdebug.md)
-
-* **Turių daugiau techninių klausimų?**
-Google ir StackOverflow yra geriausi tavo draugai.
-Nepavykus – kreipkis į savo mentorių. Jei jis nepadės,
-nukreips į atitinkamą lektorių arba pamokys `git blame`,
-kad žinotumei, kur kreiptis toliau. 
-
-### Feedbackas
-
-Jeigu taip nutiktų, kad repositorijoje, projekto template ar instrukcijoje rastumėte klaidą, tai nesišnibždėkite vieni tarp kitų, o sukurkite "issue". 
-O jei atidarysite "pull requestą" su fixu, gausite iškart 1000 karmos taškų.

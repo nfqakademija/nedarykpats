@@ -99,7 +99,7 @@ class AdvertFixtures extends AbstractFixture implements ORMFixtureInterface, Dep
                     'text' => 'Norime atnaujinti vonią, ieškome plytelių klojėjo. Butas Vilniaus rajone, susiekimas automobiliu.',
                 ],
                 [
-                    'email' => 'laurynas@uzsakovas.lt',
+                    'email' => 'aurimas@rangovas.lt',
                     'city' => 'Vilnius',
                     'title' => 'Reikalingas Sodininkas',
                     'categories' => ['lauko-darbai'],
@@ -127,7 +127,7 @@ class AdvertFixtures extends AbstractFixture implements ORMFixtureInterface, Dep
                     'text' => 'Iešome darbų vadovo buto renovacijai. Butas - 60m2, mansarda, senamiestis.',
                 ],
                 [
-                    'email' => 'laurynas@uzsakovas.lt',
+                    'email' => 'vilius@uzsakovas.lt',
                     'city' => 'Šalčinikai',
                     'title' => 'Statybos vadovas Utenoje',
                     'categories' => ['remontas', 'apdailos-darbai', 'statybos'],
@@ -141,7 +141,7 @@ class AdvertFixtures extends AbstractFixture implements ORMFixtureInterface, Dep
                     'text' => 'Reikia pajungti visą buitinę techniką (indaplovę, kaitlentę, skalbimo mašiną, šaldytuvą, gartraukį) naujoje virtuvėje. Vilnius (Pašilaičiai).',
                 ],
                 [
-                    'email' => 'martyna@uzsakove.lt',
+                    'email' => 'vilius@uzsakovas.lt',
                     'city' => 'Vilnius',
                     'title' => 'Baldų išrinkimas/surinkimas',
                     'categories' => ['remontas', 'baldai', 'kita'],
@@ -155,11 +155,46 @@ class AdvertFixtures extends AbstractFixture implements ORMFixtureInterface, Dep
                     'text' => 'Sveiki ieškau pagalbos, kas galėtu padėti instaliuoti naujai nupirktą šviestuvą',
                 ],
                 [
-                    'email' => 'martyna@uzsakove.lt',
+                    'email' => 'vilius@uzsakovas.lt',
                     'city' => 'Vilnius',
                     'title' => 'Elektros rozetčių pocizių pakeitimas',
                     'categories' => ['remontas', 'santechnika', 'apdailos-darbai'],
                     'text' => 'Ieškau žmogaus kuris galėtų sename monolito daugiabutuje perkelti rocetčių pozicijas ir atlikti apdailos darbus',
+                ],
+                [
+                    'email' => 'aurimas@uzsakovas.lt',
+                    'city' => 'Vilnius',
+                    'title' => 'Sienos griovimas',
+                    'categories' => ['remontas', 'statybos'],
+                    'text' => 'Sveiki ieškau kas galėtų nugriauti pertvarzinę sieną kuriuos plotas apie 7m². Bei pašalinti visas šiukšles. Darbą reikėtų atlikti sekančio kito mėnesio galo',
+                ],
+                [
+                    'email' => 'vilius@uzsakovas.lt',
+                    'city' => 'Vilnius',
+                    'title' => 'Buto sienos apšildymas',
+                    'categories' => ['remontas', 'statybos', 'apdailos-darbai'],
+                    'text' => 'Turiu norą apšildyti vieną savo buto sieną, Atvirai pasakius nežinau ko tiketis, bet laukiu pasiulymų.',
+                ],
+                [
+                    'email' => 'aurimas@uzsakovas.lt',
+                    'city' => 'Vilnius',
+                    'title' => 'Trinkelių klojimas',
+                    'categories' => ['remontas', 'statybos', 'lauko-darbai'],
+                    'text' => 'Norečiau nusikloti trinkeles nuo namo iki garažo manau iš butų apie 20m². Laukiu pasiūlymų iki 1000 eurų',
+                ],
+                [
+                    'email' => 'aurimas@uzsakovas.lt',
+                    'city' => 'Vilnius',
+                    'title' => 'Vonios pakeitimas',
+                    'categories' => ['remontas', 'santechnika'],
+                    'text' => 'Ieškau profesionalaus santechiko galinčiam man pajungti nauja vonia, bei pašalint seną . Taip pat bučiau suinteresuotas jei būtu galima atlikti apdailą',
+                ],
+                [
+                    'email' => 'vilius@uzsakovas.lt',
+                    'city' => 'Vilnius',
+                    'title' => 'Televizoriaus sumontavimas ant sienos',
+                    'categories' => ['remontas', 'elektra'],
+                    'text' => 'Sveiki ieškau žmogus kuris galėtų nauja sumontuoti televizoriu ant sienos. Neturiu montavimo dalių todėl tuo taip pat reikėtų pasirūpinti. ',
                 ],
             ];
     }

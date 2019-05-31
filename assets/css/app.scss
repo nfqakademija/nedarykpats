@@ -17,7 +17,6 @@
 @import "layout/content";
 @import "layout/layoutGrid";
 @import "layout/layoutLine";
-@import "layout/column";
 
 /**
  * Page Header
@@ -56,15 +55,11 @@
 @import "components/category";
 @import "components/pagination";
 @import "components/item";
-@import "components/_draft/selectedAd";
-@import "components/_draft/statusBlock";
-@import "components/_draft/replayBlock";
 @import "components/sectionBlock";
 @import "components/alert";
 @import "components/forms/form";
 @import "components/message";
 @import "components/avatarContainer";
-@import "components/_draft/switch";
 @import "components/starRating";
 @import "components/modal";
 @import "components/review";
@@ -72,6 +67,7 @@
 @import "components/topBar";
 @import "components/image";
 @import "components/avatar";
+@import "components/status";
 
 /**
  * React components
@@ -84,11 +80,6 @@
 * MEDIUM SCREEN (IPAD)
 **********************************************************/
 @media (min-width: 600px) {
-/**
- * Page Header
- */
-  @import "components/_draft/pageHeader_medium";
-  
 /**
  * Layout
  */
@@ -106,12 +97,8 @@
  * Other components
  */
   @import "components/pagination_medium";
-  @import "components/_draft/selectedAd_medium";
-  @import "components/_draft/statusBlock_medium";
   @import "components/sectionBlock_medium";
-  
 }
-
 
 /*********************************************************
 * LARGE SCREEN (DESKTOP)
@@ -130,12 +117,6 @@
   @import "layout/content_large";
   @import "layout/layoutGrid_large";
   @import "layout/layoutLine_large";
-  @import "layout/column_large";
-  
-/**
- * Typography
- */
-  @import "components/typography/header1_large";
   
 /**
  * Forms
@@ -145,7 +126,6 @@
 /**
  * Other components
  */
-  @import "components/_draft/statusBlock_large";
   @import "components/sectionBlock_large";
   @import "components/image_large";
 }

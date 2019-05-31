@@ -19,17 +19,17 @@ class OfferRuntime implements RuntimeExtensionInterface
     public function getOfferStatus(Offer $offer, Advert $advert): string
     {
         if ($advert->getAcceptedOffer() === $offer && $advert->getFeedback() instanceof Feedback) {
-            return 'Pasamdytas ir įvertintas';
+            return 'Status-acceptedFeedback';
         } elseif ($advert->getAcceptedOffer() === $offer) {
-            return 'Pasamdytas';
+            return 'Status-accepted';
         } elseif ($advert->getAcceptedOffer() instanceof Offer) {
-            return 'Nelaimėtas';
+            return 'Status-loose';
         } elseif ($offer->getIsDeclined()) {
-            return 'Atmestas';
+            return 'Status-declined';
         } elseif ($offer->getIsRetracted()) {
-            return 'Atšauktas';
+            return 'Status-retracted';
         } else {
-            return 'Laukiama';
+            return 'Status-pending';
         }
     }
 
@@ -40,6 +40,10 @@ class OfferRuntime implements RuntimeExtensionInterface
      */
     public function offerFormIsAvailable(?User $user, Advert $advert): bool
     {
+        if (!$advert->isConfirmed()) {
+            return false;
+        }
+
         if ($advert->getUser() === $user) {
             return false;
         }

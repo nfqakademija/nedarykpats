@@ -36,6 +36,10 @@
   color: var(--colorRed);
 }
 
+.u-color-grey {
+  color: var(--colorMediumGrey);
+}
+
 /**
  * Align
  */
@@ -112,7 +116,7 @@
   margin-top: var(--spaceLarge);
 }
 
-.u-margin-bottom{
+.u-margin-bottom {
   margin-bottom: var(--spaceMedium);
 }
 

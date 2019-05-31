@@ -20,7 +20,6 @@ class LoginSendEmail extends Component {
         providerDomain.set('nfq.lt', 'http://www.nfq.lt');
 
         for (let [key, value] of providerDomain.entries()) {
-            console.log(key + ' = ' + value);
             if (domain === key) {
                 this.state.providerLink = value;
             }

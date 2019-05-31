@@ -46,8 +46,7 @@ class HomeController extends AbstractController
         $paginationPages = ceil($filteredAdverts->count() / PaginationHelper::ITEMS_PER_PAGE);
 
         if ($page > $paginationPages) {
-            $page = $paginationPages;
-            $filteredAdverts = $advertRepository->findByCategories($filters, $page, PaginationHelper::ITEMS_PER_PAGE);
+            $this->redirect('/');
         }
 
         $availableCategories = $categoryRepository->findAvailableCategoriesForFilter();
