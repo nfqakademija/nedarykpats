@@ -1,42 +1,31 @@
-﻿![](https://avatars0.githubusercontent.com/u/4995607?v=3&s=100)
+﻿![](https://raw.githubusercontent.com/nfqakademija/workchase/master/public/img/logo.png)
 
-NFQ Akademija
-============
+## Projekto aprašymas
 
-# Intro
+Pastebėjome, kad dažnai taip nutinka, kad reiktų, kad kas nors atliktų 
+kokį nors darbą darbą (pavyzdžiui, nupjautų žolę, perdažytų sienas ir pan.) tačiau nežinome, 
+kas galėtų tai atlikti arba kokio specialisto mums reikia. Galima praleisti ilgas valandas internete ieškant 
+kandidato, tačiau pasirinktas žmogus nebūtinai bus tinkamas. 
 
-Sveiki! Tai yra Jūsų startinis projekto "template". 
-Šioje repositorijoje rasite Symfony `4.2.4` minimalų projekto paketą su jau paruoštais 
-visais reikalingais failais ir įrankiais darbui:
- 
-- Lokalaus development'o aplinka (docker) (PHP 7.3, MySql DB, Nginx)
-- Paprastas pavyzdys (Conroller, Template, CSS)
-- Įdiegtas bootstrap
-- Asset'ų buildinimas (encore, yarn, sass)
-- Travis CI template
+Sukūrėme platformą [Workchase](http://workchase.projektai.nfqakademija.lt),
+kurioje užsakovas - žmogus, kuris turi darbo pasiūlymą - galėtų patalpinti savo skelbimą ir visi norintys bei gebantys
+jį atlikti atsilieptų ir pasiūlytų savo kandidatūrą. Užsakovas gali peržiūrėti pasisisiūliusius kandidatus, 
+pasirinkri labiausiai tinkantį ir jį pasamdyti. Atlikus darbą, užsakovas gali įvertinti jį atlikusį asmenį
+ir tokiu būdų jį parekomenduoti kitiems. 
+
+Kviečiame prisijungti prie [Workchase](http://workchase.projektai.nfqakademija.lt) platformos ir jau šiandien susirasti asmenį, kuris jums padėtų!
 
 
-# Paleidimo instrukcija
 
-Metai iš metų studentai maldavo jog galėtų dirbti su Windows'ais akademijos metu.
- Bet nepaisant nieko, tolerancijos ir palaikymo Windows operacinei niekada nebuvo ir nebus.  
+#### Projekto komanda
 
-> Perspėjimas: Itin kieti profesionalai nenaudoja niekam tikusių operacinių sistemų. 
+- Mentorius Laurynas
+- Aurimas
+- Martyna
+- Vilius
 
-### Reikės dokerio
 
-Naudosime naujausią dokerio versiją, kuri įgalina virtualizaciją be Virtualbox ar Vmware.
- Tam reikės, kad jūsų kompiuterio procesorius palaikytų [Hypervisor](https://en.wikipedia.org/wiki/Hypervisor).
- Nėra dėl ko nerimauti, dabartiniai kompiuteriai kone visi turi šį palaikymą.
-
-Parsisiunčiate ir įsidiegiate įrankį iš [čia](https://docs.docker.com/install/linux/docker-ce/ubuntu/). Iškart įdiegus reikia pasidaryti, kad `docker` būtų galima naudoti be root teisių, kaip tai padaryti rasite [čia]( https://docs.docker.com/install/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
-
-Parsisiunčiate ir įsidiegiate `docker-compose` iš [čia](https://github.com/docker/compose/releases).
-
-Taip pat rekomenduojama įsidiegti [Kitematic](https://github.com/docker/kitematic/releases).
- Šis įrankis padės geriau organizuoti dokerio konteinerius. 
-
-#### Versijų reikalavimai
+### Reikalavimai
 * docker: `18.x-ce`
 * docker-compose: `1.23.2`
 

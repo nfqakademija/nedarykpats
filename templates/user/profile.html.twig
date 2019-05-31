@@ -180,13 +180,6 @@
 
                 {%  endif %}
 
-
-                {#TODO: netrinti#}
-                {#{% for image in imageGallery %}#}
-                    {#<a href="{{ path('profile_image_remove', {'id': image.id}) }}">#}
-                        {#<img src="{{ vich_uploader_asset(image, 'imageFile') }}" alt="{{ image.fileName }}" width="200"/>#}
-                    {#</a>#}
-                {#{% endfor %}#}
                 <div id="displayImagesProfile"
                      data-user-id={{ profilesOwner.identification }}
                 >
